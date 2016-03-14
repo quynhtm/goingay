@@ -1,0 +1,272 @@
+/*QuynhTM add site*/
+#wrap {
+    margin-bottom: 8px;
+    padding: 4px 8px;
+    position: relative;
+	text-align: left;
+    width:1000px;
+}
+body {
+    position: relative;
+	background: #B0C4DE;
+	color: black;
+    line-height: 1;
+	font-size: 12px;
+}
+.body_web{
+	padding: 8px;
+	width: 100%;
+	float: left;
+	border-radius: 10px 10px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5), 0 2px 2px 0 rgba(255, 255, 255, 0.5) inset;
+	background: #EFEFEF;
+	margin: 20px 0 50px 0;
+}
+.image_adv{
+	background: url('images/website/image_adv.jpg');
+	width: 280px;
+	height: 90px;
+	float:left;
+	margin: 7px 5px;
+}
+.batdongsanhungvuong{
+	//background: url('images/website/batdongsan.gif');
+	width: 280px;
+	height: 180px;
+	float:left;
+	margin: 7px 5px;
+}
+.web_top{
+	width:100%;
+	float:left;
+	margin: 8px 0;
+}
+.content_top{
+	width:100%;
+	float:left;
+}
+.content_center{
+	width:100%;
+	float:left;
+	color: #333333;
+    font-family: "Times New Roman",Times,serif !important;
+    font-size: 16px !important;
+    line-height: 23px !important;
+    word-wrap: break-word !important;
+}
+.content_left{
+	width:750px;
+	float:left;
+	padding-right: 10px; 
+}
+
+.content_left_home{
+	width:490px;
+	float:left;
+    padding-right: 10px;
+}
+.content_center_home{
+	width:250px;
+	float:left;
+}
+
+.content_right{
+	width:240px;
+	float:right;
+}
+
+.left_home_top{
+	float:left;
+	width: 700px; margin-right: 10px;
+	border-radius: 5px 5px 0 0;padding-bottom: 5px; margin-bottom: 10px; background: #EEEEEE
+}
+.right_home_top{
+	float:right;
+	width: 290px;height: 311px;
+	border-radius: 5px 5px 0 0;padding-bottom: 5px; margin-bottom: 10px; background: #EEEEEE
+}
+
+.active_menu {color: #7F462c!important;}
+/*
+-----------------------------------------Tin tức home------------------------------------------
+*/
+.div_title_block{float:left; font-size: 18px; color: #4E9258;width: 100%; height: 30px}
+.news_home{
+	float: left;
+	width: 100%;
+	text-align: left;
+	padding: 5px 0px 15px 0px;
+	border-bottom: 1px dotted #6FC063;
+}
+.news_home .title_news{
+	width: 100%;
+	padding-bottom: 25px;
+}
+.news_home .title_news a{
+	float:left;
+	color: #333333;
+    font: 700 14px arial;
+	text-decoration: none;
+}
+.news_home .block_image_news{
+	float: left;
+	width: 100%;
+}
+.news_home .block_image_news .thumb_img{
+	float: left;
+	width: 36%;/*150px;*/
+	height: 108px;
+	margin-right: 3%;
+}
+.news_home .block_image_news .news_lead{
+	float: left;
+	width: 56%;
+	text-align: justify;
+	line-height: 18px;
+}
+.news_home .block_image_news .news_lead p{
+	padding: 0px
+}
+.timedate{color: #6FC063; font-size: 11px;}
+/*
+-----------------------------------------Menu Header------------------------------------------
+*/
+/* Reset */
+.menu,
+.menu ul,
+.menu li,
+.menu a {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+}
+
+/* Menu */
+.menu {	
+	height: 40px;
+	width: 100%;
+	background: #4c4e5a;
+	background: -webkit-linear-gradient(top, #4E9258 0%,#347C17 100%);
+	background: -moz-linear-gradient(top, #4E9258 0%,#347C17 100%);
+	background: -o-linear-gradient(top, #4E9258 0%,#347C17 100%);
+	background: -ms-linear-gradient(top, #4E9258 0%,#347C17 100%);
+	background: linear-gradient(top, #4E9258 0%,#347C17 100%);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.menu li {
+	position: relative;
+	list-style: none;
+	float: left;
+	display: block;
+	height: 40px;
+	z-index: 100;
+}
+
+/* Links */
+
+.menu li a {
+	display: block;
+	padding: 0 14px;
+	margin: 6px 0;
+	line-height: 28px;
+	text-decoration: none;
+	
+	border-left: 1px solid #4E9258;
+	border-right: 1px solid #347C17;
+
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	font-size: 13px;
+
+	color: #f3f3f3;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+
+	-webkit-transition: color .2s ease-in-out;
+	-moz-transition: color .2s ease-in-out;
+	-o-transition: color .2s ease-in-out;
+	-ms-transition: color .2s ease-in-out;
+	transition: color .2s ease-in-out;
+}
+
+.menu li:first-child a { border-left: none; }
+.menu li:last-child a{ border-right: none; }
+
+.menu li:hover > a { color: #7F462C; }
+
+/* Sub Menu */
+
+.menu ul {
+	position: absolute;
+	top: 40px;
+	left: 0;
+	opacity: 0;
+	background: #347C17;
+	-webkit-border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+
+	-webkit-transition: opacity .25s ease .1s;
+	-moz-transition: opacity .25s ease .1s;
+	-o-transition: opacity .25s ease .1s;
+	-ms-transition: opacity .25s ease .1s;
+	transition: opacity .25s ease .1s;
+}
+
+.menu li:hover > ul { opacity: 1; }
+
+.menu ul li {
+	height: 0;
+	overflow: hidden;
+	padding: 0;
+
+	-webkit-transition: height .25s ease .1s;
+	-moz-transition: height .25s ease .1s;
+	-o-transition: height .25s ease .1s;
+	-ms-transition: height .25s ease .1s;
+	transition: height .25s ease .1s;
+}
+
+.menu li:hover > ul li {
+	height: 36px;
+	overflow: visible;
+	padding: 0;
+}
+
+.menu ul li a {
+	width: 200px;
+	padding: 4px 0 4px 18px;
+	margin: 0;
+	text-align: left;
+	border: none;
+	border-bottom: 1px solid #353539;
+}
+.menu ul li:last-child a { border: none; }
+
+/*
+-----------------------------------------Menu Header------------------------------------------
+*/
+
+/*
+FOOTER
+*/
+.block_footer{
+    float:left;
+    width: 100%;
+    border-top: 1px solid #7F462C
+}
+.block_footer .content_footer{width: 33%;text-align: center;float:left; margin: 20px 0;}
+.block_footer a.back-to-top {
+    background: url("../images/btn_buyer.png") no-repeat scroll -219px -552px rgba(0, 0, 0, 0);
+    bottom: 10px;
+    display: block;
+    height: 46px;
+    position: fixed;
+    right: 10px;
+    top: 70%;
+    width: 46px;
+    z-index: 99;
+}

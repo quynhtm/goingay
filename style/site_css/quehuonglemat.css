@@ -1,0 +1,166 @@
+/*dung chung*/
+.bg{background: #b8d1d8;height: 25px; font-weight: bold;}
+.border_bottom{border-bottom:1px solid #b8d1d8}
+.border_item{border-width:0 1px;border-color:#b8d1d8; border-style:solid; height: 25px}
+
+.clear{clear: both;}
+
+.div_menu_top{float:left; width: 100%; margin-top: 5px}
+
+
+/*CSS Login*/
+.sum_login{width: 600px; margin: 0 auto; margin-top: 30px; font-family: sans-serif; border: 1px solid #ccc; height: 200px; padding: 10px}
+
+
+/*top*/
+ .div_banner{width: 100%; float: left;}
+
+
+/*noi dung*/
+.sum_content{width: 98%; margin:15px 1% 0 1%; float: left;background: #fff; border-radius: 5px 5px 0 0;}
+.div_footer{width: 98%;float: left; text-align: center; margin: 0 1% 10px 1%}
+.div_footer .div_image_footer{width: 100%;float: left; background:url(images/simlemat/footer_simlemat.png); width: 960px; height: 81px}
+.div_footer .div_infor_footer{width: 100%;float: left; font-size: 12px; font-weight: bold;}
+
+/*noi dung bÃªn trai*/
+.left_content{width: 180px;float: left;}
+
+/*noi dung á»Ÿ giua*/
+.center_content{float: left;}
+.center_content .div_content{width: 100%;float: left;}
+.center_content .box_center{width: 100%;float: left;border: 1px solid #b8d1d8;border-radius: 5px; margin-bottom: 15px; background: #eeeeee}
+.center_content .box_center .box_title_center{width: 100%;float: left;height: 25px;border-radius: 5px 5px 0 0; background:#DF0000; text-indent: 20px; color: #fff; font-size: 14px; line-height: 25px}
+
+/*list sim so*/
+.center_content .box_center .div_list_number{width: 100%;float: left; text-align: center; font-size: 12px; line-height: 26px; font-weight: normal;}
+.center_content .box_center .div_list_number .div_stt{width: 6%;float: left;}
+.center_content .box_center .div_list_number .div_number{width: 29%;float: left;}
+.center_content .box_center .div_list_number .div_price{width: 25%;float: left;}
+.center_content .box_center .div_list_number .div_network{width: 25%;float: left;}
+.center_content .box_center .div_list_number .div_buy{width: 15%;float: left;}
+.center_content .box_center .div_list_number .div_buy_item{width: 14%;float: left;}
+.center_content .box_center .div_list_number .div_number_bold{width: 29%;float: left; font-weight: bold; color: red; font-size: 16px; text-indent: 30px; text-align: left}
+
+/*list phu kien dien thoai*/
+.center_content .box_center .item_product{float:left; width: 30%; margin:10px 0 20px 14px; border: 1px solid #b8d1d8; height: 200px; text-align: center;font-size: 12px; overflow: hidden;}
+.center_content .box_center .item_product .imge_pro{float:left; width: 100%;padding:10px 0; height: 102px}
+.center_content .box_center .item_product .name_pro{float:left; width: 100%;height: 20px; overflow: hidden;}
+.center_content .box_center .item_product .price_pro{float:left; width: 100%;height: 20px; font-weight: bold; color: red;}
+.center_content .box_center .item_product .box_buy_pro{float:left; width: 100%;height: 30px}
+
+/*noi dung á»Ÿ phai*/
+.divsumbody .divsum .sum_content .right_content{width: 180px;float: right;}
+
+/*div menu vÃ  quáº£ng cÃ¡o dung chung ben trai va ben phai*/
+.sum_list_menu{float:left; border: 1px solid #b8d1d8;border-radius: 5px 5px 0 0; width: 100%;padding-bottom: 5px; margin-bottom: 15px; background: #EEEEEE}
+.sum_list_menu .div_title_menu{float:left;border-radius: 5px 5px 0 0;width: 100%; height: 35px; margin-bottom:5px; background: #4c4e5a;
+	background: -webkit-linear-gradient(top, #4E9258 0%,#347C17 100%);
+	background: -moz-linear-gradient(top, #4E9258 0%,#347C17 100%);
+	background: -o-linear-gradient(top, #4E9258 0%,#347C17 100%);
+	background: -ms-linear-gradient(top, #4E9258 0%,#347C17 100%);
+	background: linear-gradient(top, #4E9258 0%,#347C17 100%); text-align: center; font-family: Helvetica,Arial,sans-serif;
+    font-size: 13px; font-weight: bold; color: #fff; line-height: 35px;}
+.sum_list_menu .text_menu_content{float:left; margin-left:2%; width: 98%; text-indent:9px; background:url(images/simlemat/ico_menu.png) no-repeat 0 8px; text-align: left; font-size: 12px; font-weight: bold; color: #0f819b; line-height: 25px; text-transform: capitalize; height: 25px}
+.sum_list_menu .border_bottom {border-bottom:1px solid #fff}
+.sum_list_menu .text_menu_content a{text-decoration:none; color: #0f819b}
+
+/*tin moi nhânj*/
+.sum_list_menu .div_news {float:left; width: 100%}
+.sum_list_menu .div_news .div_img_news{float:left; width: 90px;height: 65px}
+.sum_list_menu .div_news .div_title_news{float:left; width: 140px;height: 80px; margin-left: 5px; text-align: left;line-height: 15px !important;}
+.sum_list_menu .div_news .div_title_news a{text-decoration:none; }
+.sum_list_menu .div_news .div_title_news a h2{margin: 0;font-size: 12px;color: #418738}
+
+
+.sum_list_menu .div_yh_supoot{float: left; width: 100%; margin-bottom: 10px}
+.sum_list_menu .div_yh_supoot .title_yh{float:left; width:100%; text-align: center; color: #0f819b; font-size: 12px;; margin-top: -10px}
+.sum_list_menu .div_yh_supoot .img_yh{float:left; text-align: center; width: 100%; margin-top: 5px; }
+
+.div_adver{float: left; width: 100%; margin-bottom: 10px; text-align: center; overflow: hidden;}
+.div_adver img{ border: 1px solid #fff;}
+.div_adver img:hover{border: 1px solid #b8d1d8;}
+/*end div menu vÃ  quáº£ng cÃ¡o dung chung ben trai va ben phai*/
+
+/* box search*/
+.center_content .box_center .box_search{float: left;padding: 5px 10px 20px 10px; background: #EEEEEE}
+
+/* box chi tiết sản phẩm*/
+.center_content .box_center .box_search .sum_detail_pro{float: left;width: 102%; margin: 10px 0}
+.center_content .box_center .box_search .sum_detail_pro .imge_detail{width: 250px;float: left; border: 1px dotted #ccc;margin-right: 2%; padding: 10px 0}
+
+.center_content .box_center .box_search .sum_detail_pro .infor_detail{width: 290px;float: left;text-align: left;}
+.center_content .box_center .box_search .sum_detail_pro .infor_detail .name_detail{width: 100%;float: left;height: 25px; font-size: 15px; font-weight: bold;line-height: 25px}
+.center_content .box_center .box_search .sum_detail_pro .infor_detail .price_detail{width: 100%;float: left;height: 20px; line-height: 20px}
+.center_content .box_center .box_search .sum_detail_pro .infor_detail .price_detail b{font-size: 15px; color: #DF0000}
+.center_content .box_center .box_search .sum_detail_pro .infor_detail .buy_detail{width: 100%;float: left;height: 25px;}
+.center_content .box_center .box_search .sum_detail_pro .infor_detail .des_detail{width: 100%;float: left; margin: 0 0 10px 0; border-top: 1px dotted #ccc; border-bottom: 1px dotted #ccc; padding: 5px 0; font-weight: normal; font-size: 12px}
+
+/*chi tiet tin tuc*/
+.center_content .box_center .box_search .content_new{ width: 100%;float: left;text-align: justify;}
+.center_content .box_center .list_new{float: left; margin: 0 4%; text-align: left;}
+.center_content .box_center .list_new .item_new{width: 100%;float: left; margin-bottom:5px;}
+
+/* tieu đề tin*/
+.center_content .box_center .box_search .title_new{ width: 100%;float: left;text-align: left}
+.center_content .box_center .box_search .title_new h1{font-size: 20px; padding: 0; margin: 0px}
+.center_content .box_center .box_search .title_new i{font-size: 11px; color: #B6B6B4}
+
+/*phan danh cho search*/
+.center_content .box_center .box_title_search{width: 100%;float: left;height: 25px;border-radius: 5px 5px 0 0; background:#91C70D; text-indent: 20px; color: #0000DC; font-size: 14px; line-height: 25px}
+.center_content .box_center .box_search .infor_seach{width: 70%; margin: 0 auto; height: 100px;}
+.center_content .box_center .box_search .infor_search .msg_search{width: 100%; float: left; margin:10px 0 0 0; height: 50px; font-size: 12px; color: #0F819B}
+.center_content .box_center .box_search .infor_search .input_search{float: left;margin-left: 125px}
+.center_content .box_center .box_search .infor_search .input_search #search_simso{float: left;}
+
+
+/*them CSS*/
+.gia_sim {font-weight: bold; color: red; font-size: 16px;}
+
+/*danh sách sản phẩm*/
+.sum_list_menu .div_product {float:left; width: 20%; height: 240px; margin: 2% 0% 2% 2%; border: 1px solid #ccc;text-align:left;padding: 1% 1%;}
+.sum_list_menu .div_product:hover {border: 1px solid #418738;}
+.sum_list_menu .div_product .block_img{width: 100%;float: left; clear:both}
+.sum_list_menu .div_product .block_img .div_img_product{width: 100%;height: 180px; overflow: hidden; display: table-cell; vertical-align: middle; overflow: hidden}
+.sum_list_menu .div_product .div_title_product{float:left; width: 100%; padding: 5px 5px;line-height: 15px !important;}
+.sum_list_menu .div_product .div_title_product a{text-decoration:none; color: #418738}
+.sum_list_menu .div_product .div_title_product a h2{margin: 0;font-size: 12px;}
+
+.sum_list_menu .div_product .div_price_product{width: 100%;height: 20px; float: left; clear:both;padding: 5px 5px}
+.sum_list_menu .div_product .div_price_product .price_sell{color: red; font-weight: bold; font-size: 14px}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

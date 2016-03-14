@@ -1,0 +1,65 @@
+RewriteEngine On
+Options -Indexes
+AddDefaultCharset utf-8
+
+#php_flag register_globals 0
+
+RewriteCond %{HTTP_HOST} ^www\.namdalat\.com
+RewriteRule ^(.*)$ http://namdalat.com/$1 [R=permanent,L]
+
+#php_flag display_startup_errors on
+#php_flag display_errors on
+#php_flag  log_errors on
+#php_value error_log  /data/webroot/dev.save.vn/php_log/PHP_errors.log
+
+#Chi tiet tin tuc
+RewriteRule ^news-([0-9]+)/([a-zA-Z0-9_-]+)\.html(.*)$          ?page=detail_news&new_id=$1&title=$2$3				[QSA,NC]
+
+#Chi tiet san pham
+RewriteRule ^p-([0-9]+)/([a-zA-Z0-9_-]+)\.html(.*)$          ?page=detail_product&pro_id=$1&title=$2$3				[QSA,NC]
+
+#danh sach san pham
+RewriteRule ^danh-muc-san-pham/c([0-9]+)/([a-zA-Z0-9_-]+)\.html(.*)$          ?page=list_product&cat_id=$1&title=$2$3				[QSA,NC]
+
+#Chi tiet san pham
+#RewriteRule ^tin-tuc/n([0-9]+)/([a-zA-Z0-9_-]+)\.html(.*)$          ?page=list_news&news_id=$1&title=$2$3
+
+#Loc theo nha mang
+RewriteRule ^nha-mang/([0-9]+)/([a-zA-Z0-9_-]+)\.html(.*)$ 	   ?page=network&network_id=$1&title=$2$3		[QSA,NC]
+
+#Loc thuong hieu
+RewriteRule ^thuong-hieu/([0-9]+)/([a-zA-Z0-9_-]+)\.html(.*)$ 	   ?page=brand&id=$1&title=$2$3		[QSA,NC]
+
+#trang tin tuc
+RewriteRule ^tintuc.html(.*)$ 		?page=list_news$1 									[QSA,NC]
+
+#Dang ky thanh vien
+RewriteRule ^dangky.html(.*)$ 		?page=sv_register$1 									[QSA,NC]
+RewriteRule ^dangnhap.html(.*)$ 		?page=sign_in$1 									[QSA,NC]
+RewriteRule ^khoiphuc-matkhau.html(.*)$ 		?page=forgot_password$1							[QSA,NC]
+
+#Log out
+RewriteRule ^thoat.html(.*)$          ?page=sign_out$1				[QSA,NC]
+
+RewriteRule ^quantri.html(.*)$ 					    			?page=so_myshop$1 											[QSA,NC]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9_-]+)/trang-([0-9]+)\.html(.*)$ 				?page=$1&page_no=$2$3 											[QSA,NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9_-]+)\.html(.*)$ 						?page=$1$2									[QSA,NC]
+
+#profile
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9_]+)[\/]*$ 							?page=account&user_name=$1 										[QSA,NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9_]+)/c([0-9]+)/([a-zA-Z0-9_-]+)\.html(.*)$ 			?page=account&user_name=$1&category_id=$2&title=$3$4 	[QSA,NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9_]+)/c([0-9]+)/p([0-9]+)/([a-zA-Z0-9_-]+)\.html(.*)$ 		?page=account&user_name=$1&category_id=$2&pID=$3&title=$4$5 	[QSA,NC]
+RewriteRule ^profile.html(.*)$ 															?page=profile$1 				[QSA,NC]
+
+#profile edit with cmd
+RewriteRule ^profile/([a-zA-Z0-9_-]+)\.html(.*)$ 	    				?page=profile&cmd=$1$2 	[QSA,NC]
+RewriteRule ^account/([a-zA-Z0-9_-]+)\.html(.*)$ 	    				?page=account&user_name=$1$2 	[QSA,NC]
+
+#ErrorDocument 404 /err/error.html
+#ErrorDocument 403 /err/error.html

@@ -1,0 +1,4 @@
+$mysql_host = "mysql13.000webhost.com";
+$mysql_database = "a1858613_langque";
+$mysql_user = "a1858613_langque";
+$mysql_password = "langquetoi133";

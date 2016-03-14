@@ -1,0 +1,102 @@
+
+/* QuynhTM add thêm CSS*/
+.admin-icon-pro{display:block;float:none;height:50px;margin:0 auto;width:50px;background: url('../../../style/images/admin/products-pro.png') top left no-repeat;}
+.admin-icon-news{display:block;float:none;height:50px;margin:0 auto;width:50px;background: url('../../../style/images/admin/news.png') top left no-repeat;}
+.admin-icon-adver{display:block;float:none;height:50px;margin:0 auto;width:50px;background: url('../../../style/images/admin/banner_design.png') top left no-repeat;}
+.admin-icon-shopping{display:block;float:none;height:50px;margin:0 auto;width:50px;background: url('../../../style/images/admin/products-cat.png') top left no-repeat;}
+.admin-icon-category{display:block;float:none;height:50px;margin:0 auto;width:50px;background: url('../../../style/images/admin/icon_category.gif') top left no-repeat;}
+.admin-icon-support{display:block;float:none;height:50px;margin:0 auto;width:50px;background: url('../../../style/images/admin/icon_support.png') top left no-repeat;}
+.admin-icon-yahoo{display:block;float:none;height:50px;margin:0 auto;width:50px;background: url('../../../style/images/admin/icon_comment.gif') top left no-repeat;}
+.admin-icon-user{display:block;float:none;height:50px;margin:0 auto;width:50px;background: url('../../../style/images/admin/icon_user.png') top left no-repeat;}
+.admin-icon-setup{display:block;float:none;height:50px;margin:0 auto;width:50px;background: url('../../../style/images/admin/icon_config.gif') top left no-repeat;}
+
+.text_indent_20{text-indent: 20px}
+.text_middle{vertical-align: middle!important;}
+.text_center{text-align: center}
+.text_left{text-align: left}
+.text_right{text-align: right}
+
+.marginTop_10{margin-top: 10px}
+.marginTop_15{margin-top: 15px}
+.marginTop_20{margin-top: 20px}
+.marginTop_30{margin-top: 30px}
+.marginTop_40{margin-top: 40px}
+.marginTop_50{margin-top: 50px}
+.marginTop_60{margin-top: 60px}
+
+.marginBottom_10{margin-bottom: 10px}
+.marginBottom_15{margin-bottom: 15px}
+.marginBottom_20{margin-bottom: 20px}
+
+.clear{clear: both}
+
+.float_left{float: left}
+.float_right{float: right}
+.border_road{border: 1px solid #ccc; padding-bottom: 15px}
+
+.div_img_upload{padding:6px; width: 110px; height:140px; overflow:hidden;float: left;text-align:center;border: 1px solid #eee;}
+
+.width_100{width: 100%}
+.width_90{width: 90%}
+.width_50{width: 50%}
+.width_30{width: 30%}
+.width_33{width: 33%}
+.width_25{width: 25%}
+
+.title_form{text-align: center; color: #32CD32}
+
+/* list */
+.icons_controll{color:#025A8D;text-align: center;text-decoration: none;border:1px solid #FBFBFB;cursor:pointer;display:block;float:left;padding:1px 5px; margin: 0px 10px}
+.icon_home{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/icon-products-home.png') top left no-repeat;}
+.icon_publich{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/icon-32-publish.png') top left no-repeat;}
+.icon_unPublich{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/icon-32-unpublish.png') top left no-repeat;}
+.icon_add{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/icon-32-new.png') top left no-repeat;}
+.icon_delete{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/icon-32-delete.png') top left no-repeat;}
+.icon_cancel{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/cancel_f2.png') top left no-repeat;}
+.icon_load{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/sync.png') top left no-repeat;}
+.icon_excel{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/excel.png') top left no-repeat;}
+
+.icon_unapproval{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/unapproval.png') top left no-repeat;}
+.icon_approval{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/approval.png') top left no-repeat;}
+
+.icon_import{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/import.png') top left no-repeat;}
+.icon_export{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/export.png') top left no-repeat;}
+.icon_search{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/search.png') top left no-repeat;}
+
+.icon_copy{display:block;float:none;height:20px;margin:0 auto;width:20px;background: url('../../../style/images/admin/icon_copy.gif');}
+.icon_edit{display:block;float:none;height:16px;margin:0 auto;width:16px;background: url('../../../style/images/admin/b_edit.png');}
+.icon_remove{display:block;float:none;height:16px;margin:0 auto;width:16px;background: url('../../../style/images/admin/b_drop.png');}
+.icon_view{display:block;float:none;height:20px;margin:0 auto;width:20px;background: url('../../../style/images/admin/icon-view.png');}
+.icon_settings{display:block;float:none;height:22px;margin:0 auto;width:22px;background: url('../../../style/images/admin/settings.png');}
+
+.icon_true{display:block;float:none;height:16px;margin:0 auto;width:16px;background: url('../../../style/images/admin/tick.png');}
+.icon_fasle{display:block;float:none;height:16px;margin:0 auto;width:16px;background: url('../../../style/images/admin/publish_x.png');}
+
+.icon_block_true{display:block;float:none;height:32px;margin:0 auto;width:25px;background: url('../../../style/images/admin/block_user.jpg') top right no-repeat;}
+.icon_block_fasle{display:block;float:none;height:32px;margin:0 auto;width:25px;background: url('../../../style/images/admin/block_user.jpg') top left no-repeat;}
+
+.price{color: red}
+.note{color: red}
+.green{color: green}
+
+.a_list_action{text-decoration: none;cursor:pointer;display:inline-block; margin: 0 5px}
+
+#table_list{border-collapse:collapse; bordercolor:#C3C3C3}
+#table_list thead tr{line-height:20px}
+
+.area_content_select_search{border:solid 1px #ddd; width:100%; float:right; padding: 10px 5px 20px 5px;}
+
+/*Add*/
+.icon_save{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/download_f2.png') top left no-repeat;}
+.icon_back{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/back_f2.png') top left no-repeat;}
+.icon_save_tem{display:block;float:none;height:32px;margin:0 auto;width:32px;background: url('../../../style/images/admin/save_tem.png') top left no-repeat;}
+
+.image_insert_content{ border: 1px solid #884400;margin: 5px}
+.image_insert_content:hover{ border: 1px solid #0000cc;}
+
+/* div keo tha anh san pham*/
+.ul_drag_sort { margin:0px; padding:0px; margin-left:20px; }
+#sys_drag_sort{ width:100%; list-style-type:none; margin:0px; }
+#sys_drag_sort li{ float:left; padding:5px; width:130px;}
+
+.font_11{font-size: 11px}
