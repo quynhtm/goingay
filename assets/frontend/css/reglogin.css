@@ -1,0 +1,145 @@
+/*Login*/
+.main-view-post {
+    padding-top: 20px;
+    padding-bottom: 100px;
+}
+.box-reg-login{
+    background: rgba(0, 0, 0, 0) url("../img/bg-reg.png") no-repeat scroll 0 50px;
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+}
+.box-reg-login.loginbox{
+	 width: 70%;
+}
+.box-forgetpass{
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+}
+.form-send-forgetpass{
+	display: block;
+    margin: 0 auto;
+    width: 415px;
+}
+.form-send-register {
+    margin: 0 auto 0 400px;
+    width: 650px;
+}
+.form-login{
+    margin: 0 auto 0 400px;
+    width: 305px;
+}
+.box-reg-login .title-head {
+    display: inline-block;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+    font-weight: normal;
+}
+.title-head span {
+    font-size: 22px;
+}
+.link-tab {
+    color: #555;
+    font-size: 15px;
+}
+.box-reg-login .form-group {
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.box-reg-login label {
+    display: inline-block;
+    float: left;
+    font-weight: normal;
+    margin-top: 5px;
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+.control-label span {
+    color: #ff0000;
+}
+.box-reg-login .form-control {
+    border-radius: 2px;
+    box-shadow: none;
+    display: inline-block;
+    float: left;
+    width: 100%;
+}
+.form-control {
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    color: #555;
+    font-size: 14px;
+    height: 22px;
+    line-height: 1.42857;
+    padding: 2px 5px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+.btn {
+    padding: 6px 12px;
+}
+.btn-primary {
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #fff;
+}
+.form-login .btn {
+    margin-top: 5px;
+}
+.box-reg-login .form-left-reg {
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    width: 48%;
+}
+.box-reg-login .form-right-reg {
+    display: inline-block;
+    float: right;
+    width: 45%;
+}
+select.form-control {
+    height: 32px;
+    line-height: 32px;
+    width: 305px !important;
+}
+.box-reg-login .agree input {
+    float: left;
+     margin: 4px 5px 0 0;
+}
+.box-reg-login .agree label {
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: normal;
+    margin-top: 1px;
+    width: auto;
+}
+#shop_province > option {
+    padding: 4px 0;
+    text-indent: 10px;
+}
+.line-error {
+    color: #ff0000;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+.restore-pass-text{
+    font-size: 12px;
+    margin: 20px 0;
+}
+.forgotpass:hover{
+	text-decoration: underline;
+}
+
+.form-send-forgetpass label {
+    display: inline-block;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
