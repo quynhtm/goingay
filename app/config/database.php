@@ -68,7 +68,7 @@ return array(
         'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'db_website',
+			'database'  => 'db_tin',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',

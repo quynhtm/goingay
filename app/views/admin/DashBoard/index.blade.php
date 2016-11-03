@@ -27,7 +27,7 @@
                         <a class="quick-btn a_control" href="{{URL::route('admin.user_view')}}">
                             <div class="thumbnail text-center">
                                 <i class="fa fa-user fa-5x"></i><br/>
-                                <span>Quản lý User</span>
+                                <span>Quản lý User Admin</span>
                             </div>
                         </a>
                     </div>
@@ -37,44 +37,10 @@
                             <a class="quick-btn a_control" href="{{URL::route('admin.category_list')}}">
                                 <div class="thumbnail text-center">
                                     <i class="fa fa-sitemap fa-5x"></i><br/>
-                                    <span>Danh mục sản phẩm</span>
+                                    <span>Danh mục tin</span>
                                 </div>
                             </a>
                         </div>
-                    @endif
-                    @if($is_root || in_array('product_view',$aryPermission))
-                        <div class="col-sm-6 col-md-3">
-                            <a class="quick-btn a_control" href="{{URL::route('admin.product_list')}}">
-                                <div class="thumbnail text-center">
-                                    <i class="fa fa-gift fa-5x"></i><br/>
-                                    <span>Sản phẩm</span>
-                                </div>
-                            </a>
-                        </div>
-                    @endif
-					@if($is_root || in_array('order_view',$aryPermission))
-                    <div class="col-sm-6 col-md-3">
-                        <a class="quick-btn a_control" href="{{URL::route('admin.order_list')}}">
-                            <div class="thumbnail text-center">
-                                <i class="fa fa-shopping-cart fa-5x"></i><br/>
-                                <span>Quản lý đơn hàng</span>
-                            </div>
-                        </a>
-                    </div>
-                    @endif
-
-
-
-                    <div class="clearfix"></div>
-                    @if($is_root || in_array('user_shop_view',$aryPermission))
-                    <div class="col-sm-6 col-md-3">
-                        <a class="quick-btn a_control" href="{{URL::route('admin.userShop_list')}}">
-                            <div class="thumbnail text-center">
-                                <i class="fa fa-users fa-5x"></i><br/>
-                                <span>Danh sách Shop</span>
-                            </div>
-                        </a>
-                    </div>
                     @endif
                     @if($is_root || in_array('order_view',$aryPermission))
                         <div class="col-sm-6 col-md-3">
@@ -87,58 +53,47 @@
                         </div>
                     @endif
                     @if($is_root || in_array('banner_view',$aryPermission))
-                    <div class="col-sm-6 col-md-3">
-                        <a class="quick-btn a_control" href="{{URL::route('admin.banner_list')}}">
-                            <div class="thumbnail text-center">
-                                <i class="fa fa-globe fa-5x"></i><br/>
-                                <span>Quảng cáo</span>
-                            </div>
-                        </a>
-                    </div>
-                    @endif
-                    @if($is_root || in_array('banner_view',$aryPermission))
-                    <div class="col-sm-6 col-md-3">
-                        <a class="quick-btn a_control" href="{{URL::route('admin.provider_list')}}">
-                            <div class="thumbnail text-center">
-                                <i class="fa fa-briefcase fa-5x"></i><br/>
-                                <span>Nhà cung cấp của Shop</span>
-                            </div>
-                        </a>
-                    </div>
+                        <div class="col-sm-6 col-md-3">
+                            <a class="quick-btn a_control" href="{{URL::route('admin.banner_list')}}">
+                                <div class="thumbnail text-center">
+                                    <i class="fa fa-globe fa-5x"></i><br/>
+                                    <span>Quảng cáo</span>
+                                </div>
+                            </a>
+                        </div>
                     @endif
 
+                    <div class="clearfix"></div>
+                    @if($is_root || in_array('user_shop_view',$aryPermission))
+                    <div class="col-sm-6 col-md-3">
+                        <a class="quick-btn a_control" href="{{URL::route('admin.userShop_list')}}">
+                            <div class="thumbnail text-center">
+                                <i class="fa fa-users fa-5x"></i><br/>
+                                <span>QL người đăng</span>
+                            </div>
+                        </a>
+                    </div>
+                    @endif
+                    @if($is_root || in_array('product_view',$aryPermission))
+                        <div class="col-sm-6 col-md-3">
+                            <a class="quick-btn a_control" href="{{URL::route('admin.product_list')}}">
+                                <div class="thumbnail text-center">
+                                    <i class="fa fa-gift fa-5x"></i><br/>
+                                    <span>Tin đăng</span>
+                                </div>
+                            </a>
+                        </div>
+                    @endif
                     @if($is_root || in_array('contact_view',$aryPermission))
                     <div class="col-sm-6 col-md-3">
                         <a class="quick-btn a_control" href="{{URL::route('admin.contact_list')}}">
                             <div class="thumbnail text-center">
                                 <i class="fa fa-envelope-o fa-5x"></i><br/>
-                                <span>Liên hệ của Shop</span>
+                                <span>Liên hệ của KH</span>
                             </div>
                         </a>
                     </div>
                     @endif
-                    @if($is_root || in_array('toolsCommon_full',$aryPermission))
-                    <div class="col-sm-6 col-md-3">
-                        <a class="quick-btn a_control" href="{{URL::route('admin.viewShopShare')}}">
-                            <div class="thumbnail text-center">
-                                <i class="fa fa-thumbs-up fa-5x"></i><br/>
-                                <span>Lượt shop share</span>
-                            </div>
-                        </a>
-                    </div>
-                    @endif
-
-                    @if($is_root || in_array('providerEmail_full',$aryPermission))
-                    <div class="col-sm-6 col-md-3">
-                        <a class="quick-btn a_control" href="{{URL::route('admin.contentSendEmail_list')}}">
-                            <div class="thumbnail text-center">
-                                <i class="fa fa-file-text-o fa-5x"></i><br/>
-                                <span>Nội dung gửi Mail</span>
-                            </div>
-                        </a>
-                    </div>
-                    @endif
-                    
                  </div>
             </div><!-- /.col -->
         </div><!-- /.row -->

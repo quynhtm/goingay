@@ -139,7 +139,8 @@
     <div id="sidebar" class="sidebar sidebar-fixed sidebar-scroll responsive">
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <a href="{{URL::route('site.home')}}" target="_blank" title="Trang chủ shopcuatui.com.vn"><img width="185px" height="50px" src="{{Config::get('config.WEB_ROOT')}}assets/frontend/img/logo.png" alt="ShopCuaTui" /></a>
+                <!--<a href="{{URL::route('site.home')}}" target="_blank" title="Trang chủ {{CGlobal::web_name}}"><img width="185px" height="50px" src="{{Config::get('config.WEB_ROOT')}}assets/frontend/img/logo.png" alt="{{CGlobal::web_name}}" /></a>-->
+                <a href="{{URL::route('site.home')}}" target="_blank" title="Trang chủ {{CGlobal::web_name}}"><img width="185px" height="50px" src="" alt="{{CGlobal::web_name}}" /></a>
             </div>
 
             <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
@@ -193,7 +194,7 @@
             <li class="@if(Route::currentRouteName() == 'admin.userShop_list')active @endif">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-truck"></i>
-                    <span class="menu-text"> Quản trị Shop</span>
+                    <span class="menu-text"> Quản trị Khách hàng</span>
                     <b class="arrow fa fa-angle-down"></b>
                 </a>
                 <b class="arrow"></b>
@@ -201,7 +202,7 @@
                     <li class="@if(Route::currentRouteName() == 'admin.userShop_list')active @endif">
                         <a href="{{URL::route('admin.userShop_list')}}">
                             <i class="menu-icon fa fa-caret-right"></i>
-                            Danh sách Shop
+                            Danh sách Khách hàng
                         </a>
                         <b class="arrow"></b>
                     </li>
@@ -211,7 +212,7 @@
             <li class="@if(Route::currentRouteName() == 'admin.category_list' || Route::currentRouteName() == 'admin.product_list')active @endif">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-gift"></i>
-                    <span class="menu-text"> Quản trị sản phẩm </span>
+                    <span class="menu-text"> Quản trị tin đăng</span>
                     <b class="arrow fa fa-angle-down"></b>
                 </a>
                 <b class="arrow"></b>
@@ -219,24 +220,18 @@
                     <li class="@if(Route::currentRouteName() == 'admin.category_list')active @endif">
                         <a href="{{URL::route('admin.category_list')}}">
                             <i class="menu-icon fa fa-caret-right"></i>
-                            Danh mục sản phẩm
+                            Danh mục tin
                         </a>
                         <b class="arrow"></b>
                     </li>
                     <li class="@if(Route::currentRouteName() == 'admin.product_list')active @endif">
                         <a href="{{URL::route('admin.product_list')}}">
                             <i class="menu-icon fa fa-caret-right"></i>
-                            Quản lý sản phẩm
+                            Quản lý tin đăng
                         </a>
                         <b class="arrow"></b>
                     </li>
-                    <li class="@if(Route::currentRouteName() == 'admin.order_list')active @endif">
-                        <a href="{{URL::route('admin.order_list')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Quản lý đơn hàng
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
+
                 </ul>
             </li>
 
@@ -263,48 +258,7 @@
                         </a>
                         <b class="arrow"></b>
                     </li>
-                    <li class="@if(Route::currentRouteName() == 'admin.viewShopShare')active @endif">
-                        <a href="{{URL::route('admin.viewShopShare')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Lượt shop share
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
 
-
-            <li class="@if(Route::currentRouteName() == 'admin.contentSendEmail_list'
-            || Route::currentRouteName() == 'admin.customeremail_list'
-            || Route::currentRouteName() == 'admin.provideremail_list')active @endif">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-envelope-o"></i>
-                    <span class="menu-text"> Quản trị Email</span>
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-                <b class="arrow"></b>
-                <ul class="submenu">
-                    <li class="@if(Route::currentRouteName() == 'admin.contentSendEmail_list')active @endif">
-                        <a href="{{URL::route('admin.contentSendEmail_list')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Nội dung gửi Email
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="@if(Route::currentRouteName() == 'admin.customeremail_list')active @endif">
-                        <a href="{{URL::route('admin.customeremail_list')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Email Khách hàng
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="@if(Route::currentRouteName() == 'admin.provideremail_list')active @endif">
-                        <a href="{{URL::route('admin.provideremail_list')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Email nhà cung cấp
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
                 </ul>
             </li>
         </ul><!-- /.nav-list -->
