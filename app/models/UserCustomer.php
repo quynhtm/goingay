@@ -3,9 +3,9 @@
  * Created by JetBrains PhpStorm.
  * User: Quynhtm
  */
-class UserShop extends Eloquent
+class UserCustomer extends Eloquent
 {
-    protected $table = 'web_user_shop';
+    protected $table = 'web_customer';
     protected $primaryKey = 'shop_id';
     public $timestamps = false;
 
@@ -22,7 +22,7 @@ class UserShop extends Eloquent
         $shop = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_USER_SHOP_ID.$id) : array();
         if($id > 0){
             if (sizeof($shop) == 0) {
-                $shop = UserShop::where('shop_id', $id)->first();
+                $shop = UserCustomer::where('shop_id', $id)->first();
                 if($shop && Memcache::CACHE_ON){
                     Cache::put(Memcache::CACHE_USER_SHOP_ID.$id, $shop, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
                 }
@@ -34,7 +34,7 @@ class UserShop extends Eloquent
     public static function getCategoryShopById($id) {
         $categoryShop = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_CATEGORY_SHOP_ID.$id) : array();
         if (sizeof($categoryShop) == 0) {
-            $shop = UserShop::getByID($id);
+            $shop = UserCustomer::getByID($id);
             if (sizeof($shop) > 0) {
                 if (isset($shop->shop_category) && $shop->shop_category != '') {
                     $arrCateId = explode(',', $shop->shop_category);
@@ -52,7 +52,7 @@ class UserShop extends Eloquent
     public static function getShopAll() {
         $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_USER_SHOP) : array();
         if (sizeof($data) == 0) {
-            $shop = UserShop::where('shop_id', '>', 0)->where('shop_status', CGlobal::status_show)->get();
+            $shop = UserCustomer::where('shop_id', '>', 0)->where('shop_status', CGlobal::status_show)->get();
             foreach($shop as $itm) {
                 $data[$itm['shop_id']] = $itm['shop_name'];
             }
@@ -64,15 +64,15 @@ class UserShop extends Eloquent
     }
 
     public static function getUserByName($name){
-        $shop = UserShop::where('user_shop', $name)->first();
+        $shop = UserCustomer::where('user_shop', $name)->first();
         return $shop;
     }
-    public static function getUserShopByPhone($shop_phone){
-        $shop = UserShop::where('shop_phone', $shop_phone)->first();
+    public static function getCustomerByPhone($shop_phone){
+        $shop = UserCustomer::where('shop_phone', $shop_phone)->first();
         return $shop;
     }
-    public static function getUserShopByEmail($shop_email){
-        $shop = UserShop::where('shop_email', $shop_email)->first();
+    public static function getUserCustomerByEmail($shop_email){
+        $shop = UserCustomer::where('shop_email', $shop_email)->first();
         return $shop;
     }
     public static function isLogin(){
@@ -100,7 +100,7 @@ class UserShop extends Eloquent
     //cap nhat nhung shop da het session
     public static function updateShopLogout(){
         $yesterday = time() - (2 * 60 * 60);
-        $query = UserShop::where('shop_id','>',0)->where('is_login','=',1);
+        $query = UserCustomer::where('shop_id','>',0)->where('is_login','=',1);
         $query->where('shop_time_login', '<=', $yesterday);
         $result = $query->get();
         if($result){
@@ -112,7 +112,7 @@ class UserShop extends Eloquent
     }
     public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){
         try{
-            $query = UserShop::where('shop_id','>',0);
+            $query = UserCustomer::where('shop_id','>',0);
             if (isset($dataSearch['shop_name']) && $dataSearch['shop_name'] != '') {
                 $query->where('shop_name','LIKE', '%' . $dataSearch['shop_name'] . '%');
             }
@@ -152,7 +152,7 @@ class UserShop extends Eloquent
     {
         try {
             DB::connection()->getPdo()->beginTransaction();
-            $data = new UserShop();
+            $data = new UserCustomer();
             if (is_array($dataInput) && count($dataInput) > 0) {
                 foreach ($dataInput as $k => $v) {
                     $data->$k = $v;
@@ -184,7 +184,7 @@ class UserShop extends Eloquent
     {
         try {
             DB::connection()->getPdo()->beginTransaction();
-            $dataSave = UserShop::find($id);
+            $dataSave = UserCustomer::find($id);
             if (!empty($dataInput)){
                 $dataSave->update($dataInput);
             }
@@ -210,7 +210,7 @@ class UserShop extends Eloquent
     public static function deleteData($id){
         try {
             DB::connection()->getPdo()->beginTransaction();
-            $dataSave = UserShop::find($id);
+            $dataSave = UserCustomer::find($id);
             $dataSave->delete();
             DB::connection()->getPdo()->commit();
             if(isset($dataSave->shop_id) && $dataSave->shop_id > 0){

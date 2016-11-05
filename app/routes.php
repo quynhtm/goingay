@@ -96,14 +96,14 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('category/deleteCategory', array('as' => 'admin.deltete_category_post','uses' => 'CategoryController@deleteCategory'));//ajax
     Route::post('category/updateStatusCategory', array('as' => 'admin.status_category_post','uses' => 'CategoryController@updateStatusCategory'));//ajax
 
-    /*Quản lý danh sách shop*/
-    Route::get('userShop/view',array('as' => 'admin.userShop_list','uses' => 'UserShopController@view'));
-    Route::get('userShop/getUserShop/{id?}', array('as' => 'admin.userShop_edit','uses' => 'UserShopController@getUserShop'))->where('id', '[0-9]+');
-    Route::post('userShop/postUserShop/{id?}', array('as' => 'admin.userShop_edit_post','uses' => 'UserShopController@postUserShop'))->where('id', '[0-9]+');
-    Route::post('userShop/deleteUserShop', array('as' => 'admin.deltete_userShop_post','uses' => 'UserShopController@deleteUserShop'));//ajax
-    Route::get('userShop/loginToShop/{id?}', array('as' => 'admin.loginToShop','uses' => 'UserShopController@loginToShop'))->where('id', '[0-9]+');
-    Route::post('userShop/updateStatusUserShop', array('as' => 'admin.status_userShop_post','uses' => 'UserShopController@updateStatusUserShop'));//ajax
-    Route::post('userShop/setIsShop', array('as' => 'admin.setIsShop','uses' => 'UserShopController@setIsShop'));//ajax
+    /*Quản lý danh sách khách đăng tin*/
+    Route::get('userCustomer/view',array('as' => 'admin.userCustomer_list','uses' => 'UserCustomerController@view'));
+    Route::get('userCustomer/getUserCustomer/{id?}', array('as' => 'admin.userCustomer_edit','uses' => 'UserCustomerController@getUserCustomer'))->where('id', '[0-9]+');
+    Route::post('userCustomer/postUserCustomer/{id?}', array('as' => 'admin.userCustomer_edit_post','uses' => 'UserCustomerController@postUserCustomer'))->where('id', '[0-9]+');
+    Route::post('userCustomer/deleteUserCustomer', array('as' => 'admin.deltete_userCustomer_post','uses' => 'UserCustomerController@deleteUserCustomer'));//ajax
+    Route::get('userCustomer/loginToCustomer/{id?}', array('as' => 'admin.loginToCustomer','uses' => 'UserCustomerController@loginToCustomer'))->where('id', '[0-9]+');
+    Route::post('userCustomer/updateStatusUserCustomer', array('as' => 'admin.status_userCustomer_post','uses' => 'UserCustomerController@updateStatusUserCustomer'));//ajax
+    Route::post('userCustomer/setIsCustomer', array('as' => 'admin.setIsCustomer','uses' => 'UserCustomerController@setIsCustomer'));//ajax
 
     //Tools quản lý các page khác nhau
     Route::get('toolsCommon/viewShopShare',array('as' => 'admin.viewShopShare','uses' => 'ToolsCommonController@viewShopShare'));
@@ -116,7 +116,23 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('toolsCommon/sendEmailContentToCustomer',array('as' => 'admin.sendEmailContentToCustomer','uses' => 'ToolsCommonController@sendEmailContentToCustomer'));
     //Gui Email toi nha cung cap mo shop
     Route::post('toolsCommon/sendEmailInviteToSupplier',array('as' => 'admin.sendEmailInviteToSupplier','uses' => 'ToolsCommonController@sendEmailInviteToSupplier'));
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //Quản lý nhà cung cấp
     Route::get('provider/view',array('as' => 'admin.provider_list','uses' => 'ProviderController@view'));
     Route::get('provider/edit/{id?}', array('as' => 'admin.provider_edit','uses' => 'ProviderController@getProvider'))->where('id', '[0-9]+');

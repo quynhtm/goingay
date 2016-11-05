@@ -4,13 +4,13 @@
  * Created by PhpStorm.
  * User: QuynhTM
  */
-class UserShopController extends BaseAdminController
+class UserCustomerController extends BaseAdminController
 {
-    private $permission_view = 'user_shop_view';
-    private $permission_full = 'user_shop_full';
-    private $permission_delete = 'user_shop_delete';
-    private $permission_create = 'user_shop_create';
-    private $permission_edit = 'user_shop_edit';
+    private $permission_view = 'user_customer_view';
+    private $permission_full = 'user_customer_full';
+    private $permission_delete = 'user_customer_delete';
+    private $permission_create = 'user_customer_create';
+    private $permission_edit = 'user_customer_edit';
     private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện', CGlobal::status_block => 'Khóa');
     private $arrIsShop = array(-1 => 'Tất cả', CGlobal::SHOP_FREE => 'Shop Free', CGlobal::SHOP_NOMAL => 'Shop thường', CGlobal::SHOP_VIP => 'Shop Vip');
     private $error = array();
@@ -43,7 +43,7 @@ class UserShopController extends BaseAdminController
         if(!$this->is_root && !in_array($this->permission_full,$this->permission)&& !in_array($this->permission_view,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
-        UserShop::updateShopLogout();//cap nhat shop login mà chưa logout
+        UserCustomer::updateShopLogout();//cap nhat shop login mà chưa logout
 
         $pageNo = (int) Request::get('page_no',1);
         $limit = CGlobal::number_limit_show;
@@ -64,7 +64,7 @@ class UserShopController extends BaseAdminController
         //FunctionLib::debug($dataSearch);
         $optionStatus = FunctionLib::getOption($this->arrStatus, $search['shop_status']);
         $optionIsShop = FunctionLib::getOption($this->arrIsShop, $search['is_shop']);
-        $this->layout->content = View::make('admin.UserShop.view')
+        $this->layout->content = View::make('admin.UserCustomer.view')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
             ->with('total', $total)
@@ -83,7 +83,7 @@ class UserShopController extends BaseAdminController
             ->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0);//dùng common
     }
 
-    public function getUserShop($id=0) {
+    public function getUserCustomer($id=0) {
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
@@ -111,7 +111,7 @@ class UserShopController extends BaseAdminController
 
         $optionIsShop = FunctionLib::getOption($this->arrIsShop, isset($data['is_shop'])? $data['is_shop'] : -1);
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['shop_status'])? $data['shop_status'] : -1);
-        $this->layout->content = View::make('admin.UserShop.add')
+        $this->layout->content = View::make('admin.UserCustomer.add')
             ->with('id', $id)
             ->with('data', $data)
             ->with('optionStatus', $optionStatus)
@@ -120,7 +120,7 @@ class UserShopController extends BaseAdminController
             ->with('arrStatus', $this->arrStatus);
     }
 
-    public function postUserShop($id=0) {
+    public function postUserCustomer($id=0) {
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
@@ -159,7 +159,7 @@ class UserShopController extends BaseAdminController
         }
         $optionIsShop = FunctionLib::getOption($this->arrIsShop, isset($dataSave['is_shop'])? $dataSave['is_shop'] : -1);
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($dataSave['shop_status'])? $dataSave['shop_status'] : -1);
-        $this->layout->content =  View::make('admin.UserShop.add')
+        $this->layout->content =  View::make('admin.UserCustomer.add')
             ->with('id', $id)
             ->with('data', $dataSave)
             ->with('optionStatus', $optionStatus)
@@ -168,7 +168,7 @@ class UserShopController extends BaseAdminController
             ->with('arrStatus', $this->arrStatus);
     }
 
-    public function loginToShop($shop_id=0) {
+    public function loginToCustomer($shop_id=0) {
         if(!$this->is_root){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
@@ -202,7 +202,7 @@ class UserShopController extends BaseAdminController
     }
 
     //ajax
-    public function deleteUserShop(){
+    public function deleteUserCustomer(){
         $result = array('isIntOk' => 0);
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_delete,$this->permission)){
             return Response::json($result);
@@ -225,7 +225,7 @@ class UserShopController extends BaseAdminController
     }
 
     //ajax
-    public function setIsShop(){
+    public function setIsCustomer(){
         $shop_id = (int)Request::get('shop_id', 0);
         $is_shop = (int)Request::get('is_shop', CGlobal::SHOP_FREE);
         $result = array('isIntOk' => 0);
@@ -266,7 +266,7 @@ class UserShopController extends BaseAdminController
         return Response::json($result);
     }
     //ajax
-    public function updateStatusUserShop(){
+    public function updateStatusUserCustomer(){
         $shop_id = (int)Request::get('shop_id', 0);
         $shop_status = (int)Request::get('shop_status', CGlobal::SHOP_FREE);
         $result = array('isIntOk' => 0);
