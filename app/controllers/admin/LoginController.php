@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: MT969
@@ -7,17 +6,15 @@
  * Time: 9:57 AM
  * admin!1234
  */
-class LoginController extends BaseController
-{
-    protected $layout = "admin.AdminLayouts.login";
+class LoginController extends BaseController{
+	
+    protected $layout = "admin.AdminLayouts.index";
 
-    public function __construct()
-    {
-        //parent::__construct();
+    public function __construct(){
+		FunctionLib::site_css('backend/css/login.css', CGlobal::$POS_HEAD);
     }
 
-    public function loginInfo($url = '')
-    {
+    public function loginInfo($url = ''){
         if (Session::has('user')) {
             if ($url === '' || $url === 'login') {
                 return Redirect::route('admin.dashboard');
@@ -29,9 +26,8 @@ class LoginController extends BaseController
         }
     }
 
-    public function login($url = '')
-    {
-        $username = Request::get('user_name', '');
+    public function login($url = ''){
+		$username = Request::get('user_name', '');
         $password = Request::get('user_password', '');
         $error = '';
         if ($username != '' && $password != '') {
@@ -65,7 +61,6 @@ class LoginController extends BaseController
                             );
                             Session::put('user', $data, 60*24);
                             User::updateLogin($user);
-                            //echo FunctionLib::buildUrlDecode($url); die('xxx');
                             if ($url === '' || $url === 'login') {
                                 return Redirect::route('admin.dashboard');
                             } else {
@@ -82,18 +77,14 @@ class LoginController extends BaseController
         } else {
             $error = 'Chưa nhập thông tin đăng nhập!';
         }
-
         $this->layout->content = View::make('admin.User.login')
             ->with('error', $error)->with('username', $username);
     }
-
-    public function logout()
-    {
+	
+    public function logout(){
         if (Session::has('user')) {
-            // Session::forget('key');
             Session::forget('user');
         }
         return Redirect::route('admin.login', array('url' => self::buildUrlEncode(URL::previous())));
     }
-
 }

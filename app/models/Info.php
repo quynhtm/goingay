@@ -114,10 +114,10 @@ class Info extends Eloquent {
     	}
     	if($id > 0){
     		Info::updateData($id, $data_post);
-    		Utility::messages('messages', 'Cập nhật thành công!');
+    		FunctionLib::messages('messages', 'Cập nhật thành công!');
     	}else{
     		Info::addData($data_post);
-    		Utility::messages('messages', 'Thêm mới thành công!');
+    		FunctionLib::messages('messages', 'Thêm mới thành công!');
     	}
     
     }

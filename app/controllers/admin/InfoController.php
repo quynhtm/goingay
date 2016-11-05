@@ -12,11 +12,10 @@ class InfoController extends BaseAdminController{
 	private $error = '';
 	public function __construct(){
 		parent::__construct();
-		Loader::loadJS('backend/js/admin.js', CGlobal::$postEnd);
-		
-		Loader::loadCSS('libs/upload/cssUpload.css', CGlobal::$postHead);
-		Loader::loadJS('libs/upload/jquery.uploadfile.js', CGlobal::$postEnd);
-		Loader::loadJS('backend/js/upload-admin.js', CGlobal::$postEnd);
+		FunctionLib::site_js('backend/js/admin.js', CGlobal::$POS_HEAD);
+		FunctionLib::site_js('libs/upload/cssUpload.css', CGlobal::$POS_HEAD);
+		FunctionLib::site_js('libs/upload/jquery.uploadfile.js', CGlobal::$POS_HEAD);
+		FunctionLib::site_js('backend/js/upload-admin.js', CGlobal::$POS_HEAD);
 	}
 	public function listView(){
 		$this->header();
@@ -27,32 +26,20 @@ class InfoController extends BaseAdminController{
 		//Config Page
 		$pageNo = (int) Request::get('page', 1);
 		$pageScroll = CGlobal::num_scroll_page;
-		$limit = CGlobal::num_record_per_page;
+		$limit = CGlobal::number_limit_show;
 		$offset = ($pageNo - 1) * $limit;
 		$search = $data = array();
 		$total = 0;
 		
 		$search['info_title'] = addslashes(Request::get('info_title', ''));
 		$search['info_status'] = (int)Request::get('info_status', -1);
-		$search['field_get'] = 'info_id,info_title,info_keyword,info_intro,info_content,info_img,info_created,info_order_no,info_status,meta_title,meta_keywords,meta_description';
+		$search['field_get'] = '';
 		
-		$dataSearch = Info::searchByCondition($search, $limit, $offset, $total);
-		$paging = $total > 0 ? Pagging::getPager($pageScroll, $pageNo, $total, $limit, $search) : '';
+		$data = Info::searchByCondition($search, $limit, $offset, $total);
+		$paging = $total > 0 ? Pagging::getNewPager($pageScroll, $pageNo, $total, $limit, $search) : '';
 		
-		if(!empty($dataSearch)){
-			foreach($dataSearch as $k => $v){
-				$data[] = array('info_id'=>$v->info_id,
-								'info_title'=>$v->info_title,
-								'info_keyword'=>$v->info_keyword,
-								'info_order_no'=>$v->info_order_no,
-								'info_created'=>$v->info_created,
-								'info_status'=>$v->info_status,
-				);
-			}	
-		}
-		
-		$optionStatus = Utility::getOption($this->arrStatus, $search['info_status']);
-		$messages = Utility::messages('messages');
+		$optionStatus = FunctionLib::getOption($this->arrStatus, $search['info_status']);
+		$messages = FunctionLib::messages('messages');
 		
 		$this->layout->content = View::make('admin.info.list')
 								->with('data', $data)
@@ -65,7 +52,7 @@ class InfoController extends BaseAdminController{
 	}
 	public function getItem($id=0){
 		
-		Loader::loadJS('libs/ckeditor/ckeditor.js', CGlobal::$postHead);
+		FunctionLib::site_js('libs/ckeditor/ckeditor.js', CGlobal::$POS_HEAD);
 		
 		$this->header();
 		$Meta = array('title'=>'Info',);
@@ -76,7 +63,7 @@ class InfoController extends BaseAdminController{
 		if($id > 0) {
 			$data = Info::getById($id);
 		}
-		$optionStatus = Utility::getOption($this->arrStatus, isset($data['info_status'])? $data['info_status'] : CGlobal::status_show);
+		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['info_status'])? $data['info_status'] : CGlobal::status_show);
 		$this->layout->content = View::make('admin.info.add')
 								->with('id', $id)
 								->with('data', $data)
@@ -85,7 +72,7 @@ class InfoController extends BaseAdminController{
 	}
 	public function postItem($id=0){
 		
-		Loader::loadJS('libs/ckeditor/ckeditor.js', CGlobal::$postHead);
+		FunctionLib::site_js('libs/ckeditor/ckeditor.js', CGlobal::$POS_HEAD);
 		
 		$this->header();
 		$Meta = array('title'=>'Info',);
@@ -139,7 +126,7 @@ class InfoController extends BaseAdminController{
 			}
 		}
 		
-		$optionStatus = Utility::getOption($this->arrStatus, isset($data['info_status'])? $data['info_status'] : -1);
+		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['info_status'])? $data['info_status'] : -1);
 		$this->layout->content = View::make('admin.info.add')
 								->with('id', $id)
 								->with('data', $data)
@@ -155,7 +142,7 @@ class InfoController extends BaseAdminController{
 					Trash::addItem($id, 'Info', '', 'info_id', 'info_title', '', '');
 					Info::deleteId($id);
 				}
-				Utility::messages('messages', 'Xóa thành công!', 'success');
+				FunctionLib::messages('messages', 'Xóa thành công!', 'success');
 			}
 		}
 		return Redirect::route('admin.info');
