@@ -3,12 +3,7 @@
 		<div class="box-footer">
 			<div class="box-60">
 				<div class="address">
-						<p><strong>Tên đăng ký: </strong>Công ty Cổ truyền thông raovat30s</p>
-						<p><strong>Tên giao dịch: </strong>Raovat30s Online JSC</p>
-						<p><strong>Địa chỉ trụ sở: </strong>Tầng 2, Tòa nhà CT2A - KĐT Nghĩa Đô, Hoàng Quốc Việt, Cầu Giấy, Hà Nội.</p>
-						<p><strong>Điện thoại: </strong>0913.922.986</p>
-						<p><strong>Email: </strong><a href="mailto:raovat@raovat30s.vn">raovat@raovat30s.vn</a></p>
-						<p><strong>Giấy chứng nhận đăng ký kinh doanh số 0305056245 do Sở Kế hoạch và Đầu tư Thành phố Hà Nội cấp ngày 22/12/2016</strong></p>
+					{{$address}}
 				</div>
 			</div>
 			<div class="box-40">

@@ -16,6 +16,13 @@ class BaseSiteController extends BaseController{
     }
 
     public function footer(){
-        $this->layout->footer = View::make("site.BaseLayouts.footer");
+    	//So dien thoai
+    	$address='';
+    	$arrAddress = Info::getItemByKeyword('SITE_FOOTER_LEFT');
+    	if(!empty($arrAddress)){
+    		$address = stripslashes($arrAddress->info_content);
+    	}
+    	$this->layout->footer = View::make("site.BaseLayouts.footer")
+    							->with('address', $address);
     }
 }
