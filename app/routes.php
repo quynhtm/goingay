@@ -182,4 +182,16 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('provideremail/deleteProviderEmail', array('as' => 'admin.deltete_provideremail_post','uses' => 'ProviderEmailController@deleteProviderEmail'));
     Route::post('provideremail/deleteMultiProviderEmail', array('as' => 'admin.deleteMultiProviderEmail','uses' => 'ProviderEmailController@deleteMultiProviderEmail'));//ajax
     
+	//Thong tin cau hinh chung: hotline, thong tin chan trang...
+	Route::get('info', array('as' => 'admin.info','uses' => 'InfoController@listView'));
+	Route::get('info/edit/{id?}', array('as' => 'admin.info_edit','uses' => 'InfoController@getItem'))->where('id', '[0-9]+');
+	Route::post('info/edit/{id?}', array('as' => 'admin.info_edit','uses' => 'InfoController@postItem'))->where('id', '[0-9]+');
+	Route::match(['GET','POST'],'info/delete', array('as' => 'admin.info_delete','uses' => 'InfoController@delete'));
+	//Thung rac
+	Route::get('trash', array('as' => 'admin.trash','uses' => 'TrashController@listView'));
+	Route::get('trash/edit/{id?}', array('as' => 'admin.trash_edit','uses' => 'TrashController@getItem'))->where('id', '[0-9]+');
+	Route::post('trash/edit/{id?}', array('as' => 'admin.trash_edit','uses' => 'TrashController@getItem'))->where('id', '[0-9]+');
+	Route::match(['GET','POST'],'trash/delete', array('as' => 'admin.trash_delete','uses' => 'TrashController@delete'));
+	Route::match(['GET','POST'],'trash/restore', array('as' => 'admin.trash_delete','uses' => 'TrashController@restore'));
+
 });

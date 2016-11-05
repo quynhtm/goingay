@@ -112,6 +112,8 @@ class CGlobal{
     const FOLDER_BANNER = 'banner';
     const FOLDER_PRODUCT = 'product';
     const FOLDER_LOGO_SHOP = 'logo_shop';
+	
+	const FOLDER_INFO = 'info';
     //shop
     const SHOP_FREE = 1;
     const SHOP_NOMAL = 2;

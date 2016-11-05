@@ -42,4 +42,10 @@ class Memcache{
 
     //Tinh thành
     const CACHE_ALL_PROVINCE = 'cache_all_province';
+    
+    //Thong tin co ban: hotline, dia chi chan trang...
+    const CACHE_INFO_ID    = 'cache_info_id_';
+    const CACHE_INFO_KEYWORD    = 'cache_info_keyword_';
+	//Thung rac
+	const CACHE_TRASH_ID    = 'cache_trash_id_';
 }
