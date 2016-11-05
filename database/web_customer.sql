@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2016-11-05 09:43:50
+Date: 2016-11-05 11:27:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,7 @@ CREATE TABLE `web_customer` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_name` varchar(250) DEFAULT NULL COMMENT 'Tên shop, cửa hàng hiển thị',
   `customer_password` varchar(100) DEFAULT NULL,
-  `customer_phone` longtext,
+  `customer_phone` int(11) DEFAULT NULL,
   `customer_address` varchar(255) DEFAULT NULL,
   `customer_email` longtext,
   `customer_province` int(10) DEFAULT NULL COMMENT 'tinh thanh',
