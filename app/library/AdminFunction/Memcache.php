@@ -40,9 +40,9 @@ class Memcache{
     const CACHE_BANNER_ID    = 'cache_banner_id_';
     const CACHE_BANNER_ADVANCED    = 'cache_banner_advanced';
 
-    //Tinh thành
-    const CACHE_ALL_PROVINCE = 'cache_all_province';
-    
+    //Tinh thanh
+    const CACHE_ALL_PROVICE = 'cache_all_provice';
+    const CACHE_PROVICE_ID = 'cache_provice_id_';
     //Thong tin co ban: hotline, dia chi chan trang...
     const CACHE_INFO_ID    = 'cache_info_id_';
     const CACHE_INFO_KEYWORD    = 'cache_info_keyword_';
