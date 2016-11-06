@@ -1338,6 +1338,8 @@ return array(
     'Predis\\Transaction\\MultiExecContext' => $vendorDir . '/predis/predis/lib/Predis/Transaction/MultiExecContext.php',
     'Product' => $baseDir . '/app/models/Product.php',
     'ProductController' => $baseDir . '/app/controllers/admin/ProductController.php',
+    'Provice' => $baseDir . '/app/models/Provice.php',
+    'ProviceController' => $baseDir . '/app/controllers/admin/ProviceController.php',
     'Province' => $baseDir . '/app/models/Province.php',
     'Psr\\Log\\AbstractLogger' => $vendorDir . '/psr/log/Psr/Log/AbstractLogger.php',
     'Psr\\Log\\InvalidArgumentException' => $vendorDir . '/psr/log/Psr/Log/InvalidArgumentException.php',

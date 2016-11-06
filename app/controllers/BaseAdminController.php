@@ -32,7 +32,15 @@ class BaseAdminController extends BaseController
 		$menu = $this->menu();
 		$this->layout->header = View::make("admin.AdminLayouts.header")->with('menu', $menu)->with('user', $this->user);
 	}
+	
 	public function menu(){
+		$menu[] = array(
+				'name'=>'Đơn vị hành chính', 'link'=>'javascript:void(0)', 'icon'=>'fa fa-angle-down',
+				'sub'=>array(
+						array('name'=>'Tỉnh/Thành', 'link'=>URL::route('admin.provice'), 'icon'=>'fa fa-map-marker icon-4x', 'showcontent'=>1),
+				),
+		);
+		
 		$menu[] = array(
 				'name'=>'QL hệ thống', 'link'=>'javascript:void(0)', 'icon'=>'fa fa-angle-down',
 				'sub'=>array(

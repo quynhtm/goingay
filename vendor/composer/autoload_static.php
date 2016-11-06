@@ -1566,6 +1566,8 @@ class ComposerStaticInit4a50990abba9ad476c324f633d2a544b
         'Predis\\Transaction\\MultiExecContext' => __DIR__ . '/..' . '/predis/predis/lib/Predis/Transaction/MultiExecContext.php',
         'Product' => __DIR__ . '/../..' . '/app/models/Product.php',
         'ProductController' => __DIR__ . '/../..' . '/app/controllers/admin/ProductController.php',
+        'Provice' => __DIR__ . '/../..' . '/app/models/Provice.php',
+        'ProviceController' => __DIR__ . '/../..' . '/app/controllers/admin/ProviceController.php',
         'Province' => __DIR__ . '/../..' . '/app/models/Province.php',
         'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
         'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
