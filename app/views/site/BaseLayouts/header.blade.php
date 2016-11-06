@@ -40,7 +40,7 @@
 			<a href="">Đăng tin</a>
 		</div>
 		<ul class="list-link">
-			<li>
+			<li id="clickLogin">
 				<a href="javascript:void(0);"><i class="fa fa-lock"></i>Đăng nhập</a>
 			</li>
 		</ul>
