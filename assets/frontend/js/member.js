@@ -10,7 +10,7 @@ jQuery(document).ready(function($){
 
 MEMBER = {
 	register:function(){
-		jQuery('#clickRegister').click(function(){
+		jQuery('.clickRegister').click(function(){
 			jQuery('.content-popup-show').modal('hide');
 			jQuery('#sys-popup-register').modal('show');
 			jQuery('#btnRegister').click(function(){
@@ -102,7 +102,7 @@ MEMBER = {
 		});
 	},
 	login:function(){
-		jQuery('#clickLogin').unbind('click').click(function(){
+		jQuery('.clickLogin').unbind('click').click(function(){
 			jQuery('.content-popup-show').modal('hide');
 			jQuery('#sys-popup-login').modal('show');
 			jQuery('#btnLogin').click(function(){
@@ -245,7 +245,7 @@ MEMBER = {
 		});
 	},
 	forgetpass:function(){
-		jQuery('#clickForgetPass').unbind('click').click(function(){
+		jQuery('.clickForgetPass').unbind('click').click(function(){
 			jQuery('.content-popup-show').modal('hide');
 			jQuery('#sys-popup-forgetpass').modal('show');
 			jQuery('#btnForgetpass').click(function(){

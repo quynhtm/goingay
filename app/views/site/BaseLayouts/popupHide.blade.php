@@ -32,7 +32,8 @@
 	                  <a href="#" target="_blank">quy định</a> của {{CGlobal::web_name}}
                 </div>
                 <div class="action-popup-button">
-                  	<div class="btn btn-primary" id="btnRegister" href="javascript:void(0)">Đăng kí ngay</div>
+                  	<div class="btn btn-primary btn-ext" id="btnRegister" href="javascript:void(0)">Đăng kí ngay</div>
+                  	<a class="clickLogin" href="javascript:void(0)" rel="nofollow">Đăng nhập</a>
                 </div>
 				{{Form::close()}}
             </div>
@@ -55,14 +56,13 @@
                         <input type="password" placeholder="Nhập mật khẩu" name="sys_login_pass" id="sys_login_pass">
                     </div>
                  </div>
-                 <div class="classic-popup-bottomText">
-	                  <a id="clickForgetPass" href="javascript:void(0)" rel="nofollow">Bạn quên mật khẩu</a>
-                </div>
                 <div class="action-popup-button">
-                  	<div class="btn btn-primary" id="btnLogin" href="javascript:void(0)">Đăng nhập</div>
+                  	<div class="btn btn-primary btn-ext" id="btnLogin" href="javascript:void(0)">Đăng nhập</div>
+                  	<a class="clickForgetPass" href="javascript:void(0)" rel="nofollow">Bạn quên mật khẩu?</a>
                 </div>
 				{{Form::close()}}
             </div>
+            <div class="modal-footer-classic">Bạn chưa có tài khoản? <span class="btnPopLogin clickRegister">Đăng ký</span> ngay.</div>
         </div>
     </div>
 </div>
@@ -80,7 +80,7 @@
                     </div>
                  </div>
                 <div class="action-popup-button">
-                  	<div class="btn btn-primary" id="btnForgetpass" href="javascript:void(0)">Gửi đi</div>
+                  	<div class="btn btn-primary btn-ext" id="btnForgetpass" href="javascript:void(0)">Gửi đi</div>
                 </div>
 				{{Form::close()}}
             </div>
