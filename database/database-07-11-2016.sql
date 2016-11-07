@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50505
+Source Server         : LOCALHOST
+Source Server Version : 50625
 Source Host           : localhost:3306
 Source Database       : db_tin
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2016-11-03 15:27:53
+Date: 2016-11-07 09:56:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -254,12 +254,12 @@ CREATE TABLE `user` (
   `user_created` int(11) DEFAULT NULL,
   `user_updated` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('2', 'admin', 'eef828faf0754495136af05c051766cb', 'Root', '', null, '1', '1', '1478161192', '::1', null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('2', 'admin', 'eef828faf0754495136af05c051766cb', 'Root', '', null, '1', '1', '1478482704', '127.0.0.1', null, null, null, null, null, null);
 INSERT INTO `user` VALUES ('19', 'tech_code', 'eef828faf0754495136af05c051766cb', 'Tech code 3555', '', '', '1', '2', '1464324115', '::1', null, null, '2', 'admin', null, '1470042647');
 
 -- ----------------------------
@@ -288,7 +288,7 @@ CREATE TABLE `web_banner` (
   `banner_create_time` int(11) DEFAULT '0',
   `banner_update_time` int(11) DEFAULT '0',
   PRIMARY KEY (`banner_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_banner
@@ -487,40 +487,93 @@ CREATE TABLE `web_contact` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for web_customer
+-- ----------------------------
+DROP TABLE IF EXISTS `web_customer`;
+CREATE TABLE `web_customer` (
+  `customer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_name` varchar(250) DEFAULT NULL COMMENT 'Tên shop, cửa hàng hiển thị',
+  `customer_password` varchar(100) DEFAULT NULL,
+  `customer_phone` longtext,
+  `customer_address` varchar(255) DEFAULT NULL,
+  `customer_email` longtext,
+  `customer_province` int(10) DEFAULT NULL COMMENT 'tinh thanh',
+  `customer_about` text COMMENT 'gioi thieu shop',
+  `customer_status` tinyint(1) DEFAULT '0' COMMENT '0-an, 1-hoat dong, 2-khoa',
+  `customer_up_item` int(11) DEFAULT '0' COMMENT 'số lượt sản phẩm shop đã up',
+  `customer_time_login` int(12) DEFAULT NULL,
+  `customer_time_logout` int(12) DEFAULT NULL,
+  `customer_created` int(12) DEFAULT NULL COMMENT 'Ngày tạo',
+  `is_customer` tinyint(1) DEFAULT '0' COMMENT '0-thuong, 1-vip',
+  `is_login` tinyint(1) DEFAULT '0' COMMENT '0:not login, 1:login',
+  `time_start_vip` int(12) DEFAULT NULL COMMENT 'Ngày bắt đầu vip',
+  `time_end_vip` int(12) DEFAULT NULL COMMENT 'Ngày hết hạn vip',
+  PRIMARY KEY (`customer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_customer
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for web_info
+-- ----------------------------
+DROP TABLE IF EXISTS `web_info`;
+CREATE TABLE `web_info` (
+  `info_id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `info_title` varchar(255) DEFAULT NULL,
+  `info_keyword` varchar(255) DEFAULT NULL COMMENT 'keyword',
+  `info_intro` longtext,
+  `info_content` longtext,
+  `info_img` varchar(255) DEFAULT NULL,
+  `info_created` varchar(15) DEFAULT NULL,
+  `info_order_no` int(11) DEFAULT '0',
+  `info_status` tinyint(4) DEFAULT '0' COMMENT 'Item enabled status (1 = enabled, 0 = disabled)',
+  `meta_title` text COMMENT 'Meta title',
+  `meta_keywords` text COMMENT 'Meta keywords',
+  `meta_description` text COMMENT 'Meta description',
+  PRIMARY KEY (`info_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='Stores news content.';
+
+-- ----------------------------
+-- Records of web_info
+-- ----------------------------
+INSERT INTO `web_info` VALUES ('1', null, 'Thông tin chân trang bên trái', 'SITE_FOOTER_LEFT', null, '<p><strong>Tên đăng ký: </strong>Công ty Cổ truyền thông raovat30s</p>\r\n<p><strong>Tên giao dịch: </strong>Raovat30s Online JSC</p>\r\n<p><strong>Địa chỉ trụ sở: </strong>Tầng 2, Tòa nhà CT2A - KĐT Nghĩa Đô, Hoàng Quốc Việt, Cầu Giấy, Hà Nội.</p>\r\n<p><strong>Điện thoại: </strong>0913.922.986</p>\r\n<p><strong>Email: </strong><a href=\"mailto:raovat@raovat30s.vn\">raovat@raovat30s.vn</a></p>\r\n						<p><strong>Giấy chứng nhận đăng ký kinh doanh số 0305056245 do Sở Kế hoạch và Đầu tư Thành phố Hà Nội cấp ngày 22/12/2016</strong></p>\r\n', null, '1447794727', '1', '1', '', '', '');
+INSERT INTO `web_info` VALUES ('2', null, 'Thông tin giới thiệu', 'SITE_INTRO', '', '', null, '1441430611', '1', '1', '', '', '');
+INSERT INTO `web_info` VALUES ('9', null, 'Nội dung meta SEO trang chủ', 'SITE_SEO_HOME', '', '<p>Kh&ocirc;ng cần để nội dung...</p>\r\n', '', '1437450080', '1', '1', 'Rao vặt nhanh', 'Rao vặt nhanh', 'Rao vặt nhanh');
+
+-- ----------------------------
 -- Table structure for web_items
 -- ----------------------------
 DROP TABLE IF EXISTS `web_items`;
 CREATE TABLE `web_items` (
-  `product_id` int(11) NOT NULL AUTO_INCREMENT,
-  `product_code` varchar(255) DEFAULT NULL,
-  `product_name` varchar(255) DEFAULT NULL,
-  `product_price_sell` int(11) DEFAULT '0' COMMENT 'Giá bán',
-  `product_price_market` int(11) DEFAULT '0' COMMENT 'Giá thị trường',
-  `product_price_input` int(11) DEFAULT '0' COMMENT 'giá nhập',
-  `product_type_price` tinyint(5) DEFAULT '1' COMMENT 'Kiểu hiển thị giá bán: 1:hiển thị giá số, 2: hiển thị giá liên hệ',
-  `product_selloff` varchar(255) DEFAULT NULL COMMENT 'text thông báo thông tin giảm giá, sp dinh kèm, khuyến mại...',
-  `product_is_hot` tinyint(5) DEFAULT '0' COMMENT '0: SP bthuong,1:sản phẩm nổi bật,2:sản phẩm giảm giá....',
-  `product_sort_desc` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT 'mô tả ngắn',
-  `product_content` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT 'nội dung sản phẩm',
-  `product_image` varchar(255) DEFAULT NULL COMMENT 'ảnh SP chính ',
-  `product_image_hover` varchar(255) DEFAULT NULL COMMENT 'ảnh khi hover chuột vào SP',
-  `product_image_other` longtext COMMENT 'danh sach ảnh khác',
-  `product_order` int(10) DEFAULT '100' COMMENT 'sắp xếp hiển thị sản phẩm ở trang list',
-  `category_id` int(11) DEFAULT NULL,
-  `category_name` varchar(255) DEFAULT NULL,
-  `quality_input` int(11) DEFAULT '0' COMMENT 'Số lượng nhập hàng',
-  `quality_out` int(11) DEFAULT '0' COMMENT 'Số lượng đã xuất',
-  `product_status` tinyint(5) DEFAULT '1' COMMENT '0:ẩn, 1:hiện,',
-  `is_block` tinyint(5) DEFAULT '1' COMMENT '0: bị khóa, 1: không bị khóa',
-  `user_shop_id` int(11) DEFAULT '0' COMMENT 'Id user shop',
-  `user_shop_name` varchar(255) DEFAULT NULL COMMENT 'Tên shop tạo sản phẩm',
-  `is_shop` tinyint(5) DEFAULT '0' COMMENT '0: sp của shop thường, 1: sản phẩm của shop vip',
-  `is_sale` tinyint(2) DEFAULT '1' COMMENT '0: hết hàng: 1 còn hàng',
-  `provider_id` int(11) DEFAULT NULL COMMENT 'ID nhà cung cấp',
-  `shop_province` int(10) DEFAULT NULL COMMENT 'Tỉnh thành của shop',
-  `time_created` int(11) DEFAULT NULL,
-  `time_update` int(11) DEFAULT NULL,
-  PRIMARY KEY (`product_id`)
+  `item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_name` varchar(255) DEFAULT NULL,
+  `item_price_sell` int(11) DEFAULT '0' COMMENT 'Giá bán',
+  `item_area_price` int(11) DEFAULT '0' COMMENT 'Khoảng giá của tin đăng',
+  `item_content` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT 'nội dung sản phẩm',
+  `item_image` varchar(255) DEFAULT NULL COMMENT 'ảnh SP chính ',
+  `item_image_other` longtext COMMENT 'danh sach ảnh khác',
+  `item_category_id` int(11) DEFAULT NULL COMMENT 'danh mục tin',
+  `item_category_name` varchar(255) DEFAULT NULL,
+  `item_category_parent_id` int(11) DEFAULT '100' COMMENT 'danh mục cha',
+  `item_category_parent_name` varchar(255) DEFAULT '0',
+  `item_number_view` int(11) DEFAULT '0' COMMENT 'Lượt xem',
+  `item_status` tinyint(5) DEFAULT '1' COMMENT '0:ẩn, 1:hiện,',
+  `item_is_hot` tinyint(5) DEFAULT '0' COMMENT '0: tin thường, 1: tin nổi bật, 2',
+  `item_block` tinyint(5) DEFAULT '1' COMMENT '0: bị khóa, 1: không bị khóa',
+  `item_province_id` int(10) DEFAULT '0' COMMENT 'tỉnh thành đăng tin',
+  `item_province_name` varchar(50) DEFAULT NULL,
+  `item_district_id` int(10) DEFAULT '0' COMMENT 'Quân./huyện',
+  `item_district_name` varchar(50) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT '0' COMMENT 'id khách đăng tin',
+  `customer_name` varchar(255) DEFAULT NULL COMMENT 'Tên khách đăng tin',
+  `is_customer` tinyint(5) DEFAULT '0' COMMENT '0:tin thường, 1: tin vip',
+  `time_ontop` int(11) DEFAULT '0' COMMENT 'thời gian để ontop tin',
+  `time_created` int(11) DEFAULT '0',
+  `time_update` int(11) DEFAULT '0',
+  PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -550,85 +603,104 @@ CREATE TABLE `web_news` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for web_province
+-- Table structure for web_provice
 -- ----------------------------
-DROP TABLE IF EXISTS `web_province`;
-CREATE TABLE `web_province` (
-  `province_id` int(11) NOT NULL AUTO_INCREMENT,
-  `province_name` varchar(255) NOT NULL,
-  `province_position` tinyint(4) NOT NULL,
-  `province_status` varchar(20) NOT NULL,
-  `province_area` tinyint(4) NOT NULL COMMENT 'Vùng miền của tỉnh thành',
-  PRIMARY KEY (`province_id`),
-  KEY `position` (`province_position`),
-  KEY `status` (`province_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `web_provice`;
+CREATE TABLE `web_provice` (
+  `provice_id` int(10) NOT NULL AUTO_INCREMENT,
+  `provice_title` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `provice_created` int(10) DEFAULT NULL,
+  `provice_order_no` int(10) DEFAULT NULL,
+  `provice_status` tinyint(2) DEFAULT NULL,
+  PRIMARY KEY (`provice_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=247 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of web_province
+-- Records of web_provice
 -- ----------------------------
-INSERT INTO `web_province` VALUES ('3', 'Bạc Liêu', '6', '1', '3');
-INSERT INTO `web_province` VALUES ('4', 'Bắc Cạn', '7', '1', '1');
-INSERT INTO `web_province` VALUES ('5', 'Bắc Giang', '6', '1', '1');
-INSERT INTO `web_province` VALUES ('6', 'Bắc Ninh', '7', '1', '1');
-INSERT INTO `web_province` VALUES ('7', 'Bến Tre', '8', '1', '3');
-INSERT INTO `web_province` VALUES ('8', 'Bình Dương', '9', '1', '3');
-INSERT INTO `web_province` VALUES ('9', 'Bình Định', '10', '1', '2');
-INSERT INTO `web_province` VALUES ('10', 'Bình Phước', '11', '1', '2');
-INSERT INTO `web_province` VALUES ('11', 'Bình Thuận', '12', '1', '2');
-INSERT INTO `web_province` VALUES ('12', 'Cà Mau', '13', '1', '3');
-INSERT INTO `web_province` VALUES ('13', 'Cao Bằng', '14', '1', '1');
-INSERT INTO `web_province` VALUES ('14', 'Cần Thơ', '8', '1', '3');
-INSERT INTO `web_province` VALUES ('15', 'Đà Nẵng', '3', '1', '2');
-INSERT INTO `web_province` VALUES ('17', 'Đồng Nai', '18', '1', '3');
-INSERT INTO `web_province` VALUES ('18', 'Đồng Tháp', '19', '1', '3');
-INSERT INTO `web_province` VALUES ('19', 'Gia Lai', '20', '1', '2');
-INSERT INTO `web_province` VALUES ('20', 'Hà Giang', '21', '1', '1');
-INSERT INTO `web_province` VALUES ('21', 'Hà Nam', '22', '1', '1');
-INSERT INTO `web_province` VALUES ('22', 'Hà Nội', '1', '1', '1');
-INSERT INTO `web_province` VALUES ('23', 'Hà Tây', '24', '1', '1');
-INSERT INTO `web_province` VALUES ('24', 'Hà Tĩnh', '25', '1', '2');
-INSERT INTO `web_province` VALUES ('25', 'Hải Dương', '26', '1', '1');
-INSERT INTO `web_province` VALUES ('26', 'Hải Phòng', '5', '1', '1');
-INSERT INTO `web_province` VALUES ('27', 'Hòa Bình', '28', '1', '1');
-INSERT INTO `web_province` VALUES ('28', 'Hưng Yên', '29', '1', '1');
-INSERT INTO `web_province` VALUES ('29', 'TP Hồ Chí Minh', '2', '1', '3');
-INSERT INTO `web_province` VALUES ('30', 'Khánh Hòa', '31', '1', '2');
-INSERT INTO `web_province` VALUES ('31', 'Kiên Giang', '32', '1', '3');
-INSERT INTO `web_province` VALUES ('32', 'Kon Tum', '33', '1', '2');
-INSERT INTO `web_province` VALUES ('33', 'Lai Châu', '34', '1', '1');
-INSERT INTO `web_province` VALUES ('34', 'Lạng Sơn', '35', '1', '1');
-INSERT INTO `web_province` VALUES ('35', 'Lào Cai', '36', '1', '1');
-INSERT INTO `web_province` VALUES ('36', 'Lâm Đồng', '37', '1', '2');
-INSERT INTO `web_province` VALUES ('37', 'Long An', '38', '1', '3');
-INSERT INTO `web_province` VALUES ('38', 'Nam Định', '39', '1', '1');
-INSERT INTO `web_province` VALUES ('39', 'Nghệ An', '40', '1', '2');
-INSERT INTO `web_province` VALUES ('40', 'Ninh Bình', '41', '1', '1');
-INSERT INTO `web_province` VALUES ('41', 'Ninh Thuận', '42', '1', '2');
-INSERT INTO `web_province` VALUES ('42', 'Phú Thọ', '43', '1', '1');
-INSERT INTO `web_province` VALUES ('43', 'Phú Yên', '44', '1', '2');
-INSERT INTO `web_province` VALUES ('44', 'Quảng Bình', '45', '1', '2');
-INSERT INTO `web_province` VALUES ('45', 'Quảng Nam', '46', '1', '2');
-INSERT INTO `web_province` VALUES ('46', 'Quảng Ngãi', '47', '1', '2');
-INSERT INTO `web_province` VALUES ('47', 'Quảng Ninh', '7', '1', '1');
-INSERT INTO `web_province` VALUES ('48', 'Quảng Trị', '49', '1', '2');
-INSERT INTO `web_province` VALUES ('49', 'Sóc Trăng', '50', '1', '3');
-INSERT INTO `web_province` VALUES ('50', 'Sơn La', '51', '1', '1');
-INSERT INTO `web_province` VALUES ('51', 'Tây Ninh', '52', '1', '3');
-INSERT INTO `web_province` VALUES ('52', 'Thái Bình', '53', '1', '1');
-INSERT INTO `web_province` VALUES ('53', 'Thái Nguyên', '54', '1', '1');
-INSERT INTO `web_province` VALUES ('54', 'Thanh Hóa', '55', '1', '1');
-INSERT INTO `web_province` VALUES ('55', 'Thừa Thiên Huế', '56', '1', '2');
-INSERT INTO `web_province` VALUES ('56', 'Tiền Giang', '57', '1', '3');
-INSERT INTO `web_province` VALUES ('57', 'Trà Vinh', '58', '1', '3');
-INSERT INTO `web_province` VALUES ('58', 'Tuyên Quang', '59', '1', '1');
-INSERT INTO `web_province` VALUES ('59', 'Vĩnh Long', '60', '1', '3');
-INSERT INTO `web_province` VALUES ('60', 'Vĩnh Phúc', '61', '1', '1');
-INSERT INTO `web_province` VALUES ('61', 'Yên Bái', '62', '1', '1');
-INSERT INTO `web_province` VALUES ('66', 'An giang', '62', '1', '3');
-INSERT INTO `web_province` VALUES ('67', 'Vũng Tàu', '6', '1', '3');
-INSERT INTO `web_province` VALUES ('68', 'Nha Trang', '4', '1', '0');
-INSERT INTO `web_province` VALUES ('69', 'Điện Biên', '0', '0', '0');
-INSERT INTO `web_province` VALUES ('70', 'Hậu Giang', '0', '0', '0');
-INSERT INTO `web_province` VALUES ('71', 'Đắk Nông', '0', '0', '0');
-INSERT INTO `web_province` VALUES ('72', 'Đắk Lắc', '0', '0', '0');
+INSERT INTO `web_provice` VALUES ('31', 'Hồ Chí Minh', '1447081074', '2', '1');
+INSERT INTO `web_provice` VALUES ('56', 'Hải Phòng', '1448631842', '3', '1');
+INSERT INTO `web_provice` VALUES ('72', 'Phú Thọ', '1448631819', '4', '1');
+INSERT INTO `web_provice` VALUES ('87', 'Bình Dương', '1448631151', '5', '1');
+INSERT INTO `web_provice` VALUES ('96', 'Đà Nẵng', '1447080350', '6', '1');
+INSERT INTO `web_provice` VALUES ('105', 'Long an', '1448631805', '7', '1');
+INSERT INTO `web_provice` VALUES ('121', 'Bà Rịa Vũng Tàu', '1448631876', '8', '1');
+INSERT INTO `web_provice` VALUES ('130', 'An Giang', '1448631021', '9', '1');
+INSERT INTO `web_provice` VALUES ('142', 'Bắc Giang', '1448631059', '10', '1');
+INSERT INTO `web_provice` VALUES ('153', 'Bắc Kạn', '1448631088', '11', '1');
+INSERT INTO `web_provice` VALUES ('162', 'Bạc Liêu', '1448631099', '11', '1');
+INSERT INTO `web_provice` VALUES ('170', 'Bắc Ninh', '1448631116', '13', '1');
+INSERT INTO `web_provice` VALUES ('179', 'Bến Tre', '1448631127', '14', '1');
+INSERT INTO `web_provice` VALUES ('189', 'Bình Định', '1448631164', '15', '1');
+INSERT INTO `web_provice` VALUES ('194', 'Bình Phước', '1448631187', '16', '1');
+INSERT INTO `web_provice` VALUES ('195', 'Bình Thuận', '1448631196', '17', '1');
+INSERT INTO `web_provice` VALUES ('196', 'Cà Mau', '1448631205', '18', '1');
+INSERT INTO `web_provice` VALUES ('197', 'Cần Thơ', '1448631214', '19', '1');
+INSERT INTO `web_provice` VALUES ('198', 'Cao Bằng', '1448631222', '20', '1');
+INSERT INTO `web_provice` VALUES ('199', 'Đắk Lắk', '1448631231', '21', '1');
+INSERT INTO `web_provice` VALUES ('200', 'Đắk Nông', '1448631241', '22', '1');
+INSERT INTO `web_provice` VALUES ('201', 'Điện Biên', '1448631250', '23', '1');
+INSERT INTO `web_provice` VALUES ('202', 'Đồng Nai', '1448631259', '24', '1');
+INSERT INTO `web_provice` VALUES ('203', 'Đồng Tháp', '1448631348', '25', '1');
+INSERT INTO `web_provice` VALUES ('204', 'Gia Lai', '1448631355', '26', '1');
+INSERT INTO `web_provice` VALUES ('205', 'Hà Giang', '1448631364', '27', '1');
+INSERT INTO `web_provice` VALUES ('206', 'Hà Nam', '1448631947', '28', '1');
+INSERT INTO `web_provice` VALUES ('207', 'Hà Tĩnh', '1448631388', '29', '1');
+INSERT INTO `web_provice` VALUES ('208', 'Hải Dương', '1448631399', '30', '1');
+INSERT INTO `web_provice` VALUES ('209', 'Hậu Giang', '1448631424', '31', '1');
+INSERT INTO `web_provice` VALUES ('210', 'Hòa Bình', '1448631434', '32', '1');
+INSERT INTO `web_provice` VALUES ('211', 'Hưng Yên', '1448631443', '33', '1');
+INSERT INTO `web_provice` VALUES ('212', 'Khánh Hòa', '1448631451', '34', '1');
+INSERT INTO `web_provice` VALUES ('213', 'Kiên Giang', '1448631459', '35', '1');
+INSERT INTO `web_provice` VALUES ('214', 'Kon Tum', '1448631468', '36', '1');
+INSERT INTO `web_provice` VALUES ('215', 'Lai Châu', '1448631476', '37', '1');
+INSERT INTO `web_provice` VALUES ('216', 'Lâm Đồng', '1448631485', '38', '1');
+INSERT INTO `web_provice` VALUES ('217', 'Lạng Sơn', '1448631495', '39', '1');
+INSERT INTO `web_provice` VALUES ('218', 'Lào Cai', '1448631504', '40', '1');
+INSERT INTO `web_provice` VALUES ('219', 'Nam Định', '1448631526', '41', '1');
+INSERT INTO `web_provice` VALUES ('220', 'Nghệ An', '1448631535', '42', '1');
+INSERT INTO `web_provice` VALUES ('221', 'Ninh Bình', '1448631543', '43', '1');
+INSERT INTO `web_provice` VALUES ('222', 'Ninh Thuận', '1448631552', '44', '1');
+INSERT INTO `web_provice` VALUES ('223', 'Phú Yên', '1448631561', '45', '1');
+INSERT INTO `web_provice` VALUES ('224', 'Quảng Bình', '1448631586', '46', '1');
+INSERT INTO `web_provice` VALUES ('225', 'Quảng Nam', '1448631593', '47', '1');
+INSERT INTO `web_provice` VALUES ('226', 'Quảng Ngãi', '1448631603', '48', '1');
+INSERT INTO `web_provice` VALUES ('227', 'Quảng Ninh', '1448631611', '49', '1');
+INSERT INTO `web_provice` VALUES ('228', 'Quảng Trị', '1448631973', '50', '1');
+INSERT INTO `web_provice` VALUES ('229', 'Sóc Trăng', '1448631620', '51', '1');
+INSERT INTO `web_provice` VALUES ('230', 'Sơn La', '1457152307', '52', '1');
+INSERT INTO `web_provice` VALUES ('231', 'Tây Ninh', '1448631639', '54', '1');
+INSERT INTO `web_provice` VALUES ('232', 'Thái Bình', '1448631647', '55', '1');
+INSERT INTO `web_provice` VALUES ('233', 'Thái Nguyên', '1448631655', '56', '1');
+INSERT INTO `web_provice` VALUES ('234', 'Thanh Hóa', '1448631676', '57', '1');
+INSERT INTO `web_provice` VALUES ('235', 'Thừa Thiên Huế', '1448631685', '58', '1');
+INSERT INTO `web_provice` VALUES ('236', 'Tiền Giang', '1448631693', '59', '1');
+INSERT INTO `web_provice` VALUES ('237', 'Trà Vinh', '1448631701', '60', '1');
+INSERT INTO `web_provice` VALUES ('238', 'Tuyên Quang', '1448631724', '61', '1');
+INSERT INTO `web_provice` VALUES ('239', 'Vĩnh Long', '1448631747', '62', '1');
+INSERT INTO `web_provice` VALUES ('240', 'Vĩnh Phúc', '1448631756', '63', '1');
+INSERT INTO `web_provice` VALUES ('241', 'Yên Bái', '1448631765', '64', '1');
+INSERT INTO `web_provice` VALUES ('1', 'Hà Nội', '1448631909', '1', '1');
+
+-- ----------------------------
+-- Table structure for web_trash
+-- ----------------------------
+DROP TABLE IF EXISTS `web_trash`;
+CREATE TABLE `web_trash` (
+  `trash_id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `trash_obj_id` int(11) DEFAULT NULL,
+  `trash_title` varchar(255) DEFAULT NULL,
+  `trash_class` varchar(255) DEFAULT NULL,
+  `trash_content` longtext,
+  `trash_image` longtext,
+  `trash_image_other` longtext,
+  `trash_folder` varchar(255) DEFAULT NULL,
+  `trash_created` int(12) DEFAULT NULL,
+  PRIMARY KEY (`trash_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_trash
+-- ----------------------------
+INSERT INTO `web_trash` VALUES ('1', null, '4', 'Thông tin liên hệ', 'Info', 'a:12:{s:7:\"info_id\";i:4;s:10:\"info_title\";s:21:\"Thông tin liên hệ\";s:12:\"info_keyword\";s:12:\"SITE_CONTACT\";s:10:\"info_intro\";N;s:12:\"info_content\";s:557:\"<p>X&atilde; hội ng&agrave;y c&agrave;ng ph&aacute;t triển, cuộc sống ng&agrave;y c&agrave;ng được n&acirc;ng cao, v&agrave; những nhu cầu tiện nghi cho cuộc sống con người cũng v&igrave; thế m&agrave; n&acirc;ng l&ecirc;n, k&egrave;m theo đ&oacute; l&agrave; những th&uacute; vui sưu tầm v&agrave; sở hữu những sản phẩm phục vụ cho cuộc sống ng&agrave;y c&agrave;ng lớn. SanPhamReDep.COM l&agrave; nơi cung cấp v&agrave; phục vụ tốt nhất về c&aacute;c loại sản phẩm n&agrave;y.</p>\r\n\";s:8:\"info_img\";N;s:12:\"info_created\";s:10:\"1441430633\";s:13:\"info_order_no\";i:1;s:11:\"info_status\";i:1;s:10:\"meta_title\";s:21:\"Thông tin liên hệ\";s:13:\"meta_keywords\";s:21:\"Thông tin liên hệ\";s:16:\"meta_description\";s:21:\"Thông tin liên hệ\";}', '', 'a:0:{}', '', '1478450941');
