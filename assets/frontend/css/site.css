@@ -9,7 +9,9 @@ body{
     font-size: 13px;
     line-height: 1.42857;
 	background: #fafafa;
-	overflow-x: hidden;
+	padding-right: 0!important;
+	overflow-x: hidden!important;
+	overflow-y: visible !important;
 }
 a{
     color: #333;
