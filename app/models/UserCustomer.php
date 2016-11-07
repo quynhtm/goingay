@@ -94,11 +94,20 @@ class UserCustomer extends Eloquent
             if (isset($dataSearch['customer_email']) && $dataSearch['customer_email'] != '') {
                 $query->where('customer_email','LIKE', '%' . $dataSearch['customer_email'] . '%');
             }
+            if (isset($dataSearch['customer_id']) && $dataSearch['customer_id'] > 0) {
+                $query->where('customer_id', $dataSearch['customer_id']);
+            }
             if (isset($dataSearch['customer_phone']) && $dataSearch['customer_phone'] > 0) {
                 $query->where('customer_phone', $dataSearch['customer_phone']);
             }
             if (isset($dataSearch['customer_id']) && $dataSearch['customer_id'] > 0) {
                 $query->where('customer_id', $dataSearch['customer_id']);
+            }
+            if (isset($dataSearch['customer_status']) && $dataSearch['customer_status'] > -1) {
+                $query->where('customer_status', $dataSearch['customer_status']);
+            }
+            if (isset($dataSearch['is_customer']) && $dataSearch['is_customer'] > -1) {
+                $query->where('is_customer', $dataSearch['is_customer']);
             }
             $total = $query->count();
             $query->orderBy('customer_time_login', 'desc')->orderBy('customer_time_logout', 'desc');

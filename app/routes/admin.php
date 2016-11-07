@@ -37,31 +37,13 @@
     Route::post('category/updateStatusCategory', array('as' => 'admin.status_category_post','uses' => 'CategoryController@updateStatusCategory'));//ajax
 
     /*Quản lý danh sách shop*/
-    Route::get('userShop/view',array('as' => 'admin.userShop_list','uses' => 'UserShopController@view'));
-    Route::get('userShop/getUserShop/{id?}', array('as' => 'admin.userShop_edit','uses' => 'UserShopController@getUserShop'))->where('id', '[0-9]+');
-    Route::post('userShop/postUserShop/{id?}', array('as' => 'admin.userShop_edit_post','uses' => 'UserShopController@postUserShop'))->where('id', '[0-9]+');
-    Route::post('userShop/deleteUserShop', array('as' => 'admin.deltete_userShop_post','uses' => 'UserShopController@deleteUserShop'));//ajax
-    Route::get('userShop/loginToShop/{id?}', array('as' => 'admin.loginToShop','uses' => 'UserShopController@loginToShop'))->where('id', '[0-9]+');
-    Route::post('userShop/updateStatusUserShop', array('as' => 'admin.status_userShop_post','uses' => 'UserShopController@updateStatusUserShop'));//ajax
-    Route::post('userShop/setIsShop', array('as' => 'admin.setIsShop','uses' => 'UserShopController@setIsShop'));//ajax
-
-    //Tools quản lý các page khác nhau
-    Route::get('toolsCommon/viewShopShare',array('as' => 'admin.viewShopShare','uses' => 'ToolsCommonController@viewShopShare'));
-    //quan ly noi dung gui email
-    Route::get('toolsCommon/viewContentSendEmail',array('as' => 'admin.contentSendEmail_list','uses' => 'ToolsCommonController@viewContentSendEmail'));
-    Route::get('toolsCommon/edit/{id?}', array('as' => 'admin.contentSendEmail_edit','uses' => 'ToolsCommonController@getContentSendEmail'))->where('id', '[0-9]+');
-    Route::post('toolsCommon/edit/{id?}', array('as' => 'admin.contentSendEmail_edit','uses' => 'ToolsCommonController@postContentSendEmail'))->where('id', '[0-9]+');
-    Route::post('toolsCommon/deleteContentSendEmail', array('as' => 'admin.deltete_provider','uses' => 'ToolsCommonController@deleteContentSendEmail'));//ajax
-	//Gửi email tới khách hàng
-    Route::post('toolsCommon/sendEmailContentToCustomer',array('as' => 'admin.sendEmailContentToCustomer','uses' => 'ToolsCommonController@sendEmailContentToCustomer'));
-    //Gui Email toi nha cung cap mo shop
-    Route::post('toolsCommon/sendEmailInviteToSupplier',array('as' => 'admin.sendEmailInviteToSupplier','uses' => 'ToolsCommonController@sendEmailInviteToSupplier'));
-    
-    //Quản lý nhà cung cấp
-    Route::get('provider/view',array('as' => 'admin.provider_list','uses' => 'ProviderController@view'));
-    Route::get('provider/edit/{id?}', array('as' => 'admin.provider_edit','uses' => 'ProviderController@getProvider'))->where('id', '[0-9]+');
-    Route::post('provider/edit/{id?}', array('as' => 'admin.provider_edit','uses' => 'ProviderController@postProvider'))->where('id', '[0-9]+');
-    Route::post('provider/deleteProvider', array('as' => 'admin.deltete_provider','uses' => 'ProviderController@deleteProvider'));//ajax
+    Route::get('customer/view',array('as' => 'admin.customerView','uses' => 'UserCustomerController@view'));
+    Route::get('customer/getEditCustomer/{id?}', array('as' => 'admin.customerEdit','uses' => 'UserCustomerController@getEditCustomer'))->where('id', '[0-9]+');
+    Route::post('customer/postEditCustomer/{id?}', array('as' => 'admin.customerEdit','uses' => 'UserCustomerController@postEditCustomer'))->where('id', '[0-9]+');
+    Route::post('customer/deleteCustomer', array('as' => 'admin.deleteCustomer','uses' => 'UserCustomerController@deleteCustomer'));//ajax
+    Route::get('customer/loginToCustomer/{id?}', array('as' => 'admin.loginToCustomer','uses' => 'UserCustomerController@loginToCustomer'))->where('id', '[0-9]+');
+    Route::post('customer/updateStatusCustomer', array('as' => 'admin.customerStatus','uses' => 'UserCustomerController@updateStatusCustomer'));//ajax
+    Route::post('customer/setIsCustomer', array('as' => 'admin.setIsCustomer','uses' => 'UserCustomerController@setIsCustomer'));//ajax
 
     /*Quản lý San Pham*/
     Route::get('product/view',array('as' => 'admin.product_list','uses' => 'ProductController@view'));
@@ -76,38 +58,11 @@
     Route::post('news/edit/{id?}', array('as' => 'admin.news_edit','uses' => 'NewsController@postNews'))->where('id', '[0-9]+');
     Route::post('news/deleteNews', array('as' => 'admin.deltete_news_post','uses' => 'NewsController@deleteNews'));//ajax
 
-    //*Quản lý Liên hệ*/
-    Route::get('contact/view',array('as' => 'admin.contact_list','uses' => 'ContactController@view'));
-    Route::get('contact/edit/{id?}', array('as' => 'admin.contact_edit','uses' => 'ContactController@getContact'))->where('id', '[0-9]+');
-    Route::post('contact/edit/{id?}', array('as' => 'admin.contact_edit','uses' => 'ContactController@postContact'))->where('id', '[0-9]+');
-    Route::post('contact/deleteContact', array('as' => 'admin.deltete_contact','uses' => 'ContactController@deleteContact'));//ajax
-
     /*Quản lý banner*/
     Route::any('banner/view',array('as' => 'admin.banner_list','uses' => 'BannerController@view'));
     Route::get('banner/edit/{id?}', array('as' => 'admin.banner_edit','uses' => 'BannerController@getBanner'))->where('id', '[0-9]+');
     Route::post('banner/edit/{id?}', array('as' => 'admin.banner_edit','uses' => 'BannerController@postBanner'))->where('id', '[0-9]+');
     Route::post('banner/deleteBanner', array('as' => 'admin.deleteBanner','uses' => 'BannerController@deleteBanner'));//ajax
-
-    /*Quan Ly Don Hang*/
-    Route::get('order/view',array('as' => 'admin.order_list','uses' => 'OrderController@view'));
-    Route::post('order/deleteOrderShop', array('as' => 'admin.deleteOrderShop','uses' => 'OrderController@deleteOrderShop'));
-    
-    /*Quan Ly danh sach khach hang va gui mail*/
-    Route::get('customeremail/view',array('as' => 'admin.customeremail_list','uses' => 'CustomerEmailController@view'));
-    Route::get('customeremail/edit/{id?}', array('as' => 'admin.customeremail_edit','uses' => 'CustomerEmailController@getCustomerEmail'))->where('id', '[0-9]+');
-    Route::post('customeremail/edit/{id?}', array('as' => 'admin.customeremail_edit_post','uses' => 'CustomerEmailController@postCustomerEmail'))->where('id', '[0-9]+');
-    Route::post('customeremail/deleteCustomerEmail', array('as' => 'admin.deltete_customeremail_post','uses' => 'CustomerEmailController@deleteCustomerEmail'));
-    Route::post('customeremail/deleteMultiCustomerEmail', array('as' => 'admin.deleteMultiCustomerEmail','uses' => 'CustomerEmailController@deleteMultiCustomerEmail'));//ajax
-	
-    /*Quan Ly danh sach nha cung cap va gui mail*/
-    Route::get('provideremail/view',array('as' => 'admin.provideremail_list','uses' => 'ProviderEmailController@view'));
-    Route::get('provideremail/edit/{id?}', array('as' => 'admin.provideremail_edit','uses' => 'ProviderEmailController@getProviderEmail'))->where('id', '[0-9]+');
-    Route::post('provideremail/edit/{id?}', array('as' => 'admin.provideremail_edit_post','uses' => 'ProviderEmailController@postProviderEmail'))->where('id', '[0-9]+');
-    Route::post('provideremail/deleteProviderEmail', array('as' => 'admin.deltete_provideremail_post','uses' => 'ProviderEmailController@deleteProviderEmail'));
-    Route::post('provideremail/deleteMultiProviderEmail', array('as' => 'admin.deleteMultiProviderEmail','uses' => 'ProviderEmailController@deleteMultiProviderEmail'));//ajax
-    
-    
-	
 
 	//Thong tin cau hinh chung: hotline, thong tin chan trang...
 	Route::get('info', array('as' => 'admin.info','uses' => 'InfoController@listView'));
@@ -125,3 +80,15 @@
 	Route::get('provice/edit/{id?}', array('as' => 'admin.provice_edit','uses' => 'ProviceController@getItem'))->where('id', '[0-9]+');
 	Route::post('provice/edit/{id?}', array('as' => 'admin.provice_edit','uses' => 'ProviceController@postItem'))->where('id', '[0-9]+');
 	Route::match(['GET','POST'],'provice/delete', array('as' => 'admin.provice_delete','uses' => 'ProviceController@delete'));
+
+    //Tools quản lý các page khác nhau
+    Route::get('toolsCommon/viewShopShare',array('as' => 'admin.viewShopShare','uses' => 'ToolsCommonController@viewShopShare'));
+    //quan ly noi dung gui email
+    Route::get('toolsCommon/viewContentSendEmail',array('as' => 'admin.contentSendEmail_list','uses' => 'ToolsCommonController@viewContentSendEmail'));
+    Route::get('toolsCommon/edit/{id?}', array('as' => 'admin.contentSendEmail_edit','uses' => 'ToolsCommonController@getContentSendEmail'))->where('id', '[0-9]+');
+    Route::post('toolsCommon/edit/{id?}', array('as' => 'admin.contentSendEmail_edit','uses' => 'ToolsCommonController@postContentSendEmail'))->where('id', '[0-9]+');
+    Route::post('toolsCommon/deleteContentSendEmail', array('as' => 'admin.deltete_provider','uses' => 'ToolsCommonController@deleteContentSendEmail'));//ajax
+    //Gửi email tới khách hàng
+    Route::post('toolsCommon/sendEmailContentToCustomer',array('as' => 'admin.sendEmailContentToCustomer','uses' => 'ToolsCommonController@sendEmailContentToCustomer'));
+    //Gui Email toi nha cung cap mo shop
+    Route::post('toolsCommon/sendEmailInviteToSupplier',array('as' => 'admin.sendEmailInviteToSupplier','uses' => 'ToolsCommonController@sendEmailInviteToSupplier'));

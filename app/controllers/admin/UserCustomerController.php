@@ -12,7 +12,10 @@ class UserCustomerController extends BaseAdminController
     private $permission_create = 'user_customer_create';
     private $permission_edit = 'user_customer_edit';
     private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện', CGlobal::status_block => 'Khóa');
-    private $arrIsShop = array(-1 => 'Tất cả', CGlobal::SHOP_FREE => 'Shop Free', CGlobal::SHOP_NOMAL => 'Shop thường', CGlobal::SHOP_VIP => 'Shop Vip');
+    private $arrIsCustomer = array(-1 => 'Tất cả',
+        CGlobal::CUSTOMER_FREE => 'Khách Free',
+        CGlobal::CUSTOMER_NOMAL => 'Khách thường',
+        CGlobal::CUSTOMER_VIP => 'Khách Vip');
     private $error = array();
 
     public function __construct()
@@ -36,14 +39,20 @@ class UserCustomerController extends BaseAdminController
             //'frontend/js/site.js',
         ));
         CGlobal::$pageAdminTitle = 'Quản lý User Shop';
+
     }
 
     public function view() {
+        $this->header();
+        $Meta = array('title'=>'QL khách đăng tin',);
+        foreach($Meta as $key=>$val){
+            $this->layout->$key = $val;
+        }
         //Check phan quyen.
         if(!$this->is_root && !in_array($this->permission_full,$this->permission)&& !in_array($this->permission_view,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
-        UserCustomer::updateShopLogout();//cap nhat shop login mà chưa logout
+        //UserCustomer::updateShopLogout();//cap nhat shop login mà chưa logout
 
         $pageNo = (int) Request::get('page_no',1);
         $limit = CGlobal::number_limit_show;
@@ -51,19 +60,19 @@ class UserCustomerController extends BaseAdminController
         $search = $data = array();
         $total = 0;
 
-        $search['shop_id'] = addslashes(Request::get('shop_id',''));
-        $search['user_shop'] = addslashes(Request::get('user_shop',''));
-        $search['shop_name'] = addslashes(Request::get('shop_name',''));
-        $search['shop_status'] = (int)Request::get('shop_status',-1);
-        $search['is_shop'] = (int)Request::get('is_shop',-1);
+        $search['customer_id'] = addslashes(Request::get('customer_id',''));
+        $search['customer_name'] = addslashes(Request::get('customer_name',''));
+        $search['customer_email'] = addslashes(Request::get('customer_email',''));
+        $search['customer_status'] = (int)Request::get('customer_status',-1);
+        $search['is_customer'] = (int)Request::get('is_customer',-1);
         //$search['field_get'] = 'category_id,category_name,category_status';//cac truong can lay
 
-        $dataSearch = UserShop::searchByCondition($search, $limit, $offset,$total);
+        $dataSearch = UserCustomer::searchByCondition($search, $limit, $offset,$total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
 
         //FunctionLib::debug($dataSearch);
-        $optionStatus = FunctionLib::getOption($this->arrStatus, $search['shop_status']);
-        $optionIsShop = FunctionLib::getOption($this->arrIsShop, $search['is_shop']);
+        $optionStatus = FunctionLib::getOption($this->arrStatus, $search['customer_status']);
+        $optionIsCustomer = FunctionLib::getOption($this->arrIsCustomer, $search['is_customer']);
         $this->layout->content = View::make('admin.UserCustomer.view')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
@@ -72,9 +81,9 @@ class UserCustomerController extends BaseAdminController
             ->with('data', $dataSearch)
             ->with('search', $search)
             ->with('optionStatus', $optionStatus)
-            ->with('optionIsShop', $optionIsShop)
+            ->with('optionIsCustomer', $optionIsCustomer)
             ->with('arrStatus', $this->arrStatus)
-            ->with('arrIsShop', $this->arrIsShop)
+            ->with('arrIsCustomer', $this->arrIsCustomer)
 
             ->with('is_root', $this->is_root)//dùng common
             ->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)//dùng common
@@ -83,7 +92,7 @@ class UserCustomerController extends BaseAdminController
             ->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0);//dùng common
     }
 
-    public function getUserCustomer($id=0) {
+    public function getEditCustomer($id=0) {
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
@@ -120,7 +129,7 @@ class UserCustomerController extends BaseAdminController
             ->with('arrStatus', $this->arrStatus);
     }
 
-    public function postUserCustomer($id=0) {
+    public function postEditCustomer($id=0) {
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
@@ -202,7 +211,7 @@ class UserCustomerController extends BaseAdminController
     }
 
     //ajax
-    public function deleteUserCustomer(){
+    public function deleteCustomer(){
         $result = array('isIntOk' => 0);
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_delete,$this->permission)){
             return Response::json($result);
@@ -266,7 +275,7 @@ class UserCustomerController extends BaseAdminController
         return Response::json($result);
     }
     //ajax
-    public function updateStatusUserCustomer(){
+    public function updateStatusCustomer(){
         $shop_id = (int)Request::get('shop_id', 0);
         $shop_status = (int)Request::get('shop_status', CGlobal::SHOP_FREE);
         $result = array('isIntOk' => 0);

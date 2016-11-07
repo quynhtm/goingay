@@ -115,21 +115,11 @@ class CGlobal{
 	
 	const FOLDER_INFO = 'info';
     //shop
-    const SHOP_FREE = 1;
-    const SHOP_NOMAL = 2;
-    const SHOP_VIP = 3;
-    const SHOP_ONLINE = 1;
-    const SHOP_OFFLINE = 0;
-    const SHOP_NUMBER_PRODUCT_FREE = 5;
-    const SHOP_NUMBER_PRODUCT_NOMAL = 100;
-    const SHOP_NUMBER_PRODUCT_VIP = 5000;
-
-    //order
-    const ORDER_STATUS_DELETE = 0;
-    const ORDER_STATUS_NEW = 1;
-    const ORDER_STATUS_CHECKED = 2;
-    const ORDER_STATUS_SUCCESS = 3;
-    const ORDER_STATUS_CANCEL = 4;
+    const CUSTOMER_FREE = 1;
+    const CUSTOMER_NOMAL = 2;
+    const CUSTOMER_VIP = 3;
+    const CUSTOMER_ONLINE = 1;
+    const CUSTOMER_OFFLINE = 0;
 
     //product
     const TYPE_PRICE_NUMBER = 1;
