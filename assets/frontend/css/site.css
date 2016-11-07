@@ -18,7 +18,8 @@ a{
     outline: 1px none;
     text-decoration: none;
 }
-a:hover{
+a:hover,
+a:focus{
     outline: medium none;
     text-decoration: none;
     color: #004f8b;
@@ -61,7 +62,7 @@ h1, h2, h3, h4, h5, h6{
     font-size: 11px;
     height: 45px;
     position: relative;
-    z-index: 9999;
+    z-index: 2;
 }
 
 .line-head .logo {
@@ -424,7 +425,7 @@ h1, h2, h3, h4, h5, h6{
     top: 50%;
     transform: translateY(-50%);
     width: 49px;
-    z-index: 6800;
+    z-index: 2;
 	display:inline-block;
 }
 .icon-pin ul li {
