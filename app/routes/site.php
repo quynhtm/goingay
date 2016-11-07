@@ -105,3 +105,17 @@ Route::post('shop/getInforShopCart',array('as' => 'shop.getInforShopCart','uses'
 Route::post('shop/orderBuyShopCart',array('as' => 'shop.orderBuyShopCart','uses' =>'ShopVipController@orderBuyShopCart'));//ajax
 Route::post('shop/deleteOneItemShopCart',array('as' => 'shop.deleteOneItemShopCart','uses' =>'ShopVipController@deleteOneItemShopCart'));//ajax
 Route::post('shop/changeNumberBuyShopCart',array('as' => 'shop.changeNumberBuyShopCart','uses' =>'ShopVipController@changeNumberBuyShopCart'));//ajax
+
+
+
+//Register - Login
+Route::match(['GET','POST'],'dang-ky.html', array('as' => 'customer.pageRegister','uses' => 'SiteUserCustomerController@pageRegister'));
+Route::match(['GET','POST'],'dang-nhap.html', array('as' => 'customer.pageLogin','uses' => 'SiteUserCustomerController@pageLogin'));
+Route::match(['GET','POST'],'thanh-vien-thoat.html', array('as' => 'customer.logout','uses' => 'SiteUserCustomerController@logout'));
+Route::match(['GET','POST'],'quen-mat-khau.html', array('as' => 'customer.pageForgetPass','uses' => 'SiteUserCustomerController@pageForgetPass'));
+Route::match(['GET','POST'],'quen-mat-khau', array('as' => 'customer.pageGetForgetPass','uses' => 'SiteUserCustomerController@pageGetForgetPass'));
+
+Route::match(['GET','POST'],'thay-doi-thong-tin.html', array('as' => 'customer.pageChageInfo','uses' => 'SiteUserCustomerController@pageChageInfo'));
+Route::match(['GET','POST'],'thay-doi-mat-khau.html', array('as' => 'customer.pageChagePass','uses' => 'SiteUserCustomerController@pageChagePass'));
+Route::match(['GET','POST'],'lich-su-mua-hang.html', array('as' => 'customer.pageHistoryOrder','uses' => 'SiteUserCustomerController@pageHistoryOrder'));
+Route::match(['GET','POST'],'chi-tiet-don-hang.html', array('as' => 'customer.pageHistoryViewOrder','uses' => 'SiteUserCustomerController@pageHistoryViewOrder'));

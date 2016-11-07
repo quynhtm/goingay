@@ -10,8 +10,8 @@ class SiteHomeController extends BaseSiteController{
         parent::__construct();
         FunctionLib::site_css('libs/fontAwesome/4.2.0/css/font-awesome.min.css', CGlobal::$POS_HEAD);
         FunctionLib::site_js('frontend/js/site.js', CGlobal::$POS_END);
-        FunctionLib::site_js('frontend/js/member.js', CGlobal::$POS_END);
-        FunctionLib::site_css('frontend/css/member.css', CGlobal::$POS_HEAD);
+        FunctionLib::site_js('frontend/js/usercustomer.js', CGlobal::$POS_END);
+        FunctionLib::site_css('frontend/css/usercustomer.css', CGlobal::$POS_HEAD);
     }
 
     public function index(){
