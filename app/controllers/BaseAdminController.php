@@ -54,6 +54,7 @@ class BaseAdminController extends BaseController
 			'name'=>'QL đăng tin', 'link'=>'javascript:void(0)', 'icon'=>'fa fa-angle-down',
 			'sub'=>array(
 				array('name'=>'Khách đăng tin', 'link'=>URL::route('admin.customerView'), 'icon'=>'fa fa-users icon-4x', 'showcontent'=>1),
+				array('name'=>'Danh sách tin đăng', 'link'=>URL::route('admin.itemsView'), 'icon'=>'fa fa-file-text-o icon-4x', 'showcontent'=>1),
 			),
 		);
 		return $menu;

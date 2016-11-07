@@ -36,7 +36,7 @@
     Route::post('category/deleteCategory', array('as' => 'admin.deltete_category_post','uses' => 'CategoryController@deleteCategory'));//ajax
     Route::post('category/updateStatusCategory', array('as' => 'admin.status_category_post','uses' => 'CategoryController@updateStatusCategory'));//ajax
 
-    /*Quản lý danh sách shop*/
+    /*Quản lý danh sách khách hàng đăng tin*/
     Route::get('customer/view',array('as' => 'admin.customerView','uses' => 'UserCustomerController@view'));
     Route::get('customer/getEditCustomer/{id?}', array('as' => 'admin.customerEdit','uses' => 'UserCustomerController@getEditCustomer'))->where('id', '[0-9]+');
     Route::post('customer/postEditCustomer/{id?}', array('as' => 'admin.customerEdit','uses' => 'UserCustomerController@postEditCustomer'))->where('id', '[0-9]+');
@@ -45,12 +45,12 @@
     Route::post('customer/updateStatusCustomer', array('as' => 'admin.customerStatus','uses' => 'UserCustomerController@updateStatusCustomer'));//ajax
     Route::post('customer/setIsCustomer', array('as' => 'admin.setIsCustomer','uses' => 'UserCustomerController@setIsCustomer'));//ajax
 
-    /*Quản lý San Pham*/
-    Route::get('product/view',array('as' => 'admin.product_list','uses' => 'ProductController@view'));
-    Route::get('product/getProduct/{id}', array('as' => 'admin.product_edit','uses' => 'ProductController@getProduct'))->where('id', '[0-9]+');
-    Route::post('product/postProduct/{id}', array('as' => 'admin.product_edit_post','uses' => 'ProductController@postProduct'))->where('id', '[0-9]+');
-    Route::post('product/setStastusBlockProduct', array('as' => 'admin.setStastusBlockProduct','uses' => 'ProductController@setStastusBlockProduct'));//ajax
-    Route::post('product/deleteMultiProduct', array('as' => 'admin.deleteMultiProduct','uses' => 'ProductController@deleteMultiProduct'));//ajax
+    /*Quản lý tin đăng*/
+    Route::get('items/view',array('as' => 'admin.itemsView','uses' => 'ItemsController@view'));
+    Route::get('items/getItems/{id}', array('as' => 'admin.itemsEdit','uses' => 'ItemsController@getItems'))->where('id', '[0-9]+');
+    Route::post('items/postItems/{id}', array('as' => 'admin.itemsEdit','uses' => 'ItemsController@postItems'))->where('id', '[0-9]+');
+    Route::post('items/setStastusBlockItems', array('as' => 'admin.setStastusBlockItems','uses' => 'ItemsController@setStastusBlockItems'));//ajax
+    Route::post('items/deleteMultiItems', array('as' => 'admin.deleteMultiItems','uses' => 'ItemsController@deleteMultiItems'));//ajax
 
     /*Quản lý tin tức*/
     Route::get('news/view',array('as' => 'admin.news_list','uses' => 'NewsController@view'));

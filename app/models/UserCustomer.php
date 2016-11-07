@@ -16,27 +16,27 @@ class UserCustomer extends Eloquent
         'is_customer','is_login','time_start_vip','time_end_vip');
 
     public static function getByID($id) {
-        $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_USER_SHOP_ID.$id) : array();
+        $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_CUSTOMER_ID.$id) : array();
         if($id > 0){
             if (sizeof($data) == 0) {
                 $data = UserCustomer::where('customer_id', $id)->first();
                 if($data && Memcache::CACHE_ON){
-                    Cache::put(Memcache::CACHE_USER_SHOP_ID.$id, $data, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+                    Cache::put(Memcache::CACHE_CUSTOMER_ID.$id, $data, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
                 }
             }
         }
         return $data;
     }
 
-    public static function getShopAll() {
-        $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_USER_SHOP) : array();
+    public static function getCustomerAll() {
+        $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_CUSTOMER) : array();
         if (sizeof($data) == 0) {
             $customer = UserCustomer::where('customer_id', '>', 0)->where('customer_status', CGlobal::status_show)->get();
             foreach($customer as $itm) {
                 $data[$itm['customer_id']] = $itm['customer_name'];
             }
             if(!empty($data) && Memcache::CACHE_ON){
-                Cache::put(Memcache::CACHE_ALL_USER_SHOP, $data, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+                Cache::put(Memcache::CACHE_ALL_CUSTOMER, $data, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
             }
         }
         return $data;
@@ -212,10 +212,9 @@ class UserCustomer extends Eloquent
      */
     public static function removeCache($id = 0){
         if($id > 0){
-            Cache::forget(Memcache::CACHE_USER_SHOP_ID.$id);
-            Cache::forget(Memcache::CACHE_CATEGORY_SHOP_ID.$id);
+            Cache::forget(Memcache::CACHE_CUSTOMER_ID.$id);
         }
-        Cache::forget(Memcache::CACHE_ALL_USER_SHOP);
+        Cache::forget(Memcache::CACHE_ALL_CUSTOMER);
     }
 
 }
