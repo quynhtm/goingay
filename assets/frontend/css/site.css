@@ -447,3 +447,13 @@ h1, h2, h3, h4, h5, h6{
 .icon-pin .icon-contact{
 	background-position: 0 -35px;
 }
+.loading {
+    background: #c0c0c0 url("../img/loading.gif") no-repeat scroll center center;
+    height: 100%;
+    left: 0;
+    opacity: 0.4;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999999
+}

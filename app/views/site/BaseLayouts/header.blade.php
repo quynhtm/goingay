@@ -43,6 +43,9 @@
 			<li class="clickLogin">
 				<a href="javascript:void(0);"><i class="fa fa-lock"></i>Đăng nhập</a>
 			</li>
+			<li class="clickRegister">
+				<a href="javascript:void(0);"><i class="fa fa-plus"></i>Đăng ký</a>
+			</li>
 		</ul>
 	</div>
 </div>

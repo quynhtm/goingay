@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4a50990abba9ad476c324f633d2a544b
+class ComposerStaticInitbc3288a09d68c300f3cb5075bccebc16
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1590,6 +1590,7 @@ class ComposerStaticInit4a50990abba9ad476c324f633d2a544b
         'SiteHomeController' => __DIR__ . '/../..' . '/app/controllers/site/SiteHomeController.php',
         'SiteOrderController' => __DIR__ . '/../..' . '/app/controllers/site/SiteOrderController.php',
         'SiteShopController' => __DIR__ . '/../..' . '/app/controllers/site/SiteShopController.php',
+        'SiteUserCustomerController' => __DIR__ . '/../..' . '/app/controllers/site/SiteUserCustomerController.php',
         'Stack\\Builder' => __DIR__ . '/..' . '/stack/builder/src/Stack/Builder.php',
         'Stack\\StackedHttpKernel' => __DIR__ . '/..' . '/stack/builder/src/Stack/StackedHttpKernel.php',
         'Style' => __DIR__ . '/..' . '/dompdf/dompdf/include/style.cls.php',
@@ -2249,10 +2250,10 @@ class ComposerStaticInit4a50990abba9ad476c324f633d2a544b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4a50990abba9ad476c324f633d2a544b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4a50990abba9ad476c324f633d2a544b::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit4a50990abba9ad476c324f633d2a544b::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit4a50990abba9ad476c324f633d2a544b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitbc3288a09d68c300f3cb5075bccebc16::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitbc3288a09d68c300f3cb5075bccebc16::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitbc3288a09d68c300f3cb5075bccebc16::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitbc3288a09d68c300f3cb5075bccebc16::$classMap;
 
         }, null, ClassLoader::class);
     }

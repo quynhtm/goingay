@@ -216,5 +216,9 @@ class UserCustomer extends Eloquent
         }
         Cache::forget(Memcache::CACHE_ALL_CUSTOMER);
     }
-
+	
+    //SITE: Duy add
+    public static function encode_password($password){
+    	return md5(md5($password));
+    }
 }

@@ -1362,6 +1362,7 @@ return array(
     'SiteHomeController' => $baseDir . '/app/controllers/site/SiteHomeController.php',
     'SiteOrderController' => $baseDir . '/app/controllers/site/SiteOrderController.php',
     'SiteShopController' => $baseDir . '/app/controllers/site/SiteShopController.php',
+    'SiteUserCustomerController' => $baseDir . '/app/controllers/site/SiteUserCustomerController.php',
     'Stack\\Builder' => $vendorDir . '/stack/builder/src/Stack/Builder.php',
     'Stack\\StackedHttpKernel' => $vendorDir . '/stack/builder/src/Stack/StackedHttpKernel.php',
     'Style' => $vendorDir . '/dompdf/dompdf/include/style.cls.php',
