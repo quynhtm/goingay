@@ -21,6 +21,9 @@
 						</a>
 					</div>
 					@endif
+					@if(isset($sub['clear']) && $sub['clear'] == 1)
+						<div class="clear"></div>
+					@endif
 					@endforeach
 				@endif
 			@endforeach

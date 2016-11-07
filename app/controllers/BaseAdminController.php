@@ -46,7 +46,7 @@ class BaseAdminController extends BaseController
 		$menu[] = array(
 			'name'=>'Đơn vị hành chính', 'link'=>'javascript:void(0)', 'icon'=>'fa fa-angle-down',
 			'sub'=>array(
-				array('name'=>'Tỉnh/Thành', 'link'=>URL::route('admin.provice'), 'icon'=>'fa fa-map-marker icon-4x', 'showcontent'=>1),
+				array('name'=>'Tỉnh/Thành', 'link'=>URL::route('admin.provice'), 'icon'=>'fa fa-map-marker icon-4x', 'showcontent'=>1, 'clear'=>1),
 			),
 		);
 
@@ -55,6 +55,14 @@ class BaseAdminController extends BaseController
 			'sub'=>array(
 				array('name'=>'Khách đăng tin', 'link'=>URL::route('admin.customerView'), 'icon'=>'fa fa-users icon-4x', 'showcontent'=>1),
 				array('name'=>'Danh sách tin đăng', 'link'=>URL::route('admin.itemsView'), 'icon'=>'fa fa-file-text-o icon-4x', 'showcontent'=>1),
+			),
+		);
+
+		$menu[] = array(
+			'name'=>'QL nội dung', 'link'=>'javascript:void(0)', 'icon'=>'fa fa-angle-down',
+			'sub'=>array(
+				array('name'=>'Tin tức', 'link'=>URL::route('admin.newsView'), 'icon'=>'fa fa-book icon-4x', 'showcontent'=>1),
+				array('name'=>'Banner quảng cáo', 'link'=>URL::route('admin.bannerView'), 'icon'=>'fa fa-globe icon-4x', 'showcontent'=>1),
 			),
 		);
 		return $menu;

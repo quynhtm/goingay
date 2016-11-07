@@ -5,7 +5,7 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{URL::route('admin.dashboard')}}">Home</a>
             </li>
-            <li><a href="{{URL::route('admin.news_list')}}"> Danh sách tin tức</a></li>
+            <li><a href="{{URL::route('admin.newsView')}}"> Danh sách tin tức</a></li>
             <li class="active">@if($id > 0)Cập nhật tin tức @else Tạo mới tin tức @endif</li>
         </ul><!-- /.breadcrumb -->
     </div>

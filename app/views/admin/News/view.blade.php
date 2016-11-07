@@ -30,7 +30,7 @@
                     <div class="panel-footer text-right">
                         @if($is_root || $permission_full ==1 || $permission_create == 1)
                         <span class="">
-                            <a class="btn btn-danger btn-sm" href="{{URL::route('admin.news_edit')}}">
+                            <a class="btn btn-danger btn-sm" href="{{URL::route('admin.newsEdit')}}">
                                 <i class="ace-icon fa fa-plus-circle"></i>
                                 Thêm mới
                             </a>
@@ -72,7 +72,7 @@
                                 </td>
                                 <td class="text-center">
                                     @if($is_root || $permission_full ==1|| $permission_edit ==1  )
-                                        <a href="{{URL::route('admin.news_edit',array('id' => $item['news_id']))}}" title="Sửa item"><i class="fa fa-edit fa-2x"></i></a>
+                                        <a href="{{URL::route('admin.newsEdit',array('id' => $item['news_id']))}}" title="Sửa item"><i class="fa fa-edit fa-2x"></i></a>
                                     @endif
                                     @if($is_root || $permission_full ==1 || $permission_delete == 1)
                                        &nbsp;&nbsp;&nbsp;

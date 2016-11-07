@@ -39,7 +39,6 @@ class BannerController extends BaseAdminController
     {
         parent::__construct();
         $this->arrCategoryParent = Category::getAllParentCategoryId();;
-        $this->arrShop = UserShop::getShopAll();;
         //Include style.
         FunctionLib::link_css(array(
             'lib/upload/cssUpload.css',
@@ -56,6 +55,11 @@ class BannerController extends BaseAdminController
     }
 
     public function view() {
+        $this->header();
+        $Meta = array('title'=>'QL Banner quảng cáo',);
+        foreach($Meta as $key=>$val){
+            $this->layout->$key = $val;
+        }
         //Check phan quyen.
         if(!$this->is_root && !in_array($this->permission_full,$this->permission)&& !in_array($this->permission_view,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
@@ -96,7 +100,12 @@ class BannerController extends BaseAdminController
             ->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0);//dùng common
     }
 
-    public function getBanner($id=0) {
+    public function getBanner($id=0) {$this->header();
+        $this->header();
+        $Meta = array('title'=>'Thêm - sửa quảng cáo',);
+        foreach($Meta as $key=>$val){
+            $this->layout->$key = $val;
+        }
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
@@ -145,6 +154,11 @@ class BannerController extends BaseAdminController
             ->with('arrStatus', $this->arrStatus);
     }
     public function postBanner($id=0) {
+        $this->header();
+        $Meta = array('title'=>'Thêm - sửa quảng cáo',);
+        foreach($Meta as $key=>$val){
+            $this->layout->$key = $val;
+        }
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
@@ -175,7 +189,7 @@ class BannerController extends BaseAdminController
                 $data['banner_start_time'] = strtotime($data['banner_start_time']);
                 $data['banner_end_time'] = strtotime($data['banner_end_time']);
                 if(Banner::updateData($id, $data)) {
-                    return Redirect::route('admin.banner_list');
+                    return Redirect::route('admin.bannerView');
                 }
             }
         }

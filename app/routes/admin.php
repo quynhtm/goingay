@@ -53,15 +53,15 @@
     Route::post('items/deleteMultiItems', array('as' => 'admin.deleteMultiItems','uses' => 'ItemsController@deleteMultiItems'));//ajax
 
     /*Quản lý tin tức*/
-    Route::get('news/view',array('as' => 'admin.news_list','uses' => 'NewsController@view'));
-    Route::get('news/edit/{id?}', array('as' => 'admin.news_edit','uses' => 'NewsController@getNews'))->where('id', '[0-9]+');
-    Route::post('news/edit/{id?}', array('as' => 'admin.news_edit','uses' => 'NewsController@postNews'))->where('id', '[0-9]+');
-    Route::post('news/deleteNews', array('as' => 'admin.deltete_news_post','uses' => 'NewsController@deleteNews'));//ajax
+    Route::get('news/view',array('as' => 'admin.newsView','uses' => 'NewsController@view'));
+    Route::get('news/edit/{id?}', array('as' => 'admin.newsEdit','uses' => 'NewsController@getNews'))->where('id', '[0-9]+');
+    Route::post('news/edit/{id?}', array('as' => 'admin.newsEdit','uses' => 'NewsController@postNews'))->where('id', '[0-9]+');
+    Route::post('news/deleteNews', array('as' => 'admin.delteteNews','uses' => 'NewsController@deleteNews'));//ajax
 
     /*Quản lý banner*/
-    Route::any('banner/view',array('as' => 'admin.banner_list','uses' => 'BannerController@view'));
-    Route::get('banner/edit/{id?}', array('as' => 'admin.banner_edit','uses' => 'BannerController@getBanner'))->where('id', '[0-9]+');
-    Route::post('banner/edit/{id?}', array('as' => 'admin.banner_edit','uses' => 'BannerController@postBanner'))->where('id', '[0-9]+');
+    Route::any('banner/view',array('as' => 'admin.bannerView','uses' => 'BannerController@view'));
+    Route::get('banner/edit/{id?}', array('as' => 'admin.bannerEdit','uses' => 'BannerController@getBanner'))->where('id', '[0-9]+');
+    Route::post('banner/edit/{id?}', array('as' => 'admin.bannerEdit','uses' => 'BannerController@postBanner'))->where('id', '[0-9]+');
     Route::post('banner/deleteBanner', array('as' => 'admin.deleteBanner','uses' => 'BannerController@deleteBanner'));//ajax
 
 	//Thong tin cau hinh chung: hotline, thong tin chan trang...
