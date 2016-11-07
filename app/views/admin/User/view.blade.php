@@ -63,14 +63,14 @@
 					<tr>
 						<th width="5%">STT</th>
 						<th width="40%">Thông tin</th>
-						<th width="15%">Ngày tạo</th>
-						<th width="20%">Thao tác</th>
+						<th width="10%">Ngày tạo</th>
+						<th width="10%">Thao tác</th>
 					</tr>
 				</thead>
 				<tbody>
 				@foreach ($data as $key => $item)
 					<tr @if($item['user_status'] == -1)class="red bg-danger" @endif>
-						<td class="text-center">{{ $start+$key+1 }}</td>
+						<td>{{ $start+$key+1 }}</td>
 						<td>
 							<div class="green"><b>Tài khoản : </b>{{ $item['user_name'] }}</div>
 							<div><b>Tên nhân viên : </b>{{ $item['user_full_name'] }}</div>
@@ -83,7 +83,6 @@
 							@endif
 						</td>
 						<td class="text-center" align="center">
-							<br/>
 							@if($permission_edit)
 								<a href="{{URL::route('admin.user_edit',array('id' => $item['user_id']))}}" class="btn btn-xs btn-primary" data-content="Sửa thông tin tài khoản" data-placement="bottom" data-trigger="hover" data-rel="popover">
 									<i class="ace-icon fa fa-edit bigger-120"></i>

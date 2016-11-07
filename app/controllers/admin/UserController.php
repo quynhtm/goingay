@@ -26,11 +26,11 @@ class UserController extends BaseAdminController
     		$this->layout->$key = $val;
     	}
     	
-    	CGlobal::$pageAdminTitle  = "Quản trị User | Admin CMS";
-        //check permission
+        //Check permission
         if (!$this->is_root && !in_array($this->permission_view, $this->permission)) {
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
+        
         $page_no = Request::get('page_no', 1);
         $dataSearch['user_status'] = Request::get('user_status', 0);
         $dataSearch['user_email'] = Request::get('user_email', '');
