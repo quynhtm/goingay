@@ -18,9 +18,15 @@ class UserController extends BaseAdminController
         parent::__construct();
     }
 
-    public function view()
-    {
-        CGlobal::$pageAdminTitle  = "Quản trị User | Admin CMS";
+    public function view(){
+        
+    	$this->header();
+    	$Meta = array('title'=>'User',);
+    	foreach($Meta as $key=>$val){
+    		$this->layout->$key = $val;
+    	}
+    	
+    	CGlobal::$pageAdminTitle  = "Quản trị User | Admin CMS";
         //check permission
         if (!$this->is_root && !in_array($this->permission_view, $this->permission)) {
             return Redirect::route('admin.dashboard',array('error'=>1));
