@@ -20,7 +20,7 @@
 	color: #111;
     height: 35px;
     line-height: 35px;
-	padding: 0 5px;
+	padding: 0 15px;
     font-weight: bold;
 	
     background: #fafafa;
@@ -40,7 +40,7 @@
 }
 .content-popup-body {
     margin: 0 auto;
-    width: 65%;
+    width: 91%;
 }
 .content-popup-show .btn-close {
     color: #222;
@@ -77,7 +77,7 @@
 }
 .classic-popup-input input {
     border: 1px solid #dcdcdc;
-    border-radius: 3px;
+    border-radius: 2px;
     color: #888;
     font-size: 13px;
     height: 30px;
@@ -92,8 +92,11 @@
     text-align: left;
 }
 .action-popup-button{
-	text-align: center;
-	padding:5px 10px;
+	padding: 5px 2px;
+}
+.action-popup-button > a {
+    border-bottom: 1px solid #ddd;
+    font-style: italic;
 }
 .frmForm{
     padding-top: 5px;
@@ -124,4 +127,21 @@
 }
 .content-popup-show-order .content-item {
     padding: 10px 0;
+}
+.content-popup-show .modal-footer-classic{
+	background: #fff;
+    padding: 0 15px;
+	height: 35px;
+    line-height: 35px;
+}
+.btn-ext{
+	border-radius: 2px;
+}
+.btnPopLogin{
+    color: #ff7300;
+    cursor: pointer;
+    font-weight: bold;
+}
+.modal-backdrop.in{
+	opacity: 0.5;
 }
