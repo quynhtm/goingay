@@ -156,7 +156,8 @@ class SiteUserCustomerController extends BaseSiteController{
 	    				'customer_phone'=>$phone,
 	    				'customer_address'=>$address,
 	    				'customer_time_created'=>time(),
-	    				'customer_status'=>CGlobal::status_block,
+	    				'is_customer' => CGlobal::CUSTOMER_FREE,
+	    				'customer_status'=>CGlobal::status_hide,
 	    			);
 	    			$id = UserCustomer::addData($data);
 	    			//Send mail active
