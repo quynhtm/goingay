@@ -116,7 +116,7 @@ Route::match(['GET','POST'],'thanh-vien-thoat.html', array('as' => 'customer.log
 Route::match(['GET','POST'],'quen-mat-khau.html', array('as' => 'customer.pageForgetPass','uses' => 'SiteUserCustomerController@pageForgetPass'));
 Route::match(['GET','POST'],'quen-mat-khau', array('as' => 'customer.pageGetForgetPass','uses' => 'SiteUserCustomerController@pageGetForgetPass'));
 
-Route::match(['GET','POST'],'thay-doi-thong-tin.html', array('as' => 'customer.pageChageInfo','uses' => 'SiteUserCustomerController@pageChageInfo'));
+Route::match(['GET','POST'],'thong-tin-ca-nhan.html', array('as' => 'customer.pageChageInfo','uses' => 'SiteUserCustomerController@pageChageInfo'));
 Route::match(['GET','POST'],'thay-doi-mat-khau.html', array('as' => 'customer.pageChagePass','uses' => 'SiteUserCustomerController@pageChagePass'));
 Route::match(['GET','POST'],'lich-su-mua-hang.html', array('as' => 'customer.pageHistoryOrder','uses' => 'SiteUserCustomerController@pageHistoryOrder'));
 Route::match(['GET','POST'],'chi-tiet-don-hang.html', array('as' => 'customer.pageHistoryViewOrder','uses' => 'SiteUserCustomerController@pageHistoryViewOrder'));

@@ -2,7 +2,7 @@
 /*
 * @Created by: DUYNX
 * @Author    : nguyenduypt86@gmail.com
-* @Date      : 06/2016
+* @Date      : 11/2016
 * @Version   : 1.0
 */
 
@@ -11,6 +11,7 @@ class SiteUserCustomerController extends BaseSiteController{
 
 	public function __construct(){
 		parent::__construct();
+		FunctionLib::site_css('libs/fontAwesome/4.2.0/css/font-awesome.min.css', CGlobal::$POS_HEAD);
 		FunctionLib::site_js('frontend/js/site.js', CGlobal::$POS_END);
 		FunctionLib::site_js('frontend/js/usercustomer.js', CGlobal::$POS_END);
         FunctionLib::site_css('frontend/css/usercustomer.css', CGlobal::$POS_HEAD);
@@ -23,7 +24,7 @@ class SiteUserCustomerController extends BaseSiteController{
     public function pageLogin($url=''){
     	
     	if(Session::has('user_customer')){
-    		return Redirect::route('site.index');
+    		return Redirect::route('site.home');
     	}
     	
     	$token = addslashes(Request::get('token', ''));
@@ -36,25 +37,40 @@ class SiteUserCustomerController extends BaseSiteController{
 				if(!$checkMail) {
 	    			$error = 'Email đăng nhập không đúng!';
 	    		}else{
-	    			$member = Member::getMemberByEmail($mail);
-	    			if($member != ''){
-	    				if($member->member_status == 0 || $member->member_status == -1){
+	    			$customer = UserCustomer::getUserCustomerByEmail($mail);
+	    			if(sizeof($customer) > 0){
+	    				if($customer->customer_status == CGlobal::status_hide || $customer->customer_status == CGlobal::status_block){
 	    					$error = 'Tài khoản đang bị khóa!';
-	    				}elseif($member->member_status == 1){
-	    					$encode_password = Member::encode_password($pass);
-	    					if($member->member_pass == $encode_password){
+	    				}elseif($customer->customer_status == CGlobal::status_show){
+	    					$encode_password = UserCustomer::encode_password($pass);
+	    					if($customer->customer_password == $encode_password){
+	    						$timeLogin = time();
 	    						$data = array(
-		    								'member_id' => $member->member_id,
-	    									'member_full_name' => $member->member_full_name,
-	    									'member_phone' => $member->member_phone,
-		    								'member_mail' => $member->member_mail,
-	    									'member_address' => $member->member_address,
-	    									'member_status' => $member->member_status,
-	    									'member_created' => $member->member_created,
-	    								);
-	    						Session::put('member', $data, 60*24);
+    								'customer_id' => $customer->customer_id,
+    								'customer_name' => $customer->customer_name,
+    								'customer_phone' => $customer->customer_phone,
+    								'customer_address' => $customer->customer_address,
+    								'customer_email' => $customer->customer_email,
+    								'customer_province' => $customer->customer_province,
+    								'customer_about' => $customer->customer_about,
+    								'customer_status' => $customer->customer_status,
+    								'customer_up_item' => $customer->customer_up_item,
+    								'customer_time_login' => $timeLogin,
+    								'customer_time_created' => $customer->customer_time_created,
+    								'customer_time_active' => $customer->customer_time_active,
+    								'is_customer' => $customer->is_customer,
+    								'time_start_vip' => $customer->time_start_vip,
+    								'time_end_vip' => $customer->time_end_vip,
+    								'is_login' => 1,
+    							);
+	    						Session::put('user_customer', $data, 60*24);
 	    						Session::save();
-	    						Member::updateLogin($member);
+	    						
+	    						$dataUpdate = array(
+	    								'is_login'=>1,
+	    								'customer_time_login'=>$timeLogin,
+	    						);
+	    						UserCustomer::updateData($customer->customer_id, $dataUpdate);
 	    					}else{
 	    						$error = 'Mật khẩu chưa đúng!';
 	    					}
@@ -68,13 +84,20 @@ class SiteUserCustomerController extends BaseSiteController{
 	    	}
     	}else{
     		$error = 'Phiên làm việc hết hạn!';
-    		return Redirect::route('site.index');
     	}
     	echo $error;die;
     }
     public function logout(){
     	if(Session::has('user_customer')){
-        	Session::forget('user_customer');
+    		$dataSess = Session::get('user_customer');
+    		if(isset($dataSess['customer_id']) && (int)$dataSess['customer_id'] > 0){
+    			$dataUpdate = array(
+    					'is_login'=>0,
+    					'customer_time_logout'=>time(),
+    			);
+    			UserCustomer::updateData($dataSess['customer_id'], $dataUpdate);
+    		}
+    		Session::forget('user_customer');
         }
         return Redirect::route('site.home');
     }
@@ -93,6 +116,7 @@ class SiteUserCustomerController extends BaseSiteController{
     	$address = addslashes(Request::get('sys_reg_address', ''));
     	$error = '';
     	$hash_pass = '';
+    	
     	if(Session::token() === $token){
     		//Mail
     		if($mail != ''){
@@ -149,7 +173,7 @@ class SiteUserCustomerController extends BaseSiteController{
     									'customer_id'=>$id,
     									'key_secret'=>$key_secret,
     								);
-	    				Session::put('customer_active_code_register', $dataActive, 5);
+	    				Session::put('customer_active_code_register', $dataActive, 24*60);
 	    				Session::save();
 	    			
 	    				Mail::send('emails.userCustomerRegister', array('data'=>$dataTheme), function($message) use ($emails){
@@ -162,8 +186,7 @@ class SiteUserCustomerController extends BaseSiteController{
     			$error .= 'Thông tin đăng ký chưa đầy đủ!';
     		}
     	}else{
-    		$error .= 'Phiên làm việc hết hạn!';
-    		return Redirect::route('site.home');
+    		$error .= 'Phiên làm việc hết hạn. Bạn refresh lại trang web!';
     	}
     	echo $error;die;
     }
@@ -218,7 +241,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		$this->header();
 		
 		$error = '';
-		$messages = Utility::messages('messages');
+		$messages = FunctionLib::messages('messages');
 		if(isset($_POST) && !empty($_POST)){
 			$token = Request::get('_token', '');
 			$mail = Request::get('sys_change_email', '');
@@ -251,7 +274,7 @@ class SiteUserCustomerController extends BaseSiteController{
 						Session::put('member', $dataSess, 60*24);
 						Session::save();
 						$this->member = $dataSess;
-						return Redirect::route('member.pageChageInfo');
+						return Redirect::route('customer.pageChageInfo');
 					}
 				}else{
 					$error .= 'Email của bạn không đúng!';
@@ -259,8 +282,8 @@ class SiteUserCustomerController extends BaseSiteController{
 			}
 		}
 		
-		$this->layout->content = View::make('site.member.pageChageInfo')
-								->with('member',$this->member)
+		$this->layout->content = View::make('site.CustomerLayouts.EditCustomer')
+								->with('member',$this->user_customer)
 								->with('error',$error)
 								->with('messages',$messages);
 		$this->footer();

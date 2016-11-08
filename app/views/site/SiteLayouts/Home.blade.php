@@ -42,7 +42,7 @@
 				    <a href="/khac"><i class="fa fa-asterisk"></i> Khác </a>
 				</li>
 			</ul>
-			<div class="box-left-ads">
+			<div class="box-ads">
 				<img src="http://static.eclick.vn/uploads/source/2016/10/25/407950308217385024l37352a45.jpeg">
 			</div>
 		</div>

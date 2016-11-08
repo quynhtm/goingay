@@ -53,9 +53,9 @@
 			<div class="cpanel-page">
 				<a href="javascirpt:void(0)" class="name-customer">Chào: {{isset($user_customer['customer_name']) ? $user_customer['customer_name'] : 'No Name'}}</a>
 				<ul class="list-cpanel">
-					<li><a href="{{URL::route('customer.pageChageInfo')}}" rel="nofollow"><i class="glyphicon glyphicon-align-left"></i> Đổi thông tin cá nhân</a></li>
-					<li><a href="{{URL::route('customer.pageChagePass')}}" rel="nofollow"><i class="glyphicon glyphicon-equalizer"></i> Thay đổi mật khẩu</a></li>
-					<li><a href="{{URL::route('customer.pageHistoryOrder')}}" rel="nofollow"><i class="glyphicon glyphicon-shopping-cart"></i> Lịch sử mua hàng</a></li>
+					<li><a href="{{URL::route('customer.pageChageInfo')}}" rel="nofollow"><i class="glyphicon glyphicon-align-left"></i> Thông tin cá nhân</a></li>
+					<li><a href="{{URL::route('customer.pageChagePass')}}" rel="nofollow"><i class="glyphicon glyphicon-equalizer"></i> Đổi mật khẩu</a></li>
+					<li><a href="{{URL::route('customer.pageHistoryOrder')}}" rel="nofollow"><i class="glyphicon glyphicon-align-right"></i> Danh sách tin đăng</a></li>
 					<li><a href="{{URL::route('customer.logout')}}" rel="nofollow"><i class="glyphicon glyphicon-share-alt"></i> Thoát</a></li>
 				</ul>
 			</div>
