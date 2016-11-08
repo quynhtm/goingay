@@ -7,31 +7,22 @@
 */
 
 class SiteUserCustomerController extends BaseSiteController{
-    protected $userCustomer = array();
-    private $arrStatus = array(
-    		-1 => '---Chọn trạng thái---',
-    		0 => 'Chưa kiểm duyệt',
-    		1 => 'Đã kiểm duyệt',
-    		2 => 'Hủy đơn hàng',
-    		3 => 'Đã gửi',
-    		4 => 'Bị trả',
-    		5 => 'Đã thu tiền',
-    		6 => 'Đã lấy hàng hoàn',
-    );
+    protected $user_customer = array();
+
 	public function __construct(){
 		parent::__construct();
 		FunctionLib::site_js('frontend/js/site.js', CGlobal::$POS_END);
 		FunctionLib::site_js('frontend/js/usercustomer.js', CGlobal::$POS_END);
         FunctionLib::site_css('frontend/css/usercustomer.css', CGlobal::$POS_HEAD);
 		
-		if(Session::has('userCustomer')){
-			$this->userCustomer = Session::get('userCustomer');
+		if(Session::has('user_customer')){
+			$this->user_customer = Session::get('user_customer');
 		}
 	}
 	//Register - Login
     public function pageLogin($url=''){
     	
-    	if(Session::has('userCustomer')){
+    	if(Session::has('user_customer')){
     		return Redirect::route('site.index');
     	}
     	
@@ -82,14 +73,14 @@ class SiteUserCustomerController extends BaseSiteController{
     	echo $error;die;
     }
     public function logout(){
-    	if(Session::has('member')){
-        	Session::forget('member');
+    	if(Session::has('user_customer')){
+        	Session::forget('user_customer');
         }
-        return Redirect::route('site.index');
+        return Redirect::route('site.home');
     }
     public function pageRegister(){
     	
-    	if(Session::has('userCustomer')){
+    	if(Session::has('user_customer')){
     		return Redirect::route('site.home');
     	}
     	
@@ -132,7 +123,6 @@ class SiteUserCustomerController extends BaseSiteController{
     		if(sizeof($check) != 0){
     			$error .= 'Email đăng nhập này đã tồn tại!'.'<br/>';
     		}
-    		
     		if($mail != '' && $pass != '' && $repass != '' && $fullname != '' && $phone != '' && $address != ''){
     			if($error == ''){
 	    			$data = array(
@@ -142,14 +132,31 @@ class SiteUserCustomerController extends BaseSiteController{
 	    				'customer_phone'=>$phone,
 	    				'customer_address'=>$address,
 	    				'customer_time_created'=>time(),
-	    				'customer_status'=>CGlobal::status_show,
+	    				'customer_status'=>CGlobal::status_block,
 	    			);
 	    			$id = UserCustomer::addData($data);
-	    			$data['customer_id'] = $id;
-	    			Session::put('userCustomer', $data, 60*24);
-	    			Session::save();
-	    			$userCustomer = UserCustomer::getUserCustomerByEmail($mail);
-	    			UserCustomer::updateLogin($userCustomer);
+	    			//Send mail active
+	    			$key_secret = base64_encode($mail .'/'.$phone);
+	    			if($key_secret != '' && $id > 0){
+	    				$emails = [$mail, CGlobal::emailAdmin];
+	    				$dataTheme = array(
+	    						'key_secret'=>$key_secret,
+	    						'customer_email'=>$mail,
+	    						'customer_password'=>$pass,
+	    						'customer_name'=>$fullname,
+	    				);
+	    				$dataActive = array(
+    									'customer_id'=>$id,
+    									'key_secret'=>$key_secret,
+    								);
+	    				Session::put('customer_active_code_register', $dataActive, 5);
+	    				Session::save();
+	    			
+	    				Mail::send('emails.userCustomerRegister', array('data'=>$dataTheme), function($message) use ($emails){
+	    					$message->to($emails, 'user_customer')
+	    							->subject('Kích hoạt tài khoản trên website '.CGlobal::web_name.' '.date('d/m/Y h:i',  time()));
+	    				});
+	    			}
     			}
     		}else{
     			$error .= 'Thông tin đăng ký chưa đầy đủ!';
@@ -160,10 +167,53 @@ class SiteUserCustomerController extends BaseSiteController{
     	}
     	echo $error;die;
     }
+    public function pageActiveRegister(){
+    	$key = Request::get('k', '');
+    	if(Session::has('customer_active_code_register')){
+    		if($key != ''){
+    			$dataActive = Session::get('customer_active_code_register');
+    			if(sizeof($dataActive) > 0){
+    				if(isset($dataActive['key_secret']) && $dataActive['key_secret'] == $key){
+    					$dataUpdate = array(
+    							'customer_status'=>CGlobal::status_show,
+    							'is_login'=>1,
+    							'customer_time_active'=>time(),
+    					);
+    					if(isset($dataActive['customer_id'])){
+    						UserCustomer::updateData((int)$dataActive['customer_id'], $dataUpdate);
+    						$customer = UserCustomer::getByID((int)$dataActive['customer_id']);
+    						$data = array(
+    								'customer_id' => $customer->customer_id,
+    								'customer_name' => $customer->customer_name,
+    								'customer_phone' => $customer->customer_phone,
+    								'customer_address' => $customer->customer_address,
+    								'customer_email' => $customer->customer_email,
+    								'customer_province' => $customer->customer_province,
+    								'customer_about' => $customer->customer_about,
+    								'customer_status' => $customer->customer_status,
+    								'customer_up_item' => $customer->customer_up_item,
+    								'customer_time_login' => $customer->customer_time_login,
+    								'customer_time_created' => $customer->customer_time_created,
+    								'customer_time_active' => $customer->customer_time_active,
+    								'is_customer' => $customer->is_customer,
+    								'time_start_vip' => $customer->time_start_vip,
+    								'time_end_vip' => $customer->time_end_vip,
+    								'is_login' => $customer->is_login,
+    						);
+    						Session::put('user_customer', $data, 60*24);
+    						Session::save();
+    						return Redirect::route('site.home');
+    					}
+    				}
+    			}
+    		}
+    	}
+    	echo "Liên kết kích hoạt tài khoản không đúng!";die;
+    }
 	//Change Info - Chage Pass
 	public function pageChageInfo(){
-		if(!Session::has('member')){
-			return Redirect::route('site.index');
+		if(!Session::has('user_customer')){
+			return Redirect::route('site.home');
 		}
 		$this->header();
 		
@@ -423,113 +473,5 @@ class SiteUserCustomerController extends BaseSiteController{
 		$this->layout->content = View::make('site.member.pageGetNewPass')
 								->with('error', $error);
 		$this->footer();
-	}
-	public function pageHistoryOrder(){
-		if(!Session::has('member')){
-			return Redirect::route('site.index');
-		}
-		$session_member = $this->member;
-		if($session_member['member_id'] > 0){
-			Loader::loadCSS('libs/fontAwesome/4.2.0/css/font-awesome.min.css', CGlobal::$postHead);
-			$this->header();
-			//Config Page
-			$pageNo = (int) Request::get('page', 1);
-			$pageScroll = CGlobal::num_scroll_page;
-			$limit = CGlobal::num_record_per_page;
-			$offset = ($pageNo - 1) * $limit;
-			$search = $data = array();
-			$total = 0;
-			$paging = '';
-			$search['order_user_buy'] = (int)Request::get('order_user_buy', $session_member['member_id']);
-			$search['field_get'] = 'order_id,order_title,order_phone,order_num,order_total,order_created,order_status';
-			
-			$dataSearch = Order::searchByCondition($search, $limit, $offset, $total);
-			$paging = $total > 0 ? Pagging::getPager($pageScroll, $pageNo, $total, $limit, $search) : '';
-			
-			if(sizeof($dataSearch) != 0){
-				foreach($dataSearch as $v){
-					$data[] = array(
-							'order_id'=>$v->order_id,
-							'order_title'=>$v->order_title,
-							'order_phone'=>$v->order_phone,
-							'order_num'=>$v->order_num,
-							'order_total'=>$v->order_total,
-							'order_created'=>$v->order_created,
-							'order_status'=>$v->order_status,
-					
-					);
-				}
-			}
-			
-			$this->layout->content = View::make('site.member.pageHistoryOrder')
-									->with('data',$data)
-									->with('paging',$paging)
-									->with('arrStatus', $this->arrStatus);
-			$this->footer();
-		}else{
-			return Redirect::route('site.index');
-		}
-	}
-	public function pageHistoryViewOrder(){
-		if(!Session::has('member')){
-			return Redirect::route('site.index');
-		}
-		$html = '';
-		$str_content = '';
-		if(isset($_POST)){
-			$session_member = $this->member;
-			if($session_member['member_id'] > 0){
-				$orderId = (int)Request::get('item', 0);
-				if($orderId > 0){
-					$data = Order::getById($orderId);
-					$arrStatus = $this->arrStatus;
-					if(sizeof($data) != 0){
-						$order_content = $data->order_content;
-						if($order_content != ''){
-							$order_content = unserialize($order_content);
-							if(is_array($order_content)){
-								$str_content .= '<table class="content-order">';
-								$str_content .= '<tr>
-											<th width="1%">Mã[ID]</th>
-				                    		<th width="50%">Tên Sản phẩm</th>
-				                    		<th width="5%">Cỡ</th>
-				                    		<th width="5%">SL</th>
-				                    		<th width="10%">Giá</th>
-										  </tr>';
-								foreach($order_content as $item){
-									$str_content .= '<tr>
-											<td>'.$item['id'].'</td>
-				                    		<td><a href="'.FuncLib::buildLinkDetailProduct($item['id'], $item['title']).'" target="_blank">'.$item['title'].'</a></td>
-				                    		<td>'.$item['size'].'</td>
-				                    		<td>'.$item['num'].'</td>
-				                    		<td>'.FuncLib::numberFormat((int)$item['price']).'<sup>đ</sup></td>
-										  </tr>';
-								}
-								$str_content .='<tr>
-									            <td colspan="4"><b>Tổng số tiền mua hàng:</b></td>
-									            <td colspan="1"><b>'.FuncLib::numberFormat((int)$data->order_total).'</b><sup>đ</sup></td>
-									        </tr>';
-								$str_content .= '<table>';
-							}
-						}
-						
-						
-						$html .= '<div>1.Ngày tạo đơn: <b>'.date('d/m/Y h:i',$data->order_created).'</b></div>';
-						$status = isset($arrStatus[$data->order_status]) ? $arrStatus[$data->order_status] : 'Chưa biết';
-						$html .= '<div>2. Trạng thái: <b>'.$status.'</b></div></br>';
-						
-						$html .= '<div><b>Thông tin của bạn:</b></div>';
-						$html .= '<div>1.Họ tên: <b>'.$data->order_title.'</b></div>';
-						$html .= '<div>2.SĐT: <b>'.$data->order_phone.'</b></div>';
-						$html .= '<div>3.Địa chỉ: <b>'.$data->order_address.'</b></div>';
-						$html .= '<div>4.Yêu cầu: <br/>'.$data->order_note.'</div></br>';
-						
-						$html .= '<div><b>Thông tin đơn hàng:</b></div>';
-						$html .= '<div>'.$str_content.'</div>';
-					}
-				}
-			}
-		}
-		return json_encode($html);
 	}
 }

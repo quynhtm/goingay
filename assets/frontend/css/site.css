@@ -457,3 +457,60 @@ h1, h2, h3, h4, h5, h6{
     width: 100%;
     z-index: 999999
 }
+.box-login .link-normal {
+    color: #666;
+    font-size: 12px;
+    padding-left: 10px;
+}
+.box-login a:hover{
+	color: #ff7300;
+}
+.box-login .btnLog {
+    color: #666;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+.box-login .btnLog:hover a{
+	color:#ff7300;
+}
+.cpanel-page {
+    display: inline-block;
+    position: relative;
+}
+.list-cpanel {
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+    margin: 0 2px;
+    padding: 7px 0;
+    position: absolute;
+    width: 205px;
+    z-index: 10;
+	border-top:none;
+	display:none;
+}
+.cpanel-page:hover .list-cpanel{
+	display:block;
+}
+.list-cpanel li {
+    line-height: 20px;
+    padding: 5px;
+}
+.list-cpanel li a {
+    color: #555;
+    display: block;
+    font-size: 13px;
+}
+.box-login {
+    border-right: 1px solid #ddd;
+    display: inline-block;
+    float: right;
+    font-size: 14px;
+    height: 45px;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+.name-customer {
+    line-height: 45px;
+}

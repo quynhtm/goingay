@@ -16,7 +16,7 @@ return array(
 	'driver' => 'smtp',
 	'host' => '27.118.30.5',
 	'port' => 25,
-	'from' => array('address' => 'no-reply@shopcuatui.com.vn', 'name' => CGlobal::web_name),
+	'from' => array('address' => 'no-reply@raovat30s.vn', 'name' => CGlobal::web_name),
 	'username' => 'no-reply@shopcuatui.com.vn',
 	'password' => 'fo7Ve9$5',
 	'sendmail' => '/usr/sbin/sendmail -bs',

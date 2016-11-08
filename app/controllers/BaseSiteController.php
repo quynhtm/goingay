@@ -7,19 +7,19 @@
 
 class BaseSiteController extends BaseController{
     protected $layout = 'site.BaseLayouts.index';
-    protected $member = array();
+    protected $user_customer = array();
     
     public function __construct(){
        //Init
+    	$this->user_customer = UserCustomer::user_login();
     }
 
     public function header(){
-    	$member = $this->member;
-    	if(empty($member)){
+    	if(empty($this->user_customer)){
     		$this->popupHide();
     	}
     	
-    	$this->layout->header = View::make("site.BaseLayouts.header");
+    	$this->layout->header = View::make("site.BaseLayouts.header")->with('user_customer', $this->user_customer);
     }
 
     public function footer(){

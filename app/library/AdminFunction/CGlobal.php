@@ -15,13 +15,13 @@ class CGlobal{
     public static $extraMeta = '';
     public static $pageAdminTitle = 'Dashboard Admin';
     public static $pageShopTitle = 'Shop Admin';
-    public static $pageTitle = 'Tin tức';
-
-    
+    public static $pageTitle = 'Rao vặt';
+	
     const code_shop_share = 'raovat30s.vn';
     const web_name = 'Raovat30s.vn';
-    const phoneSupport = '0985.10.10.26 - 0913.922.986';
-
+    const phoneSupport = '0913.922.986';
+	const emailAdmin = 'nguyenduypt86@mail.com';
+	
     const num_scroll_page = 2;
     const number_limit_show = 30;
     const number_show_30 = 30;
