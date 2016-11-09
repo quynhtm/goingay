@@ -51,7 +51,7 @@
 		@else
 		<div class="box-login">
 			<div class="cpanel-page">
-				<a href="javascirpt:void(0)" class="name-customer">Chào: {{isset($user_customer['customer_name']) ? $user_customer['customer_name'] : 'No Name'}}</a>
+				<a href="javascript:void(0)" class="name-customer">Chào: {{isset($user_customer['customer_name']) ? $user_customer['customer_name'] : 'No Name'}}</a>
 				<ul class="list-cpanel">
 					<li><a href="{{URL::route('customer.pageChageInfo')}}" rel="nofollow"><i class="glyphicon glyphicon-align-left"></i> Thông tin cá nhân</a></li>
 					<li><a href="{{URL::route('customer.pageChagePass')}}" rel="nofollow"><i class="glyphicon glyphicon-equalizer"></i> Đổi mật khẩu</a></li>
@@ -68,3 +68,10 @@
 		<img src="http://static.eclick.vn/uploads/source/2016/11/04/e8243811134957616h825452811.jpeg" width="980">
 	</div>
 </div>
+@if($messages != '')
+<div class="line-messages">
+	<div class="container">
+		{{$messages}}
+	</div>
+</div>
+@endif

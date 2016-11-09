@@ -90,7 +90,11 @@ MEMBER = {
 						success: function(data){
 							jQuery('body').find('div.loading').remove();
 							if(data == ''){
-								window.location.reload();
+								jAlert('Bạn đăng ký tài khoản thành công! Kiểm tra mail để kích hoạt.', 'Thông báo');
+								jQuery("#popup_ok").click(function(){
+									jQuery('#frmRegister input').val('');
+									window.location.reload();
+								});
 							}else{
 								jQuery('#error-register').html(data);
 								return false;
