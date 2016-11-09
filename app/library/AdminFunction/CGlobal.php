@@ -160,6 +160,4 @@ class CGlobal{
 	
     //Duy bo sung
     const emailAdmin = 'nguyenduypt86@gmail.com';
-    const CUSTOMER_FREE = 0;
-    const CUSTOMER_VIP = 1;
 }
