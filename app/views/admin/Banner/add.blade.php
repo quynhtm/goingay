@@ -5,7 +5,7 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{URL::route('admin.dashboard')}}">Home</a>
             </li>
-            <li><a href="{{URL::route('admin.bannerView')}}"> Banner quảng cáo</a></li>
+            <li><a href="{{URL::route('admin.banner_list')}}"> Banner quảng cáo</a></li>
             <li class="active">@if($id > 0)Cập nhật banner @else Tạo mới banner @endif</li>
         </ul><!-- /.breadcrumb -->
     </div>

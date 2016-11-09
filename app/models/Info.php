@@ -5,6 +5,7 @@
 * @Date      : 06/2016
 * @Version   : 1.0
 */
+use Illuminate\Cache\MemcachedStore;
 
 class Info extends Eloquent {
     
@@ -114,10 +115,10 @@ class Info extends Eloquent {
     	}
     	if($id > 0){
     		Info::updateData($id, $data_post);
-    		FunctionLib::messages('messages', 'Cập nhật thành công!');
+    		Utility::messages('messages', 'Cập nhật thành công!');
     	}else{
     		Info::addData($data_post);
-    		FunctionLib::messages('messages', 'Thêm mới thành công!');
+    		Utility::messages('messages', 'Thêm mới thành công!');
     	}
     
     }
