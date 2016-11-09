@@ -190,7 +190,7 @@
             </li>
             @endif
 
-            <li class="@if(Route::currentRouteName() == 'admin.userShop_list')active @endif">
+            <li class="@if(Route::currentRouteName() == 'admin.user_view')active @endif">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-truck"></i>
                     <span class="menu-text"> Quản trị Shop</span>
@@ -198,8 +198,8 @@
                 </a>
                 <b class="arrow"></b>
                 <ul class="submenu">
-                    <li class="@if(Route::currentRouteName() == 'admin.userShop_list')active @endif">
-                        <a href="{{URL::route('admin.userShop_list')}}">
+                    <li class="@if(Route::currentRouteName() == 'admin.user_view')active @endif">
+                        <a href="{{URL::route('admin.user_view')}}">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Danh sách Shop
                         </a>
@@ -208,7 +208,7 @@
                 </ul>
             </li>
 
-            <li class="@if(Route::currentRouteName() == 'admin.category_list' || Route::currentRouteName() == 'admin.product_list')active @endif">
+            <li class="@if(Route::currentRouteName() == 'admin.category_list' )active @endif">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-gift"></i>
                     <span class="menu-text"> Quản trị sản phẩm </span>
@@ -223,25 +223,11 @@
                         </a>
                         <b class="arrow"></b>
                     </li>
-                    <li class="@if(Route::currentRouteName() == 'admin.product_list')active @endif">
-                        <a href="{{URL::route('admin.product_list')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Quản lý sản phẩm
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="@if(Route::currentRouteName() == 'admin.order_list')active @endif">
-                        <a href="{{URL::route('admin.order_list')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Quản lý đơn hàng
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
                 </ul>
             </li>
 
-            <li class="@if(Route::currentRouteName() == 'admin.news_list'
-                        || Route::currentRouteName() == 'admin.banner_list')active @endif">
+            <li class="@if(Route::currentRouteName() == 'admin.user_view'
+                        || Route::currentRouteName() == 'admin.user_view')active @endif">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-book"></i>
                     <span class="menu-text"> Quản trị Nội dung</span>
@@ -249,64 +235,24 @@
                 </a>
                 <b class="arrow"></b>
                 <ul class="submenu">
-                    <li class="@if(Route::currentRouteName() == 'admin.news_list')active @endif">
-                        <a href="{{URL::route('admin.news_list')}}">
+                    <li class="@if(Route::currentRouteName() == 'admin.user_view')active @endif">
+                        <a href="{{URL::route('admin.user_view')}}">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Quản trị tin tức
                         </a>
                         <b class="arrow"></b>
                     </li>
-                    <li class="@if(Route::currentRouteName() == 'admin.banner_list')active @endif">
-                        <a href="{{URL::route('admin.banner_list')}}">
+                    <li class="@if(Route::currentRouteName() == 'admin.user_view')active @endif">
+                        <a href="{{URL::route('admin.user_view')}}">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Banner quảng cáo
                         </a>
                         <b class="arrow"></b>
                     </li>
-                    <li class="@if(Route::currentRouteName() == 'admin.viewShopShare')active @endif">
-                        <a href="{{URL::route('admin.viewShopShare')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Lượt shop share
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
+
                 </ul>
             </li>
 
-
-            <li class="@if(Route::currentRouteName() == 'admin.contentSendEmail_list'
-            || Route::currentRouteName() == 'admin.customeremail_list'
-            || Route::currentRouteName() == 'admin.provideremail_list')active @endif">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-envelope-o"></i>
-                    <span class="menu-text"> Quản trị Email</span>
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-                <b class="arrow"></b>
-                <ul class="submenu">
-                    <li class="@if(Route::currentRouteName() == 'admin.contentSendEmail_list')active @endif">
-                        <a href="{{URL::route('admin.contentSendEmail_list')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Nội dung gửi Email
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="@if(Route::currentRouteName() == 'admin.customeremail_list')active @endif">
-                        <a href="{{URL::route('admin.customeremail_list')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Email Khách hàng
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="@if(Route::currentRouteName() == 'admin.provideremail_list')active @endif">
-                        <a href="{{URL::route('admin.provideremail_list')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Email nhà cung cấp
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
