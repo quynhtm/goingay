@@ -39,11 +39,6 @@ class NewsController extends BaseAdminController
     }
 
     public function view() {
-        $this->header();
-        $Meta = array('title'=>'QL tin tức',);
-        foreach($Meta as $key=>$val){
-            $this->layout->$key = $val;
-        }
         //Check phan quyen.
         if(!$this->is_root && !in_array($this->permission_full,$this->permission)&& !in_array($this->permission_view,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
@@ -91,11 +86,6 @@ class NewsController extends BaseAdminController
     }
 
     public function getNews($id=0) {
-        $this->header();
-        $Meta = array('title'=>'Thêm - sửa tin tức',);
-        foreach($Meta as $key=>$val){
-            $this->layout->$key = $val;
-        }
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
@@ -136,11 +126,6 @@ class NewsController extends BaseAdminController
             ->with('arrStatus', $this->arrStatus);
     }
     public function postNews($id=0) {
-        $this->header();
-        $Meta = array('title'=>'Thêm - sửa tin tức',);
-        foreach($Meta as $key=>$val){
-            $this->layout->$key = $val;
-        }
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
@@ -175,12 +160,12 @@ class NewsController extends BaseAdminController
             if($id > 0) {
                 //cap nhat
                 if(News::updateData($id, $dataSave)) {
-                    return Redirect::route('admin.newsView');
+                    return Redirect::route('admin.news_list');
                 }
             } else {
                 //them moi
                 if(News::addData($dataSave)) {
-                    return Redirect::route('admin.newsView');
+                    return Redirect::route('admin.news_list');
                 }
             }
         }

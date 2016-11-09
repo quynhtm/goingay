@@ -8,27 +8,18 @@
 
 class DashBoardController extends BaseAdminController{
     private $error = array();
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
     }
-	
-    public function dashboard(){
-        
-		$error = Request::get('error',0);
+
+    public function dashboard()
+    {
+        $error = Request::get('error',0);
         if($error == 1){
             $this->error[] = 'Bạn không có quyền truy cập.';
         }
-		
-		$this->header();
-		$menu = $this->menu();
-		
-		$Meta = array('title'=>'Dashboard',);
-		foreach($Meta as $key=>$val){
-			$this->layout->$key = $val;
-		}
-		
-		$this->layout->content = View::make('admin.DashBoard.index')
-								->with('error',$this->error)
-								->with('menu', $menu);
+        $this->layout->content = View::make('admin.DashBoard.index')->with('error',$this->error);
     }
+
 }

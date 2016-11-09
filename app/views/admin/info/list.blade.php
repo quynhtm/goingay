@@ -29,7 +29,7 @@
 	<div class="page-title-box">
 		<h5 class="padding10">Quản lý thông tin chung</h5>
 		<span class="menu_tools">
-			<a href="{{URL::route('admin.info_edit')}}" title="Thêm mới" class="fa fa-plus fa-admin green"></a>
+			<a href="{{Config::get('config.BASE_URL')}}admin/info/edit" title="Thêm mới" class="fa fa-plus fa-admin green"></a>
 			<a href="javascript:void(0)" title="Xóa item" id="deleteMoreItem" class="fa fa-trash fa-admin red"></a>
 	    </span>
 	</div>
@@ -45,7 +45,7 @@
 			</div>
 		</div>
 		@endif
-		{{Form::open(array('method' => 'POST', 'id'=>'formListItem', 'class'=>'formListItem', 'name'=>'txtForm', 'url'=>URL::route('admin.info_delete')))}}
+		{{Form::open(array('method' => 'POST', 'id'=>'formListItem', 'class'=>'formListItem', 'name'=>'txtForm', 'url'=>'admin/info/delete'))}}
 			<div class="showListItem">
 				<table width="100%" cellspacing="1" cellpadding="5" border="1">
 					<thead>
@@ -77,7 +77,7 @@
 								@endif
 							</td>
 							<td>
-								<a href="{{URL::route('admin.info_edit')}}/{{$item['info_id']}}" title="Cập nhật">
+								<a href="{{Config::get('config.BASE_URL')}}admin/info/edit/{{$item['info_id']}}" title="Cập nhật">
 									<i class="fa fa-edit fa-admin"></i>
 								</a>
 							</td>

@@ -15,13 +15,13 @@ class CGlobal{
     public static $extraMeta = '';
     public static $pageAdminTitle = 'Dashboard Admin';
     public static $pageShopTitle = 'Shop Admin';
-    public static $pageTitle = 'Rao vặt';
-	
-    const code_shop_share = 'raovat30s.vn';
-    const web_name = 'Raovat30s.vn';
-    const phoneSupport = '0913.922.986';
-	const emailAdmin = 'nguyenduypt86@mail.com';
-	
+    public static $pageTitle = 'shopcuatui.com.vn';
+
+    
+    const code_shop_share = 'shopcuatoi';
+    const web_name = 'shopcuatui.com.vn';
+    const phoneSupport = '0985.10.10.26 - 0913.922.986';
+
     const num_scroll_page = 2;
     const number_limit_show = 30;
     const number_show_30 = 30;
@@ -112,14 +112,22 @@ class CGlobal{
     const FOLDER_BANNER = 'banner';
     const FOLDER_PRODUCT = 'product';
     const FOLDER_LOGO_SHOP = 'logo_shop';
-	
-	const FOLDER_INFO = 'info';
     //shop
-    const CUSTOMER_FREE = 1;
-    const CUSTOMER_NOMAL = 2;
-    const CUSTOMER_VIP = 3;
-    const CUSTOMER_ONLINE = 1;
-    const CUSTOMER_OFFLINE = 0;
+    const SHOP_FREE = 1;
+    const SHOP_NOMAL = 2;
+    const SHOP_VIP = 3;
+    const SHOP_ONLINE = 1;
+    const SHOP_OFFLINE = 0;
+    const SHOP_NUMBER_PRODUCT_FREE = 5;
+    const SHOP_NUMBER_PRODUCT_NOMAL = 100;
+    const SHOP_NUMBER_PRODUCT_VIP = 5000;
+
+    //order
+    const ORDER_STATUS_DELETE = 0;
+    const ORDER_STATUS_NEW = 1;
+    const ORDER_STATUS_CHECKED = 2;
+    const ORDER_STATUS_SUCCESS = 3;
+    const ORDER_STATUS_CANCEL = 4;
 
     //product
     const TYPE_PRICE_NUMBER = 1;
