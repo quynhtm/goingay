@@ -1,14 +1,14 @@
 jQuery(document).ready(function($){
-	USER_CUSTOMMER.register();
-	USER_CUSTOMMER.login();
-	USER_CUSTOMMER.changeInfo();
-	USER_CUSTOMMER.changePass();
-	USER_CUSTOMMER.forgetpass();
-	USER_CUSTOMMER.getNewPass();
-	USER_CUSTOMMER.viewItemOrder();
+	MEMBER.register();
+	MEMBER.login();
+	MEMBER.changeInfo();
+	MEMBER.changePass();
+	MEMBER.forgetpass();
+	MEMBER.getNewPass();
+	MEMBER.viewItemOrder();
 });
 
-USER_CUSTOMMER = {
+MEMBER = {
 	register:function(){
 		jQuery('.clickRegister').click(function(){
 			jQuery('.content-popup-show').modal('hide');

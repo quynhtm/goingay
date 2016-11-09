@@ -12,10 +12,10 @@
 						<a hreft="">Quy chế hoạt động</a>
 					</div>
 					<ul class="f-box-link">
-						<li><a href="" title="Quy chế đăng tin">Quy chế đăng tin</a></li>
-						<li><a href="" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
-						<li><a href="">Quy trình giải quyết khiếu nại</a></li>
-						<li><a href="">Quy trình thanh toán</a></li>
+						<li><a href="/ho-tro?tab=1" title="Quy chế đăng tin">Quy chế đăng tin</a></li>
+						<li><a href="/ho-tro?tab=4" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
+						<li><a href="/ho-tro?tab=24">Quy trình giải quyết khiếu nại</a></li>
+						<li><a href="/ho-tro?tab=12">Quy trình thanh toán</a></li>
 					</ul>
 				</div>
 				<div class="percent-45">
@@ -24,11 +24,11 @@
 					</div>
 					<ul class="f-box-link">
 						<li><a href="" target="_blank" title="Giới thiệu">Giới thiệu</a></li>
-						<li><a href="" title="Hỗ trợ">Hỗ trợ</a></li>
-						<li><a href="">Bảng giá đăng tin</a></li>
+						<li><a href="/ho-tro" title="Hỗ trợ">Hỗ trợ</a></li>
+						<li><a href="/ho-tro?tab=11">Bảng giá đăng tin</a></li>
 						<li><a href="" target="_blank" title="Bảng giá quảng cáo">Bảng giá quảng cáo</a></li>
-						<li><a href="" title="FAQ">FAQ</a></li>
-						<li><a href="" title="Liên hệ">Liên hệ</a></li>
+						<li><a href="/ho-tro?tab=20" title="FAQ">FAQ</a></li>
+						<li><a href="/lien-he" title="Liên hệ">Liên hệ</a></li>
 					</ul>
 				</div>
 			</div>
