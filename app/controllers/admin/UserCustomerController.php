@@ -12,7 +12,7 @@ class UserCustomerController extends BaseAdminController
     private $permission_create = 'user_customer_create';
     private $permission_edit = 'user_customer_edit';
     private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện', CGlobal::status_block => 'Khóa');
-    private $arrIsShop = array(-1 => 'Tất cả', CGlobal::SHOP_FREE => 'Shop Free', CGlobal::SHOP_NOMAL => 'Shop thường', CGlobal::SHOP_VIP => 'Shop Vip');
+    private $arrIsShop = array(-1 => 'Tất cả', CGlobal::CUSTOMER_FREE => 'Shop Free', CGlobal::CUSTOMER_NOMAL => 'Shop thường', CGlobal::CUSTOMER_VIP => 'Shop Vip');
     private $error = array();
 
     public function __construct()
@@ -58,7 +58,7 @@ class UserCustomerController extends BaseAdminController
         $search['is_shop'] = (int)Request::get('is_shop',-1);
         //$search['field_get'] = 'category_id,category_name,category_status';//cac truong can lay
 
-        $dataSearch = UserShop::searchByCondition($search, $limit, $offset,$total);
+        $dataSearch = UserCustomer::searchByCondition($search, $limit, $offset,$total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
 
         //FunctionLib::debug($dataSearch);

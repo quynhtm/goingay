@@ -55,16 +55,16 @@ class Items extends Eloquent
             if (isset($dataSearch['customer_id']) && $dataSearch['customer_id'] != -1) {
                 $query->where('customer_id', $dataSearch['customer_id']);
             }
-            
+
             if (isset($dataSearch['item_id'])) {
-            	if (is_array($dataSearch['item_id'])) {
-            		$query->whereIn('item_id', $dataSearch['item_id']);
-            	}
-            	elseif ((int)$dataSearch['item_id'] > 0) {
-            		$query->where('item_id','=', (int)$dataSearch['item_id']);
-            	}
+                if (is_array($dataSearch['item_id'])) {
+                    $query->whereIn('item_id', $dataSearch['item_id']);
+                }
+                elseif ((int)$dataSearch['item_id'] > 0) {
+                    $query->where('item_id','=', (int)$dataSearch['item_id']);
+                }
             }
-        
+
             if (isset($dataSearch['item_is_hot']) && $dataSearch['item_is_hot'] > 0) {
                 $query->where('item_is_hot', $dataSearch['item_is_hot']);
             }
