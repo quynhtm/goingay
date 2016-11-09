@@ -12,4 +12,10 @@
 		max-width: 99%!important;
 	    min-width: 99%!important;
 	}
+	.content-popup-show{
+		padding-right: 0!important;
+	}
+	.content-popup-show .modal-dialog {
+	    width: 100%!important;
+	}
 }
