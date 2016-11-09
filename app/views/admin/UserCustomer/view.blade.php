@@ -91,14 +91,24 @@
                                 <td class="text-center text-middle">
                                     @if($item->is_login == CGlobal::CUSTOMER_ONLINE)
                                         <i class="fa fa-smile-o fa-2x green"></i>
-                                        <br/>{{date('H:i:s d-m-Y',$item->customer_time_login)}}
+                                        @if($item->customer_time_login > 0)
+                                            <br/>{{date('H:i:s d-m-Y',$item->customer_time_login)}}
+                                        @endif
                                     @else
                                         <i class="fa fa-meh-o fa-2x red"></i>
-                                        <br/>{{date('d-m-Y H:i:s ',$item->customer_time_logout)}}
+                                        @if($item->customer_time_logout > 0)
+                                            <br/>{{date('d-m-Y H:i:s ',$item->customer_time_logout)}}
+                                        @endif
                                     @endif
                                 </td>
                                 <td class="text-center text-middle">{{date('d-m-Y H:i:s ',$item->customer_time_created)}}</td>
-                                <td class="text-center text-middle">{{date('d-m-Y H:i:s ',$item->customer_time_active)}}</td>
+                                <td class="text-center text-middle">
+                                    @if($item->customer_time_active > 0)
+                                        {{date('d-m-Y H:i:s ',$item->customer_time_active)}}
+                                    @else
+                                        <b class="red">Chưa kích hoạt</b>
+                                    @endif
+                                </td>
                                 <td class="text-center text-middle">
                                     @if($item->customer_status == 1)
                                         <a href="javascript:void(0);"title="Hiện"><i class="fa fa-check fa-2x"></i></a>
