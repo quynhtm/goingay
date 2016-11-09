@@ -6,6 +6,7 @@
 class UserCustomer extends Eloquent
 {
     protected $table = 'web_customer';
+<<<<<<< HEAD
     protected $primaryKey = 'shop_id';
     public $timestamps = false;
 
@@ -58,11 +59,45 @@ class UserCustomer extends Eloquent
             }
             if(!empty($data) && Memcache::CACHE_ON){
                 Cache::put(Memcache::CACHE_ALL_USER_SHOP, $data, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+=======
+    protected $primaryKey = 'customer_id';
+    public $timestamps = false;
+
+    //cac truong trong DB
+    protected $fillable = array('customer_id','customer_name','customer_email','customer_phone',
+        'customer_address','customer_password','customer_province','customer_about','customer_status',
+        'customer_up_item','customer_time_login','customer_time_logout','customer_time_created','customer_time_active',
+        'is_customer','is_login','time_start_vip','time_end_vip');
+
+    public static function getByID($id) {
+        $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_CUSTOMER_ID.$id) : array();
+        if($id > 0){
+            if (sizeof($data) == 0) {
+                $data = UserCustomer::where('customer_id', $id)->first();
+                if($data && Memcache::CACHE_ON){
+                    Cache::put(Memcache::CACHE_CUSTOMER_ID.$id, $data, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+                }
             }
         }
         return $data;
     }
 
+    public static function getCustomerAll() {
+        $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_CUSTOMER) : array();
+        if (sizeof($data) == 0) {
+            $customer = UserCustomer::where('customer_id', '>', 0)->where('customer_status', CGlobal::status_show)->get();
+            foreach($customer as $itm) {
+                $data[$itm['customer_id']] = $itm['customer_name'];
+            }
+            if(!empty($data) && Memcache::CACHE_ON){
+                Cache::put(Memcache::CACHE_ALL_CUSTOMER, $data, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+>>>>>>> DUY
+            }
+        }
+        return $data;
+    }
+
+<<<<<<< HEAD
     public static function getUserByName($name){
         $shop = UserCustomer::where('user_shop', $name)->first();
         return $shop;
@@ -78,11 +113,25 @@ class UserCustomer extends Eloquent
     public static function isLogin(){
         $result = false;
         if (Session::has('user_shop')) {
+=======
+    public static function getCustomerByPhone($customer_phone){
+        $customer = UserCustomer::where('customer_phone', $customer_phone)->first();
+        return $customer;
+    }
+    public static function getUserCustomerByEmail($customer_email){
+        $customer = UserCustomer::where('customer_email', $customer_email)->first();
+        return $customer;
+    }
+    public static function isLogin(){
+        $result = false;
+        if (Session::has('user_customer')) {
+>>>>>>> DUY
             $result = true;
         }
         return $result;
     }
     public static function user_login(){
+<<<<<<< HEAD
         $user_shop = array();
         if(Session::has('user_shop')){
             return $user_shop = Session::get('user_shop');
@@ -107,11 +156,38 @@ class UserCustomer extends Eloquent
             foreach($result as $k =>$shop){
                 $dataInput = array('is_login'=>0,'shop_time_logout'=>$shop->shop_time_login);
                 $shop->update($dataInput);
+=======
+        $user_customer = array();
+        if(Session::has('user_customer')){
+            return $user_customer = Session::get('user_customer');
+        }
+        return $user_customer;
+    }
+
+    public static function updateLogin($customer = array()){
+        if($customer){
+            $customer->customer_time_login = time();
+            $customer->save();
+        }
+    }
+
+    //cap nhat nhung customer da het session
+    public static function updateCustomerLogout(){
+        $yesterday = time() - (60 * 60);
+        $query = UserCustomer::where('customer_id','>',0)->where('is_login','=',1);
+        $query->where('customer_time_login', '<=', $yesterday);
+        $result = $query->get();
+        if($result){
+            foreach($result as $k =>$customer){
+                $dataInput = array('is_login'=>0,'customer_time_logout'=>$customer->customer_time_logout);
+                $customer->update($dataInput);
+>>>>>>> DUY
             }
         }
     }
     public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){
         try{
+<<<<<<< HEAD
             $query = UserCustomer::where('shop_id','>',0);
             if (isset($dataSearch['shop_name']) && $dataSearch['shop_name'] != '') {
                 $query->where('shop_name','LIKE', '%' . $dataSearch['shop_name'] . '%');
@@ -127,6 +203,32 @@ class UserCustomer extends Eloquent
             }
             $total = $query->count();
             $query->orderBy('shop_time_login', 'desc')->orderBy('shop_time_logout', 'desc');
+=======
+            $query = UserCustomer::where('customer_id','>',0);
+            if (isset($dataSearch['customer_name']) && $dataSearch['customer_name'] != '') {
+                $query->where('customer_name','LIKE', '%' . $dataSearch['customer_name'] . '%');
+            }
+            if (isset($dataSearch['customer_email']) && $dataSearch['customer_email'] != '') {
+                $query->where('customer_email','LIKE', '%' . $dataSearch['customer_email'] . '%');
+            }
+            if (isset($dataSearch['customer_id']) && $dataSearch['customer_id'] > 0) {
+                $query->where('customer_id', $dataSearch['customer_id']);
+            }
+            if (isset($dataSearch['customer_phone']) && $dataSearch['customer_phone'] > 0) {
+                $query->where('customer_phone', $dataSearch['customer_phone']);
+            }
+            if (isset($dataSearch['customer_id']) && $dataSearch['customer_id'] > 0) {
+                $query->where('customer_id', $dataSearch['customer_id']);
+            }
+            if (isset($dataSearch['customer_status']) && $dataSearch['customer_status'] > -1) {
+                $query->where('customer_status', $dataSearch['customer_status']);
+            }
+            if (isset($dataSearch['is_customer']) && $dataSearch['is_customer'] > -1) {
+                $query->where('is_customer', $dataSearch['is_customer']);
+            }
+            $total = $query->count();
+            $query->orderBy('customer_time_login', 'desc')->orderBy('customer_time_logout', 'desc');
+>>>>>>> DUY
 
             //get field can lay du lieu
             $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
@@ -160,10 +262,17 @@ class UserCustomer extends Eloquent
             }
             if ($data->save()) {
                 DB::connection()->getPdo()->commit();
+<<<<<<< HEAD
                 if(isset($data->shop_id) && $data->shop_id > 0){
                     self::removeCache($data->shop_id);
                 }
                 return $data->shop_id;
+=======
+                if(isset($data->customer_id) && $data->customer_id > 0){
+                    self::removeCache($data->customer_id);
+                }
+                return $data->customer_id;
+>>>>>>> DUY
             }
             DB::connection()->getPdo()->commit();
             return false;
@@ -189,8 +298,13 @@ class UserCustomer extends Eloquent
                 $dataSave->update($dataInput);
             }
             DB::connection()->getPdo()->commit();
+<<<<<<< HEAD
             if(isset($dataSave->shop_id) && $dataSave->shop_id > 0){
                 self::removeCache($dataSave->shop_id);
+=======
+            if(isset($dataSave->customer_id) && $dataSave->customer_id > 0){
+                self::removeCache($dataSave->customer_id);
+>>>>>>> DUY
             }
             return true;
         } catch (PDOException $e) {
@@ -213,8 +327,13 @@ class UserCustomer extends Eloquent
             $dataSave = UserCustomer::find($id);
             $dataSave->delete();
             DB::connection()->getPdo()->commit();
+<<<<<<< HEAD
             if(isset($dataSave->shop_id) && $dataSave->shop_id > 0){
                 self::removeCache($dataSave->shop_id);
+=======
+            if(isset($dataSave->customer_id) && $dataSave->customer_id > 0){
+                self::removeCache($dataSave->customer_id);
+>>>>>>> DUY
             }
             return true;
         } catch (PDOException $e) {
@@ -228,10 +347,22 @@ class UserCustomer extends Eloquent
      */
     public static function removeCache($id = 0){
         if($id > 0){
+<<<<<<< HEAD
             Cache::forget(Memcache::CACHE_USER_SHOP_ID.$id);
             Cache::forget(Memcache::CACHE_CATEGORY_SHOP_ID.$id);
         }
         Cache::forget(Memcache::CACHE_ALL_USER_SHOP);
     }
 
+=======
+            Cache::forget(Memcache::CACHE_CUSTOMER_ID.$id);
+        }
+        Cache::forget(Memcache::CACHE_ALL_CUSTOMER);
+    }
+	
+    //SITE: Duy add
+    public static function encode_password($password){
+    	return md5(md5($password));
+    }
+>>>>>>> DUY
 }

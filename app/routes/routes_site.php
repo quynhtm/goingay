@@ -11,8 +11,8 @@ Route::any('/', array('as' => 'site.home','uses' => 'SiteHomeController@index'))
 Route::get('404.html',array('as' => 'site.page404','uses' =>'SiteHomeController@page404'));
 
 //Register - Login
-Route::match(['GET','POST'],'dang-ky.html', array('as' => 'member.pageRegister','uses' => 'SiteUserCustomerController@pageRegister'));
-Route::match(['GET','POST'],'kich-hoat-tai-khoan.html', array('as' => 'member.pageActiveRegister','uses' => 'SiteUserCustomerController@pageActiveRegister'));
+Route::match(['GET','POST'],'dang-ky.html', array('as' => 'customer.pageRegister','uses' => 'SiteUserCustomerController@pageRegister'));
+Route::match(['GET','POST'],'kich-hoat-tai-khoan.html', array('as' => 'customer.pageActiveRegister','uses' => 'SiteUserCustomerController@pageActiveRegister'));
 
 Route::match(['GET','POST'],'dang-nhap.html', array('as' => 'customer.pageLogin','uses' => 'SiteUserCustomerController@pageLogin'));
 Route::match(['GET','POST'],'thanh-vien-thoat.html', array('as' => 'customer.logout','uses' => 'SiteUserCustomerController@logout'));
