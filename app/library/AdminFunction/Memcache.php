@@ -43,7 +43,12 @@ class Memcache{
     //Tinh thành
     const CACHE_ALL_PROVINCE = 'cache_all_province';
 	
+    
+    
 	//Info
 	const CACHE_INFO_ID    = 'cache_info_id_';
 	const CACHE_INFO_KEYWORD    = 'cache_info_keyword_';
+	
+	const CACHE_ALL_CUSTOMER = 'cache_all_customer';
+	const CACHE_CUSTOMER_ID = 'cache_customer_id_';
 }
