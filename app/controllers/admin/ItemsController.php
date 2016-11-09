@@ -4,13 +4,13 @@
  * Created by PhpStorm.
  * User: QuynhTM
  */
-class ProductController extends BaseAdminController
+class ItemsController extends BaseAdminController
 {
-    private $permission_view = 'product_view';
-    private $permission_full = 'product_full';
-    private $permission_delete = 'product_delete';
-    private $permission_create = 'product_create';
-    private $permission_edit = 'product_edit';
+    private $permission_view = 'items_view';
+    private $permission_full = 'items_full';
+    private $permission_delete = 'items_delete';
+    private $permission_create = 'items_create';
+    private $permission_edit = 'items_edit';
     private $arrStatusUpdate = array(-1 => 'Trạng thái chuyển đổi',
         CGlobal::status_hide => 'Ẩn',
         CGlobal::status_show => 'Hiện',
@@ -31,7 +31,7 @@ class ProductController extends BaseAdminController
     public function __construct()
     {
         parent::__construct();
-        $this->arrShop = UserShop::getShopAll();
+        $this->arrShop = UserCustomer::getCustomerAll();
         //Include style.
         FunctionLib::link_css(array(
             'lib/upload/cssUpload.css',
@@ -51,6 +51,11 @@ class ProductController extends BaseAdminController
     }
 
     public function view() {
+        $this->header();
+        $Meta = array('title'=>'QL Tin đăng',);
+        foreach($Meta as $key=>$val){
+            $this->layout->$key = $val;
+        }
         //Check phan quyen.
         if(!$this->is_root && !in_array($this->permission_full,$this->permission)&& !in_array($this->permission_view,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
@@ -70,7 +75,7 @@ class ProductController extends BaseAdminController
         $search['is_block'] = (int)Request::get('is_block',-1);
         //$search['field_get'] = 'order_id,order_product_name,order_status';//cac truong can lay
 
-        $dataSearch = Product::searchByCondition($search, $limit, $offset,$total);
+        $dataSearch = Items::searchByCondition($search, $limit, $offset,$total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
         //FunctionLib::debug($search);
 
@@ -78,7 +83,7 @@ class ProductController extends BaseAdminController
         $optionType = FunctionLib::getOption($this->arrTypeProduct, $search['product_is_hot']);
         $optionBlock = FunctionLib::getOption($this->arrBlock, $search['is_block']);
         $optionStatusUpdate = FunctionLib::getOption($this->arrStatusUpdate, -1);
-        $this->layout->content = View::make('admin.Product.view')
+        $this->layout->content = View::make('admin.Items.view')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
             ->with('total', $total)
@@ -99,7 +104,7 @@ class ProductController extends BaseAdminController
             ->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0);//dùng common
     }
 
-    public function getProduct($id=0) {
+    public function getItems($id=0) {
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
@@ -121,7 +126,7 @@ class ProductController extends BaseAdminController
         $product = array();
         $arrViewImgOther = array();
         $imagePrimary = $imageHover = '';
-        $product = Product::getProductByID($id);
+        $product = Items::getProductByID($id);
         if(empty($product)){
             return Redirect::route('admin.product_list');
         }
@@ -176,7 +181,7 @@ class ProductController extends BaseAdminController
         $optionTypePrice = FunctionLib::getOption($this->arrTypePrice,isset($product->product_type_price)? $product->product_type_price:CGlobal::TYPE_PRICE_NUMBER);
         $optionTypeProduct = FunctionLib::getOption($this->arrTypeProduct,isset($product->product_is_hot)? $product->product_is_hot:CGlobal::PRODUCT_NOMAL);
 
-        $this->layout->content = View::make('admin.Product.add')
+        $this->layout->content = View::make('admin.Items.add')
             ->with('error', $this->error)
             ->with('id', $id)
             ->with('data', $dataShow)
@@ -188,7 +193,7 @@ class ProductController extends BaseAdminController
             ->with('optionTypePrice', $optionTypePrice)
             ->with('optionTypeProduct', $optionTypeProduct);
     }
-    public function postProduct($id=0) {
+    public function postItems($id=0) {
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
@@ -241,7 +246,7 @@ class ProductController extends BaseAdminController
             }
         }
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($dataSave['category_status'])? $dataSave['category_status'] : -1);
-        $this->layout->content =  View::make('admin.Product.add')
+        $this->layout->content =  View::make('admin.Items.add')
             ->with('id', $id)
             ->with('data', $dataSave)
             ->with('optionStatus', $optionStatus)
@@ -250,7 +255,7 @@ class ProductController extends BaseAdminController
     }
 
     //ajax
-    public function deleteMultiProduct(){
+    public function deleteMultiItems(){
         $data = array('isIntOk' => 0);
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_delete,$this->permission)){
             return Response::json($data);
@@ -269,7 +274,7 @@ class ProductController extends BaseAdminController
         }
         return Response::json($data);
     }
-    public function setStastusBlockProduct(){
+    public function setStastusBlockItems(){
         $data = array('isIntOk' => 0);
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_delete,$this->permission)){
             return Response::json($data);

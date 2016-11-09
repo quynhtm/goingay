@@ -5,7 +5,7 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{URL::route('admin.dashboard')}}">Home</a>
             </li>
-            <li class="active">Quản lý sản phẩm</li>
+            <li class="active">Quản lý tin đăng</li>
         </ul><!-- /.breadcrumb -->
     </div>
 
@@ -17,8 +17,8 @@
                     {{ Form::open(array('method' => 'GET', 'role'=>'form')) }}
                     <div class="panel-body">
                         <div class="form-group col-lg-3">
-                            <label for="order_product_name">Tên sản phẩm</label>
-                            <input type="text" class="form-control input-sm" id="product_name" name="product_name" placeholder="Tên sản phẩm" @if(isset($search['product_name']) && $search['product_name'] != '')value="{{$search['product_name']}}"@endif>
+                            <label for="item_name">Tên tin đăng</label>
+                            <input type="text" class="form-control input-sm" id="item_name" name="item_name" placeholder="Tên sản phẩm" @if(isset($search['item_name']) && $search['item_name'] != '')value="{{$search['item_name']}}"@endif>
                         </div>
                         <div class="form-group col-lg-3">
                             <label for="order_status">Trạng thái</label>
@@ -47,9 +47,6 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-lg-12 text-right">
-                            <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
-                        </div>
                     </div>
 
                     @if($is_root)
@@ -62,6 +59,7 @@
                         </div>
                         <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="Admin.setStastusBlockProduct();"><i class="fa fa-refresh"></i> Đổi trạng thái </a>
                         <span class="img_loading" id="img_loading_delete_all"></span>
+                        <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
                     </div>
                     @endif
                     {{ Form::close() }}
@@ -83,66 +81,58 @@
                         </thead>
                         <tbody>
                         @foreach ($data as $key => $item)
-                            <tr @if($item->is_shop == CGlobal::SHOP_VIP)style="background-color: #d6f6f6"@endif>
+                            <tr @if($item->is_customer == CGlobal::CUSTOMER_VIP)style="background-color: #d6f6f6"@endif>
                                 <td class="text-center text-middle">
                                     {{ $stt + $key+1 }}<br/>
-                                    <input class="check" type="checkbox" name="checkItems[]" id="sys_checkItems" value="{{$item->product_id}}">
+                                    <input class="check" type="checkbox" name="checkItems[]" id="sys_checkItems" value="{{$item->item_id}}">
                                 </td>
                                 <td class="text-center text-middle">
-                                    <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->product_id, $item->product_image, CGlobal::sizeImage_100)}}">
+                                    <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id, $item->item_image, CGlobal::sizeImage_100)}}">
                                 </td>
                                 <td class="text-left text-middle">
-                                    @if($item->product_status == CGlobal::status_show)
-                                        <a href="{{FunctionLib::buildLinkDetailProduct($item->product_id, $item->product_name, $item->category_name)}}" target="_blank" title="Chi tiết sản phẩm">
-                                            [<b>{{ $item->product_id }}</b>] {{ $item->product_name }}
+                                    @if($item->item_status == CGlobal::status_show)
+                                        <a href="{{FunctionLib::buildLinkDetailProduct($item->item_id, $item->item_image, $item->item_category_name)}}" target="_blank" title="Chi tiết sản phẩm">
+                                            [<b>{{ $item->item_id }}</b>] {{ $item->item_name }}
                                         </a>
                                     @else
-                                        [<b>{{ $item->product_id }}</b>] {{ $item->product_name }}
+                                        [<b>{{ $item->item_id }}</b>] {{ $item->item_name }}
                                     @endif
-                                    @if($item->category_name != '')
-                                        <br/><b>Danh mục:</b> {{ $item->category_name }}
+                                    @if($item->item_category_name != '')
+                                        <br/><b>Danh mục:</b> {{ $item->item_category_name }}
                                     @endif
                                 </td>
                                 <td class="text-middle">
-                                    @if($item->product_type_price == CGlobal::TYPE_PRICE_CONTACT)
-                                        Giá bán: <b class="red"> Liên hệ </b>
-                                    @else
-                                        @if($item->product_price_market > 0)Thị trường: <b class="green">{{ FunctionLib::numberFormat($item->product_price_market) }} đ</b><br/>@endif
-                                        Giá bán: <b class="red">{{ FunctionLib::numberFormat($item->product_price_sell) }} đ</b>
-                                        @if($item->product_price_input > 0)<br/>Giá nhập: <b>{{ FunctionLib::numberFormat($item->product_price_input) }} đ</b>@endif
-                                    @endif
-                                    @if(isset($arrTypeProduct[$item->product_is_hot]) && $item->product_is_hot != CGlobal::PRODUCT_NOMAL)
-                                        <br/><b class="red">{{ $arrTypeProduct[$item->product_is_hot] }}</b>
+                                    <b class="red">{{ FunctionLib::numberFormat($item->item_price_sell) }} đ</b>
+                                    @if(isset($arrTypeProduct[$item->item_is_hot]) && $item->item_is_hot != CGlobal::PRODUCT_NOMAL)
+                                        <br/><b class="red">{{ $arrTypeProduct[$item->item_is_hot] }}</b>
                                     @endif
                                 </td>
                                 <td class="text-left text-middle">
-                                    @if($item->product_sort_desc != ''){{ FunctionLib::substring($item->product_sort_desc,100) }}@endif
+                                    @if($item->item_content != ''){{ FunctionLib::substring($item->item_content,100) }}@endif
                                 </td>
                                 <td class="text-left text-middle">
-                                    @if(isset($arrShop[$item->user_shop_id]))
-                                        <b>Shop:</b> {{ $arrShop[$item->user_shop_id] }}
-                                    @endif
+                                        <b>KH:</b> [{{$item->customer_id}}]{{ $item->customer_name}}
                                         <br/>Tạo: {{date ('d-m-Y H:i',$item->time_created)}}
                                         <br/>Sửa: {{date ('d-m-Y H:i',$item->time_update)}}
                                 </td>
                                 <td class="text-center text-middle">
-                                    @if($item->is_block == CGlobal::PRODUCT_BLOCK)
+                                    @if($item->item_block == CGlobal::PRODUCT_BLOCK)
                                         <i class="fa fa-lock fa-2x red" title="Bị khóa"></i>
                                     @else
-                                        @if($item->product_status == CGlobal::status_show)
+                                        @if($item->item_status == CGlobal::status_show)
                                             <i class="fa fa-check fa-2x green" title="Hiển thị"></i>
                                         @endif
-                                        @if($item->product_status == CGlobal::status_hide)
+                                        @if($item->item_status == CGlobal::status_hide)
                                             <i class="fa fa-close fa-2x red" title="Đang ẩn"></i>
                                         @endif
-                                        @if($item->product_status == CGlobal::IMAGE_ERROR)
+                                        @if($item->item_status == CGlobal::IMAGE_ERROR)
                                             <i class="fa fa-bug fa-2x red" title="Sản phẩm bị lỗi"></i>
                                         @endif
                                     @endif
                                     @if($is_root || $permission_full ==1|| $permission_edit ==1  )
-                                        <a href="{{URL::route('admin.product_edit',array('id' => $item->product_id))}}" title="Sửa sản phẩm"><i class="fa fa-edit fa-2x"></i></a>
+                                        <a href="{{URL::route('admin.product_edit',array('id' => $item->item_id))}}" title="Sửa sản phẩm"><i class="fa fa-edit fa-2x"></i></a>
                                     @endif
-                                    <span class="img_loading" id="img_loading_{{$item->product_id}}"></span>
+                                    <span class="img_loading" id="img_loading_{{$item->item_id}}"></span>
                                 </td>
                             </tr>
                         @endforeach
