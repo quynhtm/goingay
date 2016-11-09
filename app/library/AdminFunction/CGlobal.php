@@ -15,11 +15,11 @@ class CGlobal{
     public static $extraMeta = '';
     public static $pageAdminTitle = 'Dashboard Admin';
     public static $pageShopTitle = 'Shop Admin';
-    public static $pageTitle = 'shopcuatui.com.vn';
+    public static $pageTitle = 'Raovat30s.vn';
 
     
     const code_shop_share = 'shopcuatoi';
-    const web_name = 'shopcuatui.com.vn';
+    const web_name = 'raovat30s.vn';
     const phoneSupport = '0985.10.10.26 - 0913.922.986';
 
     const num_scroll_page = 2;
@@ -165,5 +165,9 @@ class CGlobal{
     const LINK_FOLLOW = 1;
     
     const banner_slider_default_shop = 'uploads/default/default-banner-shop.jpg';
-
+	
+    //Duy bo sung
+    const emailAdmin = 'nguyenduypt86@gmail.com';
+    const CUSTOMER_FREE = 0;
+    const CUSTOMER_VIP = 1;
 }

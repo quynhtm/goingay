@@ -16,7 +16,8 @@ class BaseSiteController extends BaseController
     	FunctionLib::site_css('frontend/css/usercustomer.css', CGlobal::$POS_HEAD);
     	FunctionLib::site_js('frontend/js/usercustomer.js', CGlobal::$POS_END);
     	FunctionLib::site_js('frontend/js/site.js', CGlobal::$POS_END);
-    	
+    	FunctionLib::site_css('lib/jAlert/jquery.alerts.css', CGlobal::$POS_HEAD);
+    	FunctionLib::site_js('lib/jAlert/jquery.alerts.js', CGlobal::$POS_END);
         $this->user_customer = Session::has('user_customer') ? Session::get('user_customer') : array();
     }
 

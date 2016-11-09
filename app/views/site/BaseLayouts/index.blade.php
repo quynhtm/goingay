@@ -8,6 +8,7 @@
 		
 	{{ HTML::style('assets/lib/bootstrap/css/bootstrap.css'); }}
 	{{ HTML::style('assets/frontend/css/site.css'); }}
+	{{ HTML::style('assets/frontend/css/media.css'); }}
 	
 	{{ HTML::script('assets/js/jquery.2.1.1.min.js', array(), Config::get('config.SECURE')) }}
 	{{ HTML::script('assets/lib/bootstrap/js/bootstrap.min.js', array(), Config::get('config.SECURE')) }}
