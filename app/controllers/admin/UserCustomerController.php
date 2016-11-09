@@ -35,7 +35,7 @@ class UserCustomerController extends BaseAdminController
             //'lib/number/autoNumeric.js',
             //'frontend/js/site.js',
         ));
-        CGlobal::$pageAdminTitle = 'Quản lý User Shop';
+        CGlobal::$pageAdminTitle = 'QL khách đăng tin';
     }
 
     public function view() {
@@ -44,6 +44,7 @@ class UserCustomerController extends BaseAdminController
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
         UserCustomer::updateShopLogout();//cap nhat shop login mà chưa logout
+        CGlobal::$pageAdminTitle = "QL khách đăng tin | ".CGlobal::web_name;
 
         $pageNo = (int) Request::get('page_no',1);
         $limit = CGlobal::number_limit_show;
@@ -72,7 +73,7 @@ class UserCustomerController extends BaseAdminController
             ->with('data', $dataSearch)
             ->with('search', $search)
             ->with('optionStatus', $optionStatus)
-            ->with('optionIsShop', $optionIsShop)
+            ->with('optionIsCustomer', $optionIsShop)
             ->with('arrStatus', $this->arrStatus)
             ->with('arrIsShop', $this->arrIsShop)
 

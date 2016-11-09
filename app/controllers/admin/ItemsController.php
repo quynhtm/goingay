@@ -51,16 +51,11 @@ class ItemsController extends BaseAdminController
     }
 
     public function view() {
-        $this->header();
-        $Meta = array('title'=>'QL Tin đăng',);
-        foreach($Meta as $key=>$val){
-            $this->layout->$key = $val;
-        }
         //Check phan quyen.
         if(!$this->is_root && !in_array($this->permission_full,$this->permission)&& !in_array($this->permission_view,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
-        CGlobal::$pageShopTitle = "Quản lý sản phẩm | ".CGlobal::web_name;
+        CGlobal::$pageAdminTitle = "QL tin đăng | ".CGlobal::web_name;
         $pageNo = (int) Request::get('page_no',1);
         $limit = CGlobal::number_limit_show;
         $offset = ($pageNo - 1) * $limit;
