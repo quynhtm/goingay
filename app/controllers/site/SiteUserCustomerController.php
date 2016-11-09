@@ -161,8 +161,8 @@ class SiteUserCustomerController extends BaseSiteController{
 	    			);
 	    			$id = UserCustomer::addData($data);
 	    			//Send mail active
-	    			$key_secret = base64_encode($mail .'/'.$phone);
-	    			if($key_secret != '' && $id > 0){
+	    			if($id > 0){
+	    				$key_secret = base64_encode($mail .'/'.$phone.'/'.$id);
 	    				$emails = [$mail, CGlobal::emailAdmin];
 	    				$dataTheme = array(
 	    						'key_secret'=>$key_secret,
@@ -170,13 +170,6 @@ class SiteUserCustomerController extends BaseSiteController{
 	    						'customer_password'=>$pass,
 	    						'customer_name'=>$fullname,
 	    				);
-	    				$dataActive = array(
-    									'customer_id'=>$id,
-    									'key_secret'=>$key_secret,
-    								);
-	    				Session::put('customer_active_code_register', $dataActive, 24*60);
-	    				Session::save();
-	    			
 	    				Mail::send('emails.userCustomerRegister', array('data'=>$dataTheme), function($message) use ($emails){
 	    					$message->to($emails, 'user_customer')
 	    							->subject('Kích hoạt tài khoản trên website '.CGlobal::web_name.' '.date('d/m/Y h:i',  time()));
@@ -193,42 +186,41 @@ class SiteUserCustomerController extends BaseSiteController{
     }
     public function pageActiveRegister(){
     	$key = Request::get('k', '');
-    	if(Session::has('customer_active_code_register')){
-    		if($key != ''){
-    			$dataActive = Session::get('customer_active_code_register');
-    			if(sizeof($dataActive) > 0){
-    				if(isset($dataActive['key_secret']) && $dataActive['key_secret'] == $key){
-    					$dataUpdate = array(
-    							'customer_status'=>CGlobal::status_show,
-    							'is_login'=>1,
-    							'customer_time_active'=>time(),
-    					);
-    					if(isset($dataActive['customer_id'])){
-    						UserCustomer::updateData((int)$dataActive['customer_id'], $dataUpdate);
-    						$customer = UserCustomer::getByID((int)$dataActive['customer_id']);
-    						$data = array(
-    								'customer_id' => $customer->customer_id,
-    								'customer_name' => $customer->customer_name,
-    								'customer_phone' => $customer->customer_phone,
-    								'customer_address' => $customer->customer_address,
-    								'customer_email' => $customer->customer_email,
-    								'customer_province' => $customer->customer_province,
-    								'customer_about' => $customer->customer_about,
-    								'customer_status' => $customer->customer_status,
-    								'customer_up_item' => $customer->customer_up_item,
-    								'customer_time_login' => $customer->customer_time_login,
-    								'customer_time_created' => $customer->customer_time_created,
-    								'customer_time_active' => $customer->customer_time_active,
-    								'is_customer' => $customer->is_customer,
-    								'time_start_vip' => $customer->time_start_vip,
-    								'time_end_vip' => $customer->time_end_vip,
-    								'is_login' => $customer->is_login,
-    						);
-    						Session::put('user_customer', $data, 60*24);
-    						Session::save();
-    						return Redirect::route('site.home');
-    					}
-    				}
+    	if($key != ''){
+    		$strKey = base64_decode($key);
+    		$arrKey = explode('/', $strKey);
+    		if(count($arrKey) == 3){
+    			$customer_id =  (int)$arrKey[2];
+    			$dataUpdate = array(
+    					'customer_status'=>CGlobal::status_show,
+    					'is_login'=>1,
+    					'customer_time_active'=>time(),
+    			);
+    			UserCustomer::updateData($customer_id, $dataUpdate);
+    			$customer = UserCustomer::getByID($customer_id);
+    			if(sizeof($customer) > 0){
+    				$data = array(
+    						'customer_id' => $customer->customer_id,
+    						'customer_name' => $customer->customer_name,
+    						'customer_phone' => $customer->customer_phone,
+    						'customer_address' => $customer->customer_address,
+    						'customer_email' => $customer->customer_email,
+    						'customer_province' => $customer->customer_province,
+    						'customer_about' => $customer->customer_about,
+    						'customer_status' => $customer->customer_status,
+    						'customer_up_item' => $customer->customer_up_item,
+    						'customer_time_login' => $customer->customer_time_login,
+    						'customer_time_created' => $customer->customer_time_created,
+    						'customer_time_active' => $customer->customer_time_active,
+    						'is_customer' => $customer->is_customer,
+    						'time_start_vip' => $customer->time_start_vip,
+    						'time_end_vip' => $customer->time_end_vip,
+    						'is_login' => $customer->is_login,
+    				);
+    				Session::put('user_customer', $data, 60*24);
+    				Session::save();
+    				FunctionLib::messages('messages', 'Kích hoạt tài khoản thành công!', 'success');
+    				return Redirect::route('site.home');
     			}
     		}
     	}

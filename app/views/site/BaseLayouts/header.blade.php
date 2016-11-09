@@ -68,3 +68,10 @@
 		<img src="http://static.eclick.vn/uploads/source/2016/11/04/e8243811134957616h825452811.jpeg" width="980">
 	</div>
 </div>
+@if($messages != '')
+<div class="line-messages">
+	<div class="container">
+		{{$messages}}
+	</div>
+</div>
+@endif

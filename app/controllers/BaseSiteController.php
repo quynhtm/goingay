@@ -12,6 +12,9 @@ class BaseSiteController extends BaseController{
     public function __construct(){
        //Init
     	$this->user_customer = UserCustomer::user_login();
+    	
+    	FunctionLib::site_js('libs/jAlert/jquery.alerts.js', CGlobal::$POS_END);
+    	FunctionLib::site_css('libs/jAlert/jquery.alerts.css', CGlobal::$POS_HEAD);
     }
 
     public function header(){
@@ -19,7 +22,9 @@ class BaseSiteController extends BaseController{
     		$this->popupHide();
     	}
     	
-    	$this->layout->header = View::make("site.BaseLayouts.header")->with('user_customer', $this->user_customer);
+    	$messages = FunctionLib::messages('messages');
+    	
+    	$this->layout->header = View::make("site.BaseLayouts.header")->with('user_customer', $this->user_customer)->with('messages', $messages);
     }
 
     public function footer(){
