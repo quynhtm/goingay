@@ -54,9 +54,9 @@ class BaseAdminController extends BaseController
             'name'=>'Đơn vị hành chính',
             'link'=>'javascript:void(0)',
             'icon'=>'fa fa-code-fork',
-            'arr_link_sub'=>array('admin.provice',),
+            'arr_link_sub'=>array('admin.province',),
             'sub'=>array(
-                array('name'=>'Tỉnh/Thành', 'RouteName'=>'admin.provice', 'icon'=>'fa fa-map-marker icon-4x', 'showcontent'=>1, 'permission'=>'abc', 'clear'=>1),
+                array('name'=>'Tỉnh/Thành', 'RouteName'=>'admin.province', 'icon'=>'fa fa-map-marker icon-4x', 'showcontent'=>1, 'permission'=>'abc', 'clear'=>1),
             ),
         );
 

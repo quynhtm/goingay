@@ -132,14 +132,14 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     //Thung rac
     Route::get('trash', array('as' => 'admin.trash','uses' => 'TrashController@listView'));
     Route::get('trash/edit/{id?}', array('as' => 'admin.trash_edit','uses' => 'TrashController@getItem'))->where('id', '[0-9]+');
-    Route::post('trash/edit/{id?}', array('as' => 'admin.trash_edit','uses' => 'TrashController@getItem'))->where('id', '[0-9]+');
+    Route::post('trash/edit/{id?}', array('as' => 'admin.trash_edit','uses' => 'TrashController@postItem'))->where('id', '[0-9]+');
     Route::match(['GET','POST'],'trash/delete', array('as' => 'admin.trash_delete','uses' => 'TrashController@delete'));
     Route::match(['GET','POST'],'trash/restore', array('as' => 'admin.trash_delete','uses' => 'TrashController@restore'));
     //Tinh thanh
-    Route::get('provice', array('as' => 'admin.provice','uses' => 'ProviceController@listView'));
-    Route::get('provice/edit/{id?}', array('as' => 'admin.provice_edit','uses' => 'ProviceController@getItem'))->where('id', '[0-9]+');
-    Route::post('provice/edit/{id?}', array('as' => 'admin.provice_edit','uses' => 'ProviceController@postItem'))->where('id', '[0-9]+');
-    Route::match(['GET','POST'],'provice/delete', array('as' => 'admin.provice_delete','uses' => 'ProviceController@delete'));
+    Route::get('province', array('as' => 'admin.province','uses' => 'ProvinceController@listView'));
+    Route::get('province/edit/{id?}', array('as' => 'admin.provinceEdit','uses' => 'ProvinceController@getItem'))->where('id', '[0-9]+');
+    Route::post('province/edit/{id?}', array('as' => 'admin.provinceEdit','uses' => 'ProvinceController@postItem'))->where('id', '[0-9]+');
+    Route::post('province/deleteProvince', array('as' => 'admin.deleteProvince','uses' => 'ProvinceController@deleteProvince'));//ajax
 
     //Tools quản lý các page khác nhau
     Route::get('toolsCommon/viewShopShare',array('as' => 'admin.viewShopShare','uses' => 'ToolsCommonController@viewShopShare'));

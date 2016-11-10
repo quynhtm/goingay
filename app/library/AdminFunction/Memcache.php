@@ -39,4 +39,7 @@ class Memcache{
     const CACHE_INFO_KEYWORD    = 'cache_info_keyword_';
     //Thung rac
     const CACHE_TRASH_ID    = 'cache_trash_id_';
+
+    //Tinh thành
+    const CACHE_ALL_PROVINCE = 'cache_all_province';
 }

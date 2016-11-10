@@ -14,10 +14,13 @@ var Admin = {
                 url_ajax = 'deleteCustomer';
             }else if(type == 3){
                 url_ajax = 'deleteBanner';
+            }else if(type == 4){
+                url_ajax = 'deleteProvince';
             }else if(type == 9){
                 url_ajax = 'deletePermission';
             }
             if(url_ajax != ''){
+                alert(url_ajax);
                 $.ajax({
                     type: "post",
                     url: url_ajax,
