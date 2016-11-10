@@ -5,7 +5,7 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{URL::route('admin.dashboard')}}">Home</a>
             </li>
-            <li><a href="{{URL::route('admin.banner_list')}}"> Banner quảng cáo</a></li>
+            <li><a href="{{URL::route('admin.bannerView')}}"> Banner quảng cáo</a></li>
             <li class="active">@if($id > 0)Cập nhật banner @else Tạo mới banner @endif</li>
         </ul><!-- /.breadcrumb -->
     </div>
@@ -164,7 +164,7 @@
                 <div style="float: left;width: 40%">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <a href="javascript:;"class="btn btn-primary" onclick="SITE.uploadOneImages(3);">Upload ảnh </a>
+                            <a href="javascript:;"class="btn btn-primary" onclick="Admin.uploadOneImages(3);">Upload ảnh </a>
                             <input name="image_primary" type="hidden" id="image_primary" value="@if(isset($data['banner_image'])){{$data['banner_image']}}@endif">
                         </div>
                     </div>
