@@ -12,7 +12,8 @@ class UserCustomerController extends BaseAdminController
     private $permission_create = 'user_customer_create';
     private $permission_edit = 'user_customer_edit';
     private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện', CGlobal::status_block => 'Khóa');
-    private $arrIsShop = array(-1 => 'Tất cả', CGlobal::CUSTOMER_FREE => 'Shop Free', CGlobal::CUSTOMER_NOMAL => 'Shop thường', CGlobal::CUSTOMER_VIP => 'Shop Vip');
+    private $arrCustomerActive = array(-1 => 'Tất cả', CGlobal::status_hide => 'Chưa kích hoạt', CGlobal::status_show => 'Đã kích hoạt');
+    private $arrIsCustomer = array(-1 => 'Tất cả', CGlobal::CUSTOMER_FREE => 'Khách Free', CGlobal::CUSTOMER_NOMAL => 'Khách thường', CGlobal::CUSTOMER_VIP => 'Khách Vip');
     private $error = array();
 
     public function __construct()
@@ -31,9 +32,6 @@ class UserCustomerController extends BaseAdminController
             'lib/ckeditor/config.js',
             'js/common.js',
             'admin/js/admin.js',
-            //'lib/dragsort/jquery.dragsort.js',
-            //'lib/number/autoNumeric.js',
-            //'frontend/js/site.js',
         ));
         CGlobal::$pageAdminTitle = 'QL khách đăng tin';
     }
@@ -43,7 +41,7 @@ class UserCustomerController extends BaseAdminController
         if(!$this->is_root && !in_array($this->permission_full,$this->permission)&& !in_array($this->permission_view,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
-        UserCustomer::updateShopLogout();//cap nhat shop login mà chưa logout
+        UserCustomer::updateCustomerLogout();//cap nhat shop login mà chưa logout
         CGlobal::$pageAdminTitle = "QL khách đăng tin | ".CGlobal::web_name;
 
         $pageNo = (int) Request::get('page_no',1);
@@ -52,19 +50,20 @@ class UserCustomerController extends BaseAdminController
         $search = $data = array();
         $total = 0;
 
-        $search['shop_id'] = addslashes(Request::get('shop_id',''));
-        $search['user_shop'] = addslashes(Request::get('user_shop',''));
-        $search['shop_name'] = addslashes(Request::get('shop_name',''));
-        $search['shop_status'] = (int)Request::get('shop_status',-1);
-        $search['is_shop'] = (int)Request::get('is_shop',-1);
+        $search['customer_name'] = addslashes(Request::get('customer_name',''));
+        $search['customer_email'] = addslashes(Request::get('customer_email',''));
+        $search['customer_status'] = (int)Request::get('customer_status',-1);
+        $search['is_customer'] = (int)Request::get('is_customer',-1);
+        $search['customer_time_active'] = (int)Request::get('customer_time_active',-1);
         //$search['field_get'] = 'category_id,category_name,category_status';//cac truong can lay
 
         $dataSearch = UserCustomer::searchByCondition($search, $limit, $offset,$total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
 
         //FunctionLib::debug($dataSearch);
-        $optionStatus = FunctionLib::getOption($this->arrStatus, $search['shop_status']);
-        $optionIsShop = FunctionLib::getOption($this->arrIsShop, $search['is_shop']);
+        $optionStatus = FunctionLib::getOption($this->arrStatus, $search['customer_status']);
+        $optionIsShop = FunctionLib::getOption($this->arrIsCustomer, $search['is_customer']);
+        $optionCustomerActive = FunctionLib::getOption($this->arrCustomerActive, $search['customer_time_active']);
         $this->layout->content = View::make('admin.UserCustomer.view')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
@@ -74,8 +73,9 @@ class UserCustomerController extends BaseAdminController
             ->with('search', $search)
             ->with('optionStatus', $optionStatus)
             ->with('optionIsCustomer', $optionIsShop)
+            ->with('optionCustomerActive', $optionCustomerActive)
             ->with('arrStatus', $this->arrStatus)
-            ->with('arrIsShop', $this->arrIsShop)
+            ->with('arrIsCustomer', $this->arrIsCustomer)
 
             ->with('is_root', $this->is_root)//dùng common
             ->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)//dùng common
@@ -90,8 +90,8 @@ class UserCustomerController extends BaseAdminController
         }
         $data = array();
         if($id > 0) {
-            //$item = UserShop::find($id);
-            $item = UserShop::getByID($id);
+            //$item = UserCustomer::find($id);
+            $item = UserCustomer::getByID($id);
             if($item){
                 $data['shop_name'] = $item->shop_name;
                 $data['user_shop'] = $item->user_shop;
@@ -148,13 +148,13 @@ class UserCustomerController extends BaseAdminController
                     $dataSave['user_password'] = User::encode_password(trim($dataSave['user_password']));
                 }
                 //cap nhat
-                if(UserShop::updateData($id, $dataSave)) {
-                    return Redirect::route('admin.userShop_list');
+                if(UserCustomer::updateData($id, $dataSave)) {
+                    return Redirect::route('admin.customerView');
                 }
             } else {
                 //them moi
-                if(UserShop::addData($dataSave)) {
-                    return Redirect::route('admin.userShop_list');
+                if(UserCustomer::addData($dataSave)) {
+                    return Redirect::route('admin.customerView');
                 }
             }
         }
@@ -174,18 +174,18 @@ class UserCustomerController extends BaseAdminController
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
         if($shop_id > 0){
-            $userShop = UserShop::find($shop_id);
+            $userShop = UserCustomer::find($shop_id);
             if($userShop){
                 //xoa session cũ
-                if (Session::has('user_shop')) {
-                    Session::forget('user_shop');//xóa session
+                if (Session::has('user_customer')) {
+                    Session::forget('user_customer');//xóa session
                 }
 
-                Session::put('user_shop', $userShop, 60*24);
-                return Redirect::route('shop.adminShop');
+                Session::put('user_customer', $userShop, 60*24);
+                //return Redirect::route('shop.adminShop');
             }
         }
-        return Redirect::route('admin.userShop_list');
+        return Redirect::route('admin.customerView');
     }
 
     private function valid($data=array()) {
@@ -203,59 +203,60 @@ class UserCustomerController extends BaseAdminController
     }
 
     //ajax
-    public function deleteUserCustomer(){
+    public function deleteCustomer(){
         $result = array('isIntOk' => 0);
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_delete,$this->permission)){
             return Response::json($result);
         }
         $shop_id = (int)Request::get('id', 0);
-        if ($shop_id > 0 && UserShop::deleteData($shop_id)) {
-            //xóa các sản phẩm của shop nay
-            $deleteProduct = false;
-            $array_product = Product::getListProductOfShopId($shop_id,array('product_id','user_shop_id'));
-            if($array_product && sizeof($array_product) > 0){
-                foreach($array_product as $product){
-                    if(Product::deleteData($product->product_id)){
-                        $deleteProduct = true;
+        $deleteItems = false;
+        if ($shop_id > 0 && UserCustomer::deleteData($shop_id)) {
+            //xóa các tin đăng của shop nay
+            $deleteItems = true;
+            $arrayItems = Items::getListItemsOfCustomerId($shop_id,array('item_id','customer_id'));
+            if($arrayItems && sizeof($arrayItems) > 0){
+                foreach($arrayItems as $item){
+                    if(Items::deleteData($item->item_id)){
+                        $deleteItems = true;
                     }
                 }
             }
-            $result['isIntOk'] = ($deleteProduct)? 1: 0;
         }
+        $result['isIntOk'] = ($deleteItems)? 1: 0;
         return Response::json($result);
     }
 
     //ajax
     public function setIsCustomer(){
         $shop_id = (int)Request::get('shop_id', 0);
-        $is_shop = (int)Request::get('is_shop', CGlobal::SHOP_FREE);
+        $is_shop = (int)Request::get('is_shop', CGlobal::CUSTOMER_FREE);
         $result = array('isIntOk' => 0);
+        $updateProduct = false;
         if(!$this->is_root && !in_array($this->permission_full,$this->permission)){
             return Response::json($result);
         }
         if ($shop_id > 0) {
-            $dataSave['is_shop'] = $is_shop;
-            if($is_shop == CGlobal::SHOP_VIP){
+            $dataSave['is_customer'] = $is_shop;
+            if($is_shop == CGlobal::CUSTOMER_VIP){
                 $dataSave['time_start_vip'] = time();
                 $dataSave['time_end_vip'] =  mktime(0, 0, 0, date("m"),   date("d"),   date("Y")+1);
             }else{
                 $dataSave['time_start_vip'] = 0;
                 $dataSave['time_end_vip'] = 0;
             }
-            if(UserShop::updateData($shop_id, $dataSave)) {
+            if(UserCustomer::updateData($shop_id, $dataSave)) {
+                $updateProduct = true;
                 //cap nhật sản phẩm theo is_shop
-                $array_product = Product::getListProductOfShopId($shop_id,array('product_id','user_shop_id'));
-                $updateProduct = false;
-                if($array_product && sizeof($array_product) > 0){
-                    $inforShop = UserShop::getByID($shop_id);
+                $arrayItems = Items::getListItemsOfCustomerId($shop_id,array('item_id','customer_id'));
+                if($arrayItems && sizeof($arrayItems) > 0){
+                    $inforShop = UserCustomer::getByID($shop_id);
                     if($inforShop){
                         $arryUpdatePro = array(
-                            'user_shop_id'=>$inforShop->shop_id,
-                            'is_shop'=>$is_shop,
-                            'user_shop_name'=>$inforShop->shop_name,
-                            'shop_province'=>$inforShop->shop_province,);
-                        foreach($array_product as $product){
-                            if(Product::updateData($product->product_id,$arryUpdatePro)){
+                            'customer_id'=>$inforShop->customer_id,
+                            'is_customer'=>$is_shop,
+                            'customer_name'=>$inforShop->customer_name);
+                        foreach($arrayItems as $product){
+                            if(Items::updateData($product->item_id,$arryUpdatePro)){
                                 $updateProduct = true;
                             }
                         }
@@ -269,27 +270,27 @@ class UserCustomerController extends BaseAdminController
     //ajax
     public function updateStatusUserCustomer(){
         $shop_id = (int)Request::get('shop_id', 0);
-        $shop_status = (int)Request::get('shop_status', CGlobal::SHOP_FREE);
+        $shop_status = (int)Request::get('shop_status', CGlobal::CUSTOMER_FREE);
         $result = array('isIntOk' => 0);
+        $updateProduct = false;
         if(!$this->is_root && !in_array($this->permission_full,$this->permission)){
             return Response::json($result);
         }
         if ($shop_id > 0) {
-            $dataSave['shop_status'] = $shop_status;
-            if(UserShop::updateData($shop_id, $dataSave)) {
+            $dataSave['customer_status'] = $shop_status;
+            if(UserCustomer::updateData($shop_id, $dataSave)) {
+                $updateProduct = true;
                 //cap nhật sản phẩm theo trang thái của shop
-                $array_product = Product::getListProductOfShopId($shop_id,array('product_id','user_shop_id'));
-                $updateProduct = false;
-                if($array_product && sizeof($array_product) > 0){
-                    $inforShop = UserShop::getByID($shop_id);
+                $arrayItems = Items::getListItemsOfCustomerId($shop_id,array('item_id','customer_id'));
+                if($arrayItems && sizeof($arrayItems) > 0){
+                    $inforShop = UserCustomer::getByID($shop_id);
                     if($inforShop){
                         $arryUpdatePro = array(
-                            'user_shop_id'=>$inforShop->shop_id,
-                            'product_status'=>$shop_status,
-                            'user_shop_name'=>$inforShop->shop_name,
-                            'shop_province'=>$inforShop->shop_province,);
-                        foreach($array_product as $product){
-                            if(Product::updateData($product->product_id,$arryUpdatePro)){
+                            'customer_id'=>$inforShop->customer_id,
+                            'item_status'=>$shop_status,
+                            'customer_name'=>$inforShop->customer_name);
+                        foreach($arrayItems as $product){
+                            if(Items::updateData($product->product_id,$arryUpdatePro)){
                                 $updateProduct = true;
                             }
                         }

@@ -31,15 +31,21 @@
                             </select>
                         </div>
                         <div class="form-group col-lg-3">
-                            <label for="shop_status">Loại shop</label>
+                            <label for="shop_status">Kiểu khách hàng</label>
                             <select name="is_customer" id="is_customer" class="form-control input-sm">
                                 {{$optionIsCustomer}}
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label for="shop_status">Kiều kích hoạt</label>
+                            <select name="customer_time_active" id="customer_time_active" class="form-control input-sm">
+                                {{$optionCustomerActive}}
                             </select>
                         </div>
                     </div>
                     <div class="panel-footer text-right">
                         @if($is_root || $permission_full ==1 || $permission_create == 1)
-                        <span class="">
+                        <span style="display: none">
                             <a class="btn btn-danger" href="{{URL::route('admin.customerEdit')}}">
                                 <i class="ace-icon fa fa-plus-circle"></i>
                                 Thêm mới
@@ -114,7 +120,7 @@
                                         <a href="{{URL::route('admin.customerEdit',array('id' => $item->customer_id))}}" title="Sửa item"><i class="fa fa-edit fa-2x"></i></a>
                                     @endif
                                     @if($is_root || $permission_full ==1 || $permission_delete == 2)
-                                       <a href="javascript:void(0);" onclick="ADMIN.deleteItem({{$item->customer_id}},2)" title="Xóa Item"><i class="fa fa-trash fa-2x"></i></a>
+                                       <a href="javascript:void(0);" onclick="Admin.deleteItem({{$item->customer_id}},2)" title="Xóa Item"><i class="fa fa-trash fa-2x"></i></a>
                                     @endif
                                     <br/>
                                     @if($is_root)

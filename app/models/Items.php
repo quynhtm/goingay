@@ -31,6 +31,14 @@ class Items extends Eloquent
         return $product;
     }
 
+    public static function getListItemsOfCustomerId($customer_id = 0, $field_get = array()) {
+        if($customer_id > 0){
+            $query = Items::where('customer_id','=',$customer_id);
+            return $result = (!empty($field_get)) ? $query->get($field_get) : $query->get();
+        }
+        return array();
+    }
+
     public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){
         try{
             $query = Items::where('item_id','>',0);

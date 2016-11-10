@@ -73,7 +73,7 @@ class UserCustomer extends Eloquent
     }
 
     //cap nhat nhung shop da het session
-    public static function updateShopLogout(){
+    public static function updateCustomerLogout(){
         $yesterday = time() - (60 * 60);
         $query = UserCustomer::where('customer_id','>',0)->where('is_login','=',1);
         $query->where('customer_time_login', '<=', $yesterday);
@@ -108,6 +108,11 @@ class UserCustomer extends Eloquent
             }
             if (isset($dataSearch['is_customer']) && $dataSearch['is_customer'] > -1) {
                 $query->where('is_customer', $dataSearch['is_customer']);
+            }
+            if (isset($dataSearch['customer_time_active']) && $dataSearch['customer_time_active'] == 0) {
+                $query->where('customer_time_active','=', 0);//ch?a active
+            }elseif(isset($dataSearch['customer_time_active']) && $dataSearch['customer_time_active'] == 1) {
+                $query->where('customer_time_active','>', 0);//dã active
             }
             $total = $query->count();
             $query->orderBy('customer_time_login', 'desc')->orderBy('customer_time_logout', 'desc');
