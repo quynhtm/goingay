@@ -10,10 +10,9 @@ class TrashController extends BaseAdminController{
 	private $error = '';
 	public function __construct(){
 		parent::__construct();
-		Loader::loadJS('backend/js/admin.js', CGlobal::$postEnd);
 	}
 	public function listView(){
-		$this->header();
+		
 		$Meta = array('title'=>'Trash',);
 		foreach($Meta as $key=>$val){
 			$this->layout->$key = $val;
