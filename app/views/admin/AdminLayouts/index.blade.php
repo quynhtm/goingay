@@ -154,26 +154,6 @@
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-            <!-- @if($is_root || in_array('user_view',$aryPermission))
-            <li class="@if(Route::currentRouteName() == 'admin.user_view')active @endif">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-user"></i>
-                    <span class="menu-text"> Quản trị tài khoản</span>
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-                <b class="arrow"></b>
-                <ul class="submenu  nav-show ">
-                    <li class="@if(Route::currentRouteName() == 'admin.user_view')active @endif">
-                        <a href="{{URL::route('admin.user_view')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Danh sách tài khoản
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
-            @endif -->
-
             @if(!empty($menu))
                 @foreach($menu as $item)
                     <li class="@if(in_array(Route::currentRouteName(),$item['arr_link_sub']))active @endif">
@@ -187,8 +167,8 @@
                             @if(isset($item['sub']) && !empty($item['sub']))
                                 @foreach($item['sub'] as $sub)
                                     @if($is_root || (isset($sub['permission']) && in_array($sub['permission'],$aryPermission)))
-                                        <li class="@if(Route::currentRouteName() == $sub['link'])active @endif">
-                                            <a href="{{$sub['link']}}">
+                                        <li class="@if(strcmp(Route::currentRouteName(),$sub['RouteName']) == 0) active @endif">
+                                            <a href="{{URL::route($sub['RouteName'])}}">
                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                 {{ $sub['name'] }}
                                             </a>

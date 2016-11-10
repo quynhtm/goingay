@@ -160,12 +160,12 @@ class NewsController extends BaseAdminController
             if($id > 0) {
                 //cap nhat
                 if(News::updateData($id, $dataSave)) {
-                    return Redirect::route('admin.news_list');
+                    return Redirect::route('admin.newsView');
                 }
             } else {
                 //them moi
                 if(News::addData($dataSave)) {
-                    return Redirect::route('admin.news_list');
+                    return Redirect::route('admin.newsView');
                 }
             }
         }

@@ -30,7 +30,7 @@
                                     @if($is_root || (isset($sub['permission']) && in_array($sub['permission'],$aryPermission)))
                                         @if(isset($sub['showcontent']) && $sub['showcontent'] == 1)
                                             <div class="col-sm-6 col-md-3">
-                                                <a class="quick-btn a_control"  href="{{ $sub['link'] }}">
+                                                <a class="quick-btn a_control"  href="{{ URL::route($sub['RouteName']) }}">
                                                     <div class="thumbnail text-center">
                                                         <i class="{{ $sub['icon'] }} fa-5x"></i><br>{{ $sub['name'] }}
                                                     </div>
