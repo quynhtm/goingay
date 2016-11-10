@@ -27,17 +27,19 @@
                         @foreach($menu as $item)
                             @if(isset($item['sub']) && !empty($item['sub']))
                                 @foreach($item['sub'] as $sub)
-                                    @if(isset($sub['showcontent']) && $sub['showcontent'] == 1)
-                                        <div class="col-sm-6 col-md-3">
-                                            <a class="quick-btn a_control"  href="{{ $sub['link'] }}">
-                                                <div class="thumbnail text-center">
-                                                    <i class="{{ $sub['icon'] }} fa-5x"></i><br>{{ $sub['name'] }}
-                                                </div>
-                                            </a>
-                                        </div>
-                                    @endif
-                                    @if(isset($sub['clear']) && $sub['clear'] == 1)
-                                        <div class="clear"></div>
+                                    @if($is_root || (isset($sub['permission']) && in_array($sub['permission'],$aryPermission)))
+                                        @if(isset($sub['showcontent']) && $sub['showcontent'] == 1)
+                                            <div class="col-sm-6 col-md-3">
+                                                <a class="quick-btn a_control"  href="{{ $sub['link'] }}">
+                                                    <div class="thumbnail text-center">
+                                                        <i class="{{ $sub['icon'] }} fa-5x"></i><br>{{ $sub['name'] }}
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        @endif
+                                        @if(isset($sub['clear']) && $sub['clear'] == 1)
+                                            <div class="clear"></div>
+                                        @endif
                                     @endif
                                 @endforeach
                             @endif
