@@ -154,14 +154,13 @@
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-            @if($is_root || in_array('user_view',$aryPermission))
-            <li class="@if(Route::currentRouteName() == 'admin.user_view' || Route::currentRouteName() == 'admin.permission_view'|| Route::currentRouteName() == 'admin.groupUser_view')active @endif">
+            <!-- @if($is_root || in_array('user_view',$aryPermission))
+            <li class="@if(Route::currentRouteName() == 'admin.user_view')active @endif">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-user"></i>
                     <span class="menu-text"> Quản trị tài khoản</span>
                     <b class="arrow fa fa-angle-down"></b>
                 </a>
-
                 <b class="arrow"></b>
                 <ul class="submenu  nav-show ">
                     <li class="@if(Route::currentRouteName() == 'admin.user_view')active @endif">
@@ -171,88 +170,37 @@
                         </a>
                         <b class="arrow"></b>
                     </li>
-                    <li class="@if(Route::currentRouteName() == 'admin.permission_view')active @endif">
-                        <a href="{{URL::route('admin.permission_view')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Danh sách quyền
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="@if(Route::currentRouteName() == 'admin.groupUser_view')active @endif">
-                        <a href="{{URL::route('admin.groupUser_view')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Danh sách nhóm quyền
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
                 </ul>
             </li>
+            @endif -->
+
+            @if(!empty($menu))
+                @foreach($menu as $item)
+                    <li class="@if(in_array(Route::currentRouteName(),$item['arr_link_sub']))active @endif">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon {{$item['icon']}}"></i>
+                            <span class="menu-text"> {{$item['name']}}</span>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+                        <b class="arrow"></b>
+                        <ul class="submenu">
+                            @if(isset($item['sub']) && !empty($item['sub']))
+                                @foreach($item['sub'] as $sub)
+                                    @if($is_root || (isset($sub['permission']) && in_array($sub['permission'],$aryPermission)))
+                                        <li class="@if(Route::currentRouteName() == $sub['link'])active @endif">
+                                            <a href="{{$sub['link']}}">
+                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                {{ $sub['name'] }}
+                                            </a>
+                                            <b class="arrow"></b>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            @endif
+                        </ul>
+                    </li>
+                @endforeach
             @endif
-
-            <li class="@if(Route::currentRouteName() == 'admin.user_view')active @endif">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-truck"></i>
-                    <span class="menu-text"> Quản trị Shop</span>
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-                <b class="arrow"></b>
-                <ul class="submenu">
-                    <li class="@if(Route::currentRouteName() == 'admin.user_view')active @endif">
-                        <a href="{{URL::route('admin.user_view')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Danh sách Shop
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="@if(Route::currentRouteName() == 'admin.category_list' )active @endif">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-gift"></i>
-                    <span class="menu-text"> Quản trị sản phẩm </span>
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-                <b class="arrow"></b>
-                <ul class="submenu">
-                    <li class="@if(Route::currentRouteName() == 'admin.category_list')active @endif">
-                        <a href="{{URL::route('admin.category_list')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Danh mục sản phẩm
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="@if(Route::currentRouteName() == 'admin.user_view'
-                        || Route::currentRouteName() == 'admin.user_view')active @endif">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-book"></i>
-                    <span class="menu-text"> Quản trị Nội dung</span>
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-                <b class="arrow"></b>
-                <ul class="submenu">
-                    <li class="@if(Route::currentRouteName() == 'admin.user_view')active @endif">
-                        <a href="{{URL::route('admin.user_view')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Quản trị tin tức
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="@if(Route::currentRouteName() == 'admin.user_view')active @endif">
-                        <a href="{{URL::route('admin.user_view')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Banner quảng cáo
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-
-                </ul>
-            </li>
-
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">

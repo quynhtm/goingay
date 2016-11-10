@@ -11,19 +11,9 @@ var Admin = {
             if(type == 1){ //xoa tin tức
                 url_ajax = 'deleteNews';
             }else if(type == 2){
-                url_ajax = 'deleteUserShop';
+                url_ajax = 'deleteCustomer';
             }else if(type == 3){
                 url_ajax = 'deleteBanner';
-            }else if(type == 4){
-                url_ajax = 'deleteProvider';
-            }else if(type == 5){
-                url_ajax = 'deleteCustomerEmail';
-            }else if(type == 6){
-                url_ajax = 'deleteProviderEmail';
-            }else if(type == 7){
-                url_ajax = 'deleteContentSendEmail';
-            }else if(type == 8){
-                url_ajax = 'deleteOrderShop';
             }else if(type == 9){
                 url_ajax = 'deletePermission';
             }
