@@ -136,7 +136,7 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::match(['GET','POST'],'trash/delete', array('as' => 'admin.trash_delete','uses' => 'TrashController@delete'));
     Route::match(['GET','POST'],'trash/restore', array('as' => 'admin.trash_delete','uses' => 'TrashController@restore'));
     //Tinh thanh
-    Route::get('province', array('as' => 'admin.province','uses' => 'ProvinceController@listView'));
+    Route::get('province/view', array('as' => 'admin.province','uses' => 'ProvinceController@listView'));
     Route::get('province/edit/{id?}', array('as' => 'admin.provinceEdit','uses' => 'ProvinceController@getItem'))->where('id', '[0-9]+');
     Route::post('province/edit/{id?}', array('as' => 'admin.provinceEdit','uses' => 'ProvinceController@postItem'))->where('id', '[0-9]+');
     Route::post('province/deleteProvince', array('as' => 'admin.deleteProvince','uses' => 'ProvinceController@deleteProvince'));//ajax
