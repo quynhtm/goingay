@@ -20,7 +20,6 @@ var Admin = {
                 url_ajax = 'deletePermission';
             }
             if(url_ajax != ''){
-                alert(url_ajax);
                 $.ajax({
                     type: "post",
                     url: url_ajax,

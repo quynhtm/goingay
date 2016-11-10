@@ -16,7 +16,14 @@ class ProvinceController extends BaseAdminController{
 	private $error = '';
 	public function __construct(){
 		parent::__construct();
-		FunctionLib::site_js('backend/js/admin.js', CGlobal::$POS_HEAD);
+		//Include javascript.
+		FunctionLib::link_js(array(
+			'lib/upload/jquery.uploadfile.js',
+			'lib/ckeditor/ckeditor.js',
+			'lib/ckeditor/config.js',
+			'lib/dragsort/jquery.dragsort.js',
+			'js/common.js',
+		));
 	}
 	public function listView(){
 		if(!$this->is_root && !in_array($this->permission_full,$this->permission)&& !in_array($this->permission_view,$this->permission)){
@@ -114,7 +121,6 @@ class ProvinceController extends BaseAdminController{
 			return Response::json($data);
 		}
 		$id = (int)Request::get('id', 0);
-		FunctionLib::debug($id);
 		if ($id > 0 && Province::deleteData($id)) {
 			$data['isIntOk'] = 1;
 		}
