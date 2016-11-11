@@ -82,12 +82,9 @@ class ProvinceController extends BaseAdminController{
 		if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
 			return Redirect::route('admin.dashboard',array('error'=>1));
 		}
-		$dataSave['news_title'] = addslashes(Request::get('news_title'));
-		$dataSave['news_desc_sort'] = addslashes(Request::get('news_desc_sort'));
-		$dataSave['news_content'] = Request::get('news_content');
-		$dataSave['news_type'] = addslashes(Request::get('news_type'));
-		$dataSave['news_category'] = addslashes(Request::get('news_category'));
-		$dataSave['news_status'] = (int)Request::get('news_status', 0);
+		$dataSave['province_name'] = addslashes(Request::get('province_name'));
+		$dataSave['province_position'] = addslashes(Request::get('province_position'));
+		$dataSave['province_status'] = (int)Request::get('province_status', 0);
 		$id_hiden = (int)Request::get('id_hiden', 0);
 
 		//FunctionLib::debug($dataSave);
@@ -113,6 +110,14 @@ class ProvinceController extends BaseAdminController{
 			->with('optionStatus', $optionStatus)
 			->with('error', $this->error)
 			->with('arrStatus', $this->arrStatus);
+	}
+	private function valid($data=array()) {
+		if(!empty($data)) {
+			if(isset($data['province_name']) && trim($data['province_name']) == '') {
+				$this->error[] = 'Tên tỉnh thành không được bỏ trống';
+			}
+		}
+		return true;
 	}
 
 	public function deleteProvince(){

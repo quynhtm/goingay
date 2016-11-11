@@ -27,11 +27,11 @@ class Province extends Eloquent
     }
     
     public static function getByID($id) {
-    	$result = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_PROVIDER_ID.$id) : array();
+    	$result = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_PROVINCE_ID.$id) : array();
     	if (sizeof($result) == 0) {
     		$result = Province::where('province_id','=', $id)->first();
     		if($result && Memcache::CACHE_ON){
-    			Cache::put(Memcache::CACHE_PROVIDER_ID.$id, $result, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+    			Cache::put(Memcache::CACHE_PROVINCE_ID.$id, $result, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
     		}
     	}
     	return $result;
@@ -152,7 +152,7 @@ class Province extends Eloquent
      */
     public static function removeCache($id = 0){
         if($id > 0){
-            //Cache::forget(Memcache::CACHE_PROVIDER_ID.$id);
+            Cache::forget(Memcache::CACHE_PROVINCE_ID.$id);
         }
         Cache::forget(Memcache::CACHE_ALL_PROVINCE);
     }
