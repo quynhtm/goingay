@@ -42,7 +42,7 @@ class BaseAdminController extends BaseController
         $menu[] = array(
             'name'=>'QL hệ thống',
             'link'=>'javascript:void(0)',
-            'icon'=>'fa fa-truck',
+            'icon'=>'fa fa-cogs',
             'arr_link_sub'=>array('admin.info','admin.trash',),
             'sub'=>array(
                 array('name'=>'Thông tin chung', 'RouteName'=>'admin.info', 'icon'=>'fa fa-cogs icon-4x', 'showcontent'=>1, 'permission'=>'abc'),
