@@ -234,9 +234,8 @@ class SiteUserCustomerController extends BaseSiteController{
 		}
 		$this->header();
 		
-		$error = '';
-		$messages = FunctionLib::messages('messages');
-		$this->user_customer = Session::get('user_customer');
+		$messages = '';
+		$this->user_customer = $dataShow = Session::get('user_customer');
 		//FunctionLib::debug($customer);
 
 		//khi sửa thông tin KH
@@ -252,48 +251,50 @@ class SiteUserCustomerController extends BaseSiteController{
 			$dataUpdate['customer_province_id'] = Request::get('customer_province_id', 0);
 			$dataUpdate['customer_district_id'] = Request::get('customer_district_id', 0);
 			$dataUpdate['customer_gender'] = Request::get('customer_gender', 0);
-			//FunctionLib::debug($dataUpdate);
+
+			$error = $this->validChageInfo($dataUpdate);
 			if(Session::token() === $token){
 				$sessionMail = isset($this->user_customer['member_mail']) ? $this->user_customer['member_mail']:'';
 				if($sessionMail == $customer_email){
-					FunctionLib::messages('messages', 'Thay đổi thông tin thành công', 'success');
-					/*if($mail != '' && $full_name != '' && $phone !='' && $address != ''){
-						$data = array(
-								'member_full_name' =>$full_name,
-								'member_phone' =>$phone,
-								'member_address' =>$address,
-								);
-						Member::updateData($session_member['member_id'], $data);
-						Utility::messages('messages', 'Thay đổi thông tin thành công', 'success');
-						//Upate Session
-						$dataSess = array(
-								'member_id' => $session_member['member_id'],
-								'member_mail'=>$mail,
-								'member_full_name'=>$full_name,
-								'member_phone'=>$phone,
-								'member_address'=>$address,
-								'member_created'=>$session_member['member_created'],
-								'member_status'=>$session_member['member_status'],
-						);
-						Session::put('user_customer', $dataSess, 60*24);
-						Session::save();
-						$this->user_customer = $dataSess;
-						return Redirect::route('customer.pageChageInfo');
-					}*/
+					if(!empty($error)){
+						$messages = FunctionLib::alertMessage($error, 'error');
+					}else{
+						if(UserCustomer::updateData($this->user_customer['customer_id'],$dataUpdate)){
+							$dataNew = UserCustomer::getByID($this->user_customer['customer_id']);
+							Session::forget('user_customer');
+							Session::put('user_customer', $dataNew, 60*24);
+							Session::save();
+							$messages = FunctionLib::alertMessage('Bạn đã cập nhật thành công!', 'success');
+						}
+					}
 				}else{
-					$error .= 'Email của bạn không đúng!';
+					$messages = FunctionLib::alertMessage('Email của bạn không đúng!', 'error');
 				}
-				
-				$messages = FunctionLib::messages('messages', 'Thay đổi thông tin thành công!', 'success');
 			}
+			$dataUpdate['customer_email'] = $customer_email;
+			$dataShow = $dataUpdate;
 		}
-		
 		$this->layout->content = View::make('site.CustomerLayouts.EditCustomer')
-								->with('user_customer',$this->user_customer)
-								->with('error',$error)
+								->with('user_customer',$dataShow)
 								->with('messages',$messages);
 		$this->footer();
 	}
+	private function validChageInfo($data=array()) {
+		$error = array();
+		if(!empty($data)) {
+			if(isset($data['customer_name']) && trim($data['customer_name']) == '') {
+				$error[] = 'Tên khách hàng không được bỏ trống';
+			}
+			if(isset($data['customer_address']) && trim($data['customer_address']) == '') {
+				$error[] = 'Địa chỉ không được bỏ trống';
+			}
+			if(isset($data['customer_phone']) && trim($data['customer_phone']) == '') {
+				$error[] = 'Số điện thoại không được bỏ trống';
+			}
+		}
+		return $error;
+	}
+
 	public function pageChagePass(){
 		if(!Session::has('member')){
 			return Redirect::route('site.index');

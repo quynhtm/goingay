@@ -56,7 +56,7 @@
 						<span class="icon-timeup"></span>Gia nhập ngày : <strong>@if(isset($user_customer['customer_time_created'])){{date('d/m/Y',$user_customer['customer_time_created'])}}@endif</strong>
 					</div>
 				</div>
-				@if(isset($messages))
+				@if(isset($messages) && $messages !='')
 				{{$messages}}
 				@endif
 				<div class="box-content-info-32">

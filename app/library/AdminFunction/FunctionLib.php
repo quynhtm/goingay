@@ -720,6 +720,21 @@ class FunctionLib {
         }
         return $str;
     }
+   public static function alertMessage($messages, $type='success'){
+        $alert = '';
+        $str_alert = '';
+        $style = ($type == 'success')?'alert alert-success':'alert alert-danger';
+        if(is_array($messages)){
+            $mess='';
+            foreach($messages as $k=>$msg){
+                $mess .= $str_alert.$msg.'<br/>';
+            }
+            $alert = '<div class="'.$style.'">'.$mess.'</div>';
+        }elseif($messages != ''){
+            $alert = '<div class="'.$style.'">'.$messages.'</div>';
+        }
+        return $alert;
+    }
 
     /**
      * Ham xuat PDF hay word
