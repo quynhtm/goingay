@@ -236,18 +236,28 @@ class SiteUserCustomerController extends BaseSiteController{
 		
 		$error = '';
 		$messages = FunctionLib::messages('messages');
-		if(isset($_POST) && !empty($_POST)){
+		$this->user_customer = Session::get('user_customer');
+		//FunctionLib::debug($customer);
+
+		//khi sửa thông tin KH
+		if(isset($_POST) && !empty($_POST) && !empty($this->user_customer)){
 			$token = Request::get('_token', '');
-			$mail = Request::get('sys_change_email', '');
-			$full_name = Request::get('sys_change_full_name', '');
-			$phone = Request::get('sys_change_phone', '');
-			$address = Request::get('sys_change_address', '');
-			
+			$dataUpdate['customer_name'] = Request::get('customer_name', '');
+			$dataUpdate['customer_phone'] = Request::get('customer_phone', '');
+			$customer_email = Request::get('customer_email', '');
+			$dataUpdate['customer_show_email'] = Request::get('customer_show_email', 0);
+			$dataUpdate['customer_address'] = Request::get('customer_address', '');
+			$dataUpdate['customer_birthday'] = Request::get('customer_birthday', '');
+			$dataUpdate['customer_about'] = Request::get('customer_about', '');
+			$dataUpdate['customer_province_id'] = Request::get('customer_province_id', 0);
+			$dataUpdate['customer_district_id'] = Request::get('customer_district_id', 0);
+			$dataUpdate['customer_gender'] = Request::get('customer_gender', 0);
+			//FunctionLib::debug($dataUpdate);
 			if(Session::token() === $token){
-				$session_member = $this->member;
-				$sessionMail = $session_member['member_mail'];
-				if($sessionMail == $mail){
-					if($mail != '' && $full_name != '' && $phone !='' && $address != ''){
+				$sessionMail = isset($this->user_customer['member_mail']) ? $this->user_customer['member_mail']:'';
+				if($sessionMail == $customer_email){
+					FunctionLib::messages('messages', 'Thay đổi thông tin thành công', 'success');
+					/*if($mail != '' && $full_name != '' && $phone !='' && $address != ''){
 						$data = array(
 								'member_full_name' =>$full_name,
 								'member_phone' =>$phone,
@@ -265,11 +275,11 @@ class SiteUserCustomerController extends BaseSiteController{
 								'member_created'=>$session_member['member_created'],
 								'member_status'=>$session_member['member_status'],
 						);
-						Session::put('member', $dataSess, 60*24);
+						Session::put('user_customer', $dataSess, 60*24);
 						Session::save();
-						$this->member = $dataSess;
+						$this->user_customer = $dataSess;
 						return Redirect::route('customer.pageChageInfo');
-					}
+					}*/
 				}else{
 					$error .= 'Email của bạn không đúng!';
 				}
@@ -277,7 +287,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		}
 		
 		$this->layout->content = View::make('site.CustomerLayouts.EditCustomer')
-								->with('member',$this->user_customer)
+								->with('user_customer',$this->user_customer)
 								->with('error',$error)
 								->with('messages',$messages);
 		$this->footer();
