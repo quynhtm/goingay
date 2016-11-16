@@ -59,24 +59,7 @@
 				@if(isset($messages) && $messages !='')
 				{{$messages}}
 				@endif
-				<div class="box-content-info-32">
-					<ul>
-						<li>
-							<a href="">Tài khoản</a>
-							<div class="t2">
-								<a href="" class="active">Thông tin cá nhân</a>
-							</div>
-						</li>
-						<li>
-							<a href="javascript:void(0);">Danh sách tin</a>
-							<div class="t2">
-								<a href="" class="">Tin đã đăng</a>
-								<a href="" class="">in lưu trữ</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="box-content-info-65">
+				<div >
 					{{Form::open(array('method' => 'POST','role'=>'form','url' =>"thay-doi-thong-tin.html"))}}
 						<div class="box-top-common">
 							<div class="line">
@@ -129,8 +112,8 @@
 									<p>Giới tính: </p>
 									<select class="select_s" name="customer_gender">
 										<option value="">Chọn giới tính</option>
-										<option value="Nam">Nam</option>
-										<option value="Nữ">Nữ</option>
+										<option value="1" @if(isset($user_customer['customer_show_email']) && $user_customer['customer_show_email'] == 1)checked @endif>Nam</option>
+										<option value="0"@if(isset($user_customer['customer_show_email']) && $user_customer['customer_show_email'] == 0)checked @endif>Nữ</option>
 									</select>
 								</div>
 								<div class="box-item-455 born">
