@@ -10,10 +10,10 @@ class UserCustomer extends Eloquent
     public $timestamps = false;
 
     //cac truong trong DB
-    protected $fillable = array('customer_id','customer_name','customer_email','customer_phone',
-        'customer_address','customer_password','customer_province','customer_about','customer_status',
+    protected $fillable = array('customer_id','customer_name','customer_email','customer_show_email','customer_phone',
+        'customer_address','customer_password','customer_province_id','customer_district_id','customer_about','customer_status',
         'customer_up_item','customer_time_login','customer_time_logout','customer_time_created','customer_time_active',
-        'is_customer','is_login','time_start_vip','time_end_vip');
+        'customer_gender','customer_birthday','is_customer','is_login','time_start_vip','time_end_vip');
 
     public static function getByID($id) {
         $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_CUSTOMER_ID.$id) : array();
@@ -224,6 +224,6 @@ class UserCustomer extends Eloquent
 
     //SITE: Duy add
     public static function encode_password($password){
-        return md5(md5($password));
+        return md5($password.'-haianhem!@13368');
     }
 }

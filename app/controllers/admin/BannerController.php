@@ -39,7 +39,7 @@ class BannerController extends BaseAdminController
     {
         parent::__construct();
         $this->arrCategoryParent = Category::getAllParentCategoryId();;
-        $this->arrShop = UserShop::getShopAll();;
+        //$this->arrShop = UserShop::getShopAll();;
         //Include style.
         FunctionLib::link_css(array(
             'lib/upload/cssUpload.css',
@@ -175,7 +175,7 @@ class BannerController extends BaseAdminController
                 $data['banner_start_time'] = strtotime($data['banner_start_time']);
                 $data['banner_end_time'] = strtotime($data['banner_end_time']);
                 if(Banner::updateData($id, $data)) {
-                    return Redirect::route('admin.banner_list');
+                    return Redirect::route('admin.bannerView');
                 }
             }
         }

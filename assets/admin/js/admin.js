@@ -14,6 +14,8 @@ var Admin = {
                 url_ajax = 'deleteCustomer';
             }else if(type == 3){
                 url_ajax = 'deleteBanner';
+            }else if(type == 4){
+                url_ajax = 'deleteProvince';
             }else if(type == 9){
                 url_ajax = 'deletePermission';
             }
@@ -283,7 +285,7 @@ var Admin = {
 
 					var html= "";
 					html += "<img src='" + dataResult.info.src + "'/>";
-					html +='<br/><a href="javascript: void(0);" onclick="Common.removeImageItem('+dataResult.id_item.trim()+',\''+dataResult.info.name_img.trim()+'\','+type+');">Xóa ảnh</a>';
+					//html +='<br/><a href="javascript: void(0);" onclick="Common.removeImageItem('+dataResult.id_item.trim()+',\''+dataResult.info.name_img.trim()+'\','+type+');">Xóa ảnh</a>';
 					jQuery('#block_img_upload').html(html);
 
 					//thanh cong

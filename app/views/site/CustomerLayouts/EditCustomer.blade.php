@@ -47,12 +47,13 @@
 			<div class="head-info">
 				<h2><a href=""><i class="fa fa-user"></i>Thành viên</a></h2>
 			</div>
+			@if(isset($user_customer) && !empty($user_customer))
 			<div class="content-info">
 				<div class="box-avatar">
 					<img class="avatar" alt="avatar" src="https://stmy.vnexpress.net/myvne/i/v1/graphics/img_60x60.gif" >
-					<div class="name-avatar">nguyenduypt86</div>
+					<div class="name-avatar">@if(isset($user_customer['customer_name'])){{$user_customer['customer_name']}}@endif</div>
 					<div class="date">
-						<span class="icon-timeup"></span>Gia nhập ngày : <strong>03/11/2016</strong>
+						<span class="icon-timeup"></span>Gia nhập ngày : <strong>@if(isset($user_customer['customer_time_created'])){{date('d/m/Y',$user_customer['customer_time_created'])}}@endif</strong>
 					</div>
 				</div>
 				<div class="box-content-info-32">
@@ -73,43 +74,57 @@
 					</ul>
 				</div>
 				<div class="box-content-info-65">
-					<form action="" method="post">
+					{{Form::open(array('method' => 'POST','role'=>'form','url' =>"thay-doi-thong-tin.html"))}}
 						<div class="box-top-common">
 							<div class="line">
 								<div class="box-item-455">
 									<p>Họ và tên<span class="required" aria-required="true">*</span></p>
-									<input name="fullname" value="nguyenduypt86" placeholder="Nhập vào họ và tên" type="text">
+									<input name="customer_name" value="@if(isset($user_customer['customer_name'])){{$user_customer['customer_name']}}@endif" placeholder="Nhập vào họ và tên" type="text">
 								</div>
 								<div class="box-item-455 ext">
 									<p>Số điện thoại liên hệ<span class="required" aria-required="true">*</span></p>
-									<input name="phone" value="" placeholder="Nhập vào số điện thoại" type="text">
+									<input name="customer_phone" value="@if(isset($user_customer['customer_phone'])){{$user_customer['customer_phone']}}@endif" placeholder="Nhập vào số điện thoại" type="text">
 								</div>
 							</div>
 							<div class="line">
 								<div class="box-item-455">
 									<p>Email<span class="required" aria-required="true">*</span></p>
-									<input name="email" value="nguyenduypt86@gmail.com" placeholder="Nhập vào địa chỉ email" class="upload_input" type="text">
+									<input name="customer_email" value="@if(isset($user_customer['customer_email'])){{$user_customer['customer_email']}}@endif" placeholder="Nhập vào địa chỉ email" disabled class="upload_input" type="text">
 								</div>
 								<div class="box-item-455 ext">
 									<div class="mail-show">
-										<input name="is_show_email" value="1" class="checkbox" type="checkbox">
+										<input name="customer_show_email" value="@if(isset($user_customer['customer_show_email'])){{$user_customer['customer_show_email']}}@endif" @if(isset($user_customer['customer_show_email']) && $user_customer['customer_show_email'] == 1)checked @endif class="checkbox" type="checkbox">
 										<span class="hien_email">Hiển thị</span>
 									</div>
 								</div>
 							</div>
 							<div class="line">
-								<p>Thời gian liên hệ tốt nhất<span class="required">*</span></p>
-								<input name="time_support" value=""type="text">
+								<div class="box-item-455 unit">
+									<p>Tỉnh/Thành: <span class="required">*</span></p>
+									<select class="select_s" name="customer_province_id">
+										<option value="">Chọn tỉnh/Thành</option>
+									</select>
+								</div>
+								<div class="box-item-455 unit">
+									<p>Quận/huyện: <span class="required">*</span></p>
+									<select class="select_s" name="customer_district_id">
+										<option value="">Chọn quận/huyện</option>
+									</select>
+								</div>
+							</div>
+							<div class="line">
+								<p>Địa chỉ<span class="required">*</span></p>
+								<input name="customer_address" value="@if(isset($user_customer['customer_address'])){{$user_customer['customer_address']}}@endif" placeholder="Nhập vào địa chỉ" type="text">
 							</div>
 						</div>
 						<div class="box-top-common">
 							<label class="bdbt">
-								<span>Thông tin hỗ trợ</span>
+								<span>Thông tin riêng</span>
 							</label>
 							<div class="line">
 								<div class="box-item-455 gender">
 									<p>Giới tính: </p>
-									<select class="select_s" name="gender">
+									<select class="select_s" name="customer_gender">
 										<option value="">Chọn giới tính</option>
 										<option value="Nam">Nam</option>
 										<option value="Nữ">Nữ</option>
@@ -117,37 +132,21 @@
 								</div>
 								<div class="box-item-455 born">
 									<p>Ngày sinh: </p>
-									<input name="birthday" placeholder="dd/mm/yyyy" value="" autocomplete="off" type="text">
+									<input name="customer_birthday" placeholder="dd/mm/yyyy" value="" autocomplete="off" type="text">
 								</div>
 							</div>
 							<div class="line">
-								<div class="box-item-455 unit">
-									<p>Tỉnh/Thành: </p>
-									<select class="select_s" name="gender">
-										<option value="">Chọn tỉnh/Thành</option>
-									</select>
-								</div>
-								<div class="box-item-455 unit">
-									<p>Quận/huyện: </p>
-									<select class="select_s" name="gender">
-										<option value="">Chọn quận/huyện</option>
-									</select>
-								</div>
-								<div class="box-item-455 unit">
-									<p>Phường/xã: </p>
-									<select class="select_s" name="gender">
-										<option value="">Chọn phường/xã</option>
-									</select>
-								</div>
+								<p>Thời gian liên hệ tốt nhất</p>
+								<input name="customer_about" value="@if(isset($user_customer['customer_address'])){{$user_customer['customer_address']}}@endif"type="text">
 							</div>
 							<div class="line">
-								<p>Địa chỉ<span class="required">*</span></p>
-								<input name="time_support" value="" placeholder="Nhập vào địa chỉ" type="text">
+								<button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Cập nhật</button>
 							</div>
 						</div>
-					</form>
+					{{ Form::close() }}
 				</div>
 			</div>
+			@endif
 		</div>
 		<div class="col-right-16">
 			<div class="box-ads">
