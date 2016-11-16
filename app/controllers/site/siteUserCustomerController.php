@@ -283,6 +283,8 @@ class SiteUserCustomerController extends BaseSiteController{
 				}else{
 					$error .= 'Email của bạn không đúng!';
 				}
+				
+				$messages = FunctionLib::messages('messages', 'Thay đổi thông tin thành công!', 'success');
 			}
 		}
 		
