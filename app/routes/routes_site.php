@@ -23,3 +23,10 @@ Route::match(['GET','POST'],'thay-doi-thong-tin.html', array('as' => 'customer.p
 Route::match(['GET','POST'],'thay-doi-mat-khau.html', array('as' => 'customer.pageChagePass','uses' => 'SiteUserCustomerController@pageChagePass'));
 Route::match(['GET','POST'],'lich-su-mua-hang.html', array('as' => 'customer.pageHistoryOrder','uses' => 'SiteUserCustomerController@pageHistoryOrder'));
 Route::match(['GET','POST'],'chi-tiet-don-hang.html', array('as' => 'customer.pageHistoryViewOrder','uses' => 'SiteUserCustomerController@pageHistoryViewOrder'));
+
+//quan ly tin dang
+Route::get('quan-ly-tin-dang.html',array('as' => 'customer.ItemsList','uses' =>'SiteUserCustomerController@itemsList'));
+Route::get('dang-tin.html',array('as' => 'customer.ItemsAdd','uses' =>'SiteUserCustomerController@getAddItem'));
+Route::get('cap-nhat-tin-dang/t-{item_id}.html',array('as' => 'customer.ItemsEdit','uses' =>'SiteUserCustomerController@getEditItem'))->where('item_id', '[0-9]+');
+Route::post('cap-nhat-tin-dang/t-{item_id}.html',array('as' => 'customer.ItemsEdit','uses' =>'SiteUserCustomerController@postEditItem'))->where('item_id', '[0-9]+');
+
