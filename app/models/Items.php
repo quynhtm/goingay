@@ -10,7 +10,7 @@ class Items extends Eloquent
     public $timestamps = false;
 
     //cac truong trong DB
-    protected $fillable = array('item_id','item_name', 'item_price_sell', 'item_area_price', 'item_content',
+    protected $fillable = array('item_id','item_name', 'item_type_price', 'item_price_sell', 'item_area_price', 'item_content',
         'item_image', 'item_image_other', 'item_category_id','item_category_name','item_category_parent_id','item_category_parent_name',
         'item_number_view', 'item_status','item_is_hot','item_block','item_province_id','item_province_name',
         'item_district_id','item_district_name','customer_id','customer_name','is_customer',
@@ -21,14 +21,26 @@ class Items extends Eloquent
      * @return array
      */
     public static function getItemsByID($item_id) {
-        $product = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ITEM_ID.$item_id) : array();
-        if (sizeof($product) == 0) {
-            $product = Items::where('item_id', $item_id)->first();
-            if($product && Memcache::CACHE_ON){
-                Cache::put(Memcache::CACHE_ITEM_ID.$item_id, $product, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+        $item = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ITEM_ID.$item_id) : array();
+        if (sizeof($item) == 0) {
+            $item = Items::where('item_id', $item_id)->first();
+            if($item && Memcache::CACHE_ON){
+                Cache::put(Memcache::CACHE_ITEM_ID.$item_id, $item, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
             }
         }
-        return $product;
+        return $item;
+    }
+
+    public static function getItemByCustomerId($customer_id,$item_id) {
+        if($item_id > 0){
+            $item = Items::getItemsByID($item_id);
+            if (sizeof($item) > 0) {
+                if(isset($item->customer_id) && (int)$item->customer_id == $customer_id){
+                    return $item;
+                }
+            }
+        }
+        return array();
     }
 
     public static function getListItemsOfCustomerId($customer_id = 0, $field_get = array()) {

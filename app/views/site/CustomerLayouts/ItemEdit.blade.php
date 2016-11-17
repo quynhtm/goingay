@@ -50,7 +50,7 @@
 			</div>
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
-				{{Form::open(array('role'=>'form','method' => 'POST','url' =>URL::route('customer.ItemsEdit',array('item_id'=>$product_id)),'files' => true))}}
+				{{Form::open(array('role'=>'form','method' => 'POST','url' =>URL::route('customer.ItemsEdit',array('item_id'=>$item_id)),'files' => true))}}
 				@if(isset($error) && !empty($error))
 					<div class="alert alert-danger" role="alert">
 						@foreach($error as $itmError)
@@ -61,48 +61,51 @@
 
 				<div class="col-sm-12">
 					<div class="form-group">
-						<label for="name" class="control-label">Tên sản phẩm <span class="red"> (*) </span></label>
-						<input type="text" placeholder="Tên sản phẩm" id="product_name" name="product_name"  class="form-control input-sm" value="@if(isset($data['product_name'])){{$data['product_name']}}@endif">
+						<label for="name" class="control-label">Tên tin đăng <span class="red"> (*) </span></label>
+						<input type="text" placeholder="Tên tin đăng" id="item_name" name="item_name"  class="form-control input-sm" value="@if(isset($data['item_name'])){{$data['item_name']}}@endif">
 					</div>
 				</div>
+
 				<div class="clearfix"></div>
-				<div class="col-sm-12">
-					<div class="form-group">
-						<label for="name" class="control-label">Danh mục<span class="red"> (*) </span></label>
+				<div style="float: left; width: 50%">
+					<div class="col-sm-12">
 						<div class="form-group">
-							<select name="category_id" id="category_id" class="form-control input-sm">
-								{{$optionCategory}}
-							</select>
+							<label for="name" class="control-label">Danh mục<span class="red"> (*) </span></label>
+							<div class="form-group">
+								<select name="item_category_id" id="item_category_id" class="form-control input-sm">
+									{{$optionCategory}}
+								</select>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-sm-12">
-					<div class="form-group">
-						<label for="name" class="control-label">Trạng thái Ẩn/Hiện</label>
+					<div class="col-sm-12">
 						<div class="form-group">
-							<select name="product_status" id="product_status" class="form-control input-sm">
-								{{$optionStatusProduct}}
-							</select>
+							<label for="name" class="control-label">Trạng thái Ẩn/Hiện</label>
+							<div class="form-group">
+								<select name="item_status" id="item_status" class="form-control input-sm">
+									{{$optionStatusProduct}}
+								</select>
+							</div>
 						</div>
 					</div>
 				</div>
 
-
-
-				<div class="col-sm-12">
-					<div class="form-group">
-						<label for="name" class="control-label">Kiểu hiển thị giá<span class="red"> (*) </span></label>
+				<div style="float: left; width: 50%">
+					<div class="col-sm-12">
 						<div class="form-group">
-							<select name="product_type_price" id="product_type_price" class="form-control input-sm">
-								{{$optionTypePrice}}
-							</select>
+							<label for="name" class="control-label">Kiểu hiển thị giá<span class="red"> (*) </span></label>
+							<div class="form-group">
+								<select name="item_type_price" id="item_type_price" class="form-control input-sm">
+									{{$optionTypePrice}}
+								</select>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-sm-12">
-					<div class="form-group">
-						<label for="name" class="control-label">Giá bán <span class="red"> (*) </span></label>
-						<input type="text" placeholder="Giá bán" id="product_price_sell" name="product_price_sell" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['product_price_sell'])){{$data['product_price_sell']}}@endif">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="name" class="control-label">Giá bán <span class="red"> (*) </span></label>
+							<input type="text" placeholder="Giá bán" id="item_price_sell" name="item_price_sell" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['item_price_sell'])){{$data['item_price_sell']}}@endif">
+						</div>
 					</div>
 				</div>
 
@@ -110,8 +113,7 @@
 				<div class="col-sm-12">
 					<div class="form-group">
 						<a href="javascript:;"class="btn btn-primary" onclick="SITE.uploadImagesProduct(2);">Upload ảnh </a>
-						<input name="image_primary" type="hidden" id="image_primary" value="@if(isset($data['product_image'])){{$data['product_image']}}@endif">
-						<input name="product_image_hover" type="hidden" id="image_primary_hover" value="@if(isset($data['product_image_hover'])){{$data['product_image_hover']}}@endif">
+						<input name="image_primary" type="hidden" id="image_primary" value="@if(isset($data['item_image'])){{$data['item_image']}}@endif">
 					</div>
 				</div>
 
@@ -130,11 +132,7 @@
 										<label for="chẹcked_image_{{$key}}" style='font-weight:normal'>Ảnh đại diện</label>
 
 										<div class="clearfix"></div>
-										<input type="radio" id="chẹcked_image_hover_{{$key}}" name="chẹcked_image_hover" value="{{$key}}" @if(isset($imageHover) && $imageHover == $imgNew['img_other'] ) checked="checked" @endif onclick="SITE.checkedImageHover('{{$imgNew['img_other']}}','{{$key}}');">
-										<label for="chẹcked_image_hover_{{$key}}" style='font-weight:normal'>Ảnh hover</label>
-
-										<div class="clearfix"></div>
-										<a href="javascript:void(0);" onclick="SITE.removeImage({{$key}},{{$product_id}},'{{$imgNew['img_other']}}');">Xóa ảnh</a>
+										<a href="javascript:void(0);" onclick="SITE.removeImage({{$key}},{{$item_id}},'{{$imgNew['img_other']}}');">Xóa ảnh</a>
 										<span style="display: none"><b>{{$key}}</b></span>
 									</div>
 								</li>
@@ -154,18 +152,25 @@
 						<label for="name" class="control-label">Thông tin chi tiết <span class="red"> (*) </span>
 							<div class="controls"><button type="button" onclick="SITE.insertImageContentProduct()" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
 						</label>
-						<textarea class="form-control input-sm" rows="8" name="product_content" id="product_content">@if(isset($data['product_content'])){{$data['product_content']}}@endif</textarea>
+						<textarea class="form-control input-sm" rows="8" name="item_content" id="item_content">@if(isset($data['item_content'])){{$data['item_content']}}@endif</textarea>
 					</div>
 				</div>
 				<div class="clearfix"></div>
 
 				<div class="form-group col-sm-12 text-left">
-					<button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
+					<button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Đăng tin</button>
 				</div>
-				<input type="hidden" id="id_hiden" name="id_hiden" value="{{$product_id}}"/>
+				<input type="hidden" id="id_hiden" name="id_hiden" value="{{$item_id}}"/>
 				{{ Form::close() }}
 			</div>
 		</div>
+		<script type="text/javascript">
+			jQuery('.formatMoney').autoNumeric('init');
+			CKEDITOR.replace('item_content', {height:600});
+			function insertImgContent(src,name_product){
+				CKEDITOR.instances.item_content.insertHtml('<img src="'+src+'" alt="'+name_product+'"/>');
+			}
+		</script>
 
 		<div class="col-right-16">
 			<div class="box-ads">
