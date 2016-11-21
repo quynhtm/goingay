@@ -421,71 +421,49 @@ var Admin = {
 		}
 		jQuery('#sys_PopupImgOtherInsertContent #div_image').html('');
 	},
-	sendEmailContentToCustomer: function(){
-		var dataId = [];
-        var i = 0;
-        $("input[name*='checkItems']").each(function () {
-            if ($(this).is(":checked")) {
-                dataId[i] = $(this).val();
-                i++;
+    /**
+     * thong tin quan huyen
+     * @param district_province_id
+     * @param district_id
+     */
+    getInforDistrictOfProvince: function(district_province_id,district_id) {
+        $('#sys_showPopupDistrict').modal('show');
+        $('#img_loading_district').show();
+        $('#sys_show_infor').html('');
+        $.ajax({
+            type: "GET",
+            url: WEB_ROOT + '/admin/province/getInforDistrictOfProvince',
+            data: {district_province_id : district_province_id,district_id : district_id},
+            dataType: 'json',
+            success: function(res) {
+                $('#img_loading_district').hide();
+                $('#sys_show_infor').html(res.html);
             }
         });
-        if(dataId.length == 0) {
-            alert('Bạn chưa chọn khách hàng để gửi mail.');
-            return false;
-        }
-        
-        var emailId = jQuery('select#send_email_content_to_customer').val();
-        if(emailId <= 0){
-        	 alert('Bạn chưa chọn nội dung email để gửi.');
-             return false;
-        }
-        
-        var url_ajax = WEB_ROOT + '/admin/toolsCommon/sendEmailContentToCustomer';
-        if(url_ajax != ''){
-            if(confirm('Bạn có muốn thực hiện thao tác này?')) {
-                $('#img_loading_delete_all').show();
-                $.ajax({
-                    type: "post",
-                    url: url_ajax,
-                    data: {dataId: dataId, emailId: emailId},
-                    //dataType: 'json',
-                    success: function (res) {
-                        $('#img_loading_delete_all').hide();
-                        return true;
-                    }
-                });
+    },
+    submitInforDistrictOfProvince: function() {
+    var district_name = document.getElementById('district_name').value;
+    var district_status = document.getElementById('district_status').value;
+    var district_position = document.getElementById('district_position').value;
+    var district_province_id = document.getElementById('district_province_id').value;
+    var district_id = document.getElementById('district_id').value;
+    $.ajax({
+        type: "POST",
+        url: WEB_ROOT + '/admin/province/submitInforDistrictOfProvince',
+        data: {district_name : district_name,
+            district_status : district_status,
+            district_position : district_position,
+            district_province_id : district_province_id,
+            district_id : district_id,
+        },
+        dataType: 'json',
+        success: function(res) {
+            if(res.intReturn === 1){
+                window.location.reload();
+            }else{
+                alert(res.msg);
             }
         }
-	},
-	sendEmailInviteToSupplier:function(){
-		var dataId = [];
-        var i = 0;
-        $("input[name*='checkItems']").each(function () {
-            if ($(this).is(":checked")) {
-                dataId[i] = $(this).val();
-                i++;
-            }
-        });
-        if(dataId.length == 0) {
-            alert('Bạn chưa chọn nhà cung cấp để gửi mail.');
-            return false;
-        }
-        var url_ajax = WEB_ROOT + '/admin/toolsCommon/sendEmailInviteToSupplier';
-        if(url_ajax != ''){
-            if(confirm('Bạn có muốn thực hiện thao tác này?')) {
-                $('#img_loading_delete_all').show();
-                $.ajax({
-                    type: "post",
-                    url: url_ajax,
-                    data: {dataId: dataId},
-                    success: function (res) {
-                        $('#img_loading_delete_all').hide();
-                        return true;
-                    }
-                });
-            }
-        }
-        
-	}
+    });
+},
 }

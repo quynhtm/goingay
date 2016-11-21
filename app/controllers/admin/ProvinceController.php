@@ -61,17 +61,19 @@ class ProvinceController extends BaseAdminController{
 		if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
 			return Redirect::route('admin.dashboard',array('error'=>1));
 		}
-		$data = array();
+		$data = $listDistrict = array();
 		$arrViewImgOther = array();
 		$imageOrigin = $urlImageOrigin = '';
 		if($id > 0) {
 			$data = Province::getById($id);
-
+			//lấy quan huyen lien quan
+			$listDistrict = Districts::getInforDistrictWithProvinceId($id);
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['province_status'])? $data['province_status'] : CGlobal::status_show);
 		$this->layout->content = View::make('admin.Province.add')
 			->with('id', $id)
 			->with('data', $data)
+			->with('listDistrict', $listDistrict)
 			->with('imageOrigin', $imageOrigin)
 			->with('urlImageOrigin', $urlImageOrigin)
 			->with('arrViewImgOther', $arrViewImgOther)
@@ -86,7 +88,7 @@ class ProvinceController extends BaseAdminController{
 		$dataSave['province_position'] = addslashes(Request::get('province_position'));
 		$dataSave['province_status'] = (int)Request::get('province_status', 0);
 		$id_hiden = (int)Request::get('id_hiden', 0);
-
+		$listDistrict = array();
 		//FunctionLib::debug($dataSave);
 		if($this->valid($dataSave) && empty($this->error)) {
 			$id = ($id == 0)?$id_hiden: $id;
@@ -95,6 +97,7 @@ class ProvinceController extends BaseAdminController{
 				if(Province::updateData($id, $dataSave)) {
 					return Redirect::route('admin.province');
 				}
+				$listDistrict = Districts::getInforDistrictWithProvinceId($id);
 			} else {
 				//them moi
 				if(Province::addData($dataSave)) {
@@ -107,6 +110,7 @@ class ProvinceController extends BaseAdminController{
 		$this->layout->content =  View::make('admin.Province.add')
 			->with('id', $id)
 			->with('data', $dataSave)
+			->with('listDistrict', $listDistrict)
 			->with('optionStatus', $optionStatus)
 			->with('error', $this->error)
 			->with('arrStatus', $this->arrStatus);
@@ -130,5 +134,53 @@ class ProvinceController extends BaseAdminController{
 			$data['isIntOk'] = 1;
 		}
 		return Response::json($data);
+	}
+
+	public function getInforDistrictOfProvince(){
+		$district_province_id = Request::get('district_province_id',0);
+		$district_id = Request::get('district_id',0);
+		$arrData = $data = array();
+		$arrData['intReturn'] = 1;
+		$arrData['msg'] = '';
+		//neu sửa
+		if($district_id > 0){
+			$data = Districts::getByID($district_id);
+		}
+		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['district_status'])? $data['district_status'] : -1);
+		$html = View::make('admin.Province.addDistrict')
+			->with('data', $data)
+			->with('optionStatus', $optionStatus)
+			->with('district_id', $district_id)
+			->with('district_province_id', $district_province_id)
+			->render();
+		$arrData['html'] = $html;
+		return json_encode($arrData);
+	}
+	public function submitInforDistrictOfProvince(){
+		$arrData = array();
+		$arrData['intReturn'] = 0;
+		$arrData['msg'] = '';
+		$district_id = Request::get('district_id',0);
+		$district_province_id = Request::get('district_province_id',0);
+
+		$district_name = Request::get('district_name','');
+		$district_status = Request::get('district_status',CGlobal::status_show);
+		$district_position = Request::get('district_position',50);
+
+		$dataUpdate = array(
+			'district_name'=>$district_name,
+			'district_status'=>$district_status,
+			'district_position'=>$district_position,
+			'district_province_id'=>$district_province_id);
+
+		$id_district = ($district_id == 0)?Districts::addData($dataUpdate): Districts::updateData($district_id,$dataUpdate);
+		if($id_district) {
+			if ($id_district > 0) {
+				$arrData['intReturn'] = 1;
+			}else{
+				$arrData['msg'] = 'Chưa cập nhật được';
+			}
+		}
+		return json_encode($arrData);
 	}
 }
