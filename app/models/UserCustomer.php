@@ -112,7 +112,7 @@ class UserCustomer extends Eloquent
             if (isset($dataSearch['customer_time_active']) && $dataSearch['customer_time_active'] == 0) {
                 $query->where('customer_time_active','=', 0);//ch?a active
             }elseif(isset($dataSearch['customer_time_active']) && $dataSearch['customer_time_active'] == 1) {
-                $query->where('customer_time_active','>', 0);//dã active
+                $query->where('customer_time_active','>', 0);//dï¿½ active
             }
             $total = $query->count();
             $query->orderBy('customer_time_login', 'desc')->orderBy('customer_time_logout', 'desc');
