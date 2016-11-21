@@ -305,7 +305,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		$this->header();
 		
 		$error = '';
-		$messages = Utility::messages('messages');
+		$messages = FunctionLib::messages('messages');
 		if(isset($_POST) && !empty($_POST)){
 			$token = Request::get('_token', '');
 			$mail = Request::get('sys_change_email', '');
@@ -313,7 +313,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			$repass = Request::get('sys_change_re_pass', '');
 			$hash_pass = '';
 			if(Session::token() === $token){
-				$session_member = $this->member;
+				$session_member = $this->user_customer;
 				$sessionMail = $session_member['member_mail'];
 				if($sessionMail == $mail){
 					//Pass
@@ -367,10 +367,11 @@ class SiteUserCustomerController extends BaseSiteController{
 		$this->footer();
 	}
 	public function pageForgetPass(){
-		if (!UserCustomer::isLogin()) {
+		
+		if(Session::has('user_customer')){
 			return Redirect::route('site.home');
 		}
-    	
+		
     	$token = addslashes(Request::get('token', ''));
     	$mail = addslashes(Request::get('sys_forget_mail', ''));
  
@@ -384,28 +385,25 @@ class SiteUserCustomerController extends BaseSiteController{
     			$error .= 'Email đăng nhập không được trống!';
     		}
     		//Check mail exists
-    		$arrUser = Member::getMemberByEmail($mail);
+    		$arrUser = UserCustomer::getUserCustomerByEmail($mail);
     		if(sizeof($arrUser) != 0){
     			//Send mail
-    			$key_secret = Utility::randomString(32);
-    			if($key_secret != ''){
+    			$password = FunctionLib::randomString(5);
+    			$customer_id = $arrUser->customer_id;
+    			if($password != ''){
+    				$dataUpdate = array(
+    					'customer_password'=>UserCustomer::encode_password($password),
+    				);
+    				UserCustomer::updateData($customer_id, $dataUpdate);
+    				//Send mail
     				$emails = [$mail, CGlobal::emailAdmin];
     				$dataTheme = array(
-    						'key_secret'=>$key_secret,
-    						'phone_support'=>CGlobal::phoneSupport,
-    						'domain'=>CGlobal::domain,
+    						'customer_email'=>$mail,
+    						'customer_name'=>$arrUser->customer_name,
+    						'customer_password'=>$password,
     				);
-    				
-    				$data_session = array(
-    						'key_secret'=>$key_secret,
-    						'mail'=>$mail,
-    				);
-    				$data_session = serialize($data_session);
-	    			Session::put('get_new_forget_pass', $data_session, 5);
-	    			Session::save();
-	    			
-    				Mail::send('site.member.mailTempForgetPass', array('data'=>$dataTheme), function($message) use ($emails){
-    					$message->to($emails, 'Member')
+    				Mail::send('emails.ForgetPass', array('data'=>$dataTheme), function($message) use ($emails){
+    					$message->to($emails, 'mailUserCustomer')
     							->subject('Hướng dẫn thay đổi mật khẩu '.date('d/m/Y h:i',  time()));
     				});
     				echo 1; die;
@@ -415,96 +413,9 @@ class SiteUserCustomerController extends BaseSiteController{
     		}
     	}else{
     		$error = 'Phiên làm việc hết hạn!';
-    		return Redirect::route('site.index');
     	}
     	
     	echo $error;die;
-	}
-	public function pageGetForgetPass(){
-		if (!UserCustomer::isLogin()) {
-			return Redirect::route('site.home');
-		}
-		$sessionGetNewPass = Session::get('get_new_forget_pass');
-		$arrSession = unserialize($sessionGetNewPass);
-		$error = '';
-		if(empty($arrSession)){
-			return Redirect::route('site.index');
-		}
-		$key_secret = $arrSession['key_secret'];
-		$mail = $arrSession['mail'];
-		//Post
-		if(isset($_POST) && !empty($_POST)){
-			$token = Request::get('_token', '');
-			$pass = Request::get('sys_change_new_pass', '');
-			$repass = Request::get('sys_change_new_re_pass', '');
-			$hash_pass = '';
-				
-			if(Session::token() === $token){
-				if($mail != ''){
-					if($pass != '' && ($pass === $repass)){
-						$check_valid_pass = ValidForm::checkRegexPass($pass, 5);
-						if($check_valid_pass){
-							$hash_pass = Member::encode_password($pass);
-						}else{
-							$error .= 'Mật không được ít hơn 5 ký tự và không được có dấu!'.'<br/>';
-						}
-					}
-					if($pass == '' && $repass == ''){
-						$error .= 'Mật khẩu không được trống!'.'<br/>';
-					}elseif($pass != $repass){
-						$error .= 'Mật khẩu không khớp!'.'<br/>';
-					}
-		
-					if($pass != '' && $repass !=''){
-		
-						//Check mail exists
-						$arrUser = Member::getMemberByEmail($mail);
-						if(sizeof($arrUser) == 0){
-							$error .= 'Email đăng nhập không tồn tại!'.'<br/>';
-						}
-		
-						if($error == ''){
-							$data = array(
-									'member_pass' =>$hash_pass,
-							);
-							Member::updateData($arrUser->member_id, $data);
-							Utility::messages('messages', 'Thay đổi mật khẩu thành công', 'success');
-							//Upate Session
-							$dataSess = array(
-									'member_id' => $arrUser->member_id,
-									'member_mail'=>$mail,
-									'member_full_name'=>$arrUser->member_full_name,
-									'member_phone'=>$arrUser->member_phone,
-									'member_address'=>$arrUser->member_address,
-									'member_created'=>$arrUser->member_created,
-									'member_status'=>$arrUser->member_status,
-							);
-								
-							Session::forget('get_new_forget_pass');
-							Session::put('member', $dataSess, 60*24);
-							Session::save();
-								
-							return Redirect::route('member.pageChageInfo');
-						}
-					}
-				}else{
-					$error .= 'Email của bạn không đúng!';
-				}
-			}
-		}
-		//Get
-		$key = addslashes(Request::get('k', ''));
-		if($key != ''){
-			if($key_secret != $key){
-				return Redirect::route('site.index');
-			}
-			
-		}
-		
-		$this->header();
-		$this->layout->content = View::make('site.member.pageGetNewPass')
-								->with('error', $error);
-		$this->footer();
 	}
 
 	//QuanLy tin dang cua khach

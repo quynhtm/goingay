@@ -283,7 +283,10 @@ USER_CUSTOMMER = {
 						success: function(data){
 							jQuery('body').find('div.loading').remove();
 							if(data == '1'){
-								window.location.reload();
+								jAlert('Thông tin đăng nhập mới được gửi tới mail của bạn.', 'Thông báo');
+								jQuery("#popup_ok").click(function(){
+									window.location.reload();
+								});
 							}else{
 								jQuery('#error-forgetpass').html(data);
 								return false;
