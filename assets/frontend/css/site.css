@@ -63,7 +63,14 @@ h1, h2, h3, h4, h5, h6{
     position: relative;
     z-index: 2;
 }
-
+.line-head-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+	border-bottom: 2px solid #ddd;
+}
 .line-head .logo {
     border-right: 1px solid #ddd;
     float: left;
@@ -125,7 +132,7 @@ h1, h2, h3, h4, h5, h6{
 }
 .btn-post-text{
     background: #ff7300;
-    margin-right: 2px;
+    margin-right: 0px;
     margin-top: 9px;
     padding: 5px 10px;
 	float: right;
@@ -223,9 +230,8 @@ h1, h2, h3, h4, h5, h6{
     box-sizing: border-box;
     display: inline-block;
     margin-bottom: 20px;
-    padding: 0 15px;
     vertical-align: top;
-    width: 49.7%;
+    width: 48.5%;
 }
 .item-home-cat li .title-category{
     background: #f5f5f5;
@@ -295,8 +301,9 @@ h1, h2, h3, h4, h5, h6{
 	display: inline-block;
     width: 100%;
 }
-.box-home-post-hot ul{
-	margin-bottom: 0;
+.box-home-post-hot ul {
+    margin-bottom: 0;
+    margin-right: -4px;
 }
 .box-home-post-hot ul li {
     display: inline-block;
@@ -760,4 +767,68 @@ h1, h2, h3, h4, h5, h6{
     padding-bottom: 20px;
     text-align: center;
     text-transform: uppercase;
+}
+.box-provice{
+	display: inline-block;
+	float: left;
+	height: 45px;
+	padding: 8px 25px 9px;
+	position: relative;
+}
+.icon-address{
+    font-size: 2em !important;
+	color: #ff7300;
+	cursor: pointer;
+	margin-top: 2px;
+	background: url(../img/map-marker-2-24.png) no-repeat;
+	display: block;
+	height: 32px;
+	width: 32px;
+}
+.panel-list-provice {
+    position: absolute;
+    width: 400px;
+    height: 320px;
+    background: #f2f2f2;
+    left: -111px;
+    top: 43px;
+    display: none;
+    border: 1px solid #ddd;
+	border-bottom-left-radius:2px;
+	border-bottom-right-radius:2px;
+}
+.box-provice:hover .panel-list-provice{
+	display: inline-block!important;
+}
+.panel-list-provice:before {
+	bottom: 100%;
+	left: 37.2%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.panel-list-provice:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-bottom-color: #f2f2f2;
+	border-width: 12px;
+	margin-left: -12px;
+}
+.panel-list-provice ul {
+    display: block;
+    padding-top: 10px;
+}
+.panel-list-provice li {
+    display: inline-block;
+    width: 30%;
+    padding: 5px 10px;
+}
+.panel-list-provice li a{
+    font-size: 12px;
+	display: block;
+}
+.panel-list-provice li a:hover{
+	text-decoration:underline;
 }
