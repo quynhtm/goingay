@@ -55,7 +55,6 @@
 				<ul class="list-cpanel">
 					<li><a href="<?php echo URL::route('customer.pageChageInfo'); ?>" rel="nofollow"><i class="glyphicon glyphicon-align-left"></i> Thông tin cá nhân</a></li>
 					<li><a href="<?php echo URL::route('customer.pageChagePass'); ?>" rel="nofollow"><i class="glyphicon glyphicon-equalizer"></i> Đổi mật khẩu</a></li>
-					<li><a href="<?php echo URL::route('customer.pageHistoryOrder'); ?>" rel="nofollow"><i class="glyphicon glyphicon-align-right"></i> Danh sách tin đăng</a></li>
 					<li><a href="<?php echo URL::route('customer.logout'); ?>" rel="nofollow"><i class="glyphicon glyphicon-share-alt"></i> Thoát</a></li>
 				</ul>
 			</div>

@@ -237,6 +237,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			return Redirect::route('site.home');
 		}
 		$this->header();
+		$this->menuLeft();
 		
 		$messages = '';
 		$this->user_customer = $dataShow = Session::get('user_customer');

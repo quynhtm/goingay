@@ -42,12 +42,23 @@
 
 	</div>
 	<?php endif; ?>
-	 <?php if(isset($content)): ?>
+	 
 	<div id="content">
-		<?php echo $content; ?>
+		<div class="line-content">
+			<div class="container">
+				<?php if(isset($menuLeft)): ?>
+					<?php echo $menuLeft; ?>
 
+				<?php endif; ?>
+				
+				<?php if(isset($content)): ?>
+					<?php echo $content; ?>
+
+				<?php endif; ?>
+			</div>
+		</div>
 	</div>
-	<?php endif; ?>
+	
 	<?php if(isset($footer)): ?>
 	<div id="footer">
 		<?php echo $footer; ?>

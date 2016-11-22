@@ -33,11 +33,21 @@
 		{{$header}}
 	</div>
 	@endif
-	 @if(isset($content))
+	 
 	<div id="content">
-		{{$content}}
+		<div class="line-content">
+			<div class="container">
+				@if(isset($menuLeft))
+					{{$menuLeft}}
+				@endif
+				
+				@if(isset($content))
+					{{$content}}
+				@endif
+			</div>
+		</div>
 	</div>
-	@endif
+	
 	@if(isset($footer))
 	<div id="footer">
 		{{$footer}}

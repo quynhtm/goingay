@@ -34,6 +34,9 @@ class BaseSiteController extends BaseController
 	public function popupHide(){
 		$this->layout->popupHide = View::make("site.BaseLayouts.popupHide");
 	}
+	public function menuLeft(){
+		$this->layout->menuLeft = View::make("site.BaseLayouts.menuLeft");
+	}
     public function footer(){
 		$address='';
 		$arrAddress = Info::getItemByKeyword('SITE_FOOTER_LEFT');

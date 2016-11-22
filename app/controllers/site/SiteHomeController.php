@@ -10,8 +10,7 @@ class SiteHomeController extends BaseSiteController
     //trang chu
     public function index(){
     	$this->header();
-    	
-    	$this->header();
+    	$this->menuLeft();
     	//Meta title
     	$meta_title='';
     	$meta_keywords='';
