@@ -29,6 +29,16 @@
 					</div>
 					<div class="line">
 						<div class="box-item-455">
+							<p>Đổi mật khẩu</p>
+							<input name="customer_password" id="customer_password" value="" placeholder="Nhập để thay đổi mật khẩu" type="password">
+						</div>
+						<div class="box-item-455 ext">
+							<p>&nbsp;</p>
+							<button  class="btn btn-primary"><i class="fa fa-refresh"></i> Đổi mật khẩu</button>
+						</div>
+					</div>
+					<div class="line">
+						<div class="box-item-455">
 							<p>Email<span class="required" aria-required="true">*</span></p>
 							<input name="customer_email" value="@if(isset($user_customer['customer_email'])){{$user_customer['customer_email']}}@endif" placeholder="Nhập vào địa chỉ email" disabled class="upload_input" type="text">
 						</div>
@@ -42,14 +52,14 @@
 					<div class="line">
 						<div class="box-item-455 unit">
 							<p>Tỉnh/Thành: <span class="required">*</span></p>
-							<select class="select_s" name="customer_province_id">
-								<option value="">Chọn tỉnh/Thành</option>
+							<select class="select_s" name="customer_province_id" id="customer_province_id" onchange="USER_CUSTOMMER.getDistrictInforCustomer();">
+								{{$optionProvince}}
 							</select>
 						</div>
 						<div class="box-item-455 unit">
 							<p>Quận/huyện: <span class="required">*</span></p>
-							<select class="select_s" name="customer_district_id">
-								<option value="">Chọn quận/huyện</option>
+							<select class="select_s" name="customer_district_id" id="customer_district_id">
+								{{$optionDistrict}}
 							</select>
 						</div>
 					</div>
@@ -81,7 +91,7 @@
 						<input name="customer_about" value="@if(isset($user_customer['customer_address'])){{$user_customer['customer_address']}}@endif"type="text">
 					</div>
 					<div class="line">
-						<button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Cập nhật</button>
+						<button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Cập nhật thông tin</button>
 					</div>
 				</div>
 			{{ Form::close() }}

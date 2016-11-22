@@ -51,8 +51,8 @@
 			<div class="panel panel-info">
 				{{ Form::open(array('method' => 'GET', 'role'=>'form')) }}
 				<div class="panel-body">
-					<div class="form-group col-lg-3">
-						<label for="news_title">Tên danh mục</label>
+					<div class="form-group col-lg-6">
+						<label for="news_title">Title tin đăng</label>
 						<input type="text" class="form-control input-sm" id="news_title" name="news_title" placeholder="Tiêu đề tin tức" @if(isset($search['news_title']) && $search['news_title'] != '')value="{{$search['news_title']}}"@endif>
 					</div>
 					<div class="form-group col-lg-3">
@@ -67,29 +67,32 @@
 							{{$optionCategory}}
 						</select>
 					</div>
-				</div>
-				<div class="panel-footer text-right">
-					<span class="">
+					<div class="form-group col-lg-12 text-right">
+						<span class="">
 						<a class="btn btn-danger btn-sm" href="{{URL::route('customer.ItemsAdd')}}">
 							<i class="ace-icon fa fa-plus-circle"></i>
 							Đăng tin
 						</a>
-					</span>
-					<span class="">
-						<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
-					</span>
+						</span>
+						<span class="">
+							<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
+						</span>
+					</div>
 				</div>
 				{{ Form::close() }}
 			</div>
 			@if(isset($data) && !empty($data))
 			<div class="content-info">
+				<div class="span clearfix"> @if($total >0) Có tổng số <b>{{$total}}</b> tin đăng @endif </div>
+				<br>
 				<table class="table table-bordered table-hover">
 					<thead class="thin-border-bottom">
 					<tr class="">
 						<th width="2%" class="text-center">STT</th>
 						<th width="10%" class="text-center">Ảnh</th>
-						<th width="66%">Thông tin</th>
+						<th width="45%">Thông tin</th>
 						<th width="12%" class="text-center">Ngày </th>
+						<th width="5%" class="text-center">TT</th>
 						<th width="10%" class="text-center"></th>
 					</tr>
 					</thead>
@@ -102,6 +105,13 @@
 							</td>
 							<td>[<b>{{ $item->item_id }}</b>] {{ $item->item_name }}</td>
 							<td class="text-center text-middle">{{ date('d-m-Y',$item->time_created) }}</td>
+							<td class="text-center">
+								@if($item->item_status == CGlobal::status_show)
+									<a href="javascript:void(0);" style="color: green" title="Hiện"><i class="fa fa-check fa-2x"></i></a>
+								@else
+									<a href="javascript:void(0);" style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>
+								@endif
+							</td>
 							<td class="text-center text-middle">
 								<a href="{{URL::route('customer.ItemsEdit',array('item_id' => $item->item_id))}}" title="Sửa tin đăng"><i class="fa fa-edit fa-2x"></i></a>
 							</td>
@@ -109,6 +119,9 @@
 					@endforeach
 					</tbody>
 				</table>
+				<div class="text-right">
+					{{$paging}}
+				</div>
 			</div>
 			@endif
 		</div>

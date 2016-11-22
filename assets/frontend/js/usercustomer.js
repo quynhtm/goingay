@@ -350,5 +350,23 @@ USER_CUSTOMMER = {
 				});
 			}
 		});
+	},
+	getDistrictInforCustomer:function(ojb){
+		var customer_province_id = $('#customer_province_id').val();
+		if(parseInt(customer_province_id) > 0){
+			jQuery.ajax({
+				type: "POST",
+				url: WEB_ROOT + '/thong-tin-quan-huyen-cua-khach.html',
+				data: {customer_province_id : customer_province_id},
+				dataType: 'json',
+				success: function(res) {
+					if(res.isIntOk === 1){
+						$('#customer_district_id').html(res.html_option);
+					}else{
+						alert(res.msg);
+					}
+				}
+			});
+		}
 	}
 }

@@ -25,11 +25,9 @@ class SiteUserCustomerController extends BaseSiteController{
 	}
 	//Register - Login
     public function pageLogin($url=''){
-    	
     	if(Session::has('user_customer')){
     		return Redirect::route('site.home');
     	}
-    	
     	$token = addslashes(Request::get('token', ''));
     	$mail = addslashes(Request::get('sys_login_mail', ''));
     	$pass = addslashes(Request::get('sys_login_pass', ''));
@@ -247,6 +245,14 @@ class SiteUserCustomerController extends BaseSiteController{
 		$this->user_customer = $dataShow = Session::get('user_customer');
 		//FunctionLib::debug($customer);
 
+		//thong tin tinh thanh
+		$province = Province::getAllProvince();
+		$customer_province_id = isset($this->user_customer['customer_province_id'])?$this->user_customer['customer_province_id']: 0;
+		$optionProvince = FunctionLib::getOption(array(0=>'---Chọn tỉnh thành----') + $province, $customer_province_id);
+
+		$district = ($customer_province_id > 0)?Districts::getDistrictByProvinceId($customer_province_id): array();
+		$optionDistrict = FunctionLib::getOption(array(0=>'---Chọn quận huyện----') + $district, isset($this->user_customer['customer_district_id'])?$this->user_customer['customer_district_id']: 0);
+
 		//khi sửa thông tin KH
 		if(isset($_POST) && !empty($_POST) && !empty($this->user_customer)){
 			$token = Request::get('_token', '');
@@ -285,6 +291,8 @@ class SiteUserCustomerController extends BaseSiteController{
 		}
 		$this->layout->content = View::make('site.CustomerLayouts.EditCustomer')
 								->with('user_customer',$dataShow)
+								->with('optionProvince',$optionProvince)
+								->with('optionDistrict',$optionDistrict)
 								->with('messages',$messages);
 		$this->footer();
 	}
@@ -300,8 +308,34 @@ class SiteUserCustomerController extends BaseSiteController{
 			if(isset($data['customer_phone']) && trim($data['customer_phone']) == '') {
 				$error[] = 'Số điện thoại không được bỏ trống';
 			}
+			if(isset($data['customer_province_id']) && trim($data['customer_province_id']) == 0) {
+				$error[] = 'Bạn chưa chọn tỉnh thành';
+			}
+			if(isset($data['customer_district_id']) && trim($data['customer_district_id']) == 0) {
+				$error[] = 'Bạn chưa chọn quận huyện';
+			}
 		}
 		return $error;
+	}
+	//lay thong tin quận huyện cua KH
+	public function getDistrictCustomer(){
+		$data = array('isIntOk' => 0,'msg' => 'Không lấy được thông tin quận huyện');
+		if (!UserCustomer::isLogin()) {
+			return Response::json($data);
+		}
+		$customer_province_id = (int)Request::get('customer_province_id', 0);
+		if ($customer_province_id > 0) {
+			$district = Districts::getDistrictByProvinceId($customer_province_id);
+			if(!empty($district)){
+				$str_option = '<option value="">Chọn quận/huyện</option>';
+				foreach($district as $dis_id =>$dis_name){
+					$str_option .='<option value="'.$dis_id.'">'.$dis_name.'</option>';
+				}
+				$data['html_option'] = $str_option;
+				$data['isIntOk'] = 1;
+			}
+		}
+		return Response::json($data);
 	}
 	public function pageChagePass(){
 		if (!UserCustomer::isLogin()) {
