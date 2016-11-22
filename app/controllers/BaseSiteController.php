@@ -20,7 +20,6 @@ class BaseSiteController extends BaseController
     	FunctionLib::site_js('lib/jAlert/jquery.alerts.js', CGlobal::$POS_END);
         $this->user_customer = Session::has('user_customer') ? Session::get('user_customer') : array();
     }
-
     public function header(){
         $messages = FunctionLib::messages('messages');
 		$user_customer = $this->user_customer;

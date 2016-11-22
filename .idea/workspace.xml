@@ -2,11 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c717333-8288-4d8a-8ab4-ffaa1fccb75d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/CustomerLayouts/EditCustomer.blade.php" afterPath="$PROJECT_DIR$/app/views/site/CustomerLayouts/EditCustomer.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php" afterPath="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/frontend/img/arrow-detail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/frontend/img/map-marker-2-24.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/storage/views/543dae83bd8d51e3b40bb66efbfc9e0d" afterPath="$PROJECT_DIR$/app/storage/views/543dae83bd8d51e3b40bb66efbfc9e0d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/BaseSiteController.php" afterPath="$PROJECT_DIR$/app/controllers/BaseSiteController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/SiteLayouts/DetailProduct.blade.php" afterPath="$PROJECT_DIR$/app/views/site/SiteLayouts/DetailProduct.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/SiteLayouts/Home.blade.php" afterPath="$PROJECT_DIR$/app/views/site/SiteLayouts/Home.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/SiteLayouts/ListProduct.blade.php" afterPath="$PROJECT_DIR$/app/views/site/SiteLayouts/ListProduct.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/site/SiteHomeController.php" afterPath="$PROJECT_DIR$/app/controllers/site/SiteHomeController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/storage/views/b823011ba246747792f61f379a364398" afterPath="$PROJECT_DIR$/app/storage/views/b823011ba246747792f61f379a364398" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php" afterPath="$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/BaseLayouts/menuLeft.blade.php" afterPath="$PROJECT_DIR$/app/views/site/BaseLayouts/menuLeft.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/routes_site.php" afterPath="$PROJECT_DIR$/app/routes/routes_site.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php" afterPath="$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/frontend/js/usercustomer.js" afterPath="$PROJECT_DIR$/assets/frontend/js/usercustomer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/frontend/css/site.css" afterPath="$PROJECT_DIR$/assets/frontend/css/site.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/frontend/js/site.js" afterPath="$PROJECT_DIR$/assets/frontend/js/site.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="webtintuc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,10 +58,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="siteUserCustomerController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="siteUserCustomerController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.001227">
+            <state vertical-scroll-proportion="-62.73077">
               <caret line="318" column="5" selection-start-line="318" selection-start-column="5" selection-end-line="318" selection-end-column="5" />
               <folding>
                 <element signature="n#pageLogin#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
@@ -83,11 +93,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes_site.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="routes_site.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes/routes_site.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.115385">
-              <caret line="22" column="93" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="93" />
+            <state vertical-scroll-proportion="0.37546012">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -135,10 +145,10 @@
         <option value="$PROJECT_DIR$/assets/admin/js/admin.js" />
         <option value="$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php" />
         <option value="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php" />
-        <option value="$PROJECT_DIR$/app/routes/routes_site.php" />
         <option value="$PROJECT_DIR$/assets/frontend/js/usercustomer.js" />
         <option value="$PROJECT_DIR$/app/views/site/CustomerLayouts/EditCustomer.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php" />
+        <option value="$PROJECT_DIR$/app/routes/routes_site.php" />
       </list>
     </option>
   </component>
@@ -920,14 +930,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/routes_site.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.115385">
-          <caret line="22" column="93" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/admin/NewsController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35460123">
@@ -962,7 +964,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.001227">
+        <state vertical-scroll-proportion="-62.73077">
           <caret line="318" column="5" selection-start-line="318" selection-start-column="5" selection-end-line="318" selection-end-column="5" />
           <folding>
             <element signature="n#pageLogin#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
@@ -970,6 +972,14 @@
             <element signature="n#pageRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
             <element signature="n#pageActiveRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/routes_site.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37546012">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
