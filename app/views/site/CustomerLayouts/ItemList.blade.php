@@ -48,6 +48,39 @@
 			<div class="head-info">
 				<h2><a href=""><i class="fa fa-location-arrow"></i> Danh sách tin đăng</a></h2>
 			</div>
+			<div class="panel panel-info">
+				{{ Form::open(array('method' => 'GET', 'role'=>'form')) }}
+				<div class="panel-body">
+					<div class="form-group col-lg-3">
+						<label for="news_title">Tên danh mục</label>
+						<input type="text" class="form-control input-sm" id="news_title" name="news_title" placeholder="Tiêu đề tin tức" @if(isset($search['news_title']) && $search['news_title'] != '')value="{{$search['news_title']}}"@endif>
+					</div>
+					<div class="form-group col-lg-3">
+						<label for="item_status">Trạng thái</label>
+						<select name="item_status" id="item_status" class="form-control input-sm">
+							{{$optionStatus}}
+						</select>
+					</div>
+					<div class="form-group col-lg-3">
+						<label for="item_category_id">Danh mục</label>
+						<select name="item_category_id" id="item_category_id" class="form-control input-sm">
+							{{$optionCategory}}
+						</select>
+					</div>
+				</div>
+				<div class="panel-footer text-right">
+					<span class="">
+						<a class="btn btn-danger btn-sm" href="{{URL::route('customer.ItemsAdd')}}">
+							<i class="ace-icon fa fa-plus-circle"></i>
+							Đăng tin
+						</a>
+					</span>
+					<span class="">
+						<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
+					</span>
+				</div>
+				{{ Form::close() }}
+			</div>
 			@if(isset($data) && !empty($data))
 			<div class="content-info">
 				<table class="table table-bordered table-hover">

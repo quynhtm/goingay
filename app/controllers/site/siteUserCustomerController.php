@@ -8,7 +8,7 @@
 
 class SiteUserCustomerController extends BaseSiteController{
     protected $user_customer = array();
-	private $arrStatusProduct = array(-1 => '---- Trạng thái sản phẩm----',CGlobal::status_show => 'Hiển thị',CGlobal::status_hide => 'Ẩn');
+	private $arrStatusProduct = array(-1 => '---- Trạng thái----',CGlobal::status_show => 'Hiển thị',CGlobal::status_hide => 'Ẩn');
 	private $arrTypePrice = array(CGlobal::TYPE_PRICE_NUMBER => 'Hiển thị giá bán', CGlobal::TYPE_PRICE_CONTACT => 'Liên hệ với shop');
 	private $error = array();
 
@@ -54,8 +54,12 @@ class SiteUserCustomerController extends BaseSiteController{
     								'customer_phone' => $customer->customer_phone,
     								'customer_address' => $customer->customer_address,
     								'customer_email' => $customer->customer_email,
-    								'customer_province' => $customer->customer_province,
+    								'customer_show_email' => $customer->customer_show_email,
+    								'customer_province_id' => $customer->customer_province_id,
+    								'customer_district_id' => $customer->customer_district_id,
     								'customer_about' => $customer->customer_about,
+    								'customer_gender' => $customer->customer_gender,
+    								'customer_birthday' => $customer->customer_birthday,
     								'customer_status' => $customer->customer_status,
     								'customer_up_item' => $customer->customer_up_item,
     								'customer_time_login' => $timeLogin,
@@ -434,6 +438,8 @@ class SiteUserCustomerController extends BaseSiteController{
 		$total = 0;
 
 		$search['item_name'] = addslashes(Request::get('item_name',''));
+		$search['item_status'] = addslashes(Request::get('item_status',-1));
+		$search['item_category_id'] = Request::get('item_category_id',-1);
 		$search['customer_id'] = (isset($this->user_customer['customer_id']) && $this->user_customer['customer_id'] > 0)?(int)$this->user_customer['customer_id']: 0;//tìm theo khach
 		//$search['field_get'] = 'order_id,order_product_name,order_status';//cac truong can lay
 
@@ -441,6 +447,11 @@ class SiteUserCustomerController extends BaseSiteController{
 		$dataSearch = (isset($this->user_customer['customer_id']) && $this->user_customer['customer_id'] > 0) ? Items::searchByCondition($search, $limit, $offset,$total): array();
 		$paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
 
+		//danh muc
+		$arrCategory = Category::getAllParentCategoryId();
+		$optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCategory, $search['item_category_id']);
+
+		$optionStatus = FunctionLib::getOption($this->arrStatusProduct,$search['item_status']);
 		$this->layout->content = View::make('site.CustomerLayouts.ItemList')
 			->with('paging', $paging)
 			->with('stt', ($pageNo-1)*$limit)
@@ -448,6 +459,8 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('sizeShow', count($data))
 			->with('data', $dataSearch)
 			->with('search', $search)
+			->with('optionCategory', $optionCategory)
+			->with('optionStatus', $optionStatus)
 			->with('user_customer',$this->user_customer);
 		$this->footer();
 	}
@@ -479,7 +492,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		$arrCategory = Category::getAllParentCategoryId();
 		$optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCategory, -1);
 
-		$optionStatusProduct = FunctionLib::getOption($this->arrStatusProduct,CGlobal::status_hide);
+		$optionStatusProduct = FunctionLib::getOption($this->arrStatusProduct,CGlobal::status_show);
 		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice,CGlobal::TYPE_PRICE_NUMBER);
 
 		$this->layout->content = View::make('site.CustomerLayouts.ItemEdit')
@@ -516,22 +529,22 @@ class SiteUserCustomerController extends BaseSiteController{
 			'frontend/js/site.js',
 		));
 
-		CGlobal::$pageShopTitle = "Sửa sản phẩm | ".CGlobal::web_name;
-		$product = array();
+		CGlobal::$pageShopTitle = "Sửa tin đăng | ".CGlobal::web_name;
+		$items = array();
 		$arrViewImgOther = array();
 		$imagePrimary = $imageHover = '';
-		if(isset($this->user_shop->shop_id) && $this->user_shop->shop_id > 0 && $item_id > 0){
-			$product = Product::getProductByShopId($this->user_shop->shop_id,$item_id);
+		if(isset($this->user_customer['customer_id']) && $this->user_customer['customer_id'] > 0 && $item_id > 0){
+			$items = Items::getItemByCustomerId($this->user_customer['customer_id'], $item_id);
 		}
-		if(empty($product)){
-			return Redirect::route('shop.listProduct');
+		if(empty($items)){
+			return Redirect::route('customer.ItemsList');
 		}
 
 		//lấy ảnh show
-		if(sizeof($product) > 0){
+		if(sizeof($items) > 0){
 			//lay ảnh khác của san phẩm
-			if(!empty($product->product_image_other)){
-				$arrImagOther = unserialize($product->product_image_other);
+			if(!empty($items->item_image_other)){
+				$arrImagOther = unserialize($items->item_image_other);
 				if(sizeof($arrImagOther) > 0){
 					foreach($arrImagOther as $k=>$val){
 						$url_thumb = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item_id, $val, CGlobal::sizeImage_100);
@@ -541,64 +554,40 @@ class SiteUserCustomerController extends BaseSiteController{
 				}
 			}
 			//ảnh sản phẩm chính
-			$imagePrimary = $product->product_image;
-			$imageHover = $product->product_image_hover;
+			$imagePrimary = $items->item_image;
 		}
-
-		$dataShow = array('product_id'=>$product->product_id,
-			'product_name'=>$product->product_name,
-			'category_id'=>$product->category_id,
-			'provider_id'=>$product->provider_id,
-			'product_price_sell'=>$product->product_price_sell,
-			'product_price_market'=>$product->product_price_market,
-			'product_price_input'=>$product->product_price_input,
-			'product_type_price'=>$product->product_type_price,
-			'product_selloff'=>$product->product_selloff,
-			'product_is_hot'=>$product->product_is_hot,
-			'is_sale'=>$product->is_sale,
-			'product_code'=>$product->product_code,
-			'product_sort_desc'=>$product->product_sort_desc,
-			'product_content'=>$product->product_content,
-			'product_image'=>$product->product_image,
-			'product_image_hover'=>$product->product_image_hover,
-			'product_image_other'=>$product->product_image_other,
-			'product_order'=>$product->product_order,
-			'quality_input'=>$product->quality_input,
-			'product_status'=>$product->product_status);
-
+		$dataShow = array('product_id'=>$items->product_id,
+			'item_name'=>$items->item_name,
+			'item_category_id'=>$items->item_category_id,
+			'item_status'=>$items->item_status,
+			'item_content'=>$items->item_content,
+			'item_type_price'=>$items->item_type_price,
+			'item_price_sell'=>$items->item_price_sell,
+			'item_image'=>$items->item_image);
 
 		//danh muc san pham cua shop
-		$arrCateShop = UserShop::getCategoryShopById($this->user_shop->shop_id);
-		$optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCateShop,isset($product->category_id)? $product->category_id: -1);
+		$arrCategory = Category::getAllParentCategoryId();
+		$optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCategory,isset($items->item_category_id)? $items->item_category_id: -1);
 
-		//danh sach NCC cua shop
-		$arrNCC = ($this->user_shop->is_shop == CGlobal::SHOP_VIP)?Provider::getListProviderByShopId($this->user_shop->shop_id): array();
-		$optionNCC = FunctionLib::getOption(array(-1=>'---Chọn nhà cung cấp ----') + $arrNCC, isset($product->provider_id)? $product->provider_id:-1);
-
-		$optionStatusProduct = FunctionLib::getOption($this->arrStatusProduct,isset($product->product_status)? $product->product_status:CGlobal::status_hide);
-		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice,isset($product->product_type_price)? $product->product_type_price:CGlobal::TYPE_PRICE_NUMBER);
-		$optionTypeProduct = FunctionLib::getOption($this->arrTypeProduct,isset($product->product_is_hot)? $product->product_is_hot:CGlobal::PRODUCT_NOMAL);
-		$optionIsSale = FunctionLib::getOption($this->arrIsSale,isset($product->is_sale)? $product->is_sale:CGlobal::PRODUCT_IS_SALE);
+		$optionStatusProduct = FunctionLib::getOption($this->arrStatusProduct,isset($items->item_status)? $items->item_status :CGlobal::status_hide);
+		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice,isset($items->item_type_price)? $items->item_type_price:CGlobal::TYPE_PRICE_NUMBER);
 
 		$this->layout->content = View::make('site.CustomerLayouts.ItemEdit')
 			->with('error', $this->error)
 			->with('item_id', $item_id)
-			->with('user_shop', $this->user_shop)
+			->with('user_customer',$this->user_customer)
 			->with('data', $dataShow)
 			->with('arrViewImgOther', $arrViewImgOther)
 			->with('imagePrimary', $imagePrimary)
 			->with('imageHover', $imageHover)
 			->with('optionCategory', $optionCategory)
-			->with('optionNCC', $optionNCC)
 			->with('optionStatusProduct', $optionStatusProduct)
-			->with('optionTypePrice', $optionTypePrice)
-			->with('optionIsSale', $optionIsSale)
-			->with('optionTypeProduct', $optionTypeProduct);
+			->with('optionTypePrice', $optionTypePrice);
 		$this->footer();
 	}
 	public function postEditItem($item_id = 0){
 		if (!UserCustomer::isLogin()) {
-			return Redirect::route('site.home');
+			return Redirect::route('customer.ItemsList');
 		}
 		$this->header();
 		//Include style.
@@ -612,14 +601,11 @@ class SiteUserCustomerController extends BaseSiteController{
 			'lib/ckeditor/ckeditor.js',
 			'lib/ckeditor/config.js',
 			'lib/dragsort/jquery.dragsort.js',
-			//'js/common.js',
 			'lib/number/autoNumeric.js',
 			'frontend/js/site.js',
 		));
 
 		CGlobal::$pageShopTitle = "Sửa sản phẩm | ".CGlobal::web_name;
-		$shopVip = ( isset($this->user_shop->is_shop) && $this->user_shop->is_shop == CGlobal::SHOP_VIP)? 1: 0;
-		$product = array();
 		$arrViewImgOther = array();
 		$imagePrimary = $imageHover = '';
 
@@ -629,7 +615,6 @@ class SiteUserCustomerController extends BaseSiteController{
 		$dataSave['item_content'] = Request::get('item_content');
 		$dataSave['item_type_price'] = addslashes(Request::get('item_type_price',CGlobal::TYPE_PRICE_NUMBER));
 		$dataSave['item_price_sell'] = (int)str_replace('.','',Request::get('item_price_sell'));
-
 		$dataSave['item_image'] = $imagePrimary = addslashes(Request::get('image_primary'));
 
 		$id_hiden = Request::get('id_hiden',0);
@@ -661,18 +646,17 @@ class SiteUserCustomerController extends BaseSiteController{
 			$dataSave['item_image_other'] = serialize($arrInputImgOther);
 		}
 
-		//FunctionLib::debug($dataSave);
 		$this->validInforItem($dataSave);
 		if(empty($this->error)){
 			//lay tên danh mục
-			$dataSave['item_category_name'] = isset($arrCategory[$dataSave['category_id']])?$arrCategory[$dataSave['category_id']]: '';
+			$dataSave['item_category_name'] = isset($arrCategory[$dataSave['item_category_id']])?$arrCategory[$dataSave['item_category_id']]: '';
 			$dataSave['customer_id'] = $this->user_customer['customer_id'];
 			$dataSave['customer_name'] = $this->user_customer['customer_name'];
 			$dataSave['is_customer'] = $this->user_customer['is_customer'];
 			$dataSave['item_province_id'] = $this->user_customer['customer_province_id'];
 			$dataSave['item_district_id'] = $this->user_customer['customer_district_id'];
 			$dataSave['item_block'] = CGlobal::PRODUCT_NOT_BLOCK;
-			$dataSave['time_update'] = time();
+
 			if($item_id > 0){
 				$items = array();
 				if(isset($this->user_customer['customer_id']) && $this->user_customer['customer_id'] > 0 && $item_id > 0){
@@ -680,6 +664,7 @@ class SiteUserCustomerController extends BaseSiteController{
 				}
 				if(!empty($items)){
 					if($item_id > 0){//cap nhat
+						$dataSave['time_update'] = time();
 						if(Items::updateData($item_id,$dataSave)){
 							return Redirect::route('customer.ItemsList');
 						}
@@ -690,6 +675,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			}
 			//tạo mới
 			else{
+				//FunctionLib::debug($dataSave);
 				$dataSave['time_created'] = time();
 				if(Items::addData($dataSave)){
 					return Redirect::route('customer.ItemsList');
