@@ -3,10 +3,10 @@
 <div class="col-left-200">
 	<ul class="box-menu-category">
 		<li>
-			<a href="/" class="act"><i class="fa fa-home"></i>Trang chủ</a>
+			<a href="" class="act"><i class="fa fa-home"></i>Trang chủ</a>
 		</li>
 		<li>
-			<a href=""><i class="fa fa-building"></i> Mua bán nhà đất </a>
+			<a href="{{URL::route('site.home')}}/mua-ban-nha-dat-1122.html"><i class="fa fa-building"></i> Mua bán nhà đất </a>
 		</li>
 		<li>
 			<a href=""><i class="fa fa-building-o"></i> Thuê nhà đất </a>

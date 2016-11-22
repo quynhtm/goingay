@@ -42,5 +42,18 @@ class SiteHomeController extends BaseSiteController
     	$this->layout->content = View::make('site.SiteLayouts.page404');
     	$this->footer();
     }
+    
+    public function pageCategory($catname, $catid){
+    	$this->header();
+    	$this->menuLeft();
+    	$this->layout->content = View::make('site.SiteLayouts.ListProduct');
+    	$this->footer();
+    }
+    public function pageProductView(){
+    	$this->header();
+    	$this->menuLeft();
+    	$this->layout->content = View::make('site.SiteLayouts.DetailProduct');
+    	$this->footer();
+    }
 }
 

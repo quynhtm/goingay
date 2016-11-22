@@ -76,7 +76,7 @@
 	</div>
 	<div class="box-home-category">
 		<ul class="item-home-cat">
-			<li>
+			<li class="pull-left">
 				<div class="title-category"><a href=""><i class="fa fa-building"></i> Mua bán nhà đất</a></div>
 				<div class="content-category">
 					<div class="line">
@@ -181,7 +181,7 @@
 					</div>
 				</div>
 			</li>
-			<li>
+			<li class="pull-right">
 				<div class="title-category"><a href=""><i class="fa fa-building-o"></i> Thuê nhà đất</a></div>
 				<div class="content-category">
 					<div class="line">
@@ -286,7 +286,7 @@
 					</div>
 				</div>
 			</li>
-			<li>
+			<li class="pull-left">
 				<div class="title-category"><a href=""><i class="fa fa-car"></i>  Ôtô</a></div>
 				<div class="content-category">
 					<div class="line">
@@ -391,7 +391,7 @@
 					</div>
 				</div>
 			</li>
-			<li>
+			<li class="pull-right">
 				<div class="title-category"><a href=""><i class="fa fa-bicycle"></i> Xe máy - Xe đạp</a></div>
 				<div class="content-category">
 					<div class="line">
@@ -496,7 +496,7 @@
 					</div>
 				</div>
 			</li>
-			<li>
+			<li class="pull-left">
 				<div class="title-category"><a href=""><i class="fa fa-car"></i>  Ôtô</a></div>
 				<div class="content-category">
 					<div class="line">
@@ -601,7 +601,7 @@
 					</div>
 				</div>
 			</li>
-			<li>
+			<li class="pull-right">
 				<div class="title-category"><a href=""><i class="fa fa-bicycle"></i> Xe máy - Xe đạp</a></div>
 				<div class="content-category">
 					<div class="line">
