@@ -338,83 +338,41 @@ class SiteUserCustomerController extends BaseSiteController{
 		return Response::json($data);
 	}
 	public function pageChagePass(){
+		$data = array('isIntOk' => 0,'msg' => 'Không thay đổi được pass');
 		if (!UserCustomer::isLogin()) {
-			return Redirect::route('site.home');
+			return Response::json($data);
 		}
-		$this->header();
-		
-		$error = '';
-		$messages = FunctionLib::messages('messages');
-		if(isset($_POST) && !empty($_POST)){
-			$token = Request::get('_token', '');
-			$mail = Request::get('sys_change_email', '');
-			$pass = Request::get('sys_change_pass', '');
-			$repass = Request::get('sys_change_re_pass', '');
-			$hash_pass = '';
-			if(Session::token() === $token){
-				$session_member = $this->user_customer;
-				$sessionMail = $session_member['member_mail'];
-				if($sessionMail == $mail){
-					//Pass
-					if($pass != '' && ($pass === $repass)){
-						$check_valid_pass = ValidForm::checkRegexPass($pass, 5);
-						if($check_valid_pass){
-							$hash_pass = Member::encode_password($pass);
-						}else{
-							$error .= 'Mật không được ít hơn 5 ký tự và không được có dấu!'.'<br/>';
-						}
-					}
-					if($pass == '' && $repass == ''){
-						$error .= 'Mật khẩu không được trống!'.'<br/>';
-					}elseif($pass != $repass){
-						$error .= 'Mật khẩu không khớp!'.'<br/>';
-					}
-					
-					if($mail != '' && $pass != '' && $repass !=''){
-						if($error == ''){
-							$data = array(
-									'member_pass' =>$hash_pass,
-									);
-							Member::updateData($session_member['member_id'], $data);
-							Utility::messages('messages', 'Thay đổi mật khẩu thành công', 'success');
-							//Upate Session
-							$dataSess = array(
-									'member_id' => $session_member['member_id'],
-									'member_mail'=>$mail,
-									'member_full_name'=>$session_member['member_full_name'],
-									'member_phone'=>$session_member['member_phone'],
-									'member_address'=>$session_member['member_address'],
-									'member_created'=>$session_member['member_created'],
-									'member_status'=>$session_member['member_status'],
-							);
-							Session::put('member', $dataSess, 60*24);
-							Session::save();
-							$this->member = $dataSess;
-							return Redirect::route('member.pageChagePass');
-						}
-					}
-				}else{
-					$error .= 'Email của bạn không đúng!';
+		$customer_password = trim(Request::get('customer_password', ''));
+		if(!empty($this->user_customer) && $customer_password != ''){
+			$dataUpdate['customer_password'] = UserCustomer::encode_password($customer_password);
+			if(UserCustomer::updateData($this->user_customer['customer_id'],$dataUpdate)){
+				//Send mail
+				if($this->user_customer['customer_email'] != ''){
+					$emails = [$this->user_customer['customer_email'], CGlobal::emailAdmin];
+					$dataTheme = array(
+						'customer_email'=>$this->user_customer['customer_email'],
+						'customer_name'=>$this->user_customer['customer_name'],
+						'customer_password'=>$customer_password,
+					);
+					Mail::send('emails.ForgetPass', array('data'=>$dataTheme), function($message) use ($emails){
+						$message->to($emails, 'mailUserCustomer')
+							->subject('Hướng dẫn thay đổi mật khẩu '.date('d/m/Y h:i',  time()));
+					});
+					$data['isIntOk'] = 1;
+					$data['msg'] = 'Đã cập nhật mật khẩu thành công';
+					return Response::json($data);
 				}
 			}
 		}
-		
-		$this->layout->content = View::make('site.member.pageChagePass')
-								->with('member',$this->member)
-								->with('error',$error)
-								->with('messages',$messages);
-		$this->footer();
 	}
 	public function pageForgetPass(){
-		
-		if(Session::has('user_customer')){
+		if (!UserCustomer::isLogin()) {
 			return Redirect::route('site.home');
 		}
-		
     	$token = addslashes(Request::get('token', ''));
     	$mail = addslashes(Request::get('sys_forget_mail', ''));
- 
-    	if(Session::token() === $token){
+		$error = '';
+     	if(Session::token() === $token){
     		if($mail != ''){
     			$checkMail = ValidForm::checkRegexEmail($mail);
     			if(!$checkMail) {

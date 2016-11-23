@@ -203,51 +203,6 @@ USER_CUSTOMMER = {
 			}
 		});
 	},
-	changePass:function(){
-		jQuery('#btnChangePass').click(function(){
-			
-			var email = jQuery('#sys_change_email');
-			var pass = jQuery('#sys_change_pass');
-			var repass = jQuery('#sys_change_re_pass');
-			
-			var error = '';
-			if(email.val() == ''){
-				email.addClass('error');
-				error = 'Email không được trống!<br/>';
-			}else{
-				var regex = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-				var checkMail = regex.test(email.val());
-				if(!checkMail){
-					email.addClass('error');
-					error = 'Email không đúng định dạng!<br/>';
-				}else{
-					email.removeClass('error');
-					error = '';
-				}
-			}
-			if(pass.val() == ''){
-				pass.addClass('error');
-				error = error + 'Mật khẩu không được trống!<br/>';
-			}
-			if(repass.val() == ''){
-				repass.addClass('error');
-				error = error + 'Nhập lại mật khẩu không được trống!<br/>';
-			}
-			if(pass.val() != repass.val()){
-				pass.addClass('error');
-				repass.addClass('error');
-				error = error + 'Mật khẩu không khớp!<br/>';
-			}else{
-				pass.removeClass('error');
-				repass.removeClass('error');
-			}
-			
-			if(error != ''){
-				jQuery('#error-change-pass').html(error);
-				return false;
-			}
-		});
-	},
 	forgetpass:function(){
 		jQuery('.clickForgetPass').unbind('click').click(function(){
 			jQuery('.content-popup-show').modal('hide');
@@ -351,7 +306,7 @@ USER_CUSTOMMER = {
 			}
 		});
 	},
-	getDistrictInforCustomer:function(ojb){
+	getDistrictInforCustomer:function(){
 		var customer_province_id = $('#customer_province_id').val();
 		if(parseInt(customer_province_id) > 0){
 			jQuery.ajax({
@@ -365,6 +320,20 @@ USER_CUSTOMMER = {
 					}else{
 						alert(res.msg);
 					}
+				}
+			});
+		}
+	},
+	changePassCustomer:function(){
+		var customer_password = $('#customer_password').val();
+		if(customer_password != '' && confirm('Bạn muốn thay đổi pass')){
+			jQuery.ajax({
+				type: "POST",
+				url: WEB_ROOT + '/thay-doi-mat-khau.html',
+				data: {customer_password : customer_password},
+				dataType: 'json',
+				success: function(res) {
+					alert(res.msg);
 				}
 			});
 		}

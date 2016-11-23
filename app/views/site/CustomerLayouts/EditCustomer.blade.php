@@ -34,7 +34,7 @@
 						</div>
 						<div class="box-item-455 ext">
 							<p>&nbsp;</p>
-							<button  class="btn btn-primary"><i class="fa fa-refresh"></i> Đổi mật khẩu</button>
+							<a href="javascript:void(0);" onclick="USER_CUSTOMMER.changePassCustomer();"class="btn btn-primary"><i class="fa fa-refresh"></i> Đổi mật khẩu</a>
 						</div>
 					</div>
 					<div class="line">
