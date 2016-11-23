@@ -52,8 +52,8 @@
 				{{ Form::open(array('method' => 'GET', 'role'=>'form')) }}
 				<div class="panel-body">
 					<div class="form-group col-lg-6">
-						<label for="news_title">Title tin đăng</label>
-						<input type="text" class="form-control input-sm" id="news_title" name="news_title" placeholder="Tiêu đề tin tức" @if(isset($search['news_title']) && $search['news_title'] != '')value="{{$search['news_title']}}"@endif>
+						<label for="item_name">Title tin đăng</label>
+						<input type="text" class="form-control input-sm" id="item_name" name="item_name" placeholder="Tiêu đề tin tức" @if(isset($search['item_name']) && $search['item_name'] != '')value="{{$search['item_name']}}"@endif>
 					</div>
 					<div class="form-group col-lg-3">
 						<label for="item_status">Trạng thái</label>
@@ -88,18 +88,16 @@
 				<table class="table table-bordered table-hover">
 					<thead class="thin-border-bottom">
 					<tr class="">
-						<th width="2%" class="text-center">STT</th>
 						<th width="10%" class="text-center">Ảnh</th>
 						<th width="45%">Thông tin</th>
-						<th width="12%" class="text-center">Ngày </th>
-						<th width="5%" class="text-center">TT</th>
-						<th width="10%" class="text-center"></th>
+						<th width="13%" class="text-center">Ngày </th>
+						<th width="5%" class="text-center">Ẩn/hiện</th>
+						<th width="15%" class="text-center">Thao tác</th>
 					</tr>
 					</thead>
 					<tbody>
 					@foreach ($data as $key => $item)
 						<tr>
-							<td class="text-center text-middle">{{ $stt + $key+1 }}</td>
 							<td class="text-center text-middle">
 								<img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id, $item->item_image, CGlobal::sizeImage_100)}}">
 							</td>
@@ -107,13 +105,14 @@
 							<td class="text-center text-middle">{{ date('d-m-Y',$item->time_created) }}</td>
 							<td class="text-center">
 								@if($item->item_status == CGlobal::status_show)
-									<a href="javascript:void(0);" style="color: green" title="Hiện"><i class="fa fa-check fa-2x"></i></a>
+									<a href="javascript:void(0);" style="color: green" title="Hiện thị"><i class="fa fa-check fa-2x"></i></a>
 								@else
 									<a href="javascript:void(0);" style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>
 								@endif
 							</td>
 							<td class="text-center text-middle">
 								<a href="{{URL::route('customer.ItemsEdit',array('item_id' => $item->item_id))}}" title="Sửa tin đăng"><i class="fa fa-edit fa-2x"></i></a>
+								&nbsp;&nbsp;&nbsp;<a href="{{URL::route('customer.ItemsEdit',array('item_id' => $item->item_id))}}" title="Up top tin đăng"><i class="fa fa-level-up fa-2x"></i></a>
 							</td>
 						</tr>
 					@endforeach
