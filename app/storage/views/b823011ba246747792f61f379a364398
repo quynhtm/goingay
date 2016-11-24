@@ -67,8 +67,7 @@
 				<a href="javascript:void(0)" class="name-customer">Chào: <?php echo isset($user_customer['customer_name']) ? $user_customer['customer_name'] : 'No Name'; ?></a>
 				<ul class="list-cpanel">
 					<li><a href="<?php echo URL::route('customer.pageChageInfo'); ?>" rel="nofollow"><i class="glyphicon glyphicon-align-left"></i> Thông tin cá nhân</a></li>
-					<li><a href="<?php echo URL::route('customer.pageChagePass'); ?>" rel="nofollow"><i class="glyphicon glyphicon-equalizer"></i> Đổi mật khẩu</a></li>
-					<li><a href="<?php echo URL::route('customer.ItemsList'); ?>" rel="nofollow"><i class="glyphicon glyphicon-equalizer"></i> Tin đã đăng</a></li>
+					<li><a href="<?php echo URL::route('customer.ItemsList'); ?>" rel="nofollow"><i class="glyphicon glyphicon-equalizer"></i> Danh sách tin đăng</a></li>
 					<li><a href="<?php echo URL::route('customer.logout'); ?>" rel="nofollow"><i class="glyphicon glyphicon-share-alt"></i> Thoát</a></li>
 				</ul>
 			</div>

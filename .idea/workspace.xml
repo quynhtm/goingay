@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c717333-8288-4d8a-8ab4-ffaa1fccb75d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php" afterPath="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/routes_site.php" afterPath="$PROJECT_DIR$/app/routes/routes_site.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" afterPath="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/CustomerLayouts/EditCustomer.blade.php" afterPath="$PROJECT_DIR$/app/views/site/CustomerLayouts/EditCustomer.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/storage/views/b823011ba246747792f61f379a364398" afterPath="$PROJECT_DIR$/app/storage/views/b823011ba246747792f61f379a364398" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/frontend/css/site.css" afterPath="$PROJECT_DIR$/assets/frontend/css/site.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php" afterPath="$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/frontend/css/usercustomer.css" afterPath="$PROJECT_DIR$/assets/frontend/css/usercustomer.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/frontend/js/usercustomer.js" afterPath="$PROJECT_DIR$/assets/frontend/js/usercustomer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="webtintuc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,24 +50,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="siteUserCustomerController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="siteUserCustomerController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6453988">
-              <caret line="731" column="42" selection-start-line="731" selection-start-column="42" selection-end-line="731" selection-end-column="42" />
+            <state vertical-scroll-proportion="-20.23077">
+              <caret line="691" column="42" selection-start-line="691" selection-start-column="42" selection-end-line="691" selection-end-column="42" />
               <folding>
                 <element signature="n#pageLogin#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-                <element signature="n#logout#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-                <element signature="n#pageRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-                <element signature="n#pageActiveRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-                <element signature="n#pageChageInfo#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-                <element signature="n#validChageInfo#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-                <element signature="n#getDistrictCustomer#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
                 <element signature="n#pageForgetPass#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
                 <element signature="n#itemsList#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
                 <element signature="n#getAddItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
                 <element signature="n#getEditItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
                 <element signature="n#validInforItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+                <marker date="1479966094251" expanded="true" signature="1367:2055" placeholder="..." />
+                <marker date="1479966094251" expanded="true" signature="1405:2055" placeholder="..." />
+                <marker date="1479966094251" expanded="true" signature="1482:1538" placeholder="..." />
+                <marker date="1479966094251" expanded="true" signature="1544:2055" placeholder="..." />
+                <marker date="1479966094251" expanded="true" signature="1644:2055" placeholder="..." />
+                <marker date="1479966094251" expanded="true" signature="1764:1820" placeholder="..." />
+                <marker date="1479966094251" expanded="true" signature="1880:2055" placeholder="..." />
+                <marker date="1479966094251" expanded="true" signature="2011:2055" placeholder="..." />
+                <marker date="1479966094251" expanded="true" signature="12894:12895" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -81,15 +86,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="usercustomer.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="usercustomer.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/frontend/js/usercustomer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="346" column="40" selection-start-line="346" selection-start-column="33" selection-end-line="346" selection-end-column="40" />
-              <folding>
-                <element signature="e#3418#4955#0" expanded="false" />
-                <element signature="e#4979#6232#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.5755054">
+              <caret line="339" column="0" selection-start-line="339" selection-start-column="0" selection-end-line="339" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -147,9 +149,9 @@
         <option value="$PROJECT_DIR$/app/models/UserCustomer.php" />
         <option value="$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php" />
         <option value="$PROJECT_DIR$/app/routes/routes_site.php" />
-        <option value="$PROJECT_DIR$/assets/frontend/js/usercustomer.js" />
         <option value="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php" />
+        <option value="$PROJECT_DIR$/assets/frontend/js/usercustomer.js" />
       </list>
     </option>
   </component>
@@ -526,7 +528,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php</url>
-          <line>459</line>
+          <line>419</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
@@ -894,35 +896,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/frontend/js/usercustomer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="346" column="40" selection-start-line="346" selection-start-column="33" selection-end-line="346" selection-end-column="40" />
-          <folding>
-            <element signature="e#3418#4955#0" expanded="false" />
-            <element signature="e#4979#6232#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6453988">
-          <caret line="731" column="42" selection-start-line="731" selection-start-column="42" selection-end-line="731" selection-end-column="42" />
+        <state vertical-scroll-proportion="-20.23077">
+          <caret line="691" column="42" selection-start-line="691" selection-start-column="42" selection-end-line="691" selection-end-column="42" />
           <folding>
             <element signature="n#pageLogin#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#logout#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#pageRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#pageActiveRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#pageChageInfo#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#validChageInfo#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#getDistrictCustomer#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
             <element signature="n#pageForgetPass#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
             <element signature="n#itemsList#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
             <element signature="n#getAddItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
             <element signature="n#getEditItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
             <element signature="n#validInforItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <marker date="1479966094251" expanded="true" signature="1367:2055" placeholder="..." />
+            <marker date="1479966094251" expanded="true" signature="1405:2055" placeholder="..." />
+            <marker date="1479966094251" expanded="true" signature="1482:1538" placeholder="..." />
+            <marker date="1479966094251" expanded="true" signature="1544:2055" placeholder="..." />
+            <marker date="1479966094251" expanded="true" signature="1644:2055" placeholder="..." />
+            <marker date="1479966094251" expanded="true" signature="1764:1820" placeholder="..." />
+            <marker date="1479966094251" expanded="true" signature="1880:2055" placeholder="..." />
+            <marker date="1479966094251" expanded="true" signature="2011:2055" placeholder="..." />
+            <marker date="1479966094251" expanded="true" signature="12894:12895" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/frontend/js/usercustomer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5755054">
+          <caret line="339" column="0" selection-start-line="339" selection-start-column="0" selection-end-line="339" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

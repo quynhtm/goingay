@@ -2,7 +2,6 @@ jQuery(document).ready(function($){
 	USER_CUSTOMMER.register();
 	USER_CUSTOMMER.login();
 	USER_CUSTOMMER.changeInfo();
-	USER_CUSTOMMER.changePass();
 	USER_CUSTOMMER.forgetpass();
 	USER_CUSTOMMER.getNewPass();
 	USER_CUSTOMMER.viewItemOrder();
@@ -204,7 +203,7 @@ USER_CUSTOMMER = {
 		});
 	},
 	forgetpass:function(){
-		jQuery('.clickForgetPass').unbind('click').click(function(){
+		jQuery('.clickForgetPass').click(function(){
 			jQuery('.content-popup-show').modal('hide');
 			jQuery('#sys-popup-forgetpass').modal('show');
 			jQuery('#btnForgetpass').click(function(){
@@ -352,4 +351,5 @@ USER_CUSTOMMER = {
 			});
 		}
 	}
+
 }

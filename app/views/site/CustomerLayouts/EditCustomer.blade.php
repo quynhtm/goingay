@@ -44,7 +44,7 @@
 						</div>
 						<div class="box-item-455 ext">
 							<div class="mail-show">
-								<input name="customer_show_email" value="@if(isset($user_customer['customer_show_email'])){{$user_customer['customer_show_email']}}@endif" @if(isset($user_customer['customer_show_email']) && $user_customer['customer_show_email'] == 1)checked @endif class="checkbox" type="checkbox">
+								<input name="customer_show_email" value="1" @if(isset($user_customer['customer_show_email']) && $user_customer['customer_show_email'] == 1)checked @endif class="checkbox" type="checkbox">
 								<span class="hien_email">Hiển thị</span>
 							</div>
 						</div>
@@ -77,13 +77,13 @@
 							<p>Giới tính: </p>
 							<select class="select_s" name="customer_gender">
 								<option value="">Chọn giới tính</option>
-								<option value="1" @if(isset($user_customer['customer_show_email']) && $user_customer['customer_show_email'] == 1)checked @endif>Nam</option>
-								<option value="0"@if(isset($user_customer['customer_show_email']) && $user_customer['customer_show_email'] == 0)checked @endif>Nữ</option>
+								<option value="1" @if(isset($user_customer['customer_gender']) && $user_customer['customer_gender'] == 1)selected @endif>Nam</option>
+								<option value="0" @if(isset($user_customer['customer_gender']) && $user_customer['customer_gender'] == 0)selected @endif>Nữ</option>
 							</select>
 						</div>
 						<div class="box-item-455 born">
 							<p>Ngày sinh: </p>
-							<input name="customer_birthday" placeholder="dd/mm/yyyy" value="" autocomplete="off" type="text">
+							<input name="customer_birthday" placeholder="dd/mm/yyyy" value="@if(isset($user_customer['customer_birthday'])){{$user_customer['customer_birthday']}}@endif" autocomplete="off" type="text">
 						</div>
 					</div>
 					<div class="line">
