@@ -199,19 +199,10 @@ class SiteUserCustomerController extends BaseSiteController{
     	}
 		$this->header();
 		$this->menuLeft();
-		
+		$dataNew = array();
 		$messages = '';
 		$this->user_customer = $dataShow = Session::get('user_customer');
-		//FunctionLib::debug($customer);
-
-		//thong tin tinh thanh
-		$province = Province::getAllProvince();
-		$customer_province_id = isset($this->user_customer['customer_province_id'])?$this->user_customer['customer_province_id']: 0;
-		$optionProvince = FunctionLib::getOption(array(0=>'---Chọn tỉnh thành----') + $province, $customer_province_id);
-
-		$district = ($customer_province_id > 0)?Districts::getDistrictByProvinceId($customer_province_id): array();
-		$optionDistrict = FunctionLib::getOption(array(0=>'---Chọn quận huyện----') + $district, isset($this->user_customer['customer_district_id'])?$this->user_customer['customer_district_id']: 0);
-
+		
 		//khi sửa thông tin KH
 		if(isset($_POST) && !empty($_POST) && !empty($this->user_customer)){
 			$token = Request::get('_token', '');
@@ -246,8 +237,18 @@ class SiteUserCustomerController extends BaseSiteController{
 				}
 			}
 			$dataUpdate['customer_email'] = $customer_email;
-			$dataShow = $dataUpdate;
+			$this->user_customer = $dataShow = Session::get('user_customer');
 		}
+		
+		//thong tin tinh thanh
+		$province = Province::getAllProvince();
+		$customer_province_id = isset($this->user_customer['customer_province_id'])?$this->user_customer['customer_province_id']: 0;
+		$optionProvince = FunctionLib::getOption(array(0=>'---Chọn tỉnh thành----') + $province, $customer_province_id);
+		
+		$district = ($customer_province_id > 0)?Districts::getDistrictByProvinceId($customer_province_id): array();
+		$optionDistrict = FunctionLib::getOption(array(0=>'---Chọn quận huyện----') + $district, isset($this->user_customer['customer_district_id'])?$this->user_customer['customer_district_id']: 0);
+		
+		
 		$this->layout->content = View::make('site.CustomerLayouts.EditCustomer')
 								->with('user_customer',$dataShow)
 								->with('optionProvince',$optionProvince)
