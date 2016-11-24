@@ -83,7 +83,7 @@
 						</div>
 						<div class="box-item-455 born">
 							<p>Ngày sinh: </p>
-							<input name="customer_birthday" placeholder="dd/mm/yyyy" value="" autocomplete="off" type="text">
+							<input name="customer_birthday" placeholder="dd/mm/yyyy" value="@if(isset($user_customer['customer_birthday'])){{$user_customer['customer_birthday']}}@endif" autocomplete="off" type="text">
 						</div>
 					</div>
 					<div class="line">

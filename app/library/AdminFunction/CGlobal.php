@@ -76,7 +76,11 @@ class CGlobal{
     const status_show = 1;
     const status_hide = 0;
     const status_block = -2;
-
+	
+    //is_login Customer
+    const not_login = 0;
+    const is_login = 1;
+    
     //Tin tuc
     const NEW_CATEGORY_CUSTOMER = 1;
     const NEW_CATEGORY_SHOP = 2;

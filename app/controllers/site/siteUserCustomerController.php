@@ -46,33 +46,10 @@ class SiteUserCustomerController extends BaseSiteController{
 	    					$encode_password = UserCustomer::encode_password($pass);
 	    					if($customer->customer_password == $encode_password){
 	    						$timeLogin = time();
-	    						$data = array(
-    								'customer_id' => $customer->customer_id,
-    								'customer_name' => $customer->customer_name,
-    								'customer_phone' => $customer->customer_phone,
-    								'customer_address' => $customer->customer_address,
-    								'customer_email' => $customer->customer_email,
-    								'customer_show_email' => $customer->customer_show_email,
-    								'customer_province_id' => $customer->customer_province_id,
-    								'customer_district_id' => $customer->customer_district_id,
-    								'customer_about' => $customer->customer_about,
-    								'customer_gender' => $customer->customer_gender,
-    								'customer_birthday' => $customer->customer_birthday,
-    								'customer_status' => $customer->customer_status,
-    								'customer_up_item' => $customer->customer_up_item,
-    								'customer_time_login' => $timeLogin,
-    								'customer_time_created' => $customer->customer_time_created,
-    								'customer_time_active' => $customer->customer_time_active,
-    								'is_customer' => $customer->is_customer,
-    								'time_start_vip' => $customer->time_start_vip,
-    								'time_end_vip' => $customer->time_end_vip,
-    								'is_login' => 1,
-    							);
-	    						Session::put('user_customer', $data, 60*24);
+	    						Session::put('user_customer', $customer, 60*24);
 	    						Session::save();
-	    						
 	    						$dataUpdate = array(
-	    								'is_login'=>1,
+	    								'is_login'=>CGlobal::is_login,
 	    								'customer_time_login'=>$timeLogin,
 	    						);
 	    						UserCustomer::updateData($customer->customer_id, $dataUpdate);
@@ -205,25 +182,7 @@ class SiteUserCustomerController extends BaseSiteController{
     			UserCustomer::updateData($customer_id, $dataUpdate);
     			$customer = UserCustomer::getByID($customer_id);
     			if(sizeof($customer) > 0){
-    				$data = array(
-    						'customer_id' => $customer->customer_id,
-    						'customer_name' => $customer->customer_name,
-    						'customer_phone' => $customer->customer_phone,
-    						'customer_address' => $customer->customer_address,
-    						'customer_email' => $customer->customer_email,
-    						'customer_province' => $customer->customer_province,
-    						'customer_about' => $customer->customer_about,
-    						'customer_status' => $customer->customer_status,
-    						'customer_up_item' => $customer->customer_up_item,
-    						'customer_time_login' => $customer->customer_time_login,
-    						'customer_time_created' => $customer->customer_time_created,
-    						'customer_time_active' => $customer->customer_time_active,
-    						'is_customer' => $customer->is_customer,
-    						'time_start_vip' => $customer->time_start_vip,
-    						'time_end_vip' => $customer->time_end_vip,
-    						'is_login' => $customer->is_login,
-    				);
-    				Session::put('user_customer', $data, 60*24);
+    				Session::put('user_customer', $customer, 60*24);
     				Session::save();
     				FunctionLib::messages('messages', 'Kích hoạt tài khoản thành công!', 'success');
     				return Redirect::route('site.home');
@@ -235,9 +194,9 @@ class SiteUserCustomerController extends BaseSiteController{
 
 	//Change Info - Chage Pass
 	public function pageChageInfo(){
-		if (!UserCustomer::isLogin()) {
-			return Redirect::route('site.home');
-		}
+		if(!Session::has('user_customer')){
+    		return Redirect::route('site.home');
+    	}
 		$this->header();
 		$this->menuLeft();
 		
@@ -356,7 +315,7 @@ class SiteUserCustomerController extends BaseSiteController{
 					);
 					Mail::send('emails.ForgetPass', array('data'=>$dataTheme), function($message) use ($emails){
 						$message->to($emails, 'mailUserCustomer')
-							->subject('Hướng dẫn thay đổi mật khẩu '.date('d/m/Y h:i',  time()));
+							->subject('Thay đổi mật khẩu tại '.date('d/m/Y h:i',  time()));
 					});
 					$data['isIntOk'] = 1;
 					$data['msg'] = 'Đã cập nhật mật khẩu thành công';
@@ -366,9 +325,9 @@ class SiteUserCustomerController extends BaseSiteController{
 		}
 	}
 	public function pageForgetPass(){
-		if (!UserCustomer::isLogin()) {
-			return Redirect::route('site.home');
-		}
+		if(Session::has('user_customer')){
+    		return Redirect::route('site.home');
+    	}
     	$token = addslashes(Request::get('token', ''));
     	$mail = addslashes(Request::get('sys_forget_mail', ''));
 		$error = '';

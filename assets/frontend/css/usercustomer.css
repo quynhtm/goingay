@@ -81,7 +81,7 @@
     font-size: 13px;
     height: 30px;
     line-height: 20px;
-    padding-left: 15px;
+    padding: 0 5px;
     width: 100%;
 }
 .classic-popup-bottomText {

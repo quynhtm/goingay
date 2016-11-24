@@ -149,6 +149,8 @@ h1, h2, h3, h4, h5, h6{
     height: 45px;
     margin-right: 15px;
     padding: 6px 15px 11px;
+    width: 188px;
+    overflow: hidden;
 }
 .list-link > li {
     display: inline-block;
@@ -529,7 +531,13 @@ h1, h2, h3, h4, h5, h6{
     padding-right: 10px;
 }
 .name-customer {
-    line-height: 45px;
+    max-width: 100%;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: right;
+	line-height: 45px;
 }
 /*Menu Left*/
 .col-left-5 {
@@ -772,7 +780,7 @@ h1, h2, h3, h4, h5, h6{
 	display: inline-block;
 	float: left;
 	height: 45px;
-	padding: 8px 25px 9px;
+	padding: 8px 8px 8px;
 	position: relative;
 }
 .icon-address{
@@ -790,7 +798,7 @@ h1, h2, h3, h4, h5, h6{
     width: 400px;
     height: 320px;
     background: #f2f2f2;
-    left: -111px;
+    left: -129px;
     top: 43px;
     display: none;
     border: 1px solid #ddd;
