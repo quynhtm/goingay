@@ -365,6 +365,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			}
 		}
 	}
+
 	public function pageForgetPass(){
 		if (!UserCustomer::isLogin()) {
 			return Redirect::route('site.home');
@@ -711,5 +712,33 @@ class SiteUserCustomerController extends BaseSiteController{
 			return true;
 		}
 		return false;
+	}
+
+	//ajaz set Top tin dang
+	public function setTopItems(){
+		$data = array('isIntOk' => 0,'msg' => 'Không set top tin đăng này được');
+		if (!UserCustomer::isLogin()) {
+			return Response::json($data);
+		}
+		$item_id = (int)trim(Request::get('item_id', 0));
+		if(!empty($this->user_customer) && $item_id > 0){
+			$items = array();
+			if(isset($this->user_customer['customer_id']) && $this->user_customer['customer_id'] > 0 && $item_id > 0){
+				$items = Items::getItemByCustomerId($this->user_customer['customer_id'], $item_id);
+			}
+			if(!empty($items)){
+				if($item_id > 0){//set top
+					$dataSave['time_ontop'] = time();
+					$dataSave['time_update'] = time();
+					if(Items::updateData($item_id,$dataSave)){
+						$data['isIntOk'] = 1;
+						$data['msg'] = 'OnTop tin thành công';
+						return Response::json($data);
+					}
+				}
+			}else{
+				return Response::json($data);
+			}
+		}
 	}
 }

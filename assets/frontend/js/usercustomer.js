@@ -337,5 +337,19 @@ USER_CUSTOMMER = {
 				}
 			});
 		}
+	},
+	setTopItems:function(item_id){
+		var customer_password = $('#customer_password').val();
+		if(parseInt(item_id) > 0 && confirm('Bạn muốn up top tin đăng này')){
+			jQuery.ajax({
+				type: "POST",
+				url: WEB_ROOT + '/up-top-tin-dang.html',
+				data: {item_id : item_id},
+				dataType: 'json',
+				success: function(res) {
+					alert(res.msg);
+				}
+			});
+		}
 	}
 }

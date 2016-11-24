@@ -112,7 +112,7 @@
 							</td>
 							<td class="text-center text-middle">
 								<a href="{{URL::route('customer.ItemsEdit',array('item_id' => $item->item_id))}}" title="Sửa tin đăng"><i class="fa fa-edit fa-2x"></i></a>
-								&nbsp;&nbsp;&nbsp;<a href="{{URL::route('customer.ItemsEdit',array('item_id' => $item->item_id))}}" title="Up top tin đăng"><i class="fa fa-level-up fa-2x"></i></a>
+								&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" onclick="USER_CUSTOMMER.setTopItems({{$item->item_id}});" title="Up top tin đăng"><i class="fa fa-level-up fa-2x"></i></a>
 							</td>
 						</tr>
 					@endforeach
