@@ -91,7 +91,7 @@
                                 </td>
                                 <td class="text-left text-middle">
                                     @if($item->item_status == CGlobal::status_show)
-                                        <a href="{{FunctionLib::buildLinkDetailProduct($item->item_id, $item->item_image, $item->item_category_name)}}" target="_blank" title="Chi tiết sản phẩm">
+                                        <a href="#" target="_blank" title="Chi tiết sản phẩm">
                                             [<b>{{ $item->item_id }}</b>] {{ $item->item_name }}
                                         </a>
                                     @else
@@ -130,7 +130,7 @@
                                         @endif
                                     @endif
                                     @if($is_root || $permission_full ==1|| $permission_edit ==1  )
-                                        <a href="{{URL::route('admin.product_edit',array('id' => $item->item_id))}}" title="Sửa sản phẩm"><i class="fa fa-edit fa-2x"></i></a>
+                                        <a href="{{URL::route('admin.itemsEdit',array('id' => $item->item_id))}}" title="Sửa sản phẩm"><i class="fa fa-edit fa-2x"></i></a>
                                     @endif
                                     <span class="img_loading" id="img_loading_{{$item->item_id}}"></span>
                                 </td>
