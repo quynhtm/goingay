@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2016-11-21 14:02:11
+Date: 2016-11-25 17:23:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -259,7 +259,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('2', 'admin', 'eef828faf0754495136af05c051766cb', 'Root', '', null, '1', '1', '1479711679', '::1', null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('2', 'admin', 'eef828faf0754495136af05c051766cb', 'Root', '', null, '1', '1', '1480069181', '::1', null, null, null, null, null, null);
 INSERT INTO `user` VALUES ('19', 'tech_code', 'eef828faf0754495136af05c051766cb', 'Tech code 3555', '', '', '1', '2', '1464324115', '::1', null, null, '2', 'admin', null, '1470042647');
 
 -- ----------------------------
@@ -505,13 +505,15 @@ CREATE TABLE `web_customer` (
   `customer_district_id` int(11) DEFAULT NULL,
   `customer_about` text COMMENT 'gioi thieu shop',
   `customer_status` tinyint(1) DEFAULT '0' COMMENT '0-an, 1-hoat dong, 2-khoa',
-  `customer_up_item` int(11) DEFAULT '0' COMMENT 'số lượt dang tin',
   `customer_time_login` int(12) DEFAULT NULL,
   `customer_time_logout` int(12) DEFAULT NULL,
   `customer_time_created` int(12) DEFAULT NULL COMMENT 'Ngày tạo',
   `customer_time_active` int(12) DEFAULT '0' COMMENT 'Ngày active',
   `is_customer` tinyint(1) DEFAULT '0' COMMENT '0-thuong, 1-vip',
   `is_login` tinyint(1) DEFAULT '0' COMMENT '0:not login, 1:login',
+  `customer_up_item` int(11) DEFAULT '0' COMMENT 'số lượt dang tin',
+  `customer_number_ontop_in_day` int(6) DEFAULT '0' COMMENT 'Số lượng ontop tin trong 1 ngày',
+  `customer_date_ontop` varchar(50) DEFAULT '0' COMMENT 'Ngày ontop tin đăng',
   `time_start_vip` int(12) DEFAULT NULL COMMENT 'Ngày bắt đầu vip',
   `time_end_vip` int(12) DEFAULT NULL COMMENT 'Ngày hết hạn vip',
   PRIMARY KEY (`customer_id`)
@@ -520,7 +522,7 @@ CREATE TABLE `web_customer` (
 -- ----------------------------
 -- Records of web_customer
 -- ----------------------------
-INSERT INTO `web_customer` VALUES ('1', 'Trương Mạnh Quỳnh', 'eef828faf0754495136af05c051766cb', '0938413368', 'Việt Hưng - Long Biên - Hà Nội', 'manhquynh1984@gmail.com', '0', '0', '', '0', '0', 'Việt Hưng - Long Biên - Hà Nội', '1', '0', '1479372934', '1479372906', '1478594509', '1', '0', '1', null, null);
+INSERT INTO `web_customer` VALUES ('1', 'Trương Mạnh Quỳnh', '99afcc19f7ced142819fb2d355ff7b63', '0938413368', 'Việt Hưng - Long Biên - Hà Nội', 'manhquynh1984@gmail.com', '0', '0', '', '22', '116', 'Việt Hưng - Long Biên - Hà Nội', '1', '1480063953', '1480069302', '1478594509', '1', '0', '0', '2', '1', '25-11-2016', null, null);
 
 -- ----------------------------
 -- Table structure for web_districts
@@ -1354,11 +1356,12 @@ CREATE TABLE `web_items` (
   `time_created` int(11) DEFAULT '0',
   `time_update` int(11) DEFAULT '0',
   PRIMARY KEY (`item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_items
 -- ----------------------------
+INSERT INTO `web_items` VALUES ('1', 'tin thứ 1', '1', '3234324', '0', '<p>&aacute;dasdasd<br />\r\n&nbsp;</p>\r\n', '', null, '97', 'Thời trang', '100', '0', '0', '1', '0', '1', '22', null, '116', null, '1', 'Trương Mạnh Quỳnh', '0', '1480063979', '1480061746', '1480063979');
 
 -- ----------------------------
 -- Table structure for web_news

@@ -180,9 +180,8 @@ class UserCustomerController extends BaseAdminController
                 if (Session::has('user_customer')) {
                     Session::forget('user_customer');//xóa session
                 }
-
                 Session::put('user_customer', $userShop, 60*24);
-                //return Redirect::route('shop.adminShop');
+                return Redirect::route('customer.ItemsList');
             }
         }
         return Redirect::route('admin.customerView');
