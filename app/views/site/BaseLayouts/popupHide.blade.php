@@ -60,6 +60,10 @@
                   	<div class="btn btn-primary btn-ext" id="btnLogin" href="javascript:void(0)">Đăng nhập</div>
                   	<a class="clickForgetPass" href="javascript:void(0)" rel="nofollow">Bạn quên mật khẩu?</a>
                 </div>
+                <div class="action-popup-button">
+                	<a href="javascript:void(0)" id="clickLoginFacebook" class="login-facebook"></a>
+                	<a href="javascript:void(0)" id="clickLoginGoogle" class="login-google"></a>
+                </div>
 				{{Form::close()}}
             </div>
             <div class="modal-footer-classic">Bạn chưa có tài khoản? <span class="btnPopLogin clickRegister">Đăng ký</span> ngay.</div>

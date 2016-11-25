@@ -13,7 +13,9 @@ class UserCustomer extends Eloquent
     protected $fillable = array('customer_id','customer_name','customer_email','customer_show_email','customer_phone',
         'customer_address','customer_password','customer_province_id','customer_district_id','customer_about','customer_status',
         'customer_up_item','customer_time_login','customer_time_logout','customer_time_created','customer_time_active',
-        'customer_gender','customer_birthday','is_customer','customer_number_ontop_in_day','customer_date_ontop','is_login','time_start_vip','time_end_vip');
+        'customer_gender','customer_birthday','is_customer','customer_number_ontop_in_day','customer_date_ontop','is_login','time_start_vip','time_end_vip',
+    	'customer_id_facebook', 'customer_id_google',
+    );
 
     public static function getByID($id) {
         $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_CUSTOMER_ID.$id) : array();

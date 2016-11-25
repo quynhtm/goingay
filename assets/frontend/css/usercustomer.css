@@ -144,3 +144,27 @@
 .modal-backdrop.in{
 	opacity: 0.5;
 }
+.login-facebook {
+    background: #3b5a9b url(../img/icon-social.png) no-repeat top left;
+    width: 110px;
+    height: 34px;
+    display: inline-block;
+    font-size: 100%;
+    vertical-align: top;
+	border-radius: 2px;
+	overflow: hidden;
+}
+.login-facebook:hover,
+.login-google:hover{
+	opacity:0.8;
+}
+.login-google{
+	background: #db2814 url(../img/icon-social.png) no-repeat bottom left;
+    width: 110px;
+    height: 34px;
+    display: inline-block;
+    font-size: 100%;
+    vertical-align: top;
+	border-radius: 2px;
+	overflow: hidden;
+}

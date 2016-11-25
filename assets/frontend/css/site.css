@@ -147,9 +147,9 @@ h1, h2, h3, h4, h5, h6{
     float: right;
     font-size: 12px;
     height: 45px;
-    margin-right: 15px;
-    padding: 6px 15px 11px;
-    width: 188px;
+    margin-right: 13px;
+    padding: 6px 10px 11px;
+    width: 172px;
     overflow: hidden;
 }
 .list-link > li {
@@ -497,6 +497,7 @@ h1, h2, h3, h4, h5, h6{
 .cpanel-page {
     display: inline-block;
     position: relative;
+	width: 100%;
 }
 .list-cpanel {
     background: #f7f7f7;
@@ -508,6 +509,7 @@ h1, h2, h3, h4, h5, h6{
     z-index: 10;
 	border-top:none;
 	display:none;
+	top: 45px;
 }
 .cpanel-page:hover .list-cpanel{
 	display:block;
@@ -529,9 +531,10 @@ h1, h2, h3, h4, h5, h6{
     height: 45px;
     margin-right: 10px;
     padding-right: 10px;
+    max-width: 160px;
 }
 .name-customer {
-    max-width: 100%;
+    width: 100%;
     display: inline-block;
     white-space: nowrap;
     text-overflow: ellipsis;

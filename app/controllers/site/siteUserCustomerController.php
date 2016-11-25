@@ -5,7 +5,9 @@
 * @Date      : 11/2016
 * @Version   : 1.0
 */
-
+if(session_status() == PHP_SESSION_NONE){
+	session_start();
+}
 class SiteUserCustomerController extends BaseSiteController{
     protected $user_customer = array();
 	private $arrStatusProduct = array(-1 => '---- Trạng thái----',CGlobal::status_show => 'Hiển thị',CGlobal::status_hide => 'Ẩn');
@@ -730,5 +732,194 @@ class SiteUserCustomerController extends BaseSiteController{
 				return Response::json($data);
 			}
 		}
+	}
+	public function loginFacebook(){
+		
+		$fb = new Facebook\Facebook ([
+				'app_id' => '1806153732995309',
+				'app_secret' => '9ffa193548158f07eb1e28eaff4a5403',
+				'default_graph_version' => 'v2.8',
+				'persistent_data_handler' => 'session'
+				]);
+			
+		$helper = $fb->getRedirectLoginHelper();
+			
+		try{
+			$accessToken = $helper->getAccessToken();
+		}catch(Facebook\Exceptions\FacebookResponseException $e) {
+			//When Graph returns an error
+			echo 'Graph returned an error: ' . $e->getMessage();
+			exit;
+		}catch(Facebook\Exceptions\FacebookSDKException $e) {
+			//When validation fails or other local issues
+			echo 'Facebook SDK returned an error: ' . $e->getMessage();
+			exit;
+		}
+			
+		if (!isset($accessToken)) {
+			$permissions = array('public_profile','email'); //Optional permissions
+			$loginUrl = $helper->getLoginUrl(Config::get('config.WEB_ROOT').'/facebooklogin', $permissions);
+			header("Location: ".$loginUrl);
+			exit;
+		}
+			
+		try{
+			//Returns a 'Facebook\FacebookResponse' object
+			$fields = array('id', 'name', 'email','first_name', 'last_name', 'birthday', 'gender', 'locale');
+			$response = $fb->get('/me?fields='.implode(',', $fields).'', $accessToken);
+		}catch(Facebook\Exceptions\FacebookResponseException $e) {
+			echo 'Graph returned an error: ' . $e->getMessage();
+			exit;
+		}catch(Facebook\Exceptions\FacebookSDKException $e) {
+			echo 'Facebook SDK returned an error: ' . $e->getMessage();
+			exit;
+		}
+			
+		$user = $response->getGraphUser();
+		
+		if(sizeof($user) > 0){
+			$data = array();
+			
+			if(isset($user['id'])){
+				$data['customer_id_facebook'] = $user['id'];
+			}
+			if(isset($user['email'])){
+				$data['customer_email'] = $user['email'];
+			}
+			if(isset($user['name'])){
+				$data['customer_name'] = $user['name'];
+			}else{
+				$data['customer_name'] = '';
+			}
+			if(isset($user['gender'])){
+				if($user['gender'] == 'male'){
+					$data['customer_gender'] = 1;//Nam
+				}else{
+					$data['customer_gender'] = 0;//Nu
+				}
+			}else{
+				$data['customer_gender'] = 0;//Nu
+			}
+			if(isset($data['customer_id_facebook']) && $data['customer_id_facebook'] != ''){
+				if(isset($data['customer_email']) && $data['customer_email'] != ''){
+			
+					$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
+					if(sizeof($customer) > 0){
+						if(isset($customer->customer_id_facebook) && $customer->customer_id_facebook == ''){
+							$dataUpdate = array(
+									'customer_id_facebook' => $data['customer_id_facebook']
+							);
+							UserCustomer::updateData($customer->customer_id, $dataUpdate);
+							$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
+						}
+					}else{
+						$dataInsert['customer_time_created'] = time();
+						$dataInsert['customer_status'] = CGlobal::status_show;
+						$dataInsert['customer_time_login'] = time();
+						$dataInsert['customer_phone'] = '';
+						$dataInsert['customer_address'] = '';
+						$dataInsert['customer_email'] = $data['customer_email'];
+						$dataInsert['customer_gender'] = $data['customer_gender'];
+						$dataInsert['customer_name'] = $data['customer_name'];
+						UserCustomer::addData($dataInsert);
+						$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
+					}
+			
+					Session::put('user_customer', $customer, 60*24);
+					Session::save();
+			
+				}else{
+					echo '<script>alert("Bạn chưa công khai email!"); window.close();</script>';
+				}
+			}
+			
+			echo '<script>window.close();</script>';
+		}
+	}
+	public function loginGoogle(){
+	$client_id = '803912434754-0lpl6oc4t68ld167qn90i4uhldrlsi33.apps.googleusercontent.com'; 
+		$client_secret = 'BZJ1GVA-mG57HHOeJSKJBKeB';
+		$redirect_uri = 'http://dev.sanphamredep.com/googlelogin';
+		
+		$client = new Google_Client();
+		$client->setClientId($client_id);
+		$client->setClientSecret($client_secret);
+		$client->setRedirectUri($redirect_uri);
+		$client->addScope("email");
+		$client->addScope("profile");
+		
+		$service = new Google_Service_Oauth2($client);
+		$access_token = '';
+		$customer = array();
+		
+		if(isset($_GET['code'])){
+			
+			$client->authenticate($_GET['code']);
+			$access_token = $client->getAccessToken();
+			
+			$client->setAccessToken($access_token);
+			$user = $service->userinfo->get();
+			
+			if(sizeof($user) > 0){
+				$data = array();
+				
+				if(isset($user['id'])){
+					$data['customer_id_google'] = $user['id'];
+				}
+				if(isset($user['email'])){
+					$data['customer_email'] = $user['email'];
+				}
+				if(isset($user['name'])){
+					$data['customer_name'] = $user['name'];
+				}else{
+					$data['customer_name'] = '';
+				}
+				if(isset($user['gender'])){
+					if($user['gender'] == 'male'){
+						$data['customer_gender'] = 1;//Nam
+					}else{
+						$data['customer_gender'] = 0;//Nu
+					}
+				}else{
+					$data['customer_gender'] = 0;//Nu
+				}
+				
+				if(isset($data['customer_id_google']) && $data['customer_id_google'] != ''){
+					if(isset($data['customer_email']) && $data['customer_email'] != ''){
+						
+						$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
+						if(sizeof($customer) > 0){
+							if(isset($customer->customer_id_google) && $customer->customer_id_google == ''){
+								$dataUpdate = array(
+									'customer_id_google' => $data['customer_id_google']
+								);
+								UserCustomer::updateData($customer->customer_id, $dataUpdate);
+								$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
+							}
+						}else{
+							$dataInsert['customer_time_created'] = time();
+							$dataInsert['customer_status'] = CGlobal::status_show;
+							$dataInsert['customer_time_login'] = time();
+							$dataInsert['customer_phone'] = '';
+							$dataInsert['customer_address'] = '';
+							$dataInsert['customer_email'] = $data['customer_email'];
+							$dataInsert['customer_gender'] = $data['customer_gender'];
+							$dataInsert['customer_name'] = $data['customer_name'];
+							UserCustomer::addData($dataInsert);
+							$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
+						}
+						
+						Session::put('user_customer', $customer, 60*24);
+						Session::save();
+						
+					}
+				}
+			}
+			echo '<script>window.close();</script>';
+		}else{
+			$authUrl = $client->createAuthUrl();
+			header("Location: ".$authUrl);
+		}
+		die;
 	}
 }

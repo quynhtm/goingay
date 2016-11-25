@@ -4,7 +4,9 @@ jQuery(document).ready(function($){
 	USER_CUSTOMMER.changeInfo();
 	USER_CUSTOMMER.forgetpass();
 	USER_CUSTOMMER.getNewPass();
-	USER_CUSTOMMER.viewItemOrder();
+	
+	USER_CUSTOMMER.clickLoginFacebook();
+	USER_CUSTOMMER.clickLoginGoogle();
 });
 
 USER_CUSTOMMER = {
@@ -281,30 +283,6 @@ USER_CUSTOMMER = {
 			}
 		});
 	},
-	viewItemOrder:function(){
-		jQuery('.viewOrder').click(function(){
-			var item = jQuery(this).attr('data');
-			if(item > 0){
-				jQuery('#sys-popup-view-order').modal('show');
-				//Check ajax
-				var url = WEB_ROOT + '/chi-tiet-don-hang.html';
-				jQuery('body').append('<div class="loading"></div>');
-				jQuery('#sys-popup-view-order .content-item').html('');
-				jQuery.ajax({
-					type: "POST",
-					url: url,
-					data: "item="+encodeURI(item),
-					success: function(data){
-						jQuery('body').find('div.loading').remove();
-						if(data != ''){
-							data = jQuery.parseJSON(data);
-							jQuery('#sys-popup-view-order .content-item').append(data);
-						}
-					}
-				});
-			}
-		});
-	},
 	getDistrictInforCustomer:function(){
 		var customer_province_id = $('#customer_province_id').val();
 		if(parseInt(customer_province_id) > 0){
@@ -349,6 +327,49 @@ USER_CUSTOMMER = {
 				}
 			});
 		}
-	}
+	},
+	
+	//Login Social
+	clickLoginFacebook:function(){
+		jQuery('#clickLoginFacebook').click(function(){
+			$.oauthPopup({
+	            path: WEB_ROOT+'/facebooklogin',
+				width:800,
+				height:570,
+	            callback: function(){
+	                window.location.reload();
+	            }
+	        });
+		});
+	},
+	clickLoginGoogle:function(){
+		jQuery('#clickLoginGoogle').click(function(){
+			$.oauthPopup({
+	            path: WEB_ROOT+'/googlelogin',
+				width:800,
+				height:570,
+	            callback: function(){
+	                window.location.reload();
+	            }
+	        });
+		});
+	},
+};
 
-}
+(function(jQuery){
+	jQuery.oauthPopup = function(options){
+		options.windowName = options.windowName || 'ConnectWithOAuth';
+        options.windowOptions = options.windowOptions || 'location=0,status=0,width='+options.width+',height='+options.height+',scrollbars=1';
+        options.callback = options.callback || function(){
+            window.location.reload();
+        };
+        var that = this;
+        that._oauthWindow = window.open(options.path, options.windowName, options.windowOptions);
+        that._oauthInterval = window.setInterval(function(){
+            if (that._oauthWindow.closed) {
+                window.clearInterval(that._oauthInterval);
+                options.callback();
+            }
+        }, 2000);
+    };
+})(jQuery);

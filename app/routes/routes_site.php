@@ -17,6 +17,9 @@ Route::match(['GET','POST'],'kich-hoat-tai-khoan.html', array('as' => 'customer.
 Route::match(['GET','POST'],'dang-nhap.html', array('as' => 'customer.pageLogin','uses' => 'SiteUserCustomerController@pageLogin'));
 Route::match(['GET','POST'],'thanh-vien-thoat.html', array('as' => 'customer.logout','uses' => 'SiteUserCustomerController@logout'));
 Route::match(['GET','POST'],'quen-mat-khau.html', array('as' => 'customer.pageForgetPass','uses' => 'SiteUserCustomerController@pageForgetPass'));
+//Login Facebook - Google
+Route::match(['GET','POST'], 'facebooklogin', array('as' => 'customer.loginFacebook','uses' => 'SiteUserCustomerController@loginFacebook'));
+Route::match(['GET','POST'], 'googlelogin', array('as' => '.customer.loginGoogle','uses' => 'SiteUserCustomerController@loginGoogle'));
 
 Route::match(['GET','POST'],'thay-doi-thong-tin.html', array('as' => 'customer.pageChageInfo','uses' => 'SiteUserCustomerController@pageChageInfo'));
 Route::match(['GET','POST'],'thay-doi-mat-khau.html', array('as' => 'customer.pageChagePass','uses' => 'SiteUserCustomerController@pageChagePass'));
