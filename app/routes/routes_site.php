@@ -22,6 +22,7 @@ Route::match(['GET','POST'],'thay-doi-thong-tin.html', array('as' => 'customer.p
 Route::match(['GET','POST'],'thay-doi-mat-khau.html', array('as' => 'customer.pageChagePass','uses' => 'SiteUserCustomerController@pageChagePass'));
 Route::post('thong-tin-quan-huyen-cua-khach.html',array('as' => 'customer.getDistrictCustomer','uses' =>'SiteUserCustomerController@getDistrictCustomer'));
 
+
 //Category
 Route::get('{name}-{id}.html',array('as' => 'SiteHomeController.pageCategory','uses' =>'SiteHomeController@pageCategory'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
 Route::get('chi-tiet.html',array('as' => 'SiteHomeController.pageProductView','uses' =>'SiteHomeController@pageProductView'));
@@ -31,5 +32,6 @@ Route::get('quan-ly-tin-dang.html',array('as' => 'customer.ItemsList','uses' =>'
 Route::get('dang-tin.html',array('as' => 'customer.ItemsAdd','uses' =>'SiteUserCustomerController@getAddItem'));
 Route::get('cap-nhat-tin-dang/t-{item_id}.html',array('as' => 'customer.ItemsEdit','uses' =>'SiteUserCustomerController@getEditItem'))->where('item_id', '[0-9]+');
 Route::post('cap-nhat-tin-dang/t-{item_id}.html',array('as' => 'customer.ItemsEdit','uses' =>'SiteUserCustomerController@postEditItem'))->where('item_id', '[0-9]+');
+Route::post('up-top-tin-dang.html',array('as' => 'customer.setTopItems','uses' =>'SiteUserCustomerController@setTopItems'));
 
 

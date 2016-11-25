@@ -325,6 +325,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			}
 		}
 	}
+
 	public function pageForgetPass(){
 		if(Session::has('user_customer')){
     		return Redirect::route('site.home');
@@ -607,6 +608,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			$dataSave['is_customer'] = $this->user_customer['is_customer'];
 			$dataSave['item_province_id'] = $this->user_customer['customer_province_id'];
 			$dataSave['item_district_id'] = $this->user_customer['customer_district_id'];
+
 			$dataSave['item_block'] = CGlobal::PRODUCT_NOT_BLOCK;
 
 			if($item_id > 0){
@@ -629,7 +631,17 @@ class SiteUserCustomerController extends BaseSiteController{
 			else{
 				//FunctionLib::debug($dataSave);
 				$dataSave['time_created'] = time();
+				$dataSave['time_ontop'] = time();
+				$dataSave['time_update'] = time();
 				if(Items::addData($dataSave)){
+					//cập nhật số lượng up tin
+					$dataCustomer['customer_up_item'] = $this->user_customer['customer_up_item'] + 1;;
+					if(UserCustomer::updateData($this->user_customer['customer_id'],$dataCustomer)){
+						$dataNew = UserCustomer::getByID($this->user_customer['customer_id']);
+						Session::forget('user_customer');
+						Session::put('user_customer', $dataNew, 60*24);
+						Session::save();
+					}
 					return Redirect::route('customer.ItemsList');
 				}
 			}
@@ -671,5 +683,52 @@ class SiteUserCustomerController extends BaseSiteController{
 			return true;
 		}
 		return false;
+	}
+
+	//ajaz set Top tin dang
+	public function setTopItems(){
+		$data = array('isIntOk' => 0,'msg' => 'Không set top tin đăng này được');
+		if (!UserCustomer::isLogin()) {
+			return Response::json($data);
+		}
+		$item_id = (int)trim(Request::get('item_id', 0));
+		if(!empty($this->user_customer) && $item_id > 0){
+			$items = array();
+			if(isset($this->user_customer['customer_id']) && $this->user_customer['customer_id'] > 0 && $item_id > 0){
+				$items = Items::getItemByCustomerId($this->user_customer['customer_id'], $item_id);
+			}
+			if(!empty($items)){
+				$inforCustomer = Session::get('user_customer');
+				$today = date('d-m-Y',time());
+				//check trong cung 1 ngay chi duoc 5 lan set ontop
+				if(!empty($inforCustomer) && isset($inforCustomer['customer_date_ontop']) && strcmp($inforCustomer['customer_date_ontop'],$today) == 1	&& isset($inforCustomer['customer_number_ontop_in_day']) && $inforCustomer['customer_number_ontop_in_day'] < 5){
+					if($item_id > 0){//set top
+						$dataSave['time_ontop'] = time();
+						$dataSave['time_update'] = time();
+						if(Items::updateData($item_id,$dataSave)){
+							$number_set_top = ($inforCustomer['customer_number_ontop_in_day'] == 5)?1:$inforCustomer['customer_number_ontop_in_day']+1;
+							//cập nhật số lượng ontop tin đăng
+							$dataCustomer['customer_number_ontop_in_day'] = $number_set_top;
+							$dataCustomer['customer_date_ontop'] = date('d-m-Y');
+							if(UserCustomer::updateData($this->user_customer['customer_id'],$dataCustomer)){
+								$dataNew = UserCustomer::getByID($this->user_customer['customer_id']);
+								Session::forget('user_customer');
+								Session::put('user_customer', $dataNew, 60*24);
+								Session::save();
+							}
+							$data['isIntOk'] = 1;
+							$data['msg'] = 'OnTop tin thành công';
+							return Response::json($data);
+						}
+					}
+				}else{
+					$data['msg'] = 'Bạn đã hết lượt set Top trong ngày hôm nay';
+					return Response::json($data);
+				}
+
+			}else{
+				return Response::json($data);
+			}
+		}
 	}
 }
