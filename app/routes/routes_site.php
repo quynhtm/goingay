@@ -36,5 +36,6 @@ Route::get('dang-tin.html',array('as' => 'customer.ItemsAdd','uses' =>'SiteUserC
 Route::get('cap-nhat-tin-dang/t-{item_id}.html',array('as' => 'customer.ItemsEdit','uses' =>'SiteUserCustomerController@getEditItem'))->where('item_id', '[0-9]+');
 Route::post('cap-nhat-tin-dang/t-{item_id}.html',array('as' => 'customer.ItemsEdit','uses' =>'SiteUserCustomerController@postEditItem'))->where('item_id', '[0-9]+');
 Route::post('up-top-tin-dang.html',array('as' => 'customer.setTopItems','uses' =>'SiteUserCustomerController@setTopItems'));
+Route::post('xoa-tin-dang.html',array('as' => 'customer.removeItems','uses' =>'SiteUserCustomerController@removeItems'));
 
 

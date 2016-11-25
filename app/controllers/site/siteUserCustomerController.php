@@ -204,7 +204,8 @@ class SiteUserCustomerController extends BaseSiteController{
 		$dataNew = array();
 		$messages = '';
 		$this->user_customer = $dataShow = Session::get('user_customer');
-		
+		$customer_province_id = isset($this->user_customer['customer_province_id'])?$this->user_customer['customer_province_id']: 0;
+		$customer_district = isset($this->user_customer['customer_district_id'])?$this->user_customer['customer_district_id']: 0;
 		//khi sửa thông tin KH
 		if(isset($_POST) && !empty($_POST) && !empty($this->user_customer)){
 			$token = Request::get('_token', '');
@@ -221,7 +222,7 @@ class SiteUserCustomerController extends BaseSiteController{
 
 			$error = $this->validChageInfo($dataUpdate);
 			if(Session::token() === $token){
-				$sessionMail = isset($this->user_customer['member_mail']) ? $this->user_customer['member_mail']:'';
+				$sessionMail = isset($this->user_customer['customer_email']) ? $this->user_customer['customer_email']:'';
 				if($sessionMail == $customer_email){
 					if(!empty($error)){
 						$messages = FunctionLib::alertMessage($error, 'error');
@@ -239,18 +240,15 @@ class SiteUserCustomerController extends BaseSiteController{
 				}
 			}
 			$dataUpdate['customer_email'] = $customer_email;
-			$this->user_customer = $dataShow = Session::get('user_customer');
+			$dataShow = $dataUpdate;
 		}
 		
 		//thong tin tinh thanh
 		$province = Province::getAllProvince();
-		$customer_province_id = isset($this->user_customer['customer_province_id'])?$this->user_customer['customer_province_id']: 0;
 		$optionProvince = FunctionLib::getOption(array(0=>'---Chọn tỉnh thành----') + $province, $customer_province_id);
-		
 		$district = ($customer_province_id > 0)?Districts::getDistrictByProvinceId($customer_province_id): array();
-		$optionDistrict = FunctionLib::getOption(array(0=>'---Chọn quận huyện----') + $district, isset($this->user_customer['customer_district_id'])?$this->user_customer['customer_district_id']: 0);
-		
-		
+		$optionDistrict = FunctionLib::getOption(array(0=>'---Chọn quận huyện----') + $district,$customer_district);
+
 		$this->layout->content = View::make('site.CustomerLayouts.EditCustomer')
 								->with('user_customer',$dataShow)
 								->with('optionProvince',$optionProvince)
@@ -610,7 +608,6 @@ class SiteUserCustomerController extends BaseSiteController{
 			$dataSave['is_customer'] = $this->user_customer['is_customer'];
 			$dataSave['item_province_id'] = $this->user_customer['customer_province_id'];
 			$dataSave['item_district_id'] = $this->user_customer['customer_district_id'];
-
 			$dataSave['item_block'] = CGlobal::PRODUCT_NOT_BLOCK;
 
 			if($item_id > 0){
@@ -686,7 +683,6 @@ class SiteUserCustomerController extends BaseSiteController{
 		}
 		return false;
 	}
-
 	//ajaz set Top tin dang
 	public function setTopItems(){
 		$data = array('isIntOk' => 0,'msg' => 'Không set top tin đăng này được');
@@ -701,38 +697,96 @@ class SiteUserCustomerController extends BaseSiteController{
 			}
 			if(!empty($items)){
 				$inforCustomer = Session::get('user_customer');
+
 				$today = date('d-m-Y',time());
 				//check trong cung 1 ngay chi duoc 5 lan set ontop
-				if(!empty($inforCustomer) && isset($inforCustomer['customer_date_ontop']) && strcmp($inforCustomer['customer_date_ontop'],$today) == 1	&& isset($inforCustomer['customer_number_ontop_in_day']) && $inforCustomer['customer_number_ontop_in_day'] < 5){
-					if($item_id > 0){//set top
-						$dataSave['time_ontop'] = time();
-						$dataSave['time_update'] = time();
-						if(Items::updateData($item_id,$dataSave)){
-							$number_set_top = ($inforCustomer['customer_number_ontop_in_day'] == 5)?1:$inforCustomer['customer_number_ontop_in_day']+1;
-							//cập nhật số lượng ontop tin đăng
-							$dataCustomer['customer_number_ontop_in_day'] = $number_set_top;
-							$dataCustomer['customer_date_ontop'] = date('d-m-Y');
-							if(UserCustomer::updateData($this->user_customer['customer_id'],$dataCustomer)){
-								$dataNew = UserCustomer::getByID($this->user_customer['customer_id']);
-								Session::forget('user_customer');
-								Session::put('user_customer', $dataNew, 60*24);
-								Session::save();
+				$numberUpTopCurrent = isset($inforCustomer['customer_number_ontop_in_day']) ? $inforCustomer['customer_number_ontop_in_day']: 5;
+
+				if(!empty($inforCustomer)){
+					//check cung 1 ngày set top
+					if(isset($inforCustomer['customer_date_ontop']) && strcmp($inforCustomer['customer_date_ontop'],$today) == 0){
+						if($numberUpTopCurrent < 5){
+							if($item_id > 0){//set top
+								$dataSave['time_ontop'] = time();
+								$dataSave['time_update'] = time();
+								if(Items::updateData($item_id,$dataSave)){
+									$number_set_top = $numberUpTopCurrent + 1;//cộng thêm lượt settop
+									//cập nhật số lượng ontop tin đăng
+									$dataCustomer['customer_number_ontop_in_day'] = $number_set_top;
+									$dataCustomer['customer_date_ontop'] = date('d-m-Y');
+									if(UserCustomer::updateData($this->user_customer['customer_id'],$dataCustomer)){
+										$dataNew = UserCustomer::getByID($this->user_customer['customer_id']);
+										Session::forget('user_customer');
+										Session::put('user_customer', $dataNew, 60*24);
+										Session::save();
+									}
+									$data['isIntOk'] = 1;
+									$data['msg'] = 'OnTop tin thành công';
+									return Response::json($data);
+								}
 							}
-							$data['isIntOk'] = 1;
-							$data['msg'] = 'OnTop tin thành công';
+						}else{
+							$data['msg'] = 'Bạn đã up đủ số lượt cho ngày hôm nay';
 							return Response::json($data);
 						}
 					}
-				}else{
-					$data['msg'] = 'Bạn đã hết lượt set Top trong ngày hôm nay';
+					//check khác ngày settop
+					elseif(isset($inforCustomer['customer_date_ontop']) && strcmp($inforCustomer['customer_date_ontop'],$today) != 0 && ($numberUpTopCurrent == 5 || $numberUpTopCurrent == 0)){
+						if($item_id > 0){//set top
+							$dataSave['time_ontop'] = time();
+							$dataSave['time_update'] = time();
+							if(Items::updateData($item_id,$dataSave)){
+								$number_set_top = 1; // gan lại lượt up cho 1 ngày
+								//cập nhật số lượng ontop tin đăng
+								$dataCustomer['customer_number_ontop_in_day'] = $number_set_top;
+								$dataCustomer['customer_date_ontop'] = date('d-m-Y');
+								if(UserCustomer::updateData($this->user_customer['customer_id'],$dataCustomer)){
+									$dataNew = UserCustomer::getByID($this->user_customer['customer_id']);
+									Session::forget('user_customer');
+									Session::put('user_customer', $dataNew, 60*24);
+									Session::save();
+								}
+								$data['isIntOk'] = 1;
+								$data['msg'] = 'OnTop tin thành công';
+								return Response::json($data);
+							}
+						}
+					}
+				}
+				else{
+					$data['msg'] = 'Hết phiên làm việc, hãy đăng nhập lại';
 					return Response::json($data);
 				}
-
 			}else{
+				$data['msg'] = 'Tin đăng này không phải của bạn';
 				return Response::json($data);
 			}
 		}
 	}
+
+	//ajax xóa tin đăng
+	public function removeItems(){
+		$data = array('isIntOk' => 0,'msg' => 'Không set top tin đăng này được');
+		if (!UserCustomer::isLogin()) {
+			return Response::json($data);
+		}
+		$item_id = (int)trim(Request::get('item_id', 0));
+		if(!empty($this->user_customer) && $item_id > 0){
+			$items = array();
+			if(isset($this->user_customer['customer_id']) && $this->user_customer['customer_id'] > 0 && $item_id > 0){
+				$items = Items::getItemByCustomerId($this->user_customer['customer_id'], $item_id);
+			}
+			if(!empty($items)){
+				if ($item_id > 0 && Items::deleteData($item_id)) {
+					$data['isIntOk'] = 1;
+					$data['msg'] = 'Đã xóa thành công tin đăng';
+					return Response::json($data);
+				}
+			}
+		}
+	}
+
+
 	public function loginFacebook(){
 		
 		$fb = new Facebook\Facebook ([

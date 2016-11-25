@@ -89,10 +89,9 @@
 					<thead class="thin-border-bottom">
 					<tr class="">
 						<th width="10%" class="text-center">Ảnh</th>
-						<th width="45%">Thông tin</th>
-						<th width="13%" class="text-center">Ngày </th>
-						<th width="5%" class="text-center">Ẩn/hiện</th>
-						<th width="15%" class="text-center">Thao tác</th>
+						<th width="55%">Thông tin</th>
+						<th width="16%" class="text-center">Ngày thao tác</th>
+						<th width="17%" class="text-center">Thao tác</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -102,17 +101,21 @@
 								<img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id, $item->item_image, CGlobal::sizeImage_100)}}">
 							</td>
 							<td>[<b>{{ $item->item_id }}</b>] {{ $item->item_name }}</td>
-							<td class="text-center text-middle">{{ date('d-m-Y',$item->time_created) }}</td>
-							<td class="text-center">
+							<td class="text-center text-middle">
+								<span style="font-size: 9px;color: green">Top: {{ date('d-m-Y h:i',$item->time_ontop) }}</span>
+								<div class="clear"></div>
+								<span style="font-size: 9px;">U: {{ date('d-m-Y h:i',$item->time_update) }}</span>
+							</td>
+							<td class="text-center text-middle">
 								@if($item->item_status == CGlobal::status_show)
 									<a href="javascript:void(0);" style="color: green" title="Hiện thị"><i class="fa fa-check fa-2x"></i></a>
 								@else
 									<a href="javascript:void(0);" style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>
 								@endif
-							</td>
-							<td class="text-center text-middle">
-								<a href="{{URL::route('customer.ItemsEdit',array('item_id' => $item->item_id))}}" title="Sửa tin đăng"><i class="fa fa-edit fa-2x"></i></a>
+									&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" style="color: red" onclick="USER_CUSTOMMER.removeItems({{$item->item_id}});" title="Xóa tin đăng"><i class="fa fa-trash fa-2x"></i></a>
+								<br/><a href="{{URL::route('customer.ItemsEdit',array('item_id' => $item->item_id))}}" title="Sửa tin đăng"><i class="fa fa-edit fa-2x"></i></a>
 								&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" onclick="USER_CUSTOMMER.setTopItems({{$item->item_id}});" title="Up top tin đăng"><i class="fa fa-level-up fa-2x"></i></a>
+
 							</td>
 						</tr>
 					@endforeach

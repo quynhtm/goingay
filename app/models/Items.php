@@ -184,8 +184,8 @@ class Items extends Eloquent
             $dataSave = Items::find($id);
             $dataSave->delete();
             //xoa anh san pham
-            if($dataSave->product_image_other != ''){
-                $aryImages = unserialize($dataSave->product_image_other);
+            if($dataSave->item_image_other != ''){
+                $aryImages = unserialize($dataSave->item_image_other);
                 if(sizeof($aryImages) > 0){
                     //xoa anh chinh
                     foreach($aryImages as $ki => $name_img){

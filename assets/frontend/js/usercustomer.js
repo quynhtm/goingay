@@ -316,7 +316,7 @@ USER_CUSTOMMER = {
 		}
 	},
 	setTopItems:function(item_id){
-		if(parseInt(item_id) > 0 && confirm('Bạn muốn up top tin đăng này')){
+		if(parseInt(item_id) > 0 && confirm('Bạn muốn up top tin đăng này?')){
 			jQuery.ajax({
 				type: "POST",
 				url: WEB_ROOT + '/up-top-tin-dang.html',
@@ -324,6 +324,24 @@ USER_CUSTOMMER = {
 				dataType: 'json',
 				success: function(res) {
 					alert(res.msg);
+				}
+			});
+		}
+	},
+	removeItems:function(item_id){
+		if(parseInt(item_id) > 0 && confirm('Bạn thực sự muốn xóa tin này?')){
+			jQuery.ajax({
+				type: "POST",
+				url: WEB_ROOT + '/xoa-tin-dang.html',
+				data: {item_id : item_id},
+				dataType: 'json',
+				success: function(res) {
+					if(res.isIntOk == 1){
+						alert(res.msg);
+						window.location.reload();
+					}else{
+						alert(res.msg);
+					}
 				}
 			});
 		}

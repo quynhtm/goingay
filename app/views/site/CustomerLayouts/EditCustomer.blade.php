@@ -40,7 +40,7 @@
 					<div class="line">
 						<div class="box-item-455">
 							<p>Email<span class="required" aria-required="true">*</span></p>
-							<input name="customer_email" value="@if(isset($user_customer['customer_email'])){{$user_customer['customer_email']}}@endif" placeholder="Nhập vào địa chỉ email" disabled class="upload_input" type="text">
+							<input name="customer_email" value="@if(isset($user_customer['customer_email'])){{$user_customer['customer_email']}}@endif" placeholder="Nhập vào địa chỉ email" readonly class="upload_input" type="text">
 						</div>
 						<div class="box-item-455 ext">
 							<div class="mail-show">
