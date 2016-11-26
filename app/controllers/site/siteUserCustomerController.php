@@ -859,9 +859,10 @@ class SiteUserCustomerController extends BaseSiteController{
 			
 					$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
 					if(sizeof($customer) > 0){
-						if(isset($customer->customer_id_facebook) && $customer->customer_id_facebook == ''){
+						if(($customer->customer_id_facebook == '' || $customer->customer_id_facebook == null) && $customer->customer_status != CGlobal::status_block){
 							$dataUpdate = array(
-									'customer_id_facebook' => $data['customer_id_facebook']
+									'customer_id_facebook' => $data['customer_id_facebook'],
+									'customer_status' => CGlobal::status_show,
 							);
 							UserCustomer::updateData($customer->customer_id, $dataUpdate);
 							$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
@@ -943,9 +944,10 @@ class SiteUserCustomerController extends BaseSiteController{
 						
 						$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
 						if(sizeof($customer) > 0){
-							if(isset($customer->customer_id_google) && $customer->customer_id_google == ''){
+							if(($customer->customer_id_google == '' || $customer->customer_id_google == null) && $customer->customer_status != CGlobal::status_block){
 								$dataUpdate = array(
-									'customer_id_google' => $data['customer_id_google']
+									'customer_id_google' => $data['customer_id_google'],
+									'customer_status' => CGlobal::status_show,
 								);
 								UserCustomer::updateData($customer->customer_id, $dataUpdate);
 								$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
