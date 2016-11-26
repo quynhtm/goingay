@@ -295,7 +295,7 @@ USER_CUSTOMMER = {
 					if(res.isIntOk === 1){
 						$('#customer_district_id').html(res.html_option);
 					}else{
-						alert(res.msg);
+						jAlert(res.msg, 'Thông báo');
 					}
 				}
 			});
@@ -303,48 +303,54 @@ USER_CUSTOMMER = {
 	},
 	changePassCustomer:function(){
 		var customer_password = $('#customer_password').val();
-		if(customer_password != '' && confirm('Bạn muốn thay đổi pass')){
-			jQuery.ajax({
-				type: "POST",
-				url: WEB_ROOT + '/thay-doi-mat-khau.html',
-				data: {customer_password : customer_password},
-				dataType: 'json',
-				success: function(res) {
-					alert(res.msg);
-				}
-			});
-		}
+		jConfirm('Bạn muốn thay đổi mật khẩu [OK]:Đồng ý [Cancel]:Bỏ qua?)', 'Xác nhận', function(r) {
+			if(r && customer_password != ''){
+				jQuery.ajax({
+					type: "POST",
+					url: WEB_ROOT + '/thay-doi-mat-khau.html',
+					data: {customer_password : customer_password},
+					dataType: 'json',
+					success: function(res) {
+						jAlert(res.msg, 'Thông báo');
+					}
+				});
+			}
+		});
 	},
 	setTopItems:function(item_id){
-		if(parseInt(item_id) > 0 && confirm('Bạn muốn up top tin đăng này?')){
-			jQuery.ajax({
-				type: "POST",
-				url: WEB_ROOT + '/up-top-tin-dang.html',
-				data: {item_id : item_id},
-				dataType: 'json',
-				success: function(res) {
-					alert(res.msg);
-				}
-			});
-		}
+		jConfirm('Bạn muốn up top tin đăng này? [OK]:Đồng ý [Cancel]:Bỏ qua?)', 'Xác nhận', function(r) {
+			if(r && parseInt(item_id) > 0){
+				jQuery.ajax({
+					type: "POST",
+					url: WEB_ROOT + '/up-top-tin-dang.html',
+					data: {item_id : item_id},
+					dataType: 'json',
+					success: function(res) {
+						jAlert(res.msg, 'Thông báo');
+					}
+				});
+			}
+		});
 	},
 	removeItems:function(item_id){
-		if(parseInt(item_id) > 0 && confirm('Bạn thực sự muốn xóa tin này?')){
-			jQuery.ajax({
-				type: "POST",
-				url: WEB_ROOT + '/xoa-tin-dang.html',
-				data: {item_id : item_id},
-				dataType: 'json',
-				success: function(res) {
-					if(res.isIntOk == 1){
-						alert(res.msg);
-						window.location.reload();
-					}else{
-						alert(res.msg);
+		jConfirm('Bạn thực sự muốn xóa tin này? [OK]:Đồng ý [Cancel]:Bỏ qua?)', 'Xác nhận', function(r) {
+			if(r && parseInt(item_id) > 0){
+				jQuery.ajax({
+					type: "POST",
+					url: WEB_ROOT + '/xoa-tin-dang.html',
+					data: {item_id : item_id},
+					dataType: 'json',
+					success: function(res) {
+						if(res.isIntOk == 1){
+							jAlert(res.msg, 'Thông báo');
+							window.location.reload();
+						}else{
+							jAlert(res.msg, 'Thông báo');
+						}
 					}
-				}
-			});
-		}
+				});
+			}
+		});
 	},
 	
 	//Login Social

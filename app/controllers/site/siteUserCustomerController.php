@@ -868,15 +868,16 @@ class SiteUserCustomerController extends BaseSiteController{
 							$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
 						}
 					}else{
-						$dataInsert['customer_time_created'] = time();
-						$dataInsert['customer_status'] = CGlobal::status_show;
-						$dataInsert['customer_time_login'] = time();
-						$dataInsert['customer_phone'] = '';
-						$dataInsert['customer_address'] = '';
-						$dataInsert['customer_email'] = $data['customer_email'];
-						$dataInsert['customer_gender'] = $data['customer_gender'];
-						$dataInsert['customer_name'] = $data['customer_name'];
-						UserCustomer::addData($dataInsert);
+						$data['customer_time_created'] = time();
+						$data['customer_status'] = CGlobal::status_show;
+						$data['customer_time_login'] = time();
+						$data['customer_phone'] = '';
+						$data['customer_address'] = '';
+						$data['customer_email'] = $data['customer_email'];
+						$data['customer_gender'] = $data['customer_gender'];
+						$data['customer_name'] = $data['customer_name'];
+						
+						UserCustomer::addData($data);
 						$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
 					}
 			
@@ -953,15 +954,15 @@ class SiteUserCustomerController extends BaseSiteController{
 								$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
 							}
 						}else{
-							$dataInsert['customer_time_created'] = time();
-							$dataInsert['customer_status'] = CGlobal::status_show;
-							$dataInsert['customer_time_login'] = time();
-							$dataInsert['customer_phone'] = '';
-							$dataInsert['customer_address'] = '';
-							$dataInsert['customer_email'] = $data['customer_email'];
-							$dataInsert['customer_gender'] = $data['customer_gender'];
-							$dataInsert['customer_name'] = $data['customer_name'];
-							UserCustomer::addData($dataInsert);
+							$data['customer_time_created'] = time();
+							$data['customer_status'] = CGlobal::status_show;
+							$data['customer_time_login'] = time();
+							$data['customer_phone'] = '';
+							$data['customer_address'] = '';
+							$data['customer_email'] = $data['customer_email'];
+							$data['customer_gender'] = $data['customer_gender'];
+							$data['customer_name'] = $data['customer_name'];
+							UserCustomer::addData($data);
 							$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
 						}
 						
