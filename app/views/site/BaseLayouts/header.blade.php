@@ -77,7 +77,27 @@
 </div>
 <div class="line-ads">
 	<div class="container">
-		<img src="http://static.eclick.vn/uploads/source/2016/11/04/e8243811134957616h825452811.jpeg" width="980">
+		<ul class="rslides" id="sliderHead">
+			<li>
+				<a href="" title="">
+					<img src="http://st.img.polyad.net/2016/11/23/FOshop_970x90_20161122_TT.gif" alt="" />
+				</a>
+			</li>
+			<li>
+				<a href="" title="">
+					<img src="http://static.eclick.vn/uploads/source/2016/11/04/e8243811134957616h825452811.jpeg" alt="" />
+				</a>
+			</li>
+		 </ul>
+		<script type="text/javascript">
+			jQuery(document).ready(function() {
+				jQuery("#sliderHead").responsiveSlides({
+				    maxwidth: 1000,
+				    speed: 800,
+				    timeout: 10000,
+			    });
+			});
+		</script>
 	</div>
 </div>
 @if($messages != '')

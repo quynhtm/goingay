@@ -19,6 +19,10 @@ class BaseSiteController extends BaseController
     	FunctionLib::site_css('lib/jAlert/jquery.alerts.css', CGlobal::$POS_HEAD);
     	FunctionLib::site_js('lib/jAlert/jquery.alerts.js', CGlobal::$POS_END);
         $this->user_customer = Session::has('user_customer') ? Session::get('user_customer') : array();
+		
+		FunctionLib::site_css('lib/ResponsiveSlides/responsiveslides.css', CGlobal::$POS_HEAD);
+    	FunctionLib::site_js('lib/ResponsiveSlides/responsiveslides.min.js', CGlobal::$POS_END);
+		
     }
     public function header(){
         $messages = FunctionLib::messages('messages');

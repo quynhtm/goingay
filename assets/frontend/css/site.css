@@ -70,6 +70,7 @@ h1, h2, h3, h4, h5, h6{
     width: 100%;
     background: #fff;
 	border-bottom: 2px solid #ddd;
+	z-index: 10;
 }
 .line-head .logo {
     border-right: 1px solid #ddd;
@@ -220,8 +221,9 @@ h1, h2, h3, h4, h5, h6{
 	display: inline-block;
     width: 100%;
 }
-.box-ads img{
-	max-width: 100%;
+.box-ads img {
+    max-width: 100%;
+    width: auto !important;
 }
 .box-home-category{
 	display: inline-block;
@@ -359,11 +361,13 @@ h1, h2, h3, h4, h5, h6{
 	margin-bottom: 0;	
 }
 .line-ads,
-.line-messages{
+.line-messages {
     display: inline-block;
     margin-bottom: 15px;
     width: 100%;
-	clear: both;
+    clear: both;
+    position: relative;
+    z-index: 1;
 }
 .line-messages .alert{
 	padding: 8px;

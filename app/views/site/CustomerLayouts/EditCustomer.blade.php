@@ -101,6 +101,26 @@
 </div>
 <div class="col-right-16">
 	<div class="box-ads">
-		<img src="http://static.eclick.vn/uploads/source/2016/10/25/407950308217385024l37352a45.jpeg">
+		<ul class="rslides" id="sliderRight">
+			<li>
+				<a href="" title="">
+					<img src="http://st.img.polyad.net/2016/11/24/banner_thang12_160x600(4).jpg">
+				</a>
+			</li>
+			<li>
+				<a href="" title="">
+					<img src="http://static.eclick.vn/uploads/source/2016/10/25/407950308217385024l37352a45.jpeg">
+				</a>
+			</li>
+		 </ul>
+		<script type="text/javascript">
+			jQuery(document).ready(function() {
+				jQuery("#sliderRight").responsiveSlides({
+				    maxwidth: 1000,
+				    speed: 800,
+				    timeout: 10000,
+			    });
+			});
+		</script>
 	</div>
 </div>
