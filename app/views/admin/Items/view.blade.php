@@ -43,6 +43,12 @@
                             </select>
                         </div>
                         <div class="form-group col-lg-3">
+                            <label for="item_category_id">Danh mục tin đăng</label>
+                            <select name="item_category_id" id="item_category_id" class="form-control input-sm">
+                                {{$optionCategory}}
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3">
                             <label for="order_status">Tin đăng của khách</label>
                             <select name="customer_id" id="customer_id" class="form-control input-sm chosen-select-deselect" tabindex="12" data-placeholder="Chọn tên khách hàng">
                                 <option value=""></option>

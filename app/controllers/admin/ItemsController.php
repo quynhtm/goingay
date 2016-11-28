@@ -69,6 +69,7 @@ class ItemsController extends BaseAdminController
         $search['category_id'] = (int)Request::get('category_id',-1);
         $search['customer_id'] = (int)Request::get('customer_id',-1);
         $search['item_block'] = (int)Request::get('item_block',-1);
+        $search['item_category_id'] = (int)Request::get('item_category_id',-1);
         //$search['field_get'] = 'order_id,order_product_name,order_status';//cac truong can lay
 
         $dataSearch = Items::searchByCondition($search, $limit, $offset,$total);
@@ -79,6 +80,10 @@ class ItemsController extends BaseAdminController
         $optionType = FunctionLib::getOption($this->arrTypeProduct, $search['item_is_hot']);
         $optionBlock = FunctionLib::getOption($this->arrBlock, $search['item_block']);
         $optionStatusUpdate = FunctionLib::getOption($this->arrStatusUpdate, -1);
+        //danh muc
+        $arrCategory = Category::getAllParentCategoryId();
+        $optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCategory, $search['item_category_id']);
+
         $this->layout->content = View::make('admin.Items.view')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
@@ -90,6 +95,7 @@ class ItemsController extends BaseAdminController
             ->with('arrTypeProduct', $this->arrTypeProduct)
             ->with('optionStatus', $optionStatus)
             ->with('optionType', $optionType)
+            ->with('optionCategory', $optionCategory)
             ->with('optionBlock', $optionBlock)
 
             ->with('optionStatusUpdate', $optionStatusUpdate)
