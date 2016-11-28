@@ -57,11 +57,14 @@ class Items extends Eloquent
             if (isset($dataSearch['item_name']) && $dataSearch['item_name'] != '') {
                 $query->where('item_name','LIKE', '%' . $dataSearch['item_name'] . '%');
             }
+            if (isset($dataSearch['item_id']) && $dataSearch['item_id'] > 0) {
+                $query->where('item_id', $dataSearch['item_id']);
+            }
             if (isset($dataSearch['item_block']) && $dataSearch['item_block'] != -1) {
                 $query->where('item_block', $dataSearch['item_block']);
             }
-            if (isset($dataSearch['product_status']) && $dataSearch['product_status'] != -1) {
-                $query->where('product_status', $dataSearch['product_status']);
+            if (isset($dataSearch['item_status']) && $dataSearch['item_status'] != -1) {
+                $query->where('item_status', $dataSearch['item_status']);
             }
             if (isset($dataSearch['item_category_id']) && $dataSearch['item_category_id'] != -1) {
                 $query->where('item_category_id', $dataSearch['item_category_id']);

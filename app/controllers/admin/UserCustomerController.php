@@ -50,6 +50,7 @@ class UserCustomerController extends BaseAdminController
         $search = $data = array();
         $total = 0;
 
+        $search['customer_id'] = addslashes(Request::get('customer_id',0));
         $search['customer_name'] = addslashes(Request::get('customer_name',''));
         $search['customer_email'] = addslashes(Request::get('customer_email',''));
         $search['customer_status'] = (int)Request::get('customer_status',-1);

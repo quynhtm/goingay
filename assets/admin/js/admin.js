@@ -80,7 +80,7 @@ var Admin = {
             }
         }
     },
-    setStastusBlockProduct: function(){
+    setStastusBlockItems: function(){
         var dataId = [];
         var i = 0;
         $("input[name*='checkItems']").each(function () {
@@ -98,7 +98,7 @@ var Admin = {
             alert('Bạn chưa chọn trạng thái để cập nhật.');
             return false;
         }
-        var url_ajax = 'setStastusBlockProduct';
+        var url_ajax = 'setStastusBlockItems';
 
         if(url_ajax != '' && parseInt(valueInput) > -1){
             if(confirm('Bạn có muốn thực hiện thao tác này?')) {

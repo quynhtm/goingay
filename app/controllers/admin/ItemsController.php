@@ -62,21 +62,22 @@ class ItemsController extends BaseAdminController
         $search = $data = array();
         $total = 0;
 
-        $search['product_name'] = addslashes(Request::get('product_name',''));
-        $search['product_status'] = (int)Request::get('product_status',-1);
-        $search['product_is_hot'] = (int)Request::get('product_is_hot',-1);
+        $search['item_name'] = addslashes(Request::get('item_name',''));
+        $search['item_id'] = (int)Request::get('item_id',0);
+        $search['item_status'] = (int)Request::get('item_status',-1);
+        $search['item_is_hot'] = (int)Request::get('item_is_hot',-1);
         $search['category_id'] = (int)Request::get('category_id',-1);
-        $search['user_shop_id'] = (int)Request::get('user_shop_id',-1);
-        $search['is_block'] = (int)Request::get('is_block',-1);
+        $search['customer_id'] = (int)Request::get('customer_id',-1);
+        $search['item_block'] = (int)Request::get('item_block',-1);
         //$search['field_get'] = 'order_id,order_product_name,order_status';//cac truong can lay
 
         $dataSearch = Items::searchByCondition($search, $limit, $offset,$total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
         //FunctionLib::debug($search);
 
-        $optionStatus = FunctionLib::getOption($this->arrStatus, $search['product_status']);
-        $optionType = FunctionLib::getOption($this->arrTypeProduct, $search['product_is_hot']);
-        $optionBlock = FunctionLib::getOption($this->arrBlock, $search['is_block']);
+        $optionStatus = FunctionLib::getOption($this->arrStatus, $search['item_status']);
+        $optionType = FunctionLib::getOption($this->arrTypeProduct, $search['item_is_hot']);
+        $optionBlock = FunctionLib::getOption($this->arrBlock, $search['item_block']);
         $optionStatusUpdate = FunctionLib::getOption($this->arrStatusUpdate, -1);
         $this->layout->content = View::make('admin.Items.view')
             ->with('paging', $paging)
@@ -262,7 +263,7 @@ class ItemsController extends BaseAdminController
         }
         if(sizeof($dataId) > 0){
             foreach($dataId as $k =>$id){
-                if ($id > 0 && Product::deleteData($id)) {
+                if ($id > 0 && Items::deleteData($id)) {
                     $data['isIntOk'] = 1;
                 }
             }
@@ -285,14 +286,14 @@ class ItemsController extends BaseAdminController
             switch( $valueInput ) {
                 case 0://ẩn sản phẩm
                 case 1://hiển thị sản phẩm
-                    $arrUpdate['product_status'] = $valueInput;
+                    $arrUpdate['item_status'] = $valueInput;
                     break;
                 case 2://Khóa sản phẩm
                 case 3://Mở khóa sản phẩm
-                    $arrUpdate['is_block'] = ($valueInput == 2)? CGlobal::PRODUCT_BLOCK : CGlobal::PRODUCT_NOT_BLOCK;
+                    $arrUpdate['item_block'] = ($valueInput == 2)? CGlobal::PRODUCT_BLOCK : CGlobal::PRODUCT_NOT_BLOCK;
                     break;
                 case 4://Set top san phẩm
-                    $arrUpdate['time_update'] = time();
+                    $arrUpdate['time_ontop'] = time();
                     break;
                 /**
                  * product_is_hot
@@ -309,14 +310,14 @@ class ItemsController extends BaseAdminController
                     }elseif($valueInput == 7){
                         $product_is_hot = CGlobal::PRODUCT_SELLOFF;
                     }
-                    $arrUpdate['product_is_hot'] = $product_is_hot;
+                    $arrUpdate['item_is_hot'] = $product_is_hot;
                     break;
                 default:
                     break;
             }
             if(sizeof($arrUpdate) > 0){
                 foreach($dataId as $k =>$id){
-                    if ($id > 0 && Product::updateData($id,$arrUpdate)) {
+                    if ($id > 0 && Items::updateData($id,$arrUpdate)) {
                         $data['isIntOk'] = 1;
                     }
                 }

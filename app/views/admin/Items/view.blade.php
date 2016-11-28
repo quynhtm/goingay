@@ -17,33 +17,37 @@
                     {{ Form::open(array('method' => 'GET', 'role'=>'form')) }}
                     <div class="panel-body">
                         <div class="form-group col-lg-3">
+                            <label for="item_id">Id tin đăng</label>
+                            <input type="text" class="form-control input-sm" id="item_id" name="item_id" placeholder="ID tin đăng" @if(isset($search['item_id']) && $search['item_id'] > 0)value="{{$search['item_id']}}"@endif>
+                        </div>
+                        <div class="form-group col-lg-3">
                             <label for="item_name">Tên tin đăng</label>
-                            <input type="text" class="form-control input-sm" id="item_name" name="item_name" placeholder="Tên sản phẩm" @if(isset($search['item_name']) && $search['item_name'] != '')value="{{$search['item_name']}}"@endif>
+                            <input type="text" class="form-control input-sm" id="item_name" name="item_name" placeholder="Tên tin đăng" @if(isset($search['item_name']) && $search['item_name'] != '')value="{{$search['item_name']}}"@endif>
                         </div>
                         <div class="form-group col-lg-3">
                             <label for="order_status">Trạng thái</label>
-                            <select name="product_status" id="product_status" class="form-control input-sm">
+                            <select name="item_status" id="item_status" class="form-control input-sm">
                                 {{$optionStatus}}
                             </select>
                         </div>
                         <div class="form-group col-lg-3">
-                            <label for="order_status">Loại sản phẩm</label>
-                            <select name="product_is_hot" id="product_is_hot" class="form-control input-sm">
+                            <label for="order_status">Loại tin</label>
+                            <select name="item_is_hot" id="item_is_hot" class="form-control input-sm">
                                 {{$optionType}}
                             </select>
                         </div>
                         <div class="form-group col-lg-3">
                             <label for="order_status">Kiểu khóa SP</label>
-                            <select name="is_block" id="is_block" class="form-control input-sm">
+                            <select name="item_block" id="item_block" class="form-control input-sm">
                                 {{$optionBlock}}
                             </select>
                         </div>
                         <div class="form-group col-lg-3">
-                            <label for="order_status">Sản phẩm của Shop</label>
-                            <select name="user_shop_id" id="user_shop_id" class="form-control input-sm chosen-select-deselect" tabindex="12" data-placeholder="Chọn tên shop">
+                            <label for="order_status">Tin đăng của khách</label>
+                            <select name="customer_id" id="customer_id" class="form-control input-sm chosen-select-deselect" tabindex="12" data-placeholder="Chọn tên khách hàng">
                                 <option value=""></option>
                                 @foreach($arrShop as $shop_id => $shopName)
-                                    <option value="{{$shop_id}}" @if($search['user_shop_id'] == $shop_id) selected="selected" @endif>{{$shopName}}</option>
+                                    <option value="{{$shop_id}}" @if($search['customer_id'] == $shop_id) selected="selected" @endif>{{$shopName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -57,7 +61,7 @@
                                 {{$optionStatusUpdate}}
                             </select>
                         </div>
-                        <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="Admin.setStastusBlockProduct();"><i class="fa fa-refresh"></i> Đổi trạng thái </a>
+                        <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="Admin.setStastusBlockItems();"><i class="fa fa-refresh"></i> Đổi trạng thái </a>
                         <span class="img_loading" id="img_loading_delete_all"></span>
                         <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
                     </div>
@@ -65,17 +69,16 @@
                     {{ Form::close() }}
                 </div>
                 @if(sizeof($data) > 0)
-                    <div class="span clearfix"> @if($total >0) Có tổng số <b>{{$total}}</b> sản  phẩm @endif </div>
+                    <div class="span clearfix"> @if($total >0) Có tổng số <b>{{$total}}</b> items @endif </div>
                     <br>
                     <table class="table table-bordered table-hover">
                         <thead class="thin-border-bottom">
                         <tr class="">
                             <th width="3%" class="text-center">STT <input type="checkbox" class="check" id="checkAll"></th>
-                            <th width="8%" class="text-center">Ảnh SP</th>
-                            <th width="24%">Thông tin sản phẩm</th>
-                            <th width="15%">Giá bán</th>
-                            <th width="15%">Mô tả ngắn</th>
-                            <th width="15%">Thông tin khác</th>
+                            <th width="7%" class="text-center">Ảnh</th>
+                            <th width="35%">Tin đăng</th>
+                            <th width="25%">Mô tả ngắn</th>
+                            <th width="20%">Thông tin khác</th>
                             <th width="10%" class="text-center">Thao tác</th>
                         </tr>
                         </thead>
@@ -100,19 +103,20 @@
                                     @if($item->item_category_name != '')
                                         <br/><b>Danh mục:</b> {{ $item->item_category_name }}
                                     @endif
-                                </td>
-                                <td class="text-middle">
-                                    <b class="red">{{ FunctionLib::numberFormat($item->item_price_sell) }} đ</b>
+                                    @if($item->item_price_sell > 0)
+                                        <br/><b>Giá:</b> <b class="red">{{ FunctionLib::numberFormat($item->item_price_sell) }} đ</b>
+                                    @endif
                                     @if(isset($arrTypeProduct[$item->item_is_hot]) && $item->item_is_hot != CGlobal::PRODUCT_NOMAL)
                                         <br/><b class="red">{{ $arrTypeProduct[$item->item_is_hot] }}</b>
                                     @endif
                                 </td>
                                 <td class="text-left text-middle">
-                                    @if($item->item_content != ''){{ FunctionLib::substring($item->item_content,100) }}@endif
+                                    @if($item->item_content != ''){{ FunctionLib::substring($item->item_content,300) }}@endif
                                 </td>
                                 <td class="text-left text-middle">
-                                        <b>KH:</b> [{{$item->customer_id}}]{{ $item->customer_name}}
-                                        <br/>Tạo: {{date ('d-m-Y H:i',$item->time_created)}}
+                                        <b>KH:</b> [{{$item->customer_id}}] <a href="{{URL::route('admin.customerView',array('customer_id' => $item->customer_id))}}" target="_blank" title="view thông tin khách hàng">{{ $item->customer_name}}</a>
+                                        <br/>Top: {{date ('d-m-Y H:i',$item->time_created)}}
+                                        <br/>Tạo: {{date ('d-m-Y H:i',$item->time_ontop)}}
                                         <br/>Sửa: {{date ('d-m-Y H:i',$item->time_update)}}
                                 </td>
                                 <td class="text-center text-middle">

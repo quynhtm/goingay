@@ -17,6 +17,10 @@
                     {{ Form::open(array('method' => 'GET', 'role'=>'form')) }}
                     <div class="panel-body">
                         <div class="form-group col-lg-3">
+                            <label for="customer_id">Id Khách hàng</label>
+                            <input type="text" class="form-control input-sm" id="customer_id" name="customer_id" placeholder="Id khách hàng" @if(isset($search['customer_id']) && $search['customer_id'] > 0)value="{{$search['customer_id']}}"@endif>
+                        </div>
+                        <div class="form-group col-lg-3">
                             <label for="customer_name">Tên Khách hàng</label>
                             <input type="text" class="form-control input-sm" id="customer_name" name="customer_name" placeholder="Tên khách hàng" @if(isset($search['customer_name']) && $search['customer_name'] != '')value="{{$search['customer_name']}}"@endif>
                         </div>
@@ -65,8 +69,8 @@
                         <thead class="thin-border-bottom">
                         <tr class="">
                             <th width="5%" class="text-center">STT <input type="checkbox" class="check" id="checkAll"></th>
-                            <th width="30%">Thông tin KH</th>
-                            <th width="23%">Kiểu khách hàng</th>
+                            <th width="33%">Thông tin KH</th>
+                            <th width="22%">Kiểu khách hàng</th>
                             <th width="10%" class="text-center text-middle">Online</th>
                             <th width="10%" class="text-center text-middle">Ngày tạo</th>
                             <th width="10%" class="text-center text-middle">Ngày active</th>
@@ -88,11 +92,11 @@
                                     @if($item->customer_email != '')
                                         <br/>{{ $item->customer_email }}
                                     @endif
+                                    <br/>Add: {{ $item->customer_address }}
                                 </td>
                                 <td class="text-middle">
                                     @if(isset($arrIsCustomer[$item->is_customer])){{ $arrIsCustomer[$item->is_customer] }}@else --- @endif
-                                    <br/>∑ đã đăng:{{ $item->customer_up_item }}
-                                    <br/>Địa chỉ: {{ $item->customer_address }}
+                                    <br/>∑ tin đã đăng: <b>{{ $item->customer_up_item }}</b>
                                 </td>
                                 <td class="text-center text-middle">
                                     @if($item->is_login == CGlobal::CUSTOMER_ONLINE)
