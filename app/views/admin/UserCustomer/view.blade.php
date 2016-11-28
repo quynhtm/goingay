@@ -70,7 +70,7 @@
                         <tr class="">
                             <th width="5%" class="text-center">STT <input type="checkbox" class="check" id="checkAll"></th>
                             <th width="33%">Thông tin KH</th>
-                            <th width="22%">Kiểu khách hàng</th>
+                            <th width="22%">Thông tin thêm</th>
                             <th width="10%" class="text-center text-middle">Online</th>
                             <th width="10%" class="text-center text-middle">Ngày tạo</th>
                             <th width="10%" class="text-center text-middle">Ngày active</th>
@@ -121,7 +121,7 @@
                                     @endif
 
                                     @if($is_root || $permission_full ==1|| $permission_edit ==1  )
-                                        <a href="{{URL::route('admin.customerEdit',array('id' => $item->customer_id))}}" title="Sửa item"><i class="fa fa-edit fa-2x"></i></a>
+                                        <a href="{{URL::route('admin.getCustomerEdit',array('id' => $item->customer_id))}}" title="Sửa item"><i class="fa fa-edit fa-2x"></i></a>
                                     @endif
                                     @if($is_root || $permission_full ==1 || $permission_delete == 2)
                                        <a href="javascript:void(0);" onclick="Admin.deleteItem({{$item->customer_id}},2)" title="Xóa Item"><i class="fa fa-trash fa-2x"></i></a>

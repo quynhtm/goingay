@@ -98,7 +98,7 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
 
     /*Quản lý danh sách khách hàng đăng tin*/
     Route::get('customer/view',array('as' => 'admin.customerView','uses' => 'UserCustomerController@view'));
-    Route::get('customer/getEditCustomer/{id?}', array('as' => 'admin.customerEdit','uses' => 'UserCustomerController@getEditCustomer'))->where('id', '[0-9]+');
+    Route::get('customer/getEditCustomer/{id?}', array('as' => 'admin.getCustomerEdit','uses' => 'UserCustomerController@getEditCustomer'))->where('id', '[0-9]+');
     Route::post('customer/postEditCustomer/{id?}', array('as' => 'admin.customerEdit','uses' => 'UserCustomerController@postEditCustomer'))->where('id', '[0-9]+');
     Route::post('customer/deleteCustomer', array('as' => 'admin.deleteCustomer','uses' => 'UserCustomerController@deleteCustomer'));//ajax
     Route::get('customer/loginToCustomer/{id?}', array('as' => 'admin.loginToCustomer','uses' => 'UserCustomerController@loginToCustomer'))->where('id', '[0-9]+');

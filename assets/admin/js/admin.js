@@ -193,6 +193,24 @@ var Admin = {
             }
         });
     },
+    getDistrictInforCustomer:function(){
+        var customer_province_id = $('#customer_province_id').val();
+        if(parseInt(customer_province_id) > 0){
+            jQuery.ajax({
+                type: "POST",
+                url: WEB_ROOT + '/thong-tin-quan-huyen-cua-khach.html',
+                data: {customer_province_id : customer_province_id},
+                dataType: 'json',
+                success: function(res) {
+                    if(res.isIntOk === 1){
+                        $('#customer_district_id').html(res.html_option);
+                    }else{
+                        alert(res.msg, 'Thông báo');
+                    }
+                }
+            });
+        }
+    },
 
     uploadImagesCategory: function() {
         $('#sys_PopupUploadImg').modal('show');
@@ -220,13 +238,13 @@ var Admin = {
         }
         $("#sys_mulitplefileuploader").uploadFile(settings);
     },
-    changeIsShop: function(is_shop, shop_id){
-        if(is_shop > 0){
+    changeIsShop: function(is_customer, customer_id){
+        if(is_customer > 0){
             $('#img_loading').show();
             $.ajax({
                 type: "post",
-                url: WEB_ROOT + '/admin/userShop/setIsShop',
-                data: {shop_id : shop_id, is_shop:is_shop},
+                url: WEB_ROOT + '/admin/customer/setIsCustomer',
+                data: {customer_id : customer_id, is_customer:is_customer},
                 dataType: 'json',
                 success: function(res) {
                     $('#img_loading').hide();
@@ -239,13 +257,13 @@ var Admin = {
             });
         }
     },
-    changeStatusShop: function(shop_status, shop_id){
-        if(shop_id > 0){
+    changeStatusShop: function(customer_status, customer_id){
+        if(customer_id > 0){
             $('#img_loading').show();
             $.ajax({
                 type: "post",
-                url: WEB_ROOT + '/admin/userShop/updateStatusUserShop',
-                data: {shop_id : shop_id, shop_status:shop_status},
+                url: WEB_ROOT + '/admin/customer/updateStatusCustomer',
+                data: {customer_id : customer_id, customer_status:customer_status},
                 dataType: 'json',
                 success: function(res) {
                     $('#img_loading').hide();

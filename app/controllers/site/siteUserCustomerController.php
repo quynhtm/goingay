@@ -280,9 +280,6 @@ class SiteUserCustomerController extends BaseSiteController{
 	//lay thong tin quận huyện cua KH
 	public function getDistrictCustomer(){
 		$data = array('isIntOk' => 0,'msg' => 'Không lấy được thông tin quận huyện');
-		if (!UserCustomer::isLogin()) {
-			return Response::json($data);
-		}
 		$customer_province_id = (int)Request::get('customer_province_id', 0);
 		if ($customer_province_id > 0) {
 			$district = Districts::getDistrictByProvinceId($customer_province_id);
