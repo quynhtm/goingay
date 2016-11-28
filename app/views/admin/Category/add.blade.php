@@ -55,11 +55,11 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                       <input name="image" type="file"/>
-                      <input name="category_image_background" type="hidden" id="category_image_background" @if(isset($data['category_image_background']))value="{{$data['category_image_background']}}"@else value="" @endif>
+                      <input name="category_icons" type="hidden" id="category_icons" @if(isset($data['category_icons']))value="{{$data['category_icons']}}"@else value="" @endif>
                     </div>
-                    @if(isset($data['url_src_icon']))
+                    @if(isset($data['category_icons']) && $data['category_icons'] !='')
                     <div class="form-group">
-                       <img src="{{$data['url_src_icon']}}" height="50" width="50">
+                       <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_CATEGORY, $data['category_id'], $data['category_icons'], CGlobal::sizeImage_100, '', true, CGlobal::type_thumb_image_banner, false)}}" height="50" width="50">
                     </div>
                     @endif
                 </div>

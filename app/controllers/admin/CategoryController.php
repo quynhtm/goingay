@@ -125,8 +125,9 @@ class CategoryController extends BaseAdminController
         $data = array();
         if($id > 0) {
             $data = Category::find($id);
-            if(isset($data['category_image_background']) && $data['category_image_background'] != ''){
-                $data['url_src_icon'] = URL::to('/').'/images/category/'.$data['category_image_background'];
+            if(isset($data['category_icons']) && $data['category_icons'] != ''){
+                //$url_thumb = ThumbImg::getImageThumb(CGlobal::FOLDER_CATEGORY, $id, $data['category_icons'], CGlobal::sizeImage_80, '', true, CGlobal::type_thumb_image_banner, false);
+                //$data['url_src_icon'] = $url_thumb;
             }
         }
 
@@ -148,7 +149,6 @@ class CategoryController extends BaseAdminController
 
         $dataSave['category_name'] = addslashes(Request::get('category_name'));
         $dataSave['category_icons'] = addslashes(Request::get('category_icons'));
-        $dataSave['category_image_background'] = addslashes(Request::get('category_image_background'));
         $dataSave['category_status'] = (int)Request::get('category_status', 0);
         $dataSave['category_parent_id'] = (int)Request::get('category_parent_id', 0);
         $dataSave['category_content_front'] = (int)Request::get('category_content_front', 0);
@@ -158,13 +158,12 @@ class CategoryController extends BaseAdminController
 
         $file = Input::file('image');
         if($file){
-            $destinationPath = public_path().'/images/category/';
             $filename = $file->getClientOriginalName();
+            $destinationPath = Config::get('config.DIR_ROOT').'/uploads/'.CGlobal::FOLDER_CATEGORY.'/'. $id;
             $upload  = Input::file('image')->move($destinationPath, $filename);
-            //FunctionLib::debug($filename);
-            $dataSave['category_image_background'] = $filename;
+            $dataSave['category_icons'] = $filename;
         }else{
-            $dataSave['category_image_background'] = Request::get('category_image_background', '');
+            $dataSave['category_icons'] = Request::get('category_icons', '');
         }
 
         if($this->valid($dataSave) && empty($this->error)) {

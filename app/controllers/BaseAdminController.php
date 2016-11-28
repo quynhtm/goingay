@@ -64,9 +64,10 @@ class BaseAdminController extends BaseController
             'name'=>'QL đăng tin',
             'link'=>'javascript:void(0)',
             'icon'=>'fa fa-gift',
-            'arr_link_sub'=>array('admin.customerView','admin.itemsView',),
+            'arr_link_sub'=>array('admin.customerView','admin.itemsView','admin.category_list',),
             'sub'=>array(
                 array('name'=>'Khách đăng tin', 'RouteName'=>'admin.customerView', 'icon'=>'fa fa-users icon-4x', 'showcontent'=>1, 'permission'=>'user_customer_full'),
+                array('name'=>'Danh mục tin', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1, 'permission'=>'items_full'),
                 array('name'=>'Danh sách tin đăng', 'RouteName'=>'admin.itemsView', 'icon'=>'fa fa-file-text-o icon-4x', 'showcontent'=>1, 'permission'=>'items_full'),
             ),
         );
