@@ -64,9 +64,9 @@
                                 <thead>
                                 <tr>
                                     <th width="5%">Stt</th>
-                                    <th width="75%">Quận / Huyện</th>
+                                    <th width="70%">Quận / Huyện</th>
                                     <th width="10%" class="text-center">Vị trí</th>
-                                    <th width="10%" class="text-center">Trạng thái</th>
+                                    <th width="15%" class="text-center">Trạng thái</th>
                                     <th width="10%" class="text-center"></th>
                                 </tr>
                                 </thead>
@@ -75,8 +75,8 @@
                                     <tr>
                                         <td>{{$k+1}}</td>
                                         <td>{{$district->district_name}}</td>
-                                        <td>{{$district->district_position}}</td>
-                                        <td>
+                                        <td class="text-center">{{$district->district_position}}</td>
+                                        <td class="text-center">
                                             @if($district->district_status == 1)
                                                 <a href="javascript:void(0);" title="Hiện"><i class="fa fa-check fa-2x"></i></a>
                                             @else

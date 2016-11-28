@@ -164,13 +164,13 @@ class BannerController extends BaseAdminController
 
         $data['banner_is_target'] = (int)Request::get('banner_is_target');
         $data['banner_is_rel'] = (int)Request::get('banner_is_rel');
-        $data['banner_type'] = (int)Request::get('banner_type');
-        $data['banner_page'] = (int)Request::get('banner_page');
-        $data['banner_category_id'] = (int)Request::get('banner_category_id');
+        $data['banner_type'] = (int)Request::get('banner_type',0);
+        $data['banner_page'] = (int)Request::get('banner_page',0);
+        $data['banner_category_id'] = (int)Request::get('banner_category_id',0);
         $data['banner_is_run_time'] = (int)Request::get('banner_is_run_time');
         $data['banner_start_time'] = Request::get('banner_start_time');
         $data['banner_end_time'] = Request::get('banner_end_time');
-        $data['banner_province_id'] = (int)Request::get('banner_province_id');
+        $data['banner_province_id'] = (int)Request::get('banner_province_id',0);
         $data['banner_status'] = (int)Request::get('banner_status');
         $id_hiden = (int)Request::get('id_hiden', 0);
 
@@ -229,6 +229,9 @@ class BannerController extends BaseAdminController
         if(!empty($data)) {
             if(isset($data['banner_name']) && trim($data['banner_name']) == '') {
                 $this->error[] = 'Tên banner không được bỏ trống';
+            }
+            if(isset($data['banner_type']) && trim($data['banner_type']) == 0) {
+                $this->error[] = 'Chưa chọn loại Banner';
             }
             if(isset($data['banner_link']) && trim($data['banner_link']) == '') {
                 $this->error[] = 'Chưa có link view cho banner';
