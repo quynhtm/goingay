@@ -37,6 +37,7 @@
                 </div>
                 <div class="clearfix"></div>
 
+
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="name" class="control-label">Loại quảng cáo</label>
@@ -57,7 +58,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="name" class="control-label">Danh mục quảng cáo</label>
@@ -68,24 +68,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="clearfix"></div>
 
+                <div class="clearfix"></div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="name" class="control-label">Quảng cáo cho</label>
-                        <div class="form-group">
-                            <select name="banner_is_shop" id="banner_is_shop" class="form-control input-sm">
-                                {{$optionIsShop}}
-                            </select>
-                        </div>
+                        <label for="name" class="control-label">Thứ hiển thị</label>
+                        <input type="text" placeholder="Vị trí hiển thị" id="banner_order" name="banner_order"  class="form-control input-sm" value="@if(isset($data['banner_order'])){{$data['banner_order']}}@endif">
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="name" class="control-label">Banner của Shop</label>
+                        <label for="name" class="control-label">Tỉnh thành</label>
                         <div class="form-group">
-                            <select name="banner_shop_id" id="banner_shop_id" class="form-control input-sm">
-                                {{$optionShopName}}
+                            <select name="banner_province_id" id="banner_province_id" class="form-control input-sm">
+                                {{$optionProvince}}
                             </select>
                         </div>
                     </div>
@@ -151,12 +147,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Vị trí hiển thị</label>
-                        <input type="text" placeholder="Vị trí hiển thị" id="banner_order" name="banner_order"  class="form-control input-sm" value="@if(isset($data['banner_order'])){{$data['banner_order']}}@endif">
-                    </div>
-                </div>
+
                 <div class="clearfix"></div>
 
                 </div>

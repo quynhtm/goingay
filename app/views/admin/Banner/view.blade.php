@@ -21,24 +21,38 @@
                             <input type="text" class="form-control input-sm" id="banner_name" name="banner_name" placeholder="Tiêu đề banner" @if(isset($search['banner_name']) && $search['banner_name'] != '')value="{{$search['banner_name']}}"@endif>
                         </div>
                         <div class="form-group col-lg-3">
+                            <label for="banner_province_id">Tỉnh thành</label>
+                            <select name="banner_province_id" id="banner_province_id" class="form-control input-sm">
+                                {{$optionProvince}}
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label for="banner_type">Loại</label>
+                            <select name="banner_type" id="banner_type" class="form-control input-sm">
+                                {{$optionType}}
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label for="banner_page">Thuộc page</label>
+                            <select name="banner_page" id="banner_page" class="form-control input-sm">
+                                {{$optionPage}}
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3">
                             <label for="category_status">Trạng thái</label>
                             <select name="banner_status" id="banner_status" class="form-control input-sm">
                                 {{$optionStatus}}
                             </select>
                         </div>
-                    </div>
-                    <div class="panel-footer text-right">
-                        @if($is_root || $permission_full ==1 || $permission_create == 1)
-                        <span class="">
-                            <a class="btn btn-danger btn-sm" href="{{URL::route('admin.bannerEdit')}}">
-                                <i class="ace-icon fa fa-plus-circle"></i>
-                                Thêm mới
-                            </a>
-                        </span>
-                        @endif
-                        <span class="">
+                        <div class="form-group col-lg-9 text-right">
+                            @if($is_root || $permission_full ==1 || $permission_create == 1)
+                                <a class="btn btn-danger btn-sm" href="{{URL::route('admin.bannerEdit')}}">
+                                    <i class="ace-icon fa fa-plus-circle"></i>
+                                    Thêm mới
+                                </a>
+                            @endif
                             <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
-                        </span>
+                        </div>
                     </div>
                     {{ Form::close() }}
                 </div>
@@ -48,11 +62,12 @@
                     <table class="table table-bordered table-hover">
                         <thead class="thin-border-bottom">
                         <tr class="">
-                            <th width="5%" class="text-center">STT</th>
+                            <th width="2%" class="text-center">TT</th>
                             <th width="10%" class="text-center">Ảnh</th>
-                            <th width="25%">Tên banner</th>
-                            <th width="20%">Thông tin banner</th>
-                            <th width="20%">Thông tin thêm</th>
+                            <th width="23%">Tên banner</th>
+                            <th width="10%" class="text-center">Loại banner</th>
+                            <th width="15%" class="text-center">Thuộc page</th>
+                            <th width="15%" class="text-center">Thông tin banner</th>
                             <th width="10%" class="text-center">Ngày chạy</th>
                             <th width="10%" class="text-center">Thao tác</th>
                         </tr>
@@ -66,15 +81,19 @@
                                 </td>
                                 <td>
                                     [<b>{{ $item->banner_id }}</b>] {{ $item->banner_name }}
+                                    <br/>C: {{date('h:i d-m-Y',$item->banner_create_time)}}
+                                    <br/>U: {{date('h:i d-m-Y',$item->banner_update_time)}}
+                                </td>
+                                <td class="text-center text-middle">
+                                    @if(isset($arrTypeBanner[$item->banner_type])){{$arrTypeBanner[$item->banner_type]}}@else ---- @endif
+                                </td>
+                                <td class="text-center text-middle">
+                                    @if(isset($arrPage[$item->banner_page])){{$arrPage[$item->banner_page]}}@else ---- @endif
+
                                 </td>
                                 <td>
-                                    <b>Loại: </b>@if(isset($arrTypeBanner[$item->banner_type])){{$arrTypeBanner[$item->banner_type]}}@else ---- @endif
-                                    <br/><b>Page: </b>@if(isset($arrPage[$item->banner_page])){{$arrPage[$item->banner_page]}}@else ---- @endif
-                                    <br/><b>Danh mục: </b>{{$item->banner_category_id}}
-                                </td>
-                                <td>
-                                    @if(isset($arrIsShop[$item->banner_is_shop]))<b>{{$arrIsShop[$item->banner_is_shop]}}</b>@else ---- @endif
-                                    @if($item->banner_shop_id > 0 && isset($arrShop[$item->banner_shop_id]))<br/><b>{{$arrShop[$item->banner_shop_id]}}</b>@endif
+                                    <br/><b>Danh mục: </b>@if(isset($arrCategory[$item->banner_category_id])){{$arrCategory[$item->banner_category_id]}}@else ----- @endif
+                                    <br/><b>Tỉnh: </b>@if(isset($arrProvince[$item->banner_province_id])){{$arrProvince[$item->banner_province_id]}}@else Toàn quốc @endif
                                     <br/>@if($item->banner_is_rel == 1)Follow @else Nofollow @endif
                                 </td>
                                 <td class="text-center text-middle">
@@ -82,7 +101,7 @@
                                         S:{{date('d-m-Y',$item->banner_start_time)}}
                                         <br/>E:{{date('d-m-Y',$item->banner_end_time)}}
                                     @else
-                                        Không giới hạn ngày chạy
+                                        Không giới hạn
                                     @endif
                                 </td>
                                 <td class="text-center text-middle">

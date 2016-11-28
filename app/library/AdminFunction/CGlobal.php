@@ -141,21 +141,18 @@ class CGlobal{
     const BANNER_IS_RUN_TIME = 1;
     const BANNER_NOT_TARGET_BLANK = 0;
     const BANNER_TARGET_BLANK = 1;
-    const BANNER_NOT_SHOP = 0;
-    const BANNER_IS_SHOP = 1;
 
-    const BANNER_TYPE_HOME_BIG = 1;
-    const BANNER_TYPE_HOME_SMALL = 2;
-    const BANNER_TYPE_HOME_LEFT = 3;
-    const BANNER_TYPE_HOME_RIGHT = 4;
-    const BANNER_TYPE_HOME_LIST = 5;
+    const BANNER_TYPE_TOP = 1;
+    const BANNER_TYPE_LEFT = 2;
+    const BANNER_TYPE_RIGHT = 3;
+    const BANNER_TYPE_BOTTOM = 4;
+    const BANNER_TYPE_CENTER = 5;
 
     const BANNER_PAGE_HOME = 1;
     const BANNER_PAGE_LIST = 2;
     const BANNER_PAGE_DETAIL = 3;
     const BANNER_PAGE_CATEGORY = 4;
-    const BANNER_TYPE_HOME_RIGHT_1 = 6;
-    const BANNER_TYPE_HOME_RIGHT_2 = 7;
+    const BANNER_PAGE_OTHER = 6;
 
     const LINK_NOFOLLOW = 0;
     const LINK_FOLLOW = 1;

@@ -9,17 +9,19 @@ class Banner extends Eloquent
     protected $primaryKey = 'banner_id';
     public $timestamps = false;
 
-
-
     //cac truong trong DB
     protected $fillable = array('banner_id','banner_name', 'banner_link',
-        'banner_image', 'banner_image_temp', 'banner_order','banner_total_click',
-        'banner_is_target', 'banner_is_rel', 'banner_type','banner_page',
-        'banner_category_id', 'banner_status', 'banner_is_run_time','banner_start_time','banner_end_time',
-        'banner_time_click', 'banner_is_shop', 'banner_shop_id', 'banner_update_time', 'banner_create_time');
+        'banner_image', 'banner_image_temp', 'banner_total_click',
+        'banner_is_target', 'banner_is_rel', 'banner_type',
+        'banner_order',//vị trí hiển thị
+        'banner_page',// thuoc page nao
+        'banner_province_id',//tỉnh thành
+        'banner_category_id', //danh mục
+        'banner_status', 'banner_is_run_time','banner_start_time','banner_end_time',
+        'banner_time_click', 'banner_update_time', 'banner_create_time');
 
-    public static function getBannerAdvanced($banner_type = 0, $banner_page = 0, $banner_category_id = 0, $banner_shop_id = 0){
-        $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_shop_id;
+    public static function getBannerAdvanced($banner_type = 0, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0){
+        $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_province_id;
         $bannerAdvanced = (Memcache::CACHE_ON)? Cache::get($key_cache) : array();
         if (sizeof($bannerAdvanced) == 0) {
             $banner = Banner::where('banner_id' ,'>', 0)
@@ -27,7 +29,7 @@ class Banner extends Eloquent
                 ->where('banner_type',$banner_type)
                 ->where('banner_page',$banner_page)
                 ->where('banner_category_id',$banner_category_id)
-                ->where('banner_shop_id',$banner_shop_id)
+                ->where('banner_province_id',$banner_province_id)
                 ->orderBy('banner_order','asc')->get();
             if($banner){
                 foreach($banner as $itm) {
@@ -51,15 +53,6 @@ class Banner extends Eloquent
         }
         return $new;
     }
-    public static function getBannerShopByID($id,$shop_id) {
-        $banner = Banner::getBannerByID($id);
-        if(sizeof($banner)>0){
-            if($banner->banner_shop_id == $shop_id){
-                return $banner;
-            }
-        }
-        return array();
-    }
 
     public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){
         try{
@@ -70,16 +63,16 @@ class Banner extends Eloquent
             if (isset($dataSearch['banner_status']) && $dataSearch['banner_status'] != -1) {
                 $query->where('banner_status', $dataSearch['banner_status']);
             }
-            if (isset($dataSearch['banner_category_id']) && $dataSearch['banner_category_id'] > 0) {
+            if (isset($dataSearch['banner_category_id']) && $dataSearch['banner_category_id'] > -1) {
                 $query->where('banner_category_id', $dataSearch['banner_category_id']);
             }
-            if (isset($dataSearch['banner_shop_id']) && $dataSearch['banner_shop_id'] > 0) {
-                $query->where('banner_shop_id', $dataSearch['banner_shop_id']);
+            if (isset($dataSearch['banner_province_id']) && $dataSearch['banner_province_id'] > -1) {
+                $query->where('banner_province_id', $dataSearch['banner_province_id']);
             }
-            if (isset($dataSearch['banner_type']) && $dataSearch['banner_type'] > 0) {
+            if (isset($dataSearch['banner_type']) && $dataSearch['banner_type'] > -1) {
                 $query->where('banner_type', $dataSearch['banner_type']);
             }
-            if (isset($dataSearch['banner_page']) && $dataSearch['banner_page'] > 0) {
+            if (isset($dataSearch['banner_page']) && $dataSearch['banner_page'] > -1) {
                 $query->where('banner_page', $dataSearch['banner_page']);
             }
             $total = $query->count();
@@ -119,7 +112,7 @@ class Banner extends Eloquent
                 DB::connection()->getPdo()->commit();
                 if(isset($data->banner_id) && $data->banner_id > 0){
                     //x�a cache banner show
-                    $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$data->banner_type.'_'.$data->banner_page.'_'.$data->banner_category_id.'_'.$data->banner_shop_id;
+                    $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$data->banner_type.'_'.$data->banner_page.'_'.$data->banner_category_id.'_'.$data->banner_province_id;
                     Cache::forget($key_cache);
                     self::removeCache($data->banner_id);
                 }
@@ -149,7 +142,7 @@ class Banner extends Eloquent
                 $dataSave->update($dataInput);
                 if(isset($dataSave->banner_id) && $dataSave->banner_id > 0){
                     //x�a cache banner show
-                    $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_'.$dataSave->banner_page.'_'.$dataSave->banner_category_id.'_'.$dataSave->banner_shop_id;
+                    $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_'.$dataSave->banner_page.'_'.$dataSave->banner_category_id.'_'.$dataSave->banner_province_id;
                     Cache::forget($key_cache);
                     self::removeCache($dataSave->banner_id);
                 }
@@ -186,7 +179,7 @@ class Banner extends Eloquent
                     }
                 }
                 //x�a cache banner show
-                $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_'.$dataSave->banner_page.'_'.$dataSave->banner_category_id.'_'.$dataSave->banner_shop_id;
+                $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_'.$dataSave->banner_page.'_'.$dataSave->banner_category_id.'_'.$dataSave->banner_province_id;
                 Cache::forget($key_cache);
                 self::removeCache($dataSave->banner_id);
             }
