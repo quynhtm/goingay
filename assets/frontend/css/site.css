@@ -588,7 +588,8 @@ h1, h2, h3, h4, h5, h6{
 .list-item-panel-icon i.fa-mobile-phone{
 	font-size: 20px;
 }
-.list-item-panel-icon li a:hover{
+.list-item-panel-icon li a:hover,
+.list-item-panel-icon li a.act{
 	color: #fff;
 	background: #ff7300;
 }
