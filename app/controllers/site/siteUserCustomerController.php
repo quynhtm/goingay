@@ -243,6 +243,8 @@ class SiteUserCustomerController extends BaseSiteController{
 			$dataShow = $dataUpdate;
 		}
 		
+		//Banner Right
+		$arrBannerRight = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_RIGHT, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
 		//thong tin tinh thanh
 		$province = Province::getAllProvince();
 		$optionProvince = FunctionLib::getOption(array(0=>'---Chọn tỉnh thành----') + $province, $customer_province_id);
@@ -253,6 +255,7 @@ class SiteUserCustomerController extends BaseSiteController{
 								->with('user_customer',$dataShow)
 								->with('optionProvince',$optionProvince)
 								->with('optionDistrict',$optionDistrict)
+								->with('arrBannerRight',$arrBannerRight)
 								->with('messages',$messages);
 		$this->footer();
 	}
@@ -397,6 +400,8 @@ class SiteUserCustomerController extends BaseSiteController{
 		$dataSearch = (isset($this->user_customer['customer_id']) && $this->user_customer['customer_id'] > 0) ? Items::searchByCondition($search, $limit, $offset,$total): array();
 		$paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
 
+		//Banner right
+		$arrBannerRight = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_RIGHT, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
 		//danh muc
 		$arrCategory = Category::getAllParentCategoryId();
 		$optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCategory, $search['item_category_id']);
@@ -411,7 +416,8 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('search', $search)
 			->with('optionCategory', $optionCategory)
 			->with('optionStatus', $optionStatus)
-			->with('user_customer',$this->user_customer);
+			->with('user_customer',$this->user_customer)
+			->with('arrBannerRight',$arrBannerRight);
 		$this->footer();
 	}
 	public function getAddItem($item_id = 0){
@@ -437,7 +443,9 @@ class SiteUserCustomerController extends BaseSiteController{
 		$product = array();
 		$arrViewImgOther = array();
 		$imagePrimary = $imageHover = '';
-
+		//Banner right
+		$arrBannerRight = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_RIGHT, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
+		
 		//danh muc
 		$arrCategory = Category::getAllParentCategoryId();
 		$optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCategory, -1);
@@ -455,7 +463,8 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('imageHover', $imageHover)
 			->with('optionCategory', $optionCategory)
 			->with('optionStatusProduct', $optionStatusProduct)
-			->with('optionTypePrice', $optionTypePrice);
+			->with('optionTypePrice', $optionTypePrice)
+			->with('arrBannerRight', $arrBannerRight);
 		$this->footer();
 	}
 	public function getEditItem($item_id = 0){
@@ -514,7 +523,9 @@ class SiteUserCustomerController extends BaseSiteController{
 			'item_type_price'=>$items->item_type_price,
 			'item_price_sell'=>$items->item_price_sell,
 			'item_image'=>$items->item_image);
-
+		//Banner right
+		$arrBannerRight = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_RIGHT, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
+		
 		//danh muc san pham cua shop
 		$arrCategory = Category::getAllParentCategoryId();
 		$optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCategory,isset($items->item_category_id)? $items->item_category_id: -1);
@@ -532,7 +543,8 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('imageHover', $imageHover)
 			->with('optionCategory', $optionCategory)
 			->with('optionStatusProduct', $optionStatusProduct)
-			->with('optionTypePrice', $optionTypePrice);
+			->with('optionTypePrice', $optionTypePrice)
+			->with('arrBannerRight', $arrBannerRight);
 		$this->footer();
 	}
 	public function postEditItem($item_id = 0){
@@ -642,6 +654,9 @@ class SiteUserCustomerController extends BaseSiteController{
 				}
 			}
 		}
+		//Banner right
+		$arrBannerRight = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_RIGHT, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
+		
 		//FunctionLib::debug($dataSave);
 		$optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCategory,$dataSave['item_category_id']);
 		$optionStatusProduct = FunctionLib::getOption($this->arrStatusProduct,$dataSave['item_status']);
@@ -657,7 +672,8 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('imageHover', $imageHover)
 			->with('optionCategory', $optionCategory)
 			->with('optionStatusProduct', $optionStatusProduct)
-			->with('optionTypePrice', $optionTypePrice);
+			->with('optionTypePrice', $optionTypePrice)
+			->with('arrBannerRight', $arrBannerRight);
 		$this->footer();
 	}
 	private function validInforItem($data=array()) {

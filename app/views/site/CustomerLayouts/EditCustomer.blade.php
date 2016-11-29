@@ -100,18 +100,47 @@
 	@endif
 </div>
 <div class="col-right-16">
+	@if(sizeof($arrBannerRight) > 0)
 	<div class="box-ads">
 		<ul class="rslides" id="sliderRight">
-			<li>
-				<a href="" title="">
-					<img src="http://st.img.polyad.net/2016/11/24/banner_thang12_160x600(4).jpg">
+			@foreach($arrBannerRight as $slider)
+			<?php 
+			if($slider->banner_is_rel == 0){
+				$rel = 'rel="nofollow"';
+			}else{
+				$rel = '';
+			}
+			if($slider->banner_is_target == 0){
+				$target = 'target="_blank"';
+			}else{
+				$target = '';
+			}
+			
+			$banner_is_run_time = 1;
+			if($slider->banner_is_run_time == CGlobal::status_hide){
+				$banner_is_run_time = 1;
+			}else{
+				$banner_start_time = $slider->banner_start_time;
+				$banner_end_time = $slider->banner_end_time;
+				$date_current = time();
+			
+				if($banner_start_time > 0 && $banner_end_time > 0 && $banner_start_time <= $banner_end_time){
+					if($banner_start_time <= $date_current && $date_current <= $banner_end_time){
+						$banner_is_run_time = 1;
+					}
+				}else{
+					$banner_is_run_time = 0;
+				}
+			}
+			?>
+			@if($banner_is_run_time == 1)
+			<div class="slide ">
+				<a {{$target}} {{$rel}} href="@if($slider->banner_link != '') {{$slider->banner_link}} @else javascript:void(0) @endif" title="{{$slider->banner_name}}">
+					<img src="{{ThumbImg::thumbBaseNormal(CGlobal::FOLDER_BANNER, $slider->banner_id, $slider->banner_image, 200, 600, '', true, true, false)}}" alt="{{$slider->banner_name}}" />
 				</a>
-			</li>
-			<li>
-				<a href="" title="">
-					<img src="http://static.eclick.vn/uploads/source/2016/10/25/407950308217385024l37352a45.jpeg">
-				</a>
-			</li>
+			</div>
+			@endif
+			@endforeach
 		 </ul>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
@@ -123,4 +152,5 @@
 			});
 		</script>
 	</div>
+	@endif
 </div>

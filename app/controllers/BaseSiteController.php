@@ -30,15 +30,19 @@ class BaseSiteController extends BaseController
 		if(empty($user_customer)){
 			$this->popupHide();
 		}
+		$arrBannerHead = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
 		$this->layout->header = View::make("site.BaseLayouts.header")
 								->with('user_customer', $user_customer)
-								->with('messages', $messages);
+								->with('messages', $messages)
+								->with('arrBannerHead', $arrBannerHead);
     }
 	public function popupHide(){
 		$this->layout->popupHide = View::make("site.BaseLayouts.popupHide");
 	}
 	public function menuLeft(){
-		$this->layout->menuLeft = View::make("site.BaseLayouts.menuLeft");
+		$arrBannerLeft = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_LEFT, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
+		$this->layout->menuLeft = View::make("site.BaseLayouts.menuLeft")
+								->with('arrBannerLeft', $arrBannerLeft);
 	}
     public function footer(){
 		$address='';
