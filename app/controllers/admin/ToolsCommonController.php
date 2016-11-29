@@ -40,7 +40,7 @@ class ToolsCommonController extends BaseAdminController
      * Quản lý lượt share của shop
      * **********************************************************************************************************************************
      */
-    public function viewShopShare() {
+    public function viewClickShare() {
         //Check phan quyen.
         if(!$this->is_root && !in_array($this->permission_full,$this->permission)&& !in_array($this->permission_view,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
@@ -52,23 +52,19 @@ class ToolsCommonController extends BaseAdminController
         $search = $data = array();
         $total = 0;
 
-        $search['shop_name'] = addslashes(Request::get('shop_name',''));
-        $search['shop_id'] = (int)Request::get('shop_id',0);
+        $search['object_name'] = addslashes(Request::get('object_name',''));
+        $search['object_id'] = (int)Request::get('object_id',0);
 
-        $dataSearch = ShopShare::searchByCondition($search, $limit, $offset,$total);
+        $dataSearch = ClickShare::searchByCondition($search, $limit, $offset,$total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
 
-        //FunctionLib::debug($dataSearch);
-        $arrShop = UserShop::getShopAll();
-        //$optionShop = FunctionLib::getOption(array(0=>'-- Chọn Shop ---') + $arrShop, $search['shop_id']);
-        $this->layout->content = View::make('admin.ToolsCommon.viewShopShare')
+        $this->layout->content = View::make('admin.ToolsCommon.viewClickShare')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
             ->with('total', $total)
             ->with('sizeShow', count($data))
             ->with('data', $dataSearch)
             ->with('search', $search)
-            ->with('arrShop', $arrShop)
 
             ->with('is_root', $this->is_root)//dùng common
             ->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)//dùng common

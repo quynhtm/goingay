@@ -97,6 +97,7 @@
                                 <td class="text-middle">
                                     @if(isset($arrIsCustomer[$item->is_customer])){{ $arrIsCustomer[$item->is_customer] }}@else --- @endif
                                     <br/>∑ tin đã đăng: <b>{{ $item->customer_up_item }}</b>
+                                    <br/>∑ lượt share: <b>{{ $item->customer_number_share }}</b>
                                 </td>
                                 <td class="text-center text-middle">
                                     @if($item->is_login == CGlobal::CUSTOMER_ONLINE)

@@ -144,15 +144,10 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('province/submitInforDistrictOfProvince',array('as'=>'submitInforDistrictOfProvince','uses'=>'ProvinceController@submitInforDistrictOfProvince'));// thong tin quan huyen
 
     //Tools quản lý các page khác nhau
-    Route::get('toolsCommon/viewShopShare',array('as' => 'admin.viewShopShare','uses' => 'ToolsCommonController@viewShopShare'));
+    Route::get('toolsCommon/viewClickShare',array('as' => 'admin.viewClickShare','uses' => 'ToolsCommonController@viewClickShare'));
     //quan ly noi dung gui email
     Route::get('toolsCommon/viewContentSendEmail',array('as' => 'admin.contentSendEmail_list','uses' => 'ToolsCommonController@viewContentSendEmail'));
     Route::get('toolsCommon/edit/{id?}', array('as' => 'admin.contentSendEmail_edit','uses' => 'ToolsCommonController@getContentSendEmail'))->where('id', '[0-9]+');
     Route::post('toolsCommon/edit/{id?}', array('as' => 'admin.contentSendEmail_edit','uses' => 'ToolsCommonController@postContentSendEmail'))->where('id', '[0-9]+');
     Route::post('toolsCommon/deleteContentSendEmail', array('as' => 'admin.deltete_provider','uses' => 'ToolsCommonController@deleteContentSendEmail'));//ajax
-    //Gửi email tới khách hàng
-    Route::post('toolsCommon/sendEmailContentToCustomer',array('as' => 'admin.sendEmailContentToCustomer','uses' => 'ToolsCommonController@sendEmailContentToCustomer'));
-    //Gui Email toi nha cung cap mo shop
-    Route::post('toolsCommon/sendEmailInviteToSupplier',array('as' => 'admin.sendEmailInviteToSupplier','uses' => 'ToolsCommonController@sendEmailInviteToSupplier'));
-    
 });

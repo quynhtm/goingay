@@ -17,13 +17,12 @@
                     {{ Form::open(array('method' => 'GET', 'role'=>'form')) }}
                     <div class="panel-body">
                         <div class="form-group col-lg-3">
-                            <label for="order_status">Sản phẩm của Shop</label>
-                            <select name="user_shop_id" id="user_shop_id" class="form-control input-sm chosen-select-deselect" tabindex="12" data-placeholder="Chọn tên shop">
-                                <option value=""></option>
-                                @foreach($arrShop as $shop_id => $shopName)
-                                    <option value="{{$shop_id}}" @if($search['shop_id'] == $shop_id) selected="selected" @endif>{{$shopName}}</option>
-                                @endforeach
-                            </select>
+                            <label for="object_name">ID đối tượng share</label>
+                            <input type="text" class="form-control input-sm" id="object_id" name="object_id" placeholder="ID đối tượng share" @if(isset($search['object_id']) && $search['object_id'] != '')value="{{$search['object_id']}}"@endif>
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label for="object_name">Tên đối tượng share</label>
+                            <input type="text" class="form-control input-sm" id="object_name" name="object_name" placeholder="Tên đối tượng share" @if(isset($search['object_name']) && $search['object_name'] != '')value="{{$search['object_name']}}"@endif>
                         </div>
                     </div>
                     <div class="panel-footer text-right">
@@ -40,7 +39,7 @@
                         <thead class="thin-border-bottom">
                         <tr class="">
                             <th width="5%" class="text-center">STT</th>
-                            <th width="55%">Tên shop</th>
+                            <th width="55%">Tên đối tượng</th>
                             <th width="20%" class="text-center">IP share</th>
                             <th width="20%" class="text-center">Thời gian</th>
                         </tr>
@@ -52,13 +51,13 @@
                                     {{ $stt + $key+1 }}
                                 </td>
                                 <td>
-                                    [<b>{{ $item->shop_id }}</b>] {{ $item->shop_name }}
+                                    [<b>{{ $item->object_id }}</b>] {{ $item->object_name }}
                                 </td>
                                 <td class="text-center">
-                                    {{ $item->shop_share_ip }}
+                                    {{ $item->share_ip }}
                                 </td>
                                 <td class="text-center">
-                                    {{date('d-m-Y H:i:s',$item->shop_share_time)}}
+                                    {{date('d-m-Y H:i:s',$item->share_time)}}
                                 </td>
                             </tr>
                         @endforeach
@@ -79,16 +78,3 @@
         <!-- /.row -->
     </div><!-- /.page-content -->
 </div>
-<script type="text/javascript">
-    //tim kiem cho shop
-    var config = {
-        '.chosen-select'           : {},
-        '.chosen-select-deselect'  : {allow_single_deselect:true},
-        '.chosen-select-no-single' : {disable_search_threshold:10},
-        '.chosen-select-no-results': {no_results_text:'Không có kết quả'}
-        //      '.chosen-select-width'     : {width:"95%"}
-    }
-    for (var selector in config) {
-        $(selector).chosen(config[selector]);
-    }
-</script>
