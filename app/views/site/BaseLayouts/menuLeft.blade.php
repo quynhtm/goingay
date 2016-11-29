@@ -3,44 +3,15 @@
 <div class="col-left-200">
 	<ul class="box-menu-category">
 		<li>
-			<a href="" class="act"><i class="fa fa-home"></i>Trang chủ</a>
+			<a title="Trang chủ" href="{{URL::route('site.home')}}" @if(Route::currentRouteName() == 'site.home')class="act"@endif><i class="fa fa-home"></i>Trang chủ</a>
 		</li>
+		@if(!empty($menuCategoriessAll))
+		@foreach($menuCategoriessAll as $cat)
 		<li>
-			<a href="{{URL::route('site.home')}}/mua-ban-nha-dat-1122.html"><i class="fa fa-building"></i> Mua bán nhà đất </a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-building-o"></i> Thuê nhà đất </a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-car"></i> Ôtô </a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-bicycle"></i> Xe máy - Xe đạp </a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-mortar-board"></i> Tuyển sinh - Tuyển dụng </a>
-		</li>
-		<li>
-			<a href="/dien-thoai-sim"><i class="fa fa-mobile-phone"></i> Điện thoại - Sim </a>
-		</li>
-		<li>
-			<a href="/pc-laptop"><i class="fa fa-laptop"></i> PC - Laptop </a>
-		</li>
-		<li>
-			<a href="/dien-tu-ky-thuat-so"><i class="fa fa-desktop"></i> Điện tử - Kỹ thuật số </a>
-		</li>
-		<li>
-			<a href="/thoi-trang-lam-dep"><i class="fa fa-child"></i> Thời trang - Làm đẹp </a>
-		</li>
-		<li>
-			<a href="/am-thuc-du-lich"><i class="fa fa-cutlery"></i> Ẩm thực - Du lịch </a>
-		</li>
-		<li>
-			<a href="/dich-vu"><i class="fa fa-dropbox"></i> Dịch vụ </a>
-		</li>
-		<li>
-			<a href="/khac"><i class="fa fa-asterisk"></i> Khác </a>
-		</li>
+	        <a title="{{$cat['category_name']}}" href="{{FunctionLib::buildLinkCategory($cat['category_id'], $cat['category_name'])}}" ><i class="{{$cat['category_icons']}}"></i>{{$cat['category_name']}}</a>
+	    </li>
+		@endforeach
+		@endif
 	</ul>
 	@if(sizeof($arrBannerLeft) > 0)
 	<div class="box-ads">
@@ -101,44 +72,15 @@
 <div class="col-left-5">
 	<ul class="list-item-panel-icon">
 		<li class="fst">
-			<a href=""><i class="fa fa-home">&nbsp;</i></a>
+			<a title="Trang chủ" href="{{URL::route('site.home')}}" @if(Route::currentRouteName() == 'site.home')class="act"@endif><i class="fa fa-home"></i></a>
 		</li>
+		@if(!empty($menuCategoriessAll))
+		@foreach($menuCategoriessAll as $cat)
 		<li>
-			<a href=""><i class="fa fa-building"></i></a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-building-o"></i></a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-car"></i></a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-bicycle"></i></a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-mortar-board"></i></a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-mobile-phone"></i></a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-laptop"></i></a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-desktop"></i></a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-child"></i></a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-cutlery"></i></a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-dropbox"></i></a>
-		</li>
-		<li>
-			<a href=""><i class="fa fa-asterisk"></i></a>
-		</li>
+	        <a title="{{$cat['category_name']}}" href="{{FunctionLib::buildLinkCategory($cat['category_id'], $cat['category_name'])}}" ><i class="{{$cat['category_icons']}}"></i></a>
+	    </li>
+		@endforeach
+		@endif
 	</ul>
 </div>
 @endif

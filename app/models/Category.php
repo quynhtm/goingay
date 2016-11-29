@@ -196,7 +196,7 @@ class Category extends Eloquent
     public static function getCategoriessAll(){
         $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_CATEGORY) : array();
         if (sizeof($data) == 0) {
-            $categories = Category::where('category_id', '>', 0)->where('category_status', '=', CGlobal::status_show)->get();
+            $categories = Category::where('category_id', '>', 0)->where('category_status', '=', CGlobal::status_show)->orderBy('category_content_front_order', 'asc')->get();
             if($categories){
                 foreach($categories as $itm) {
                     $data[$itm->category_id] = array('category_id'=>$itm->category_id,

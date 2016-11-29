@@ -40,9 +40,11 @@ class BaseSiteController extends BaseController
 		$this->layout->popupHide = View::make("site.BaseLayouts.popupHide");
 	}
 	public function menuLeft(){
+		$menuCategoriessAll = Category::getCategoriessAll();
 		$arrBannerLeft = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_LEFT, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
 		$this->layout->menuLeft = View::make("site.BaseLayouts.menuLeft")
-								->with('arrBannerLeft', $arrBannerLeft);
+								->with('arrBannerLeft', $arrBannerLeft)
+								->with('menuCategoriessAll', $menuCategoriessAll);
 	}
     public function footer(){
 		$address='';

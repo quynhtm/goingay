@@ -431,7 +431,13 @@ class FunctionLib {
     	$replacer="...";
     	return substr($str,0,$posSpace).$replacer;
     }
-    
+    //Buid Link Category
+    static function buildLinkCategory($cat_id = 0, $cat_title = 'Danh-mục'){
+    	if($cat_id > 0){
+    		return URL::route('SiteHomeController.pageCategory', array('id'=>$cat_id, 'name'=>strtolower(FunctionLib::safe_title($cat_title))));
+    	}
+    	return '#';
+    }
     /**
      * @param int $pro_id
      * @param string $pro_name
