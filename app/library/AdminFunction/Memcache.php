@@ -27,6 +27,9 @@ class Memcache{
     //tin tức
     const CACHE_NEW_ID    = 'cache_news_id_';
 
+    //share
+    const CACHE_SHARE_OBJECT_ID    = 'cache_share_object_id_';
+
     //banner
     const CACHE_BANNER_ID    = 'cache_banner_id_';
     const CACHE_BANNER_ADVANCED    = 'cache_banner_advanced';
