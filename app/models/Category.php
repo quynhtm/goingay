@@ -12,7 +12,7 @@ class Category extends Eloquent
     //cac truong trong DB
     protected $fillable = array('category_id','category_name', 'category_parent_id',
         'category_content_front', 'category_content_front_order', 'category_status',
-        'category_image_background', 'category_icons', 'category_icons_font', 'category_order');
+        'category_image_background', 'category_icons', 'category_order');
 
     public static function getByID($id) {
         $category = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_CATEGORY_ID.$id) : array();
@@ -83,6 +83,9 @@ class Category extends Eloquent
             }
             if (isset($dataSearch['category_status']) && $dataSearch['category_status'] != -1) {
                 $query->where('category_status', $dataSearch['category_status']);
+            }
+            if (isset($dataSearch['category_content_front']) && $dataSearch['category_content_front'] != -1) {
+            	$query->where('category_content_front', $dataSearch['category_content_front']);
             }
             $total = $query->count();
             $query->orderBy('category_id', 'desc');

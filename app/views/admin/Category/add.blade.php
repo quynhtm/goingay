@@ -54,10 +54,10 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <input type="text" placeholder="Icons font" id="category_icons_font" name="category_icons_font" class="form-control input-sm" value="@if(isset($data['category_icons_font'])){{$data['category_icons_font']}}@endif">
+                        <input type="text" placeholder="Icons font" id="category_icons" name="category_icons" class="form-control input-sm" value="@if(isset($data['category_icons'])){{$data['category_icons']}}@endif">
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <!--<div class="col-sm-4">
                     <div class="form-group">
                       <input name="image" type="file"/>
                       <input name="category_icons" type="hidden" id="category_icons" @if(isset($data['category_icons']))value="{{$data['category_icons']}}"@else value="" @endif>
@@ -67,9 +67,43 @@
                        <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_CATEGORY, $data['category_id'], $data['category_icons'], CGlobal::sizeImage_100, '', true, CGlobal::type_thumb_image_banner, false)}}" height="50" width="50">
                     </div>
                     @endif
+                </div>-->
+                <div class="clearfix"></div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <i>Vị trí trang chủ</i>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="text" placeholder="Vị trí trang chủ" id="category_content_front_order" name="category_content_front_order" class="form-control input-sm" value="@if(isset($data['category_content_front_order'])){{$data['category_content_front_order']}}@endif">
+                    </div>
+                </div>
+                 <div class="clearfix"></div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <i>Vị trí</i>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="text" placeholder="Vị trí" id="category_order" name="category_order" class="form-control input-sm" value="@if(isset($data['category_order'])){{$data['category_order']}}@endif">
+                    </div>
                 </div>
                 <div class="clearfix"></div>
-
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <i>Hiển thị trang chủ</i>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <select name="category_content_front" id="category_content_front" class="form-control input-sm">
+                            {{$optionShowHome}}
+                        </select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
                 <div class="col-sm-2">
                     <div class="form-group">
                         <i>Trạng thái</i>

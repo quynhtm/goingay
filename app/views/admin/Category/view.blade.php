@@ -21,11 +21,18 @@
                             <input type="text" class="form-control input-sm" id="category_name" name="category_name" placeholder="Tên danh mục" @if(isset($search['category_name']) && $search['category_name'] != '')value="{{$search['category_name']}}"@endif>
                         </div>
                         <div class="form-group col-lg-3">
+                            <label for="category_content_front">Hiển thị trang chủ</label>
+                            <select name="category_content_front" id="category_content_front" class="form-control input-sm">
+                                {{$optionShowHome}}
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3">
                             <label for="category_status">Trạng thái</label>
                             <select name="category_status" id="category_status" class="form-control input-sm">
                                 {{$optionStatus}}
                             </select>
                         </div>
+                        
                     </div>
                     <div class="panel-footer text-right">
                         @if($is_root || $permission_full ==1 || $permission_create == 1)
@@ -51,9 +58,10 @@
                             <th width="2%"class="td_list">STT</th>
                             <th width="1%" class="td_list"><input type="checkbox" id="checkAll"/></th>
                             <th width="25%" class="td_list">Tên danh mục</th>
-                            <th width="25%" class="td_list">Danh mục cha</th>
-                            <th width="10%" class="td_list">Show SP home (vịtri)</th>
-                            <th width="8%" class="td_list">Vị trí</th>
+                            <th width="10%" class="td_list">Danh mục cha</th>
+                            <th width="5%" class="td_list">Icon font</th>
+                            <th width="8%" class="td_list">Vị trí trang chủ</th>
+                            <th width="5%" class="td_list">Vị trí</th>
                             <th width="5%" class="td_list">Status</th>
                             <th width="10%" class="td_list">Action</th>
                         </tr>
@@ -70,11 +78,10 @@
                                    {{ $item['padding_left'].$item['category_parent_name'] }}
                                 </td>
                                 <td>
-                                    @if($item['category_parent_id'] == 0)
-                                        {{ $arrStatus[$item['category_content_front']].'--'. $item['category_content_front_order']}}
-                                    @else
-                                        ------
-                                    @endif
+                                   <i class="{{ $item['category_icons']}}"></i>
+                                </td>
+                                <td>
+                                   @if(isset($arrShowHome[$item['category_content_front']])) {{$arrShowHome[$item['category_content_front']]}} -- {{$item['category_content_front_order']}} @endif
                                 </td>
                                 <td>
                                     {{$item['category_order']}}
