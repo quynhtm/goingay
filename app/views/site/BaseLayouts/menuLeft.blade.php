@@ -77,7 +77,7 @@
 		@if(!empty($menuCategoriessAll))
 		@foreach($menuCategoriessAll as $cat)
 		<li>
-	        <a title="{{$cat['category_name']}}" href="{{FunctionLib::buildLinkCategory($cat['category_id'], $cat['category_name'])}}" ><i class="{{$cat['category_icons']}}"></i></a>
+	        <a title="{{$cat['category_name']}}" href="{{FunctionLib::buildLinkCategory($cat['category_id'], $cat['category_name'])}}" @if(isset($catid) && $catid == $cat['category_id']) style="background: green" @endif><i class="{{$cat['category_icons']}}"></i></a>
 	    </li>
 		@endforeach
 		@endif

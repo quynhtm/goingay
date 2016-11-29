@@ -45,7 +45,7 @@ class SiteHomeController extends BaseSiteController
     
     public function pageCategory($catname, $catid){
     	$this->header();
-    	$this->menuLeft();
+    	$this->menuLeft($catid);
     	$this->layout->content = View::make('site.SiteLayouts.ListProduct');
     	$this->footer();
     }
