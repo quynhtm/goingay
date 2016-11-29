@@ -31,9 +31,16 @@ class SiteHomeController extends BaseSiteController
         $this->layout->content = View::make('site.SiteLayouts.Home');
         $this->footer();
     }
-    
+
+	//chi tiet tin rao
+	public function pageDetailItem($item_id, $item_name, $item_category_id){
+		$this->header();
+		$this->menuLeft();
+		$this->layout->content = View::make('site.SiteLayouts.DetailProduct');
+		$this->footer();
+	}
+
 	public function page404(){
-    	
 		$meta_title = $meta_keywords = $meta_description = '404';
 		$meta_img= '';
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
@@ -42,14 +49,25 @@ class SiteHomeController extends BaseSiteController
     	$this->layout->content = View::make('site.SiteLayouts.page404');
     	$this->footer();
     }
-    
+
+	//danh sact tin dang theo danh muc
     public function pageCategory($catname, $catid){
     	$this->header();
     	$this->menuLeft($catid);
     	$this->layout->content = View::make('site.SiteLayouts.ListProduct');
     	$this->footer();
     }
-    public function pageProductView(){
+
+	//chi tiet tin tuc
+	public function pageDetailNew($new_id, $new_name){
+    	$this->header();
+    	$this->menuLeft();
+    	$this->layout->content = View::make('site.SiteLayouts.DetailProduct');
+    	$this->footer();
+    }
+
+    //Danh sach tin da dang cua khach
+	public function pageListItemCustomer($customer_id, $customer_name){
     	$this->header();
     	$this->menuLeft();
     	$this->layout->content = View::make('site.SiteLayouts.DetailProduct');

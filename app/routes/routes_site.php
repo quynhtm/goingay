@@ -21,21 +21,36 @@ Route::match(['GET','POST'],'quen-mat-khau.html', array('as' => 'customer.pageFo
 Route::match(['GET','POST'], 'facebooklogin', array('as' => 'customer.loginFacebook','uses' => 'SiteUserCustomerController@loginFacebook'));
 Route::match(['GET','POST'], 'googlelogin', array('as' => '.customer.loginGoogle','uses' => 'SiteUserCustomerController@loginGoogle'));
 
-Route::match(['GET','POST'],'thay-doi-thong-tin.html', array('as' => 'customer.pageChageInfo','uses' => 'SiteUserCustomerController@pageChageInfo'));
-Route::match(['GET','POST'],'thay-doi-mat-khau.html', array('as' => 'customer.pageChagePass','uses' => 'SiteUserCustomerController@pageChagePass'));
-Route::post('thong-tin-quan-huyen-cua-khach.html',array('as' => 'customer.getDistrictCustomer','uses' =>'SiteUserCustomerController@getDistrictCustomer'));
-
-
-//Category
+//list tin theo danh muc Category
 Route::get('{name}-{id}.html',array('as' => 'SiteHomeController.pageCategory','uses' =>'SiteHomeController@pageCategory'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
-Route::get('chi-tiet.html',array('as' => 'SiteHomeController.pageProductView','uses' =>'SiteHomeController@pageProductView'));
 
+//list tin dang cua nguoi dung
+Route::get('tin-rao-da-dang/{customer_name}-c-{customer_id}.html',array('as' => 'SiteHomeController.pageListItemCustomer','uses' =>'SiteHomeController@pageListItemCustomer'))->where('customer_name', '[A-Z0-9a-z_\-]+')->where('customer_id', '[0-9]+');
+
+//chi tiet tin rao vat
+Route::get('{item_name}-danhmuc{item_category_id}-tin{item_id}.html',array('as' => 'SiteHomeController.pageDetailItem','uses' =>'SiteHomeController@pageDetailItem'))->where('item_name', '[A-Z0-9a-z_\-]+')->where('item_category_id', '[0-9]+')->where('item_id', '[0-9]+');
+
+//chi tiet tin tuc
+Route::get('tin-t?c/{new_name}-{new_id}.html',array('as' => 'SiteHomeController.pageDetailNew','uses' =>'SiteHomeController@pageDetailNew'))->where('new_name', '[A-Z0-9a-z_\-]+')->where('new_id', '[0-9]+');
+
+
+
+/******************************************************************************************************************************
+ * Thao tac co phan dang nh?p cua Khách hàng
 //Quan ly tin dang
+ * /***************************************************************************************************************************
+ * */
 Route::get('quan-ly-tin-dang.html',array('as' => 'customer.ItemsList','uses' =>'SiteUserCustomerController@itemsList'));
 Route::get('dang-tin.html',array('as' => 'customer.ItemsAdd','uses' =>'SiteUserCustomerController@getAddItem'));
 Route::get('cap-nhat-tin-dang/t-{item_id}.html',array('as' => 'customer.ItemsEdit','uses' =>'SiteUserCustomerController@getEditItem'))->where('item_id', '[0-9]+');
 Route::post('cap-nhat-tin-dang/t-{item_id}.html',array('as' => 'customer.ItemsEdit','uses' =>'SiteUserCustomerController@postEditItem'))->where('item_id', '[0-9]+');
 Route::post('up-top-tin-dang.html',array('as' => 'customer.setTopItems','uses' =>'SiteUserCustomerController@setTopItems'));
 Route::post('xoa-tin-dang.html',array('as' => 'customer.removeItems','uses' =>'SiteUserCustomerController@removeItems'));
+
+//sua thong tin KH
+Route::match(['GET','POST'],'thay-doi-thong-tin.html', array('as' => 'customer.pageChageInfo','uses' => 'SiteUserCustomerController@pageChageInfo'));
+Route::match(['GET','POST'],'thay-doi-mat-khau.html', array('as' => 'customer.pageChagePass','uses' => 'SiteUserCustomerController@pageChagePass'));
+Route::post('thong-tin-quan-huyen-cua-khach.html',array('as' => 'customer.getDistrictCustomer','uses' =>'SiteUserCustomerController@getDistrictCustomer'));
+
 
 
