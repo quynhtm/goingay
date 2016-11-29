@@ -36,7 +36,7 @@ class SiteHomeController extends BaseSiteController
 	public function pageDetailItem($item_id, $item_name, $item_category_id){
 		$this->header();
 		$this->menuLeft();
-		$this->layout->content = View::make('site.SiteLayouts.DetailProduct');
+		$this->layout->content = View::make('site.SiteLayouts.DetailItem');
 		$this->footer();
 	}
 
@@ -54,7 +54,7 @@ class SiteHomeController extends BaseSiteController
     public function pageCategory($catname, $catid){
     	$this->header();
     	$this->menuLeft($catid);
-    	$this->layout->content = View::make('site.SiteLayouts.ListProduct');
+    	$this->layout->content = View::make('site.SiteLayouts.ListItemCategory');
     	$this->footer();
     }
 
@@ -62,7 +62,7 @@ class SiteHomeController extends BaseSiteController
 	public function pageDetailNew($new_id, $new_name){
     	$this->header();
     	$this->menuLeft();
-    	$this->layout->content = View::make('site.SiteLayouts.DetailProduct');
+    	$this->layout->content = View::make('site.SiteLayouts.DetailNews');
     	$this->footer();
     }
 
@@ -70,7 +70,7 @@ class SiteHomeController extends BaseSiteController
 	public function pageListItemCustomer($customer_id, $customer_name){
     	$this->header();
     	$this->menuLeft();
-    	$this->layout->content = View::make('site.SiteLayouts.DetailProduct');
+    	$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer');
     	$this->footer();
     }
 }
