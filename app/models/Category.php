@@ -12,7 +12,7 @@ class Category extends Eloquent
     //cac truong trong DB
     protected $fillable = array('category_id','category_name', 'category_parent_id',
         'category_content_front', 'category_content_front_order', 'category_status',
-        'category_image_background', 'category_icons', 'category_order');
+        'category_image_background', 'category_icons', 'category_icons_font', 'category_order');
 
     public static function getByID($id) {
         $category = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_CATEGORY_ID.$id) : array();
@@ -219,7 +219,7 @@ class Category extends Eloquent
         return $treeCategroy = self::getTreeCategory($categories);
     }
     /**
-     * build cây danh m?c
+     * build cï¿½y danh m?c
      * @param $data
      * @return array
      */

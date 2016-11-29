@@ -49,7 +49,12 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <i>Upload Icon </i>
+                        <i>Upload Icon</i>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="text" placeholder="Icons font" id="category_icons_font" name="category_icons_font" class="form-control input-sm" value="@if(isset($data['category_icons_font'])){{$data['category_icons_font']}}@endif">
                     </div>
                 </div>
                 <div class="col-sm-4">

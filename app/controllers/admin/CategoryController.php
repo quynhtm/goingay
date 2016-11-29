@@ -149,13 +149,14 @@ class CategoryController extends BaseAdminController
 
         $dataSave['category_name'] = addslashes(Request::get('category_name'));
         $dataSave['category_icons'] = addslashes(Request::get('category_icons'));
+        $dataSave['category_icons_font'] = addslashes(Request::get('category_icons_font'));
         $dataSave['category_status'] = (int)Request::get('category_status', 0);
         $dataSave['category_parent_id'] = (int)Request::get('category_parent_id', 0);
         $dataSave['category_content_front'] = (int)Request::get('category_content_front', 0);
         $dataSave['category_content_front_order'] = (int)Request::get('category_content_front_order', 0);
         $dataSave['category_order'] = (int)Request::get('category_order', 0);
         $dataSave['category_parent_id'] = (int)Request::get('category_parent_id', 0);
-
+        
         $file = Input::file('image');
         if($file){
             $filename = $file->getClientOriginalName();

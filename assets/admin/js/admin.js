@@ -18,6 +18,8 @@ var Admin = {
                 url_ajax = 'deleteProvince';
             }else if(type == 9){
                 url_ajax = 'deletePermission';
+            }else if(type == 10){
+            	url_ajax = 'deleteCategory';
             }
             if(url_ajax != ''){
                 $.ajax({
@@ -219,7 +221,7 @@ var Admin = {
         var settings = {
             url: WEB_ROOT + '/admin/categories/uploadImage',
             method: "POST",
-            allowedTypes:"jpg,png,jpeg",
+            allowedTypes:"jpg,png,jpeg,gif",
             fileName: "multipleFile",
             formData: {id: id_hiden},
             multiple: false,
@@ -285,7 +287,7 @@ var Admin = {
 		var settings = {
 			url: WEB_ROOT + '/ajax/uploadImage',
 			method: "POST",
-			allowedTypes:"jpg,png,jpeg",
+			allowedTypes:"jpg,png,jpeg,gif",
 			fileName: "multipleFile",
 			formData: {id: id_hiden,type: type},
 			multiple: false,//up 1 anh
@@ -357,7 +359,7 @@ var Admin = {
 		var settings = {
 			url: WEB_ROOT + '/ajax/uploadImage',
 			method: "POST",
-			allowedTypes:"jpg,png,jpeg",
+			allowedTypes:"jpg,png,jpeg,gif",
 			fileName: "multipleFile",
 			formData: {id: id_hiden,type: type},
 			multiple: (id_hiden==0)? false: true,
