@@ -18,7 +18,7 @@ class AjaxCommonController extends BaseSiteController
             case 1://img news
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, CGlobal::FOLDER_NEWS, $type);
                 break;
-            case 2://img Product
+            case 2://img Item
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, CGlobal::FOLDER_PRODUCT, $type);
                 break;
             case 3://img banner
@@ -50,36 +50,15 @@ class AjaxCommonController extends BaseSiteController
                         $new_row['news_status'] = CGlobal::IMAGE_ERROR;
                         $item_id = News::addData($new_row);
                         break;
-                    case 2://img Product
-                        $user_shop = UserShop::user_login();
-                        if(sizeof($user_shop) > 0){
-                            //check xem shop có đủ điều kiện nhập thêm sản phẩm không
-                            //check shop con lươt up hay không
-                            $number_limit_product = $user_shop->number_limit_product;//lượt up
-                            $shop_up_product = $user_shop->shop_up_product;// total da up
-                            if($shop_up_product >= $number_limit_product){
-                                $item_id = 0;
-                            }else{
-                                $new_row['time_created'] = time();
-                                $new_row['product_status'] = CGlobal::status_hide;
-                                $new_row['user_shop_id'] = $user_shop->shop_id;
-                                $new_row['user_shop_name'] = $user_shop->shop_name;
-                                $new_row['is_shop'] = $user_shop->is_shop;
-                                $new_row['shop_province'] = $user_shop->shop_province;
-                                $item_id = Product::addData($new_row);
-
-                                //cap nhat lai so l??t up san ph?m cho shop
-                                $inforShop = UserShop::getByID($user_shop->shop_id);//lay du lieu moi nhat, ko lay session vi ko cap nhat dung
-                                if(sizeof($inforShop) > 0){
-                                    $userShopUpdate['shop_up_product'] = $inforShop->shop_up_product + 1;
-                                    UserShop::updateData($inforShop->shop_id, $userShopUpdate);
-                                    $userShop2 = UserShop::getByID($inforShop->shop_id);
-                                    if($userShop2){
-                                        Session::forget('user_shop');//xóa session
-                                        Session::put('user_shop', $userShop2, 60*24);
-                                    }
-                                }
-                            }
+                    case 2://img Item
+                        $user_customer = UserCustomer::user_login();
+                        if(sizeof($user_customer) > 0){
+                        	$new_row['time_created'] = time();
+                        	$new_row['item_status'] = CGlobal::status_hide;
+                        	$new_row['customer_id'] = $user_customer->customer_id;
+                        	$new_row['customer_name'] = $user_customer->customer_name;
+                        	$new_row['item_province_id'] = $user_customer->customer_province_id;
+                        	$item_id = Items::addData($new_row);
                         }
                         break;
                     case 3://img banner
@@ -116,19 +95,19 @@ class AjaxCommonController extends BaseSiteController
                     		News::updateData($item_id,$proUpdate);
                     	}
                     }
-                    //cap nhat DB de quan ly cac file anh product
+                    //cap nhat DB de quan ly cac file anh tin đăng
                     if( $type == 2 ){
                         //img Product
-                        $user_shop = UserShop::user_login();
-                        if(sizeof($user_shop) > 0){
+                       $user_customer = UserCustomer::user_login();
+                        if(sizeof($user_customer) > 0){
                             //get mang anh other
-                            $shop_id = $user_shop->shop_id;
-                            $inforPro = Product::getProductByShopId($shop_id,$item_id);
-                            if($inforPro){
-                                $arrImagOther = unserialize($inforPro->product_image_other);
+                            $customer = $user_customer->customer_id;
+                            $inforItem = Items::getItemByCustomerId($customer, $item_id);
+                            if($inforItem){
+                                $arrImagOther = unserialize($inforItem->item_image_other);
                                 $arrImagOther[] = $file_name;//gan anh vua upload
-                                $proUpdate['product_image_other'] = serialize($arrImagOther);
-                                Product::updateData($item_id,$proUpdate);
+                                $itemUpdate['item_image_other'] = serialize($arrImagOther);
+                                Items::updateData($item_id, $itemUpdate);
                             }
                         }
                     }

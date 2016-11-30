@@ -1140,3 +1140,23 @@ h1, h2, h3, h4, h5, h6{
     color: #333;
     font: 400 13px/20px arial;
 }
+#sys_drag_sort li {
+    height: 155px !important;
+}
+#sys_drag_sort li img {
+    width: auto !important;
+    max-height: 100px !important;
+	height: auto !important;
+}
+#sys_drag_sort li .block_img_upload {
+    display: block;
+    height: 100%;
+}
+#sys_drag_sort li .block_img_upload .thumb {
+    height: 85px;
+	overflow: hidden;
+	border-bottom: 1px dotted#ddd;
+}
+#div_image_insert_content .float_left.image_insert_content {
+    display: inline-block;
+}
