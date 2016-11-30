@@ -53,6 +53,10 @@ class SiteHomeController extends BaseSiteController
 
 	//danh sact tin dang theo danh muc
     public function pageCategory($catname, $catid){
+		$meta_title = $meta_keywords = $meta_description = $catname;
+		$meta_img= '';
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+
     	$this->header();
     	$this->menuLeft($catid);
 
