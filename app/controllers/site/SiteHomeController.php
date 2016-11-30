@@ -67,7 +67,16 @@ class SiteHomeController extends BaseSiteController
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
 
+		//t?nh thành
+		$arrProvince = Province::getAllProvince();
+
+		//thong tin danh m?c
+		$arrCategory = Category::getAllParentCategoryId();
+
     	$this->layout->content = View::make('site.SiteLayouts.ListItemCategory')
+			->with('arrProvince', $arrProvince)
+			->with('arrCategory', $arrCategory)
+			->with('category_id', $catid)
 			->with('paging', $paging)
 			->with('total', $totalSearch)
 			->with('resultItemCategory', $resultItemCategory);

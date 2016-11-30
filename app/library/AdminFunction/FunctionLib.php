@@ -434,7 +434,7 @@ class FunctionLib {
     //Buid Link Category
     static function buildLinkCategory($cat_id = 0, $cat_title = 'Danh-mục'){
     	if($cat_id > 0){
-    		return URL::route('SiteHomeController.pageCategory', array('id'=>$cat_id, 'name'=>strtolower(FunctionLib::safe_title($cat_title))));
+    		return URL::route('Site.pageCategory', array('id'=>$cat_id, 'name'=>strtolower(FunctionLib::safe_title($cat_title))));
     	}
     	return '#';
     }
@@ -444,9 +444,9 @@ class FunctionLib {
      * @param string $cat_name
      * @return string
      */
-    static function buildLinkDetailProduct($pro_id = 0,$pro_name = 'sản phẩm',$cat_name = 'danh mục'){
-        if($pro_id > 0){
-            return URL::route('site.detailProduct', array('cat'=>strtolower(FunctionLib::safe_title($cat_name)),'name'=>strtolower(FunctionLib::safe_title($pro_name)),'id'=>$pro_id));
+    static function buildLinkDetailItem($item_id = 0,$item_name = 'tin đăng',$cat_id = 0){
+        if($item_id > 0){
+            return URL::route('Site.pageDetailItem', array('item_id'=>$item_id,'item_name'=>strtolower(FunctionLib::safe_title($item_name)),'item_category_id'=>$cat_id));
         }
         return '#';
     }
