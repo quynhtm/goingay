@@ -22,7 +22,8 @@ class BaseSiteController extends BaseController
 		
 		FunctionLib::site_css('lib/ResponsiveSlides/responsiveslides.css', CGlobal::$POS_HEAD);
     	FunctionLib::site_js('lib/ResponsiveSlides/responsiveslides.min.js', CGlobal::$POS_END);
-		
+    	
+    	FunctionLib::site_js('lib/sticky/jquery.sticky.js', CGlobal::$POS_END);
     }
     public function header(){
         $messages = FunctionLib::messages('messages');
