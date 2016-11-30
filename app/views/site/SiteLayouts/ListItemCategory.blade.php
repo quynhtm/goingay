@@ -41,7 +41,7 @@
 	<div class="content-boxcat">
 		<div class="col-653 pull-left">
 			<div class="form-seach-inboxcat">
-				<h2>Tìm kiếm mua @if(isset($arrCategory[$category_id])){{$arrCategory[$category_id]}} @endif</h2>
+				<h2>Tìm kiếm @if(isset($arrCategory[$category_id])){{$arrCategory[$category_id]}} @endif</h2>
 				<form>
 					<input class="seach-keyword" placeholder="Nhập từ khóa tìm kiếm hoặc tỉnh thành" name="q" value="" autocomplete="off" type="text">
 					<input class="submit-seach" value="Tìm kiếm" type="submit">
