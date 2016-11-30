@@ -129,13 +129,12 @@ class CGlobal{
     //product
     const TYPE_PRICE_NUMBER = 1;
     const TYPE_PRICE_CONTACT = 2;
-    const PRODUCT_NOMAL = 1;
-    const PRODUCT_HOT = 2;
-    const PRODUCT_SELLOFF = 3;
-    const PRODUCT_BLOCK = 0;
-    const PRODUCT_NOT_BLOCK = 1;
-    const PRODUCT_IS_SALE = 1;//con hàng
-    const PRODUCT_NOT_IS_SALE = 0;//het hàng
+    const ITEMS_NOMAL = 1;
+    const ITEMS_HOT = 2;
+    const ITEMS_SELLOFF = 3;
+    const ITEMS_BLOCK = 0;
+    const ITEMS_NOT_BLOCK = 1;
+
 
     //banner
     const BANNER_NOT_RUN_TIME = 0;

@@ -57,9 +57,7 @@ class Items extends Eloquent
             if (isset($dataSearch['item_name']) && $dataSearch['item_name'] != '') {
                 $query->where('item_name','LIKE', '%' . $dataSearch['item_name'] . '%');
             }
-            if (isset($dataSearch['item_id']) && $dataSearch['item_id'] > 0) {
-                $query->where('item_id', $dataSearch['item_id']);
-            }
+
             if (isset($dataSearch['item_block']) && $dataSearch['item_block'] != -1) {
                 $query->where('item_block', $dataSearch['item_block']);
             }
@@ -95,11 +93,73 @@ class Items extends Eloquent
             if(isset($dataSearch['str_item_id']) && $dataSearch['str_item_id'] != ''){
                 $arrItemsId = explode(',', trim($dataSearch['str_item_id']));
                 $query->whereIn('item_id', $arrItemsId);
-                //$query->orderBy('item_id', 'desc');
                 $query->orderByRaw(DB::raw("FIELD(item_id, ".trim($dataSearch['str_item_id'])." )"));
 
             }else{
                 $query->orderBy('item_id', 'desc');
+            }
+
+            $total = $query->count();
+            //get field can lay du lieu
+            $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
+            if(!empty($fields)){
+                $result = $query->take($limit)->skip($offset)->get($fields);
+            }else{
+                $result = $query->take($limit)->skip($offset)->get();
+            }
+            return $result;
+
+        }catch (PDOException $e){
+            throw new PDOException();
+        }
+    }
+
+    public static function getItemsSite($dataSearch = array(), $limit =0, $offset=0, &$total){
+        try{
+            $query = Items::where('item_id','>',0);
+            $query->where('item_block', '=',CGlobal::ITEMS_NOT_BLOCK);
+            $query->where('item_status', '=',CGlobal::status_show);
+
+            if (isset($dataSearch['item_name']) && $dataSearch['item_name'] != '') {
+                $query->where('item_name','LIKE', '%' . $dataSearch['item_name'] . '%');
+            }
+
+            if (isset($dataSearch['item_category_id']) && $dataSearch['item_category_id'] != -1) {
+                $query->where('item_category_id', $dataSearch['item_category_id']);
+            }
+
+            if (isset($dataSearch['item_province_id']) && $dataSearch['item_province_id'] != -1) {
+                $query->where('item_province_id', $dataSearch['item_province_id']);
+            }
+            if (isset($dataSearch['item_district_id']) && $dataSearch['item_district_id'] != -1) {
+                $query->where('item_district_id', $dataSearch['item_district_id']);
+            }
+
+            if (isset($dataSearch['customer_id']) && $dataSearch['customer_id'] != -1) {
+                $query->where('customer_id', $dataSearch['customer_id']);
+            }
+
+            if (isset($dataSearch['item_id'])) {
+                if (is_array($dataSearch['item_id'])) {
+                    $query->whereIn('item_id', $dataSearch['item_id']);
+                }
+                elseif ((int)$dataSearch['item_id'] > 0) {
+                    $query->where('item_id','=', (int)$dataSearch['item_id']);
+                }
+            }
+
+            if (isset($dataSearch['item_is_hot']) && $dataSearch['item_is_hot'] > 0) {
+                $query->where('item_is_hot', $dataSearch['item_is_hot']);
+            }
+
+            //lay theo id SP truyen vào và sap xep theo vi tri đã truyề vào
+            if(isset($dataSearch['str_item_id']) && $dataSearch['str_item_id'] != ''){
+                $arrItemsId = explode(',', trim($dataSearch['str_item_id']));
+                $query->whereIn('item_id', $arrItemsId);
+                $query->orderByRaw(DB::raw("FIELD(item_id, ".trim($dataSearch['str_item_id'])." )"));
+
+            }else{
+                $query->orderBy('is_customer', 'desc')->orderBy('time_ontop', 'desc')->orderBy('item_id', 'desc');
             }
 
             $total = $query->count();
