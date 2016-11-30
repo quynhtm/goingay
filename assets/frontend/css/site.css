@@ -63,14 +63,9 @@ h1, h2, h3, h4, h5, h6{
     position: relative;
     z-index: 2;
 }
-.line-head-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #fff;
-	border-bottom: 2px solid #ddd;
-	z-index: 10;
+.line-head-fixed .line-head{
+	z-index: 100!important;
+	background: #fff;
 }
 .line-head .logo {
     border-right: 1px solid #ddd;
@@ -557,6 +552,10 @@ h1, h2, h3, h4, h5, h6{
     z-index: 500;
 	 margin-bottom: 0px;
 }
+.menu-left-fixed{
+	width: 100%;
+	display: inline-block;
+}
 .list-item-panel-icon li {
     float: left;
     position: relative;
@@ -588,7 +587,8 @@ h1, h2, h3, h4, h5, h6{
 .list-item-panel-icon i.fa-mobile-phone{
 	font-size: 20px;
 }
-.list-item-panel-icon li a:hover{
+.list-item-panel-icon li a:hover,
+.list-item-panel-icon li a.act{
 	color: #fff;
 	background: #ff7300;
 }

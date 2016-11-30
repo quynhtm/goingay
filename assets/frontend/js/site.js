@@ -1,19 +1,14 @@
 jQuery(document).ready(function($){
-	SITE.menuHeadFixed();
+	SITE.menuFixed();
 	SITE.backTop();
 });
 
 SITE={
-		menuHeadFixed:function(){
-			var menuSite = jQuery('.line-head'),
-				posMenu  = menuSite.offset();
-			jQuery(window).scroll(function(){
-				if(jQuery(this).scrollTop() >= 0.1){
-					menuSite.addClass('line-head-fixed');
-				}else if(jQuery(this).scrollTop() <= posMenu.top){
-					menuSite.removeClass('line-head-fixed');
-				}
-			});
+		menuFixed:function(){
+			//Head
+			$(".line-head").sticky({topSpacing: 0, className:"line-head-fixed"});
+			//Left
+			$(".list-item-panel-icon").sticky({ topSpacing: 47, bottomSpacing: 200, className:"menu-left-fixed"});
 		},
 		backTop:function(){
 		 jQuery(window).scroll(function() {
