@@ -8,10 +8,12 @@
 			<div class="one-focus-item">
 				<div class="item-wrap">
 					<div class="thumb-image">
-						<a class="image-item" href="{{FunctionLib::buildLinkDetailItem($itemHot->item_id,$itemHot->item_name,$itemHot->item_category_id)}}">
+						<a class="image-item" title="{{$itemHot->item_name}}" href="{{FunctionLib::buildLinkDetailItem($itemHot->item_id,$itemHot->item_name,$itemHot->item_category_id)}}">
+							@if($itemHot->item_image != '')
 							<span>
-								<img itemprop="image" src="http://img.f2.raovat.vnecdn.net/images/2016/11/03/581a9f4722c4c-biet-thu-lien-ke-belleville-b4-nam-trung-yen9_300x180.png" title="Bán 120m nhà phố Nguyễn Chánh,mặt tiền 6m,5 tầng" alt="Bán 120m nhà phố Nguyễn Chánh,mặt tiền 6m,5 tầng">
+								<img itemprop="image" src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHot->item_id, $itemHot->item_image, CGlobal::sizeImage_300)}}" title="{{$itemHot->item_name}}" alt="{{$itemHot->item_name}}">
 							</span>
+							@endif
 							@if($itemHot->item_type_price == CGlobal::TYPE_PRICE_NUMBER)
 								<span class="price-item">{{FunctionLib::numberFormat($itemHot->item_price_sell)}} đ</span>
 							@else
