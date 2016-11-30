@@ -36,7 +36,7 @@ Route::get('tin-t?c/{new_name}-{new_id}.html',array('as' => 'Site.pageDetailNew'
 
 
 /******************************************************************************************************************************
- * Thao tac co phan dang nh?p cua Khách hàng
+ * Thao tac co phan dang nh?p cua Khï¿½ch hï¿½ng
 //Quan ly tin dang
  * /***************************************************************************************************************************
  * */
@@ -46,6 +46,9 @@ Route::get('cap-nhat-tin-dang/t-{item_id}.html',array('as' => 'customer.ItemsEdi
 Route::post('cap-nhat-tin-dang/t-{item_id}.html',array('as' => 'customer.ItemsEdit','uses' =>'SiteUserCustomerController@postEditItem'))->where('item_id', '[0-9]+');
 Route::post('up-top-tin-dang.html',array('as' => 'customer.setTopItems','uses' =>'SiteUserCustomerController@setTopItems'));
 Route::post('xoa-tin-dang.html',array('as' => 'customer.removeItems','uses' =>'SiteUserCustomerController@removeItems'));
+
+Route::match(['GET','POST'],'getAllImageItem', array('as' => 'customer.getAllImageItem','uses' => 'SiteUserCustomerController@getAllImageItem'));
+Route::match(['GET','POST'],'removeImage', array('as' => 'customer.removeImage','uses' => 'SiteUserCustomerController@removeImage'));
 
 //sua thong tin KH
 Route::match(['GET','POST'],'thay-doi-thong-tin.html', array('as' => 'customer.pageChageInfo','uses' => 'SiteUserCustomerController@pageChageInfo'));
