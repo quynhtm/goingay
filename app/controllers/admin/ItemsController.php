@@ -23,9 +23,9 @@ class ItemsController extends BaseAdminController
         7 => 'Sản phẩm giảm giá',
         );
     private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
-    private $arrBlock = array(-1 => 'Chọn kiểu khóa SP', CGlobal::PRODUCT_NOT_BLOCK => 'Đang mở', CGlobal::PRODUCT_BLOCK => 'Đang khóa');
+    private $arrBlock = array(-1 => 'Chọn kiểu khóa SP', CGlobal::ITEMS_NOT_BLOCK => 'Đang mở', CGlobal::ITEMS_BLOCK => 'Đang khóa');
     private $arrTypePrice = array(CGlobal::TYPE_PRICE_NUMBER => 'Hiển thị giá bán', CGlobal::TYPE_PRICE_CONTACT => 'Liên hệ với shop');
-    private $arrTypeProduct = array(-1 => '--Chọn loại sản phẩm--', CGlobal::PRODUCT_NOMAL => 'Sản phẩm bình thường', CGlobal::PRODUCT_HOT => 'Sản phẩm nổi bật', CGlobal::PRODUCT_SELLOFF => 'Sản phẩm giảm giá');
+    private $arrTypeProduct = array(-1 => '--Chọn loại sản phẩm--', CGlobal::ITEMS_NOMAL => 'Sản phẩm bình thường', CGlobal::ITEMS_HOT => 'Sản phẩm nổi bật', CGlobal::ITEMS_SELLOFF => 'Sản phẩm giảm giá');
     private $error =  array();
     private $arrShop =  array();
     public function __construct()

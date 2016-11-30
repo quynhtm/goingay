@@ -6,7 +6,8 @@ class SiteHomeController extends BaseSiteController
         parent::__construct();
     }
 
-    private $str_field_product_get = 'product_id,product_name,category_id,category_name,product_image,product_image_hover,product_status,product_price_sell,product_price_market,product_type_price,product_selloff,user_shop_id,user_shop_name,is_shop,is_block';//cac truong can lay
+    private $str_field_items_get = 'item_id,item_name,item_type_price,item_price_sell,item_content,item_image,item_image_other,item_category_id,item_category_name,item_number_view,item_status,item_is_hot,item_province_id,item_district_id,customer_id,is_customer,customer_name,time_ontop';//cac truong can lay
+
     //trang chu
     public function index(){
     	$this->header();
@@ -54,7 +55,22 @@ class SiteHomeController extends BaseSiteController
     public function pageCategory($catname, $catid){
     	$this->header();
     	$this->menuLeft($catid);
-    	$this->layout->content = View::make('site.SiteLayouts.ListItemCategory');
+
+		//danh sach tin dang cua danh m?c
+		$pageNo = (int) Request::get('page_no',1);
+		$limit = CGlobal::number_limit_show;
+		$offset = ($pageNo - 1) * $limit;
+		$search = $data = array();
+		$totalSearch = 0;
+		$search['item_category_id'] = $catid;
+		$search['field_get'] = $this->str_field_items_get;
+		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
+		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
+
+    	$this->layout->content = View::make('site.SiteLayouts.ListItemCategory')
+			->with('paging', $paging)
+			->with('total', $totalSearch)
+			->with('resultItemCategory', $resultItemCategory);
     	$this->footer();
     }
 

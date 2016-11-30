@@ -126,7 +126,7 @@
                                         <br/>Sửa: {{date ('d-m-Y H:i',$item->time_update)}}
                                 </td>
                                 <td class="text-center text-middle">
-                                    @if($item->item_block == CGlobal::PRODUCT_BLOCK)
+                                    @if($item->item_block == CGlobal::ITEMS_BLOCK)
                                         <i class="fa fa-lock fa-2x red" title="Bị khóa"></i>
                                     @else
                                         @if($item->item_status == CGlobal::status_show)
