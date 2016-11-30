@@ -53,6 +53,9 @@ class SiteHomeController extends BaseSiteController
 
 	//danh sact tin dang theo danh muc
     public function pageCategory($catname, $catid){
+		if($catid <= 0){
+			return Redirect::route('site.home');
+		}
 		$meta_title = $meta_keywords = $meta_description = $catname;
 		$meta_img= '';
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
@@ -104,10 +107,49 @@ class SiteHomeController extends BaseSiteController
     }
 
     //Danh sach tin da dang cua khach
-	public function pageListItemCustomer($customer_id, $customer_name){
-    	$this->header();
-    	$this->menuLeft();
-    	$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer');
+	public function pageListItemCustomer($customer_name,$customer_id){
+		//thong tin khach dang tin
+		$arrCustomer = UserCustomer::getByID($customer_id);
+		if(empty($arrCustomer)){
+			return Redirect::route('site.home');
+		}
+		$meta_title = $meta_keywords = $meta_description = $customer_name;
+		$meta_img= '';
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+
+		$this->header();
+		$this->menuLeft(0);
+
+		//List san pham cùng danh muc n?i b?t TOP
+		$number_show_hot = 3;
+		$searchHot['customer_id'] = $customer_id;
+		$searchHot['item_image'] = 1;//check có ?nh ??i di?n
+		$searchHot['field_get'] = $this->str_field_items_get;
+		$resultHot = self::getItemHot($searchHot,$number_show_hot);
+
+		//danh sach tin dang cua danh m?c
+		$pageNo = (int) Request::get('page_no',1);
+		$limit = CGlobal::number_limit_show;
+		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cái n?i b?t ? trên ?i
+		$search = $data = array();
+		$totalSearch = 0;
+		$search['customer_id'] = $customer_id;
+		$search['field_get'] = $this->str_field_items_get;
+		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
+		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
+
+		//t?nh thành
+		$arrProvince = Province::getAllProvince();
+
+
+
+    	$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer')
+			->with('arrProvince', $arrProvince)
+			->with('arrCustomer', $arrCustomer)
+			->with('paging', $paging)
+			->with('total', $totalSearch)
+			->with('resultHot', $resultHot)
+			->with('resultItemCategory', $resultItemCategory);
     	$this->footer();
     }
 

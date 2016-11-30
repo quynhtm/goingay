@@ -1,303 +1,109 @@
 <div class="col-left-92">
 	<div class="head-info">
-		<h2><a href=""><i class="fa fa-building"></i>Mua bán nhà đất</a></h2>
+		<h2><a href=""><i class="fa fa-building"></i>Tin đã đăng @if(!empty($arrCustomer) && isset($arrCustomer->customer_name)) của {{$arrCustomer->customer_name}} @endif</a></h2>
 	</div>
-	<div class="content-boxcat">
-		<div class="one-focus-item">
-			<div class="item-wrap">
-				<div class="thumb-image">
-					<a class="image-item" href="">
-						<span>
-							<img itemprop="image" src="http://img.f2.raovat.vnecdn.net/images/2016/11/03/581a9f4722c4c-biet-thu-lien-ke-belleville-b4-nam-trung-yen9_300x180.png" title="Bán 120m nhà phố Nguyễn Chánh,mặt tiền 6m,5 tầng" alt="Bán 120m nhà phố Nguyễn Chánh,mặt tiền 6m,5 tầng">
-						</span>
-						<span class="price-item">2.600.000.000 đ</span>
-					</a>
+	@if(isset($resultHot) && !empty($resultHot))
+		<div class="content-boxcat">
+			@foreach ($resultHot as $keyh => $itemHot)
+				<div class="one-focus-item">
+					<div class="item-wrap">
+						<div class="thumb-image">
+							<a class="image-item" title="{{$itemHot->item_name}}" href="{{FunctionLib::buildLinkDetailItem($itemHot->item_id,$itemHot->item_name,$itemHot->item_category_id)}}">
+								@if($itemHot->item_image != '')
+									<span>
+								<img itemprop="image" src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHot->item_id, $itemHot->item_image, CGlobal::sizeImage_300)}}" title="{{$itemHot->item_name}}" alt="{{$itemHot->item_name}}">
+							</span>
+								@endif
+								@if($itemHot->item_type_price == CGlobal::TYPE_PRICE_NUMBER)
+									<span class="price-item">{{FunctionLib::numberFormat($itemHot->item_price_sell)}} đ</span>
+								@else
+									<span class="price-item">Liên hệ</span>
+								@endif
+							</a>
+						</div>
+						<div class="title-item">
+							<h2>
+								<a href="" title="{{$itemHot->item_name}}">{{$itemHot->item_name}}</a>
+							</h2>
+						</div>
+						<div class="info-item">
+							<ul>
+								<li class="pull-left local"><i class="fa fa-location-arrow"></i><a href="">@if(isset($arrProvince[$itemHot->item_province_id])){{$arrProvince[$itemHot->item_province_id]}}@else Toàn quốc @endif</a></li>
+								<li class="pull-right time-post"><i class="fa fa-clock-o"></i>{{date('H:i',$itemHot->time_ontop)}} - {{date('d/m/Y',$itemHot->time_ontop)}}</li>
+							</ul>
+						</div>
+					</div>
 				</div>
-				<div class="title-item">
-					<h2>
-						<a href="" title="Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ">Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ</a>
-					</h2>
-				</div>
-				<div class="info-item">
-					<ul>
-						<li class="pull-left local"><i class="fa fa-location-arrow"></i><a href="">Hà Nội</a></li>
-						<li class="pull-right time-post"><i class="fa fa-clock-o"></i>11:13 - 21/11/2016</li>
-					</ul>
-				</div>
-			</div>
+			@endforeach
 		</div>
-		<div class="one-focus-item">
-			<div class="item-wrap">
-				<div class="thumb-image">
-					<a class="image-item" href="">
-						<span>
-							<img itemprop="image" src="http://img.f2.raovat.vnecdn.net/images/2016/11/20/5831380d7161d-FB_IMG_1479620556560_300x180.jpg" title="Bán đất nền dự án tại Đồng Nai" alt="Bán đất nền dự án tại Đồng Nai">
-						</span>
-						<span class="price-item">2.600.000.000 đ</span>
-					</a>
-				</div>
-				<div class="title-item">
-					<h2>
-						<a href="" title="Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ">Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ</a>
-					</h2>
-				</div>
-				<div class="info-item">
-					<ul>
-						<li class="pull-left local"><i class="fa fa-location-arrow"></i><a href="">Hà Nội</a></li>
-						<li class="pull-right time-post"><i class="fa fa-clock-o"></i>11:13 - 21/11/2016</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="one-focus-item">
-			<div class="item-wrap">
-				<div class="thumb-image">
-					<a class="image-item" href="">
-						<span>
-							<img itemprop="image" src="http://img.f4.raovat.vnecdn.net/images/2016/10/15/5801f1777d6af-Lien-ke-96-96b-nguyen-huy-tuong-02_300x180.jpg" title="Bán liền kề Nguyễn Huy Tưởng, TX- 123Triệu/m2" alt="Bán liền kề Nguyễn Huy Tưởng, TX- 123Triệu/m2">
-						</span>
-						<span class="price-item">2.600.000.000 đ</span>
-					</a>
-				</div>
-				<div class="title-item">
-					<h2>
-						<a href="" title="Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ">Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ</a>
-					</h2>
-				</div>
-				<div class="info-item">
-					<ul>
-						<li class="pull-left local"><i class="fa fa-location-arrow"></i><a href="">Hà Nội</a></li>
-						<li class="pull-right time-post"><i class="fa fa-clock-o"></i>11:13 - 21/11/2016</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+	@endif
+
 	<div class="content-boxcat">
 		<div class="col-653 pull-left">
 			<div class="form-seach-inboxcat">
-				<h2>Tìm kiếm mua bán nhà đất</h2>
+				<h2>Tìm kiếm tin đã đăng</h2>
 				<form>
 					<input class="seach-keyword" placeholder="Nhập từ khóa tìm kiếm hoặc tỉnh thành" name="q" value="" autocomplete="off" type="text">
 					<input class="submit-seach" value="Tìm kiếm" type="submit">
 				</form>
 			</div>
-			<div class="filter-item">
-				<div class="filter-list-action">
-					<ul>
-						<li class="sort"><a href=""><i class="fa fa-list"></i>Sắp xếp</a></li>
-						<li class="active"><a href=""><i class="fa fa-sort-numeric-asc"></i>Mới cập nhật</a></li>
-					</ul>
+			@if(isset($resultItemCategory) && !empty($resultItemCategory))
+				<div class="filter-item">
+					<div class="filter-list-action">
+						<ul>
+							<li class="sort"><a href=""><i class="fa fa-list"></i>Sắp xếp</a></li>
+							<li class="active"><a href=""><i class="fa fa-sort-numeric-asc"></i>Mới cập nhật</a></li>
+						</ul>
+					</div>
 				</div>
-			</div>
-			<div class="list-item-filter">
-				<ul>
-					<li>
-						<a class="img" href="{{URL::route('site.home')}}/chi-tiet.html">
-                           <img src="http://img.f1.raovat.vnecdn.net/images/2016/11/22/5833e786e9beb-Chung-cu-imperia-sky-garden-500x450_200x120.jpg" alt="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-                    	</a>
-                    	<div class="title-post">
-                    		<h2>
-	                            <a href="" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-	                                Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ
-	                            </a>
-                        	</h2>
-                        	<div class="pull-right">
-	                    		<span class="price"><a itemprop="price" href="">1.300.000.000 đ</a></span>
-	                    	</div>
-                    	</div>
-                    	<div class="info-item">
-                    		<ul class="pull-left">
-	                            <li class="local">
-	                                <i class="fa fa-location-arrow"></i>
-	                                <a href="">Hà Nội</a>
-	                            </li>
-	                            <li class="">
-	                                <i class="fa fa-clock-o"></i> 13:37 - 22/11/2016
-	                            </li>
-	                        </ul>
-	                        <ul class="pull-right">
-	                        	<li>
-									<i class="fa fa-minus"></i> 2 
-								</li>
-								<li>
-									<i class="fa fa-tint"></i> 1
-								</li>
-	                        </ul>
-                    	</div>
-					</li>
-					<li>
-						<a class="img" href="">
-                           <img itemprop="image" src="http://img.f1.raovat.vnecdn.net/images/2016/10/29/58141930d55bc-20161004150917-8ef1_200x120.jpg" alt="Biệt thự Vinhomes Thăng Long giá rẻ như Chung Cư" title="Biệt thự Vinhomes Thăng Long giá rẻ như Chung Cư">
-                    	</a>
-                    	<div class="title-post">
-                    		<h2>
-	                            <a href="" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-	                                Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ
-	                            </a>
-                        	</h2>
-                        	<div class="pull-right">
-	                    		<span class="price"><a itemprop="price" href="">1.300.000.000 đ</a></span>
-	                    	</div>
-                    	</div>
-                    	<div class="info-item">
-                    		<ul class="pull-left">
-	                            <li class="local">
-	                                <i class="fa fa-location-arrow"></i>
-	                                <a href="">Hà Nội</a>
-	                            </li>
-	                            <li class="">
-	                                <i class="fa fa-clock-o"></i> 13:37 - 22/11/2016
-	                            </li>
-	                        </ul>
-	                        <ul class="pull-right">
-	                        	<li>
-									<i class="fa fa-minus"></i> 2 
-								</li>
-								<li>
-									<i class="fa fa-tint"></i> 1
-								</li>
-	                        </ul>
-                    	</div>
-					</li>
-					<li>
-						<a class="img" href="">
-                           <img src="http://img.f1.raovat.vnecdn.net/images/2016/11/22/5833e786e9beb-Chung-cu-imperia-sky-garden-500x450_200x120.jpg" alt="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-                    	</a>
-                    	<div class="title-post">
-                    		<h2>
-	                            <a href="" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-	                                Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ
-	                            </a>
-                        	</h2>
-                        	<div class="pull-right">
-	                    		<span class="price"><a itemprop="price" href="">1.300.000.000 đ</a></span>
-	                    	</div>
-                    	</div>
-                    	<div class="info-item">
-                    		<ul class="pull-left">
-	                            <li class="local">
-	                                <i class="fa fa-location-arrow"></i>
-	                                <a href="">Hà Nội</a>
-	                            </li>
-	                            <li class="">
-	                                <i class="fa fa-clock-o"></i> 13:37 - 22/11/2016
-	                            </li>
-	                        </ul>
-	                        <ul class="pull-right">
-	                        	<li>
-									<i class="fa fa-minus"></i> 2 
-								</li>
-								<li>
-									<i class="fa fa-tint"></i> 1
-								</li>
-	                        </ul>
-                    	</div>
-					</li>
-					<li>
-						<a class="img" href="">
-                           <img itemprop="image" src="http://img.f1.raovat.vnecdn.net/images/2016/10/29/58141930d55bc-20161004150917-8ef1_200x120.jpg" alt="Biệt thự Vinhomes Thăng Long giá rẻ như Chung Cư" title="Biệt thự Vinhomes Thăng Long giá rẻ như Chung Cư">
-                    	</a>
-                    	<div class="title-post">
-                    		<h2>
-	                            <a href="" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-	                                Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ
-	                            </a>
-                        	</h2>
-                        	<div class="pull-right">
-	                    		<span class="price"><a itemprop="price" href="">1.300.000.000 đ</a></span>
-	                    	</div>
-                    	</div>
-                    	<div class="info-item">
-                    		<ul class="pull-left">
-	                            <li class="local">
-	                                <i class="fa fa-location-arrow"></i>
-	                                <a href="">Hà Nội</a>
-	                            </li>
-	                            <li class="">
-	                                <i class="fa fa-clock-o"></i> 13:37 - 22/11/2016
-	                            </li>
-	                        </ul>
-	                        <ul class="pull-right">
-	                        	<li>
-									<i class="fa fa-minus"></i> 2 
-								</li>
-								<li>
-									<i class="fa fa-tint"></i> 1
-								</li>
-	                        </ul>
-                    	</div>
-					</li>
-					<li>
-						<a class="img" href="">
-                           <img src="http://img.f1.raovat.vnecdn.net/images/2016/11/22/5833e786e9beb-Chung-cu-imperia-sky-garden-500x450_200x120.jpg" alt="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-                    	</a>
-                    	<div class="title-post">
-                    		<h2>
-	                            <a href="" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-	                                Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ
-	                            </a>
-                        	</h2>
-                        	<div class="pull-right">
-	                    		<span class="price"><a itemprop="price" href="">1.300.000.000 đ</a></span>
-	                    	</div>
-                    	</div>
-                    	<div class="info-item">
-                    		<ul class="pull-left">
-	                            <li class="local">
-	                                <i class="fa fa-location-arrow"></i>
-	                                <a href="">Hà Nội</a>
-	                            </li>
-	                            <li class="">
-	                                <i class="fa fa-clock-o"></i> 13:37 - 22/11/2016
-	                            </li>
-	                        </ul>
-	                        <ul class="pull-right">
-	                        	<li>
-									<i class="fa fa-minus"></i> 2 
-								</li>
-								<li>
-									<i class="fa fa-tint"></i> 1
-								</li>
-	                        </ul>
-                    	</div>
-					</li>
-					<li>
-						<a class="img" href="">
-                           <img itemprop="image" src="http://img.f1.raovat.vnecdn.net/images/2016/10/29/58141930d55bc-20161004150917-8ef1_200x120.jpg" alt="Biệt thự Vinhomes Thăng Long giá rẻ như Chung Cư" title="Biệt thự Vinhomes Thăng Long giá rẻ như Chung Cư">
-                    	</a>
-                    	<div class="title-post">
-                    		<h2>
-	                            <a href="" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-	                                Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ
-	                            </a>
-                        	</h2>
-                        	<div class="pull-right">
-	                    		<span class="price"><a itemprop="price" href="">1.300.000.000 đ</a></span>
-	                    	</div>
-                    	</div>
-                    	<div class="info-item">
-                    		<ul class="pull-left">
-	                            <li class="local">
-	                                <i class="fa fa-location-arrow"></i>
-	                                <a href="">Hà Nội</a>
-	                            </li>
-	                            <li class="">
-	                                <i class="fa fa-clock-o"></i> 13:37 - 22/11/2016
-	                            </li>
-	                        </ul>
-	                        <ul class="pull-right">
-	                        	<li>
-									<i class="fa fa-minus"></i> 2 
-								</li>
-								<li>
-									<i class="fa fa-tint"></i> 1
-								</li>
-	                        </ul>
-                    	</div>
-					</li>
-				</ul>
-			</div>
+				<div class="list-item-filter">
+					<ul>
+						@foreach ($resultItemCategory as $keyc => $itemCate)
+							<li>
+								<a class="img" href="{{FunctionLib::buildLinkDetailItem($itemCate->item_id,$itemCate->item_name,$itemCate->item_category_id)}}">
+									<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/22/5833e786e9beb-Chung-cu-imperia-sky-garden-500x450_200x120.jpg" alt="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
+								</a>
+								<div class="title-post">
+									<h2>
+										<a href="{{FunctionLib::buildLinkDetailItem($itemCate->item_id,$itemCate->item_name,$itemCate->item_category_id)}}" title="{{$itemCate->item_name}}">
+											{{$itemCate->item_name}}
+										</a>
+									</h2>
+									<div class="pull-right">
+										@if($itemCate->item_type_price == CGlobal::TYPE_PRICE_NUMBER)
+											<span class="price"><a itemprop="price" href="#">{{FunctionLib::numberFormat($itemCate->item_price_sell)}} đ</a></span>
+										@else
+											<span class="price"><a itemprop="price" href="#">Liên hệ</a></span>
+										@endif
+									</div>
+								</div>
+								<div class="info-item">
+									<ul class="pull-left">
+										<li class="local">
+											<i class="fa fa-location-arrow"></i>
+											<a href="">@if(isset($arrProvince[$itemCate->item_province_id])){{$arrProvince[$itemCate->item_province_id]}}@else Toàn quốc @endif</a>
+										</li>
+										<li class="">
+											<i class="fa fa-clock-o"></i> {{date('H:i',$itemCate->time_ontop)}} - {{date('d/m/Y',$itemCate->time_ontop)}}
+										</li>
+									</ul>
+									<ul class="pull-right" style="display: none">
+										<li>
+											<i class="fa fa-minus"></i> 2
+										</li>
+										<li>
+											<i class="fa fa-tint"></i> 1
+										</li>
+									</ul>
+								</div>
+							</li>
+						@endforeach
+					</ul>
+					<div class="text-right">
+						{{$paging}}
+					</div>
+				</div>
+			@endif
 		</div>
 		<div class="col-327 pull-right">
 			<div class="box-ads">
