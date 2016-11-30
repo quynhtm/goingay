@@ -53,7 +53,7 @@ class SiteHomeController extends BaseSiteController
 
 	//danh sact tin dang theo danh muc
     public function pageCategory($catname, $catid){
-		if($catid <= 0){
+		if((int)$catid <= 0){
 			return Redirect::route('site.home');
 		}
 		$meta_title = $meta_keywords = $meta_description = $catname;
@@ -140,8 +140,6 @@ class SiteHomeController extends BaseSiteController
 
 		//t?nh thành
 		$arrProvince = Province::getAllProvince();
-
-
 
     	$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer')
 			->with('arrProvince', $arrProvince)
