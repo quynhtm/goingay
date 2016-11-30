@@ -472,6 +472,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			return Redirect::route('site.home');
 		}
 		$this->header();
+		$this->menuLeft();
 		//Include style.
 		FunctionLib::link_css(array(
 			'lib/upload/cssUpload.css',
@@ -506,7 +507,7 @@ class SiteUserCustomerController extends BaseSiteController{
 				$arrImagOther = unserialize($items->item_image_other);
 				if(sizeof($arrImagOther) > 0){
 					foreach($arrImagOther as $k=>$val){
-						$url_thumb = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item_id, $val, CGlobal::sizeImage_100);
+						$url_thumb = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item_id, $val, CGlobal::sizeImage_300);
 						$url_thumb_content = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item_id, $val, CGlobal::sizeImage_600);
 						$arrViewImgOther[] = array('img_other'=>$val,'src_img_other'=>$url_thumb,'src_thumb_content'=>$url_thumb_content);
 					}
@@ -552,6 +553,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			return Redirect::route('customer.ItemsList');
 		}
 		$this->header();
+		
 		//Include style.
 		FunctionLib::link_css(array(
 			'lib/upload/cssUpload.css',
@@ -675,6 +677,69 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('optionTypePrice', $optionTypePrice)
 			->with('arrBannerRight', $arrBannerRight);
 		$this->footer();
+	}
+	public function getAllImageItem($item_id = 0){
+		$item_id = (int)Request::get('item_id',0);
+        $data = array('isIntOk' => 0);
+        if(isset($this->user_customer->customer_id) && $this->user_customer->customer_id > 0 && $item_id > 0){
+            $result = Items::getItemByCustomerId($this->user_customer->customer_id, $item_id);
+            
+            if(sizeof($result) > 0){
+                if($result->item_image_other != ''){
+                    $arrViewImgOther = array();
+                    $arrImagOther = unserialize($result->item_image_other);
+                    if(sizeof($arrImagOther) > 0){
+                        foreach($arrImagOther as $k=>$val){
+                            $url_thumb = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item_id, $val, CGlobal::sizeImage_300);
+                            $url_thumb_content = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item_id, $val, CGlobal::sizeImage_600);
+                            $arrViewImgOther[] = array('item_name'=>$result->item_name,
+                                'src_img_other'=>$url_thumb,
+                                'src_thumb_content'=>$url_thumb_content);
+                        }
+                    }
+                    $data['dataImage'] = $arrViewImgOther;
+                    $data['isIntOk'] = 1;
+                    return Response::json($data);
+                }
+            }else{
+                return Response::json($data);
+            }
+        }
+        return Response::json($data);
+	}
+	public function removeImage(){
+		$item_id = Request::get('id',0);
+		$name_img = Request::get('nameImage','');
+		$aryData = array();
+		$aryData['intIsOK'] = -1;
+		$aryData['msg'] = "Error";
+		$aryData['nameImage'] = $name_img;
+		if($item_id > 0 && $name_img != ''){
+			//get mang anh other
+			$customer_id = $this->user_customer->customer_id;
+			$inforItem = Items::getItemByCustomerId($customer_id, $item_id);
+			if($inforItem) {
+				$arrImagOther = unserialize($inforItem->item_image_other);
+				foreach($arrImagOther as $ki => $img){
+					if(strcmp($img,$name_img) == 0){
+						unset($arrImagOther[$ki]);
+						break;
+					}
+				}
+				$itemUpdate['item_image_other'] = serialize($arrImagOther);
+				Items::updateData($item_id,$itemUpdate);
+			}
+			//anh upload
+			FunctionLib::deleteFileUpload($name_img, $item_id,CGlobal::FOLDER_PRODUCT);
+			//xoa anh thumb
+			$arrSizeThumb = CGlobal::$arrSizeImage;
+			foreach($arrSizeThumb as $k=>$size){
+				$sizeThumb = $size['w'].'x'.$size['h'];
+				FunctionLib::deleteFileThumb($name_img,$item_id,CGlobal::FOLDER_PRODUCT,$sizeThumb);
+			}
+			$aryData['intIsOK'] = 1;
+		}
+		return Response::json($aryData);
 	}
 	private function validInforItem($data=array()) {
 		if(!empty($data)) {
