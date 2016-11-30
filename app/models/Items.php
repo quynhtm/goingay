@@ -139,6 +139,11 @@ class Items extends Eloquent
                 $query->where('customer_id', $dataSearch['customer_id']);
             }
 
+            //tim tin đăng có ảnh đại dien
+            if (isset($dataSearch['item_image']) && $dataSearch['item_image'] == 1) {
+                $query->where('item_image', '!=','');
+            }
+
             if (isset($dataSearch['item_id'])) {
                 if (is_array($dataSearch['item_id'])) {
                     $query->whereIn('item_id', $dataSearch['item_id']);

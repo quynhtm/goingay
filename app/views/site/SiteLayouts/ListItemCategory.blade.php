@@ -1,78 +1,41 @@
 <div class="col-left-92">
 	<div class="head-info">
-		<h2><a href=""><i class="fa fa-building"></i>Mua bán nhà đất</a></h2>
+		<h2><a href=""><i class="fa fa-building"></i>@if(isset($arrCategory[$category_id])){{$arrCategory[$category_id]}} @endif</a></h2>
 	</div>
+	@if(isset($resultHot) && !empty($resultHot))
 	<div class="content-boxcat">
-		<div class="one-focus-item">
-			<div class="item-wrap">
-				<div class="thumb-image">
-					<a class="image-item" href="">
-						<span>
-							<img itemprop="image" src="http://img.f2.raovat.vnecdn.net/images/2016/11/03/581a9f4722c4c-biet-thu-lien-ke-belleville-b4-nam-trung-yen9_300x180.png" title="Bán 120m nhà phố Nguyễn Chánh,mặt tiền 6m,5 tầng" alt="Bán 120m nhà phố Nguyễn Chánh,mặt tiền 6m,5 tầng">
-						</span>
-						<span class="price-item">2.600.000.000 đ</span>
-					</a>
-				</div>
-				<div class="title-item">
-					<h2>
-						<a href="" title="Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ">Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ</a>
-					</h2>
-				</div>
-				<div class="info-item">
-					<ul>
-						<li class="pull-left local"><i class="fa fa-location-arrow"></i><a href="">Hà Nội</a></li>
-						<li class="pull-right time-post"><i class="fa fa-clock-o"></i>11:13 - 21/11/2016</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="one-focus-item">
-			<div class="item-wrap">
-				<div class="thumb-image">
-					<a class="image-item" href="">
-						<span>
-							<img itemprop="image" src="http://img.f2.raovat.vnecdn.net/images/2016/11/20/5831380d7161d-FB_IMG_1479620556560_300x180.jpg" title="Bán đất nền dự án tại Đồng Nai" alt="Bán đất nền dự án tại Đồng Nai">
-						</span>
-						<span class="price-item">2.600.000.000 đ</span>
-					</a>
-				</div>
-				<div class="title-item">
-					<h2>
-						<a href="" title="Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ">Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ</a>
-					</h2>
-				</div>
-				<div class="info-item">
-					<ul>
-						<li class="pull-left local"><i class="fa fa-location-arrow"></i><a href="">Hà Nội</a></li>
-						<li class="pull-right time-post"><i class="fa fa-clock-o"></i>11:13 - 21/11/2016</li>
-					</ul>
+		@foreach ($resultHot as $keyh => $itemHot)
+			<div class="one-focus-item">
+				<div class="item-wrap">
+					<div class="thumb-image">
+						<a class="image-item" href="{{FunctionLib::buildLinkDetailItem($itemHot->item_id,$itemHot->item_name,$itemHot->item_category_id)}}">
+							<span>
+								<img itemprop="image" src="http://img.f2.raovat.vnecdn.net/images/2016/11/03/581a9f4722c4c-biet-thu-lien-ke-belleville-b4-nam-trung-yen9_300x180.png" title="Bán 120m nhà phố Nguyễn Chánh,mặt tiền 6m,5 tầng" alt="Bán 120m nhà phố Nguyễn Chánh,mặt tiền 6m,5 tầng">
+							</span>
+							@if($itemHot->item_type_price == CGlobal::TYPE_PRICE_NUMBER)
+								<span class="price-item">{{FunctionLib::numberFormat($itemHot->item_price_sell)}} đ</span>
+							@else
+								<span class="price-item">Liên hệ</span>
+							@endif
+						</a>
+					</div>
+					<div class="title-item">
+						<h2>
+							<a href="" title="{{$itemHot->item_name}}">{{$itemHot->item_name}}</a>
+						</h2>
+					</div>
+					<div class="info-item">
+						<ul>
+							<li class="pull-left local"><i class="fa fa-location-arrow"></i><a href="">@if(isset($arrProvince[$itemHot->item_province_id])){{$arrProvince[$itemHot->item_province_id]}}@else Toàn quốc @endif</a></li>
+							<li class="pull-right time-post"><i class="fa fa-clock-o"></i>{{date('H:i',$itemHot->time_ontop)}} - {{date('d/m/Y',$itemHot->time_ontop)}}</li>
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="one-focus-item">
-			<div class="item-wrap">
-				<div class="thumb-image">
-					<a class="image-item" href="">
-						<span>
-							<img itemprop="image" src="http://img.f4.raovat.vnecdn.net/images/2016/10/15/5801f1777d6af-Lien-ke-96-96b-nguyen-huy-tuong-02_300x180.jpg" title="Bán liền kề Nguyễn Huy Tưởng, TX- 123Triệu/m2" alt="Bán liền kề Nguyễn Huy Tưởng, TX- 123Triệu/m2">
-						</span>
-						<span class="price-item">2.600.000.000 đ</span>
-					</a>
-				</div>
-				<div class="title-item">
-					<h2>
-						<a href="" title="Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ">Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ</a>
-					</h2>
-				</div>
-				<div class="info-item">
-					<ul>
-						<li class="pull-left local"><i class="fa fa-location-arrow"></i><a href="">Hà Nội</a></li>
-						<li class="pull-right time-post"><i class="fa fa-clock-o"></i>11:13 - 21/11/2016</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		@endforeach
 	</div>
+	@endif
+
 	<div class="content-boxcat">
 		<div class="col-653 pull-left">
 			<div class="form-seach-inboxcat">
@@ -82,7 +45,7 @@
 					<input class="submit-seach" value="Tìm kiếm" type="submit">
 				</form>
 			</div>
-			@if(!empty($resultItemCategory))
+			@if(isset($resultItemCategory) && !empty($resultItemCategory))
 			<div class="filter-item">
 				<div class="filter-list-action">
 					<ul>

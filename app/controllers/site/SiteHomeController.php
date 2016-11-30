@@ -56,10 +56,17 @@ class SiteHomeController extends BaseSiteController
     	$this->header();
     	$this->menuLeft($catid);
 
+		//List san pham cùng danh muc n?i b?t TOP
+		$number_show_hot = 3;
+		$searchHot['item_category_id'] = $catid;
+		$searchHot['item_image'] = 1;//check có ?nh ??i di?n
+		$searchHot['field_get'] = $this->str_field_items_get;
+		$resultHot = self::getItemHot($searchHot,$number_show_hot);
+
 		//danh sach tin dang cua danh m?c
 		$pageNo = (int) Request::get('page_no',1);
 		$limit = CGlobal::number_limit_show;
-		$offset = ($pageNo - 1) * $limit;
+		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cái n?i b?t ? trên ?i
 		$search = $data = array();
 		$totalSearch = 0;
 		$search['item_category_id'] = $catid;
@@ -79,6 +86,7 @@ class SiteHomeController extends BaseSiteController
 			->with('category_id', $catid)
 			->with('paging', $paging)
 			->with('total', $totalSearch)
+			->with('resultHot', $resultHot)
 			->with('resultItemCategory', $resultItemCategory);
     	$this->footer();
     }
@@ -98,5 +106,14 @@ class SiteHomeController extends BaseSiteController
     	$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer');
     	$this->footer();
     }
+
+	//ham dung common cho site
+	public function getItemHot($search = array(),$limit){
+		$data = array();
+		if(!empty($search)){
+			$data = Items::getItemsSite($search,$limit,0,$totalSearch);
+		}
+		return $data;
+	}
 }
 
