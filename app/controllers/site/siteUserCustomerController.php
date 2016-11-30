@@ -617,7 +617,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			$dataSave['is_customer'] = $this->user_customer['is_customer'];
 			$dataSave['item_province_id'] = $this->user_customer['customer_province_id'];
 			$dataSave['item_district_id'] = $this->user_customer['customer_district_id'];
-			$dataSave['item_block'] = CGlobal::PRODUCT_NOT_BLOCK;
+			$dataSave['item_block'] = CGlobal::ITEMS_NOT_BLOCK;
 
 			if($item_id > 0){
 				$items = array();
