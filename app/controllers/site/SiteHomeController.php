@@ -34,7 +34,16 @@ class SiteHomeController extends BaseSiteController
     }
 
 	//chi tiet tin rao
-	public function pageDetailItem($item_id, $item_name, $item_category_id){
+	public function pageDetailItem( $item_name, $item_category_id,$item_id){
+		if((int)$item_id <= 0){
+			return Redirect::route('site.home');
+		}
+		// tin hien th?
+		$itemShow = Items::getItemsByID($item_id);
+		if(empty($itemShow)){
+			return Redirect::route('site.home');
+		}
+
 		$this->header();
 		$this->menuLeft();
 		$this->layout->content = View::make('site.SiteLayouts.DetailItem');
@@ -81,7 +90,7 @@ class SiteHomeController extends BaseSiteController
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
 
-		//t?nh thành
+		//tinh thành
 		$arrProvince = Province::getAllProvince();
 
 		//thong tin danh m?c
