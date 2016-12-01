@@ -34,10 +34,40 @@ class SiteHomeController extends BaseSiteController
     }
 
 	//chi tiet tin rao
-	public function pageDetailItem($item_id, $item_name, $item_category_id){
+	public function pageDetailItem( $item_name, $item_category_id,$item_id){
+		if((int)$item_id <= 0){
+			return Redirect::route('site.home');
+		}
+		// tin hien th?
+		$itemShow = Items::getItemsByID($item_id);
+		if(empty($itemShow)){
+			return Redirect::route('site.home');
+		}
+
 		$this->header();
 		$this->menuLeft();
-		$this->layout->content = View::make('site.SiteLayouts.DetailItem');
+
+		//thong tin khach dang tin
+		$arrCustomer = UserCustomer::getByID($itemShow->customer_id);
+		//FunctionLib::debug($itemShow);
+
+		//t?nh thành
+		$arrProvince = Province::getAllProvince();
+
+		//tin dang cua cung danh muc
+		$limit = CGlobal::number_show_15;
+		$offset = 0;
+		$search = $data = array();
+		$totalSearch = 0;
+		$search['item_category_id'] = $itemShow->item_category_id;
+		$search['field_get'] = $this->str_field_items_get;
+		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
+
+		$this->layout->content = View::make('site.SiteLayouts.DetailItem')
+			->with('itemShow', $itemShow)
+			->with('arrProvince', $arrProvince)
+			->with('resultItemCategory', $resultItemCategory)
+			->with('arrCustomer', $arrCustomer);
 		$this->footer();
 	}
 
@@ -53,7 +83,7 @@ class SiteHomeController extends BaseSiteController
 
 	//danh sact tin dang theo danh muc
     public function pageCategory($catname, $catid){
-		if($catid <= 0){
+		if((int)$catid <= 0){
 			return Redirect::route('site.home');
 		}
 		$meta_title = $meta_keywords = $meta_description = $catname;
@@ -81,7 +111,7 @@ class SiteHomeController extends BaseSiteController
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
 
-		//t?nh thành
+		//tinh thành
 		$arrProvince = Province::getAllProvince();
 
 		//thong tin danh m?c
@@ -140,8 +170,6 @@ class SiteHomeController extends BaseSiteController
 
 		//t?nh thành
 		$arrProvince = Province::getAllProvince();
-
-
 
     	$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer')
 			->with('arrProvince', $arrProvince)

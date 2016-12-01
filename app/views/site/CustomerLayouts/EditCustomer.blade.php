@@ -77,8 +77,8 @@
 							<p>Giới tính: </p>
 							<select class="select_s" name="customer_gender">
 								<option value="">Chọn giới tính</option>
-								<option value="1" @if(isset($user_customer['customer_gender']) && $user_customer['customer_gender'] == 1)selected @endif>Nam</option>
-								<option value="0" @if(isset($user_customer['customer_gender']) && $user_customer['customer_gender'] == 0)selected @endif>Nữ</option>
+								<option value="{{CGlobal::CUSTOMER_GENDER_BOY}}" @if(isset($user_customer['customer_gender']) && $user_customer['customer_gender'] == CGlobal::CUSTOMER_GENDER_BOY)selected @endif>Nam</option>
+								<option value="{{CGlobal::CUSTOMER_GENDER_GIRL}}" @if(isset($user_customer['customer_gender']) && $user_customer['customer_gender'] == CGlobal::CUSTOMER_GENDER_GIRL)selected @endif>Nữ</option>
 							</select>
 						</div>
 						<div class="box-item-455 born">

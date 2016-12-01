@@ -125,6 +125,8 @@ class CGlobal{
     const CUSTOMER_VIP = 3;
     const CUSTOMER_ONLINE = 1;
     const CUSTOMER_OFFLINE = 0;
+    const CUSTOMER_GENDER_GIRL = 0;
+    const CUSTOMER_GENDER_BOY = 1;
 
     //product
     const TYPE_PRICE_NUMBER = 1;
