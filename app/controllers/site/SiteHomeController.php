@@ -46,7 +46,28 @@ class SiteHomeController extends BaseSiteController
 
 		$this->header();
 		$this->menuLeft();
-		$this->layout->content = View::make('site.SiteLayouts.DetailItem');
+
+		//thong tin khach dang tin
+		$arrCustomer = UserCustomer::getByID($itemShow->customer_id);
+		//FunctionLib::debug($itemShow);
+
+		//t?nh thành
+		$arrProvince = Province::getAllProvince();
+
+		//tin dang cua cung danh muc
+		$limit = CGlobal::number_show_15;
+		$offset = 0;
+		$search = $data = array();
+		$totalSearch = 0;
+		$search['item_category_id'] = $itemShow->item_category_id;
+		$search['field_get'] = $this->str_field_items_get;
+		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
+
+		$this->layout->content = View::make('site.SiteLayouts.DetailItem')
+			->with('itemShow', $itemShow)
+			->with('arrProvince', $arrProvince)
+			->with('resultItemCategory', $resultItemCategory)
+			->with('arrCustomer', $arrCustomer);
 		$this->footer();
 	}
 

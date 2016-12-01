@@ -438,6 +438,13 @@ class FunctionLib {
     	}
     	return '#';
     }
+    //Buid Link danh sach tin dang cua nguoi dung
+    static function buildLinkItemsCustomer($customer_id = 0, $customer_name = 'Khách hàng'){
+    	if($customer_id > 0){
+    		return URL::route('Site.pageListItemCustomer', array( 'customer_name'=>strtolower(FunctionLib::safe_title($customer_name)),'customer_id'=>$customer_id));
+    	}
+    	return '#';
+    }
     /**
      * @param int $pro_id
      * @param string $pro_name
