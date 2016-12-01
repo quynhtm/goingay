@@ -23,7 +23,7 @@
 					</div>
 					<div class="title-item">
 						<h2>
-							<a href="" title="{{$itemHot->item_name}}">{{$itemHot->item_name}}</a>
+							<a href="{{FunctionLib::buildLinkDetailItem($itemHot->item_id,$itemHot->item_name,$itemHot->item_category_id)}}" title="{{$itemHot->item_name}}">{{$itemHot->item_name}}</a>
 						</h2>
 					</div>
 					<div class="info-item">

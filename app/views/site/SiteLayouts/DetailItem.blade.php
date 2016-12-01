@@ -8,7 +8,7 @@
 	</div>
 	<div class="content-boxcat">
 		<div class="slide-detail-post">
-			<img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $itemShow->item_image, CGlobal::sizeImage_300)}}" title="{{$itemShow->item_name}}" alt="{{$itemShow->item_name}}">
+			<img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $itemShow->item_image, CGlobal::sizeImage_600)}}" title="{{$itemShow->item_name}}" alt="{{$itemShow->item_name}}">
 		</div>
 		<div class="info-detail-post">
 			@if($itemShow->item_type_price == CGlobal::TYPE_PRICE_NUMBER)

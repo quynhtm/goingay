@@ -382,7 +382,8 @@ class SiteUserCustomerController extends BaseSiteController{
 			return Redirect::route('site.home');
 		}
 		$this->header();
-
+		$this->menuLeft();
+		
 		CGlobal::$pageShopTitle = "Quản lý sản phẩm | ".CGlobal::web_name;
 		$pageNo = (int) Request::get('page_no',1);
 		$limit = CGlobal::number_limit_show;
@@ -425,6 +426,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			return Redirect::route('site.home');
 		}
 		$this->header();
+		$this->menuLeft();
 		//Include style.
 		FunctionLib::link_css(array(
 			'lib/upload/cssUpload.css',
@@ -553,7 +555,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			return Redirect::route('customer.ItemsList');
 		}
 		$this->header();
-		
+		$this->menuLeft();
 		//Include style.
 		FunctionLib::link_css(array(
 			'lib/upload/cssUpload.css',
@@ -678,8 +680,8 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('arrBannerRight', $arrBannerRight);
 		$this->footer();
 	}
-	public function getAllImageItem($item_id = 0){
-		$item_id = (int)Request::get('item_id',0);
+	public function getAllImageItem(){
+		$item_id = (int)Request::get('item_id', 0);
         $data = array('isIntOk' => 0);
         if(isset($this->user_customer->customer_id) && $this->user_customer->customer_id > 0 && $item_id > 0){
             $result = Items::getItemByCustomerId($this->user_customer->customer_id, $item_id);
@@ -761,7 +763,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		}
 		return false;
 	}
-	//ajaz set Top tin dang
+	//ajax set Top tin dang
 	public function setTopItems(){
 		$data = array('isIntOk' => 0,'msg' => 'Không set top tin đăng này được');
 		if (!UserCustomer::isLogin()) {
@@ -864,7 +866,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		}
 	}
 
-
+	//Login Facebook - Google
 	public function loginFacebook(){
 		
 		$fb = new Facebook\Facebook ([
