@@ -51,7 +51,7 @@ class SiteHomeController extends BaseSiteController
 		$arrCustomer = UserCustomer::getByID($itemShow->customer_id);
 		//FunctionLib::debug($itemShow);
 
-		//t?nh thành
+		//t?nh thï¿½nh
 		$arrProvince = Province::getAllProvince();
 
 		//tin dang cua cung danh muc
@@ -93,17 +93,17 @@ class SiteHomeController extends BaseSiteController
     	$this->header();
     	$this->menuLeft($catid);
 
-		//List san pham cùng danh muc n?i b?t TOP
+		//List san pham cï¿½ng danh muc n?i b?t TOP
 		$number_show_hot = 3;
 		$searchHot['item_category_id'] = $catid;
-		$searchHot['item_image'] = 1;//check có ?nh ??i di?n
+		$searchHot['item_image'] = 1;//check cï¿½ ?nh ??i di?n
 		$searchHot['field_get'] = $this->str_field_items_get;
 		$resultHot = self::getItemHot($searchHot,$number_show_hot);
 
 		//danh sach tin dang cua danh m?c
 		$pageNo = (int) Request::get('page_no',1);
 		$limit = CGlobal::number_limit_show;
-		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cái n?i b?t ? trên ?i
+		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cï¿½i n?i b?t ? trï¿½n ?i
 		$search = $data = array();
 		$totalSearch = 0;
 		$search['item_category_id'] = $catid;
@@ -111,7 +111,7 @@ class SiteHomeController extends BaseSiteController
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
 
-		//tinh thành
+		//tinh thï¿½nh
 		$arrProvince = Province::getAllProvince();
 
 		//thong tin danh m?c
@@ -127,7 +127,12 @@ class SiteHomeController extends BaseSiteController
 			->with('resultItemCategory', $resultItemCategory);
     	$this->footer();
     }
-
+	public function pageNews(){
+		$this->header();
+		$this->menuLeft();
+		$this->layout->content = View::make('site.SiteLayouts.pageNews');
+		$this->footer();
+	}
 	//chi tiet tin tuc
 	public function pageDetailNew($new_id, $new_name){
     	$this->header();
@@ -150,17 +155,17 @@ class SiteHomeController extends BaseSiteController
 		$this->header();
 		$this->menuLeft(0);
 
-		//List san pham cùng danh muc n?i b?t TOP
+		//List san pham cï¿½ng danh muc n?i b?t TOP
 		$number_show_hot = 3;
 		$searchHot['customer_id'] = $customer_id;
-		$searchHot['item_image'] = 1;//check có ?nh ??i di?n
+		$searchHot['item_image'] = 1;//check cï¿½ ?nh ??i di?n
 		$searchHot['field_get'] = $this->str_field_items_get;
 		$resultHot = self::getItemHot($searchHot,$number_show_hot);
 
 		//danh sach tin dang cua danh m?c
 		$pageNo = (int) Request::get('page_no',1);
 		$limit = CGlobal::number_limit_show;
-		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cái n?i b?t ? trên ?i
+		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cï¿½i n?i b?t ? trï¿½n ?i
 		$search = $data = array();
 		$totalSearch = 0;
 		$search['customer_id'] = $customer_id;
@@ -168,7 +173,7 @@ class SiteHomeController extends BaseSiteController
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
 
-		//t?nh thành
+		//t?nh thï¿½nh
 		$arrProvince = Province::getAllProvince();
 
     	$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer')

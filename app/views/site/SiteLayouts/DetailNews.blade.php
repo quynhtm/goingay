@@ -1,307 +1,51 @@
 <div class="col-left-92">
 	<div class="head-info">
-		<h2><a href=""><i class="fa fa-building"></i>Mua bán nhà đất</a></h2>
-	</div>
-	<div class="content-boxcat">
-		<div class="one-focus-item">
-			<div class="item-wrap">
-				<div class="thumb-image">
-					<a class="image-item" href="">
-						<span>
-							<img itemprop="image" src="http://img.f2.raovat.vnecdn.net/images/2016/11/03/581a9f4722c4c-biet-thu-lien-ke-belleville-b4-nam-trung-yen9_300x180.png" title="Bán 120m nhà phố Nguyễn Chánh,mặt tiền 6m,5 tầng" alt="Bán 120m nhà phố Nguyễn Chánh,mặt tiền 6m,5 tầng">
-						</span>
-						<span class="price-item">2.600.000.000 đ</span>
-					</a>
-				</div>
-				<div class="title-item">
-					<h2>
-						<a href="" title="Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ">Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ</a>
-					</h2>
-				</div>
-				<div class="info-item">
-					<ul>
-						<li class="pull-left local"><i class="fa fa-location-arrow"></i><a href="">Hà Nội</a></li>
-						<li class="pull-right time-post"><i class="fa fa-clock-o"></i>11:13 - 21/11/2016</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="one-focus-item">
-			<div class="item-wrap">
-				<div class="thumb-image">
-					<a class="image-item" href="">
-						<span>
-							<img itemprop="image" src="http://img.f2.raovat.vnecdn.net/images/2016/11/20/5831380d7161d-FB_IMG_1479620556560_300x180.jpg" title="Bán đất nền dự án tại Đồng Nai" alt="Bán đất nền dự án tại Đồng Nai">
-						</span>
-						<span class="price-item">2.600.000.000 đ</span>
-					</a>
-				</div>
-				<div class="title-item">
-					<h2>
-						<a href="" title="Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ">Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ</a>
-					</h2>
-				</div>
-				<div class="info-item">
-					<ul>
-						<li class="pull-left local"><i class="fa fa-location-arrow"></i><a href="">Hà Nội</a></li>
-						<li class="pull-right time-post"><i class="fa fa-clock-o"></i>11:13 - 21/11/2016</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="one-focus-item">
-			<div class="item-wrap">
-				<div class="thumb-image">
-					<a class="image-item" href="">
-						<span>
-							<img itemprop="image" src="http://img.f4.raovat.vnecdn.net/images/2016/10/15/5801f1777d6af-Lien-ke-96-96b-nguyen-huy-tuong-02_300x180.jpg" title="Bán liền kề Nguyễn Huy Tưởng, TX- 123Triệu/m2" alt="Bán liền kề Nguyễn Huy Tưởng, TX- 123Triệu/m2">
-						</span>
-						<span class="price-item">2.600.000.000 đ</span>
-					</a>
-				</div>
-				<div class="title-item">
-					<h2>
-						<a href="" title="Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ">Mở Bán DA Lạc Hồng- Ngoại Giao Đoàn 3 PN từ 2,6 tỷ</a>
-					</h2>
-				</div>
-				<div class="info-item">
-					<ul>
-						<li class="pull-left local"><i class="fa fa-location-arrow"></i><a href="">Hà Nội</a></li>
-						<li class="pull-right time-post"><i class="fa fa-clock-o"></i>11:13 - 21/11/2016</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		<h2><a href=""><i class="fa fa-newspaper-o"></i>Tin tức</a></h2>
 	</div>
 	<div class="content-boxcat">
 		<div class="col-653 pull-left">
-			<div class="form-seach-inboxcat">
-				<h2>Tìm kiếm mua bán nhà đất</h2>
-				<form>
-					<input class="seach-keyword" placeholder="Nhập từ khóa tìm kiếm hoặc tỉnh thành" name="q" value="" autocomplete="off" type="text">
-					<input class="submit-seach" value="Tìm kiếm" type="submit">
-				</form>
-			</div>
-			<div class="filter-item">
-				<div class="filter-list-action">
-					<ul>
-						<li class="sort"><a href=""><i class="fa fa-list"></i>Sắp xếp</a></li>
-						<li class="active"><a href=""><i class="fa fa-sort-numeric-asc"></i>Mới cập nhật</a></li>
-					</ul>
+			<div class="list-item-news news">
+				<h1 class="post-title-view">Celadon City vào top dự án có thiết kế cảnh quan đẹp nhất</h1>
+				<div class="post-intro-view">Dự án được vinh danh trong chương trình "South East Asia Property Awards" do Tập đoàn Property Guru tổ chức.</div>
+				<div class="post-content-view">
+					Đây là lần thứ 2 trong năm, Celadon City nhận danh hiệu này. Ngoài ra, hai năm liên tiếp, các khu đô thị: Gamuda City tại Hà Nội và Celadon City tại TP HCM do Tập đoàn Gamuda Land phát triển đều được công nhận là khu đô thị tốt nhất.
+					<br/><br/>
+					<p style="text-align:center"><img alt="celadon-city-tu-hao-dat-danh-hieu-top-du-an-co-thiet-ke-canh-quan-dep-nhat-khu-vuc-dong-nam-a-xin-edit" data-natural-width="400" data-pwidth="470.40625" data-width="400" src="http://img.f25.kinhdoanh.vnecdn.net/2016/11/29/Image-ExtractWord-0-Out-7235-1480408742.jpeg" style="margin: 0px; padding: 0px; border: 0px; font-size: 0px; line-height: 0; max-width: 100%;"></p>
 				</div>
 			</div>
-			<div class="list-item-filter">
-				<ul>
-					<li>
-						<a class="img" href="{{URL::route('site.home')}}/chi-tiet.html">
-							<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/22/5833e786e9beb-Chung-cu-imperia-sky-garden-500x450_200x120.jpg" alt="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-						</a>
-						<div class="title-post">
-							<h2>
-								<a href="" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-									Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ
-								</a>
-							</h2>
-							<div class="pull-right">
-								<span class="price"><a itemprop="price" href="">1.300.000.000 đ</a></span>
-							</div>
-						</div>
-						<div class="info-item">
-							<ul class="pull-left">
-								<li class="local">
-									<i class="fa fa-location-arrow"></i>
-									<a href="">Hà Nội</a>
-								</li>
-								<li class="">
-									<i class="fa fa-clock-o"></i> 13:37 - 22/11/2016
-								</li>
-							</ul>
-							<ul class="pull-right">
-								<li>
-									<i class="fa fa-minus"></i> 2
-								</li>
-								<li>
-									<i class="fa fa-tint"></i> 1
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="img" href="">
-							<img itemprop="image" src="http://img.f1.raovat.vnecdn.net/images/2016/10/29/58141930d55bc-20161004150917-8ef1_200x120.jpg" alt="Biệt thự Vinhomes Thăng Long giá rẻ như Chung Cư" title="Biệt thự Vinhomes Thăng Long giá rẻ như Chung Cư">
-						</a>
-						<div class="title-post">
-							<h2>
-								<a href="" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-									Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ
-								</a>
-							</h2>
-							<div class="pull-right">
-								<span class="price"><a itemprop="price" href="">1.300.000.000 đ</a></span>
-							</div>
-						</div>
-						<div class="info-item">
-							<ul class="pull-left">
-								<li class="local">
-									<i class="fa fa-location-arrow"></i>
-									<a href="">Hà Nội</a>
-								</li>
-								<li class="">
-									<i class="fa fa-clock-o"></i> 13:37 - 22/11/2016
-								</li>
-							</ul>
-							<ul class="pull-right">
-								<li>
-									<i class="fa fa-minus"></i> 2
-								</li>
-								<li>
-									<i class="fa fa-tint"></i> 1
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="img" href="">
-							<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/22/5833e786e9beb-Chung-cu-imperia-sky-garden-500x450_200x120.jpg" alt="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-						</a>
-						<div class="title-post">
-							<h2>
-								<a href="" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-									Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ
-								</a>
-							</h2>
-							<div class="pull-right">
-								<span class="price"><a itemprop="price" href="">1.300.000.000 đ</a></span>
-							</div>
-						</div>
-						<div class="info-item">
-							<ul class="pull-left">
-								<li class="local">
-									<i class="fa fa-location-arrow"></i>
-									<a href="">Hà Nội</a>
-								</li>
-								<li class="">
-									<i class="fa fa-clock-o"></i> 13:37 - 22/11/2016
-								</li>
-							</ul>
-							<ul class="pull-right">
-								<li>
-									<i class="fa fa-minus"></i> 2
-								</li>
-								<li>
-									<i class="fa fa-tint"></i> 1
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="img" href="">
-							<img itemprop="image" src="http://img.f1.raovat.vnecdn.net/images/2016/10/29/58141930d55bc-20161004150917-8ef1_200x120.jpg" alt="Biệt thự Vinhomes Thăng Long giá rẻ như Chung Cư" title="Biệt thự Vinhomes Thăng Long giá rẻ như Chung Cư">
-						</a>
-						<div class="title-post">
-							<h2>
-								<a href="" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-									Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ
-								</a>
-							</h2>
-							<div class="pull-right">
-								<span class="price"><a itemprop="price" href="">1.300.000.000 đ</a></span>
-							</div>
-						</div>
-						<div class="info-item">
-							<ul class="pull-left">
-								<li class="local">
-									<i class="fa fa-location-arrow"></i>
-									<a href="">Hà Nội</a>
-								</li>
-								<li class="">
-									<i class="fa fa-clock-o"></i> 13:37 - 22/11/2016
-								</li>
-							</ul>
-							<ul class="pull-right">
-								<li>
-									<i class="fa fa-minus"></i> 2
-								</li>
-								<li>
-									<i class="fa fa-tint"></i> 1
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="img" href="">
-							<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/22/5833e786e9beb-Chung-cu-imperia-sky-garden-500x450_200x120.jpg" alt="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-						</a>
-						<div class="title-post">
-							<h2>
-								<a href="" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-									Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ
-								</a>
-							</h2>
-							<div class="pull-right">
-								<span class="price"><a itemprop="price" href="">1.300.000.000 đ</a></span>
-							</div>
-						</div>
-						<div class="info-item">
-							<ul class="pull-left">
-								<li class="local">
-									<i class="fa fa-location-arrow"></i>
-									<a href="">Hà Nội</a>
-								</li>
-								<li class="">
-									<i class="fa fa-clock-o"></i> 13:37 - 22/11/2016
-								</li>
-							</ul>
-							<ul class="pull-right">
-								<li>
-									<i class="fa fa-minus"></i> 2
-								</li>
-								<li>
-									<i class="fa fa-tint"></i> 1
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="img" href="">
-							<img itemprop="image" src="http://img.f1.raovat.vnecdn.net/images/2016/10/29/58141930d55bc-20161004150917-8ef1_200x120.jpg" alt="Biệt thự Vinhomes Thăng Long giá rẻ như Chung Cư" title="Biệt thự Vinhomes Thăng Long giá rẻ như Chung Cư">
-						</a>
-						<div class="title-post">
-							<h2>
-								<a href="" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
-									Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ
-								</a>
-							</h2>
-							<div class="pull-right">
-								<span class="price"><a itemprop="price" href="">1.300.000.000 đ</a></span>
-							</div>
-						</div>
-						<div class="info-item">
-							<ul class="pull-left">
-								<li class="local">
-									<i class="fa fa-location-arrow"></i>
-									<a href="">Hà Nội</a>
-								</li>
-								<li class="">
-									<i class="fa fa-clock-o"></i> 13:37 - 22/11/2016
-								</li>
-							</ul>
-							<ul class="pull-right">
-								<li>
-									<i class="fa fa-minus"></i> 2
-								</li>
-								<li>
-									<i class="fa fa-tint"></i> 1
-								</li>
-							</ul>
-						</div>
-					</li>
-				</ul>
-			</div>
+			<ul class="news-detail-list">
+				<li><a href="">Empire ra mắt thị trường dự án condotel Naman Garden</a></li>
+				<li><a href="">1.000 người dự mở bán căn hộ hướng sông Phú Mỹ Hưng</a></li>
+				<li><a href="">Sắm nhà sang, nhận đồng vàng may mắn duy nhất ngày 26.11 tại Imperial Plaza</a></li>
+			</ul>
 		</div>
 		<div class="col-327 pull-right">
-			<div class="box-ads">
-				<img src="http://static.eclick.vn/uploads/source/2016/10/31/87792651f32f26t98052y3724.jpeg">
+			<div class="event-box">
+				<div class="event-box-title">Sự kiện nổi bật</div>
+				<div class="even-box-content">
+					<div class="main-img">
+						<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/30/583e3ac6909fb-Image-307354715-ExtractWord-0-8075-5937-1480404429_300x180.png" alt="event_img">
+					</div>
+					<div class="main-text">
+						<div class="event-block-title">
+							<a href="" title="">Nhất Nam Land mở bán dự án Coco Center House</a>
+						</div>
+						<ul class="event-block-list">
+					 		<li>
+								<a target="_blank" href="">Ecohome Phúc Lợi: Hàng trăm giao dịch trong tuần đầu mở bán</a>
+							</li>
+							<li>
+								<a target="_blank" href="">Sắm nhà sang, nhận đồng vàng may mắn duy nhất ngày 26.11 tại Imperial Plaza</a>
+							</li>
+							<li>
+								<a target="_blank" href="">Raovat VnExpress khuyến mãi khủng lên tới 50%</a>
+							</li>
+							<li>
+								<a target="_blank" href="">Căn hộ 3 phòng ngủ giá từ 2,6 tỷ đồng giữa Thủ Thiêm</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
