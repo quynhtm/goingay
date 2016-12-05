@@ -32,7 +32,7 @@ Route::get('{item_name}-cat{item_category_id}-tin{item_id}.html',array('as' => '
 
 //tin tuc
 Route::get('tin-tuc.html',array('as' => 'Site.pageNews','uses' =>'SiteHomeController@pageNews'));
-Route::get('tin-tuc/{new_name}-{new_id}.html',array('as' => 'Site.pageDetailNew','uses' =>'SiteHomeController@pageDetailNew'))->where('new_name', '[A-Z0-9a-z_\-]+')->where('new_id', '[0-9]+');
+Route::get('chi-tiet/tin-tuc-{new_id}/{news_title}.html',array('as' => 'Site.pageDetailNew','uses' =>'SiteHomeController@pageDetailNew'))->where('new_id', '[0-9]+')->where('news_title', '[A-Z0-9a-z_\-]+');
 
 
 

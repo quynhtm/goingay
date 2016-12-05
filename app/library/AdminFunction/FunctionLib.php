@@ -464,9 +464,9 @@ class FunctionLib {
      * @param string $cat_name
      * @return string
      */
-    static function buildLinkDetailNews($new_id = 0,$cat_id=0, $new_name = 'tin tức'){
+    static function buildLinkDetailNews($new_id = 0,$news_title = 'tin tức'){
         if($new_id > 0){
-            return URL::route('site.detailNew', array('name'=>strtolower(FunctionLib::safe_title($new_name)), 'cat_id'=>$cat_id, 'id'=>$new_id));
+            return URL::route('Site.pageDetailNew', array('news_title'=>strtolower(FunctionLib::safe_title($news_title)), 'new_id'=>$new_id));
         }
         return '#';
     }

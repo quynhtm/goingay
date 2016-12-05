@@ -61,7 +61,7 @@
                                 <td class="text-center">{{ $stt + $key+1 }}</td>
                                 <td class="text-center"><img src="{{$item['url_image']}}"></td>
                                 <td>
-                                    [<b>{{ $item['news_id'] }}</b>] {{ $item['news_title'] }}
+                                    [<b>{{ $item['news_id'] }}</b>]<a href="{{FunctionLib::buildLinkDetailNews($item['news_id'],$item['news_title'])}}" target="_blank">{{ $item['news_title'] }}</a>
                                 </td>
                                 <td class="text-center">
                                     @if($item['news_status'] == 1)

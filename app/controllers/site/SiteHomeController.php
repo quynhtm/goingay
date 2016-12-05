@@ -46,6 +46,12 @@ class SiteHomeController extends BaseSiteController
 
 		$this->header();
 		$this->menuLeft();
+		//seo
+		$meta_title = $itemShow->item_name;
+		$meta_keywords = CGlobal::web_name;
+		$meta_description = FunctionLib::substring($itemShow->item_content,300);
+		$meta_img= '';
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 
 		//thong tin khach dang tin
 		$arrCustomer = UserCustomer::getByID($itemShow->customer_id);
@@ -130,14 +136,41 @@ class SiteHomeController extends BaseSiteController
 	public function pageNews(){
 		$this->header();
 		$this->menuLeft();
-		$this->layout->content = View::make('site.SiteLayouts.pageNews');
+		//list tin tuc lien quan
+		$search['news_status'] = CGlobal::status_show;
+		$search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort';//cac truong can lay
+		$arrListNew = News::searchByCondition($search, CGlobal::number_show_15, 0,$total);
+
+		$this->layout->content = View::make('site.SiteLayouts.pageNews')
+			->with('arrListNew', $arrListNew);
 		$this->footer();
 	}
 	//chi tiet tin tuc
 	public function pageDetailNew($new_id, $new_name){
+		$inforNew = News::getNewByID($new_id);
+		if(empty($inforNew)){
+			return Redirect::route('site.home');
+		}
     	$this->header();
     	$this->menuLeft();
-    	$this->layout->content = View::make('site.SiteLayouts.DetailNews');
+		//seo
+		$meta_title = $inforNew->news_title;
+		$meta_keywords = CGlobal::web_name;
+		$meta_description = $inforNew->news_desc_sort;
+		$meta_img= '';
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+
+		//list tin tuc lien quan
+		$search['news_category'] = $inforNew->news_category;
+		$search['news_status'] = CGlobal::status_show;
+		$search['not_news_id'] = $new_id;
+		$search['field_get'] = 'news_id,news_title,news_status';//cac truong can lay
+		$arrListNew = News::searchByCondition($search, CGlobal::number_show_15, 0,$total);
+		//FunctionLib::debug($arrListNew);
+
+    	$this->layout->content = View::make('site.SiteLayouts.DetailNews')
+			->with('inforNew', $inforNew)
+			->with('arrListNew', $arrListNew);
     	$this->footer();
     }
 
