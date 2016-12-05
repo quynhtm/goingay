@@ -61,7 +61,7 @@
 					@foreach ($resultItemCategory as $keyc => $itemCate)
 					<li>
 						<a class="img" href="{{FunctionLib::buildLinkDetailItem($itemCate->item_id,$itemCate->item_name,$itemCate->item_category_id)}}">
-                           <img src="http://img.f1.raovat.vnecdn.net/images/2016/11/22/5833e786e9beb-Chung-cu-imperia-sky-garden-500x450_200x120.jpg" alt="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ" title="Duy nhất tại Q.Thanh Xuân - CHCC 2PN 1,3 tỷ">
+                           <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemCate->item_id, $itemCate->item_image, CGlobal::sizeImage_200)}}" alt="{{$itemCate->item_name}}" title="{{$itemCate->item_name}}">
                     	</a>
                     	<div class="title-post">
                     		<h2>

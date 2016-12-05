@@ -51,6 +51,39 @@ class Items extends Eloquent
         return array();
     }
 
+    public static function getItemsHomeSite($item_category_id = 0){
+        $key_cache = Memcache::CACHE_ITEM_HOME_CATEGORY_ID.'_'.$item_category_id;
+        $itemsHomeSite = (Memcache::CACHE_ON)? Cache::get($key_cache) : array();
+        if (sizeof($itemsHomeSite) == 0) {
+            $itemHome = Items::where('item_id' ,'>', 0)
+                ->where('item_block',CGlobal::ITEMS_NOT_BLOCK)
+                ->where('item_status',CGlobal::status_show)
+                ->where('item_category_id',$item_category_id)
+                ->orderBy('is_customer', 'desc')->orderBy('time_ontop', 'desc')->orderBy('item_id', 'desc')
+                ->get();
+            if($itemHome){
+                foreach($itemHome as $itm) {
+                    $itemsHomeSite[$itm['item_id']] = array(
+                        'item_id'=>$itm['item_id'],
+                        'item_name'=>$itm['item_name'],
+                        'item_type_price'=>$itm['item_type_price'],
+                        'item_price_sell'=>$itm['item_price_sell'],
+                        'item_image'=>$itm['item_image'],
+                        'item_category_id'=>$itm['item_category_id'],
+                        'item_category_name'=>$itm['item_category_name'],
+                        'item_province_id'=>$itm['item_province_id'],
+                        'time_ontop'=>$itm['time_ontop'],
+                        'customer_id'=>$itm['customer_id'],
+                        'customer_name'=>$itm['customer_name']);
+                }
+            }
+            if($itemsHomeSite && Memcache::CACHE_ON){
+                Cache::put($key_cache, $itemsHomeSite, Memcache::CACHE_TIME_TO_LIVE_5);
+            }
+        }
+        return $itemsHomeSite;
+    }
+
     public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){
         try{
             $query = Items::where('item_id','>',0);
@@ -155,6 +188,12 @@ class Items extends Eloquent
 
             if (isset($dataSearch['item_is_hot']) && $dataSearch['item_is_hot'] > 0) {
                 $query->where('item_is_hot', $dataSearch['item_is_hot']);
+            }
+
+            //lay khong thuoc arr items_id
+            if(isset($dataSearch['str_not_item_id']) && $dataSearch['str_not_item_id'] != ''){
+                $arrNotItemsId = explode(',', trim($dataSearch['str_not_item_id']));
+                $query->whereNotIn('item_id', $arrNotItemsId);
             }
 
             //lay theo id SP truyen vào và sap xep theo vi tri đã truyề vào

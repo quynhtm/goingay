@@ -55,20 +55,21 @@
                     <table class="table table-bordered table-hover">
                         <thead class="thin-border-bottom">
                         <tr class="">
-                            <th width="2%"class="td_list">STT</th>
-                            <th width="1%" class="td_list"><input type="checkbox" id="checkAll"/></th>
+                            <th width="2%"class="text-center">STT</th>
+                            <th width="1%" class="text-center"><input type="checkbox" id="checkAll"/></th>
                             <th width="25%" class="td_list">Tên danh mục</th>
                             <th width="10%" class="td_list">Danh mục cha</th>
-                            <th width="5%" class="td_list">Icon font</th>
-                            <th width="8%" class="td_list">Vị trí trang chủ</th>
-                            <th width="5%" class="td_list">Vị trí</th>
-                            <th width="5%" class="td_list">Status</th>
-                            <th width="10%" class="td_list">Action</th>
+                            <th width="5%" class="text-center">Icon font</th>
+                            <th width="5%" class="text-center">Vị trí</th>
+                            <th width="5%" class="text-center">Status</th>
+                            <th width="5%" class="text-center">Status FrontSite</th>
+                            <th width="8%" class="text-center">Vị trí FrontSite</th>
+                            <th width="10%" class="text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($data as $key => $item)
-                            <tr @if($item['category_parent_id'] == 0)style="background-color:#d6f6f6"@endif>
+                            <tr>
                                 <td class="text-center">{{ $key+1 }}</td>
                                 <td class="text-center"><input class="check" type="checkbox" name="checkItems[]" id="sys_checkItems" value="{{$item['category_id']}}"></td>
                                 <td>
@@ -77,13 +78,11 @@
                                 <td>
                                    {{ $item['padding_left'].$item['category_parent_name'] }}
                                 </td>
-                                <td>
-                                   <i class="{{ $item['category_icons']}}"></i>
+                                <td class="text-center">
+                                   <i class="{{ $item['category_icons']}} fa-3x"></i>
                                 </td>
-                                <td>
-                                   @if(isset($arrShowHome[$item['category_content_front']])) {{$arrShowHome[$item['category_content_front']]}} -- {{$item['category_content_front_order']}} @endif
-                                </td>
-                                <td>
+
+                                <td class="text-center">
                                     {{$item['category_order']}}
                                 </td>
                                 <td class="text-center">
@@ -93,6 +92,16 @@
                                         <a href="javascript:void(0);" onclick="Admin.updateStatusItem({{$item['category_id']}},{{$item['category_status']}},1)"style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>
                                     @endif
                                     <span class="img_loading" id="img_loading_{{$item['category_id']}}"></span>
+                                </td>
+                                <td class="text-center">
+                                    @if($item['category_content_front'] == 1)
+                                        <a href="javascript:void(0);" title="Hiện"><i class="fa fa-check fa-2x"></i></a>
+                                    @else
+                                        <a href="javascript:void(0);" style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    {{$item['category_content_front_order']}}
                                 </td>
                                 <td class="text-center">
                                     @if($is_root || $permission_full ==1|| $permission_edit ==1  )

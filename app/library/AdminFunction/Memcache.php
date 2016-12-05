@@ -18,11 +18,13 @@ class Memcache{
     //danh mục
     const CACHE_ALL_CATEGORY    = 'cache_all_category';
     const CACHE_ALL_PARENT_CATEGORY    = 'cache_all_parent_category';
+    const CACHE_ALL_SHOW_CATEGORY_FRONT    = 'cache_all_show_category_front';
     const CACHE_ALL_CHILD_CATEGORY_BY_PARENT_ID    = 'cache_all_child_by_parent_id_';
     const CACHE_CATEGORY_ID    = 'cache_category_id_';
 
     //tin đăng
     const CACHE_ITEM_ID    = 'cache_item_id_';
+    const CACHE_ITEM_HOME_CATEGORY_ID   = 'cache_item_home_category_id_';
 
     //tin tức
     const CACHE_NEW_ID    = 'cache_news_id_';

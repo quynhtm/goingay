@@ -56,6 +56,28 @@ class Category extends Eloquent
         return $data;
     }
 
+    public static function getCategoryShowFrontSite() {
+        $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_SHOW_CATEGORY_FRONT) : array();
+        if (sizeof($data) == 0) {
+            $category = Category::where('category_id', '>', 0)
+                ->where('category_parent_id',0)
+                ->where('category_status',CGlobal::status_show)
+                ->where('category_content_front',CGlobal::status_show)
+                ->orderBy('category_content_front_order','asc')->get();
+            if($category){
+                foreach($category as $itm) {
+                    $data[$itm['category_id']] = array(
+                        'category_name'=>$itm['category_name'],
+                        'category_icons'=>$itm['category_icons']);
+                }
+            }
+            if($data && Memcache::CACHE_ON){
+                Cache::put(Memcache::CACHE_ALL_SHOW_CATEGORY_FRONT, $data, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+            }
+        }
+        return $data;
+    }
+
     public static function getAllChildCategoryIdByParentId($parentId = 0) {
         $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_CHILD_CATEGORY_BY_PARENT_ID.$parentId) : array();
         if (sizeof($data) == 0 && $parentId > 0) {
@@ -191,6 +213,7 @@ class Category extends Eloquent
         }
         Cache::forget(Memcache::CACHE_ALL_CATEGORY);
         Cache::forget(Memcache::CACHE_ALL_PARENT_CATEGORY);
+        Cache::forget(Memcache::CACHE_ALL_SHOW_CATEGORY_FRONT);
     }
 
     public static function getCategoriessAll(){
