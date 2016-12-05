@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c717333-8288-4d8a-8ab4-ffaa1fccb75d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" afterPath="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Category.php" afterPath="$PROJECT_DIR$/app/models/Category.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/SiteLayouts/DetailItem.blade.php" afterPath="$PROJECT_DIR$/app/views/site/SiteLayouts/DetailItem.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/SiteLayouts/Home.blade.php" afterPath="$PROJECT_DIR$/app/views/site/SiteLayouts/Home.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Items.php" afterPath="$PROJECT_DIR$/app/models/Items.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/SiteLayouts/ListItemCategory.blade.php" afterPath="$PROJECT_DIR$/app/views/site/SiteLayouts/ListItemCategory.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/SiteLayouts/ListItemCustomer.blade.php" afterPath="$PROJECT_DIR$/app/views/site/SiteLayouts/ListItemCustomer.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/library/AdminFunction/Memcache.php" afterPath="$PROJECT_DIR$/app/library/AdminFunction/Memcache.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/site/SiteHomeController.php" afterPath="$PROJECT_DIR$/app/controllers/site/SiteHomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/admin/Category/view.blade.php" afterPath="$PROJECT_DIR$/app/views/admin/Category/view.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="webtintuc.iws" />
@@ -64,21 +56,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Home.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/site/SiteLayouts/Home.blade.php">
+      <file leaf-file-name="Items.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/models/Items.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.9033079">
-              <caret line="100" column="88" selection-start-line="100" selection-start-column="88" selection-end-line="100" selection-end-column="88" />
+            <state vertical-scroll-proportion="0.73006135">
+              <caret line="62" column="56" selection-start-line="62" selection-start-column="56" selection-end-line="62" selection-end-column="56" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Items.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/Items.php">
+      <file leaf-file-name="CGlobal.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.576923">
-              <caret line="70" column="35" selection-start-line="70" selection-start-column="25" selection-end-line="70" selection-end-column="35" />
+            <state vertical-scroll-proportion="-19.615385">
+              <caret line="30" column="24" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -146,13 +138,13 @@
         <option value="$PROJECT_DIR$/app/models/Category.php" />
         <option value="$PROJECT_DIR$/app/views/admin/Category/view.blade.php" />
         <option value="$PROJECT_DIR$/app/library/AdminFunction/Memcache.php" />
-        <option value="$PROJECT_DIR$/app/models/Items.php" />
         <option value="$PROJECT_DIR$/app/controllers/site/SiteHomeController.php" />
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/Home.blade.php" />
         <option value="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" />
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/ListItemCategory.blade.php" />
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/DetailItem.blade.php" />
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/ListItemCustomer.blade.php" />
+        <option value="$PROJECT_DIR$/app/models/Items.php" />
       </list>
     </option>
   </component>
@@ -925,21 +917,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/site/SiteHomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.2">
-          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
-          <folding>
-            <element signature="n#pageDetailItem#0;n#SiteHomeController#0;n#!!top" expanded="false" />
-            <element signature="n#page404#0;n#SiteHomeController#0;n#!!top" expanded="false" />
-            <element signature="n#pageNews#0;n#SiteHomeController#0;n#!!top" expanded="false" />
-            <element signature="n#pageDetailNew#0;n#SiteHomeController#0;n#!!top" expanded="false" />
-            <element signature="n#pageListItemCustomer#0;n#SiteHomeController#0;n#!!top" expanded="false" />
-            <element signature="n#getItemHot#0;n#SiteHomeController#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/admin/Items/view.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.461538">
@@ -948,26 +925,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Items.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.576923">
-          <caret line="70" column="35" selection-start-line="70" selection-start-column="25" selection-end-line="70" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/library/PHPThumb/ThumbImg.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.076923">
           <caret line="78" column="116" selection-start-line="78" selection-start-column="116" selection-end-line="78" selection-end-column="116" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.5384617">
-          <caret line="43" column="30" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -1010,6 +971,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.9033079">
           <caret line="100" column="88" selection-start-line="100" selection-start-column="88" selection-end-line="100" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/site/SiteHomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.2">
+          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+          <folding>
+            <element signature="n#pageDetailItem#0;n#SiteHomeController#0;n#!!top" expanded="false" />
+            <element signature="n#page404#0;n#SiteHomeController#0;n#!!top" expanded="false" />
+            <element signature="n#pageNews#0;n#SiteHomeController#0;n#!!top" expanded="false" />
+            <element signature="n#pageDetailNew#0;n#SiteHomeController#0;n#!!top" expanded="false" />
+            <element signature="n#pageListItemCustomer#0;n#SiteHomeController#0;n#!!top" expanded="false" />
+            <element signature="n#getItemHot#0;n#SiteHomeController#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.615385">
+          <caret line="30" column="24" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/Items.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.73006135">
+          <caret line="62" column="56" selection-start-line="62" selection-start-column="56" selection-end-line="62" selection-end-column="56" />
           <folding />
         </state>
       </provider>
