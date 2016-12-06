@@ -54,6 +54,7 @@ class AjaxCommonController extends BaseSiteController
                         $user_customer = UserCustomer::user_login();
                         if(sizeof($user_customer) > 0){
                         	$new_row['time_created'] = time();
+                        	$new_row['time_ontop'] = time();
                         	$new_row['item_status'] = CGlobal::status_hide;
                         	$new_row['customer_id'] = $user_customer->customer_id;
                         	$new_row['customer_name'] = $user_customer->customer_name;

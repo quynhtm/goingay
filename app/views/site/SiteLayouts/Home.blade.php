@@ -80,13 +80,17 @@
 			@foreach ($resultHome as $keyc => $itemHome)
 				@if(isset($itemHome['dataItem']) && !empty($itemHome['dataItem']))
 					<li @if($stt %2 == 0) class="pull-right" @else class="pull-left" @endif>
-						<div class="title-category"><a href=""><i class="{{$itemHome['category_icons']}}"></i> {{$itemHome['category_name']}}</a></div>
+						<div class="title-category">
+							<a title="{{$itemHome['category_name']}}" href="{{FunctionLib::buildLinkCategory($keyc, $itemHome['category_name'])}}">
+								<i class="{{$itemHome['category_icons']}}"></i> {{$itemHome['category_name']}}
+							</a>
+						</div>
 						<div class="content-category">
 							@foreach ($itemHome['dataItem'] as $kitem => $itemShow)
 								<div class="line">
 									<div class="thumb">
 										<a href="{{FunctionLib::buildLinkDetailItem($itemShow['item_id'],$itemShow['item_name'],$itemShow['item_category_id'])}}" title="{{$itemShow['item_name']}}">
-											<img itemprop="image" src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow['item_id'], $itemShow['item_image'], CGlobal::sizeImage_200)}}" title="{{$itemShow['item_name']}}" alt="{{$itemShow['item_name']}}">
+											<img itemprop="image" src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow['item_id'], $itemShow['item_image'], CGlobal::sizeImage_100)}}" title="{{$itemShow['item_name']}}" alt="{{$itemShow['item_name']}}" height="60"width="120">
 										</a>
 									</div>
 									<div class="round-titlebox">
@@ -115,6 +119,7 @@
 							@endforeach
 						</div>
 					</li>
+						@if($stt %2 == 0) <div style="clear: both"></div> @endif
 					<?php $stt ++; ?>
 				@endif
 			@endforeach
