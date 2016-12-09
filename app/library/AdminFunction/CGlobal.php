@@ -38,13 +38,14 @@ class CGlobal{
      */
     const type_thumb_image_product = 1;
     const type_thumb_image_banner = 2;
-    
+
     const sizeImage_80 = 80;
     const sizeImage_100 = 100;//dung common
     const sizeImage_120 = 120;
     const sizeImage_200 = 200;
     const sizeImage_300 = 300;
     const sizeImage_450 = 450;
+    const sizeImage_500 = 500;
     const sizeImage_600 = 600;
     const sizeImage_750 = 750;
     const sizeImage_1020 = 1020;
@@ -57,10 +58,14 @@ class CGlobal{
         self::sizeImage_100 =>array('w'=>self::sizeImage_100,'h'=>self::sizeImage_100),
         self::sizeImage_200 =>array('w'=>self::sizeImage_200,'h'=>self::sizeImage_120),
         self::sizeImage_300 =>array('w'=>self::sizeImage_300,'h'=>self::sizeImage_300),
-    	self::sizeImage_450 =>array('w'=>self::sizeImage_450,'h'=>self::sizeImage_450),
-    	self::sizeImage_600 =>array('w'=>self::sizeImage_600,'h'=>self::sizeImage_600),
+    	self::sizeImage_500 =>array('w'=>self::sizeImage_500,'h'=>self::sizeImage_200),
     );
 
+    //dinh nghĩa khung ảnh hiển thị bên ngoài
+    const size_imge_show_list_60 = ' height="60" width="120" ';
+    const size_imge_show_list_80 = ' height="80" width="120" ';
+    const size_imge_show_list_180 = ' height="180" width="300" ';
+    const size_imge_show_detail = ' height="100" width="500" ';
     /**
      * Dinh nghi kich thuoc anh Banner
      */
@@ -112,11 +117,6 @@ class CGlobal{
         self::NEW_TYPE_DAC_BIET => 'Tin đặc biệt',
         self::NEW_TYPE_QUANG_CAO => 'Tin quảng cáo',
     );
-
-    //dinh nghĩa khung ảnh hiển thị bên ngoài
-    const size_imge_show_list_60 = ' height="60" width="120" ';
-    const size_imge_show_list_80 = ' height="80" width="120" ';
-    const size_imge_show_list_180 = ' height="180" width="300" ';
 
     const IMAGE_ERROR = 133;
     const FOLDER_NEWS = 'news';
