@@ -52,9 +52,23 @@
 			@foreach ($data as $key => $item)
 				<tr>
 					<td class="text-center text-middle">
-						<img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id, $item->item_image, CGlobal::sizeImage_100)}}">
+						@if($item->item_status == CGlobal::status_show)
+							<a href="{{FunctionLib::buildLinkDetailItem($item->item_id,$item->item_name,$item->item_category_id)}}" title="Chi tiết tin đăng">
+								<img height="40" src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id, $item->item_image, CGlobal::sizeImage_100)}}">
+							</a>
+						@else
+							<img height="40" src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id, $item->item_image, CGlobal::sizeImage_100)}}">
+						@endif
 					</td>
-					<td>[<b>{{ $item->item_id }}</b>] {{ $item->item_name }}</td>
+					<td>
+						[<b>{{ $item->item_id }}</b>]
+						@if($item->item_status == CGlobal::status_show)
+							<a href="{{FunctionLib::buildLinkDetailItem($item->item_id,$item->item_name,$item->item_category_id)}}" title="Chi tiết tin đăng">{{ $item->item_name }}</a>
+						@else
+							{{ $item->item_name }}
+						@endif
+						@if($item->item_category_name != '')<br/><b>Mục tin: </b>{{ $item->item_category_name }}@endif
+					</td>
 					<td class="text-center text-middle">
 						<span style="font-size: 9px;color: green">Top: {{ date('d-m-Y h:i',$item->time_ontop) }}</span>
 						<div class="clear"></div>
@@ -66,10 +80,9 @@
 						@else
 							<a href="javascript:void(0);" style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>
 						@endif
-							&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" style="color: red" onclick="USER_CUSTOMMER.removeItems({{$item->item_id}});" title="Xóa tin đăng"><i class="fa fa-trash fa-2x"></i></a>
+						&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" style="color: red" onclick="USER_CUSTOMMER.removeItems({{$item->item_id}});" title="Xóa tin đăng"><i class="fa fa-trash fa-2x"></i></a>
 						<br/><a href="{{URL::route('customer.ItemsEdit',array('item_id' => $item->item_id))}}" title="Sửa tin đăng"><i class="fa fa-edit fa-2x"></i></a>
 						&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" onclick="USER_CUSTOMMER.setTopItems({{$item->item_id}});" title="Up top tin đăng"><i class="fa fa-level-up fa-2x"></i></a>
-
 					</td>
 				</tr>
 			@endforeach

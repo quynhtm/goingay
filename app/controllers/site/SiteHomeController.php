@@ -28,26 +28,38 @@ class SiteHomeController extends BaseSiteController
     		}
     	}
     	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
-		$resultHome = array();
+		$resultHomeList = $resultHomeTop = $resultHomeSlider = array();
 
-		//lay man danh mục hiển thị ra ngoài trang chủ
+		//List san pham noi bat TOP
+		$number_show_hot = 3;
+		$searchHomeTop['item_image'] = 1;//check lay truong anh
+		$searchHomeTop['field_get'] = $this->str_field_items_get;
+		$resultHomeTop = self::getItemHot($searchHomeTop,$number_show_hot);
+
+		//List san pham noi bat SLIDE
+		$number_show_hot = 5;
+		$searchHomeSlider['item_image'] = 1;//check lay truong anh
+		$searchHomeSlider['field_get'] = $this->str_field_items_get;
+		$resultHomeSlider = self::getItemHot($searchHomeSlider,$number_show_hot);
+
+		//lay du lieu hien thi theo danh mục
+		//lay mang danh mục hiển thị ra ngoài trang chủ
 		$cateShowFront = Category::getCategoryShowFrontSite();
-
-		//lay du lieu hien thi
 		if(!empty($cateShowFront)){
 			foreach($cateShowFront as $keyCat=>$inforCat){
-				$resultHome[$keyCat]['category_icons'] = $inforCat['category_icons'];
-				$resultHome[$keyCat]['category_name'] = $inforCat['category_name'];
-				$resultHome[$keyCat]['dataItem'] = Items::getItemsHomeSite($keyCat);
+				$resultHomeList[$keyCat]['category_icons'] = $inforCat['category_icons'];
+				$resultHomeList[$keyCat]['category_name'] = $inforCat['category_name'];
+				$resultHomeList[$keyCat]['dataItem'] = Items::getItemsHomeSite($keyCat);
 			}
 		}
 
 		//tinh thanh
 		$arrProvince = Province::getAllProvince();
-
         $this->layout->content = View::make('site.SiteLayouts.Home')
 			->with('arrProvince', $arrProvince)
-			->with('resultHome', $resultHome);
+			->with('resultHomeTop', $resultHomeTop)
+			->with('resultHomeSlider', $resultHomeSlider)
+			->with('resultHomeList', $resultHomeList);
         $this->footer();
     }
 
@@ -117,7 +129,7 @@ class SiteHomeController extends BaseSiteController
     	$this->header();
     	$this->menuLeft($catid);
 
-		//List san pham cï¿½ng danh muc n?i b?t TOP
+		//List san pham noi bat TOP
 		$number_show_hot = 3;
 		$searchHot['item_category_id'] = $catid;
 		$searchHot['item_image'] = 1;//check cï¿½ ?nh ??i di?n

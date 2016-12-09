@@ -11,7 +11,7 @@
 						<a class="image-item" title="{{$itemHot->item_name}}" href="{{FunctionLib::buildLinkDetailItem($itemHot->item_id,$itemHot->item_name,$itemHot->item_category_id)}}">
 							@if($itemHot->item_image != '')
 							<span>
-								<img itemprop="image" src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHot->item_id, $itemHot->item_image, CGlobal::sizeImage_300)}}" title="{{$itemHot->item_name}}" alt="{{$itemHot->item_name}}">
+								<img itemprop="image" {{CGlobal::size_imge_show_list_180}} src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHot->item_id, $itemHot->item_image, CGlobal::sizeImage_300)}}" title="{{$itemHot->item_name}}" alt="{{$itemHot->item_name}}">
 							</span>
 							@endif
 							@if($itemHot->item_type_price == CGlobal::TYPE_PRICE_NUMBER)
@@ -61,7 +61,7 @@
 					@foreach ($resultItemCategory as $keyc => $itemCate)
 					<li>
 						<a class="img" href="{{FunctionLib::buildLinkDetailItem($itemCate->item_id,$itemCate->item_name,$itemCate->item_category_id)}}">
-                           <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemCate->item_id, $itemCate->item_image, CGlobal::sizeImage_200)}}" alt="{{$itemCate->item_name}}" title="{{$itemCate->item_name}}">
+                           <img {{CGlobal::size_imge_show_list_60}} src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemCate->item_id, $itemCate->item_image, CGlobal::sizeImage_200)}}" alt="{{$itemCate->item_name}}" title="{{$itemCate->item_name}}">
                     	</a>
                     	<div class="title-post">
                     		<h2>

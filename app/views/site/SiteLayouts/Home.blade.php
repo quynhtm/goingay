@@ -1,83 +1,47 @@
 <div class="col-right-765">
-	<div class="box-home-post-hot">
-		<ul>
-			<li>
-			   <a class="img-hot" href="">
-					<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/02/581844b2127a0-20161021144432-4d0e_300x180.jpg" title="">
-					<span class="price-hot" href="">1.100.000.000 đ</span>
-			   </a>
-			   <h2>
-					<a itemprop="name" class="title-item-hot" href="" title="">Chỉ 350tr nhận nhà ngay T11 + CK 45tr - LH: 0945212476</a>
-			   </h2>
-			</li>
-			<li>
-			   <a class="img-hot" href="">
-					<img src="http://img.f2.raovat.vnecdn.net/images/2016/11/01/581720390340c-t-i-xu-ng_300x180.jpg" title="">
-					<span class="price-hot" href="">1.100.000.000 đ</span>
-			   </a>
-			   <h2>
-					<a itemprop="name" class="title-item-hot" href="" title="">Chỉ 350tr nhận nhà ngay T11 + CK 45tr - LH: 0945212476</a>
-			   </h2>
-			</li>
-			<li>
-			   <a class="img-hot" href="">
-					<img src="http://img.f2.raovat.vnecdn.net/images/2016/10/27/580dba08eadd8-phoicanh-tong-the-1-300x184_300x180.jpg" title="">
-					<span class="price-hot" href="">1.100.000.000 đ</span>
-			   </a>
-			   <h2>
-					<a itemprop="name" class="title-item-hot" href="" title="">Chỉ 350tr nhận nhà ngay T11 + CK 45tr - LH: 0945212476</a>
-			   </h2>
-			</li>
-		</ul>
-	</div>
+	@if(!empty($resultHomeTop))
+		<div class="box-home-post-hot">
+			<ul>
+				@foreach ($resultHomeTop as $keytop => $itemHomeTop)
+					<li>
+						<a class="img-hot" href="{{FunctionLib::buildLinkDetailItem($itemHomeTop['item_id'],$itemHomeTop['item_name'],$itemHomeTop['item_category_id'])}}" title="{{$itemHomeTop['item_name']}}">
+							<img {{CGlobal::size_imge_show_list_180}} src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHomeTop['item_id'], $itemHomeTop['item_image'], CGlobal::sizeImage_300)}}" title="{{$itemHomeTop['item_name']}}" alt="{{$itemHomeTop['item_name']}}" >
+							@if($itemHomeTop['item_type_price'] == CGlobal::TYPE_PRICE_NUMBER)
+								<span class="price-hot">{{FunctionLib::numberFormat($itemHomeTop['item_price_sell'])}} đ</span>
+							@else
+								<span class="price-hot">Liên hệ</span>
+							@endif
+						</a>
+					   <h2>
+							<a itemprop="name" class="title-item-hot" href="{{FunctionLib::buildLinkDetailItem($itemHomeTop['item_id'],$itemHomeTop['item_name'],$itemHomeTop['item_category_id'])}}" title="{{$itemHomeTop['item_name']}}">{{$itemHomeTop['item_name']}}</a>
+					   </h2>
+					</li>
+				@endforeach
+			</ul>
+		</div>
+	@endif
+
+	@if(!empty($resultHomeSlider))
 	<div class="box-home-post-hot ext">
 		<ul>
+			@foreach ($resultHomeSlider as $keySlider => $itemHomeSlider)
 			<li>
-			   <a class="img-hot" href="">
-					<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/02/581844b2127a0-20161021144432-4d0e_300x180.jpg" title="">
+				<a class="img-hot" href="{{FunctionLib::buildLinkDetailItem($itemHomeSlider['item_id'],$itemHomeSlider['item_name'],$itemHomeSlider['item_category_id'])}}" title="{{$itemHomeSlider['item_name']}}">
+					<img {{CGlobal::size_imge_show_list_80}} src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHomeSlider['item_id'], $itemHomeSlider['item_image'], CGlobal::sizeImage_100)}}" title="{{$itemHomeSlider['item_name']}}" alt="{{$itemHomeSlider['item_name']}}" >
 			   </a>
 			   <h2>
-					<a itemprop="name" class="title-item-hot" href="" title="">Chỉ 350tr nhận nhà ngay T11 + CK 45tr - LH: 0945212476</a>
+				   <a itemprop="name" class="title-item-hot" href="{{FunctionLib::buildLinkDetailItem($itemHomeSlider['item_id'],$itemHomeSlider['item_name'],$itemHomeSlider['item_category_id'])}}" title="{{$itemHomeSlider['item_name']}}">{{$itemHomeSlider['item_name']}}</a>
 			   </h2>
 			</li>
-			<li>
-			   <a class="img-hot" href="">
-					<img src="http://img.f2.raovat.vnecdn.net/images/2016/11/01/581720390340c-t-i-xu-ng_300x180.jpg" title="">
-			   </a>
-			   <h2>
-					<a itemprop="name" class="title-item-hot" href="" title="">Chỉ 350tr nhận nhà ngay T11 + CK 45tr - LH: 0945212476</a>
-			   </h2>
-			</li>
-			<li>
-			   <a class="img-hot" href="">
-					<img src="http://img.f2.raovat.vnecdn.net/images/2016/10/27/580dba08eadd8-phoicanh-tong-the-1-300x184_300x180.jpg" title="">
-			   </a>
-			   <h2>
-					<a itemprop="name" class="title-item-hot" href="" title="">Chỉ 350tr nhận nhà ngay T11 + CK 45tr - LH: 0945212476</a>
-			   </h2>
-			</li>
-			<li>
-			   <a class="img-hot" href="">
-					<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/02/581844b2127a0-20161021144432-4d0e_300x180.jpg" title="">
-			   </a>
-			   <h2>
-					<a itemprop="name" class="title-item-hot" href="" title="">Chỉ 350tr nhận nhà ngay T11 + CK 45tr - LH: 0945212476</a>
-			   </h2>
-			</li>
-			<li>
-			   <a class="img-hot" href="">
-					<img src="http://img.f2.raovat.vnecdn.net/images/2016/11/01/581720390340c-t-i-xu-ng_300x180.jpg" title="">
-			   </a>
-			   <h2>
-					<a itemprop="name" class="title-item-hot" href="" title="">Chỉ 350tr nhận nhà ngay T11 + CK 45tr - LH: 0945212476</a>
-			   </h2>
-			</li>
+			@endforeach
 		</ul>
 	</div>
+	@endif
+
 	<div class="box-home-category">
 		<ul class="item-home-cat">
 			<?php $stt = 1?>
-			@foreach ($resultHome as $keyc => $itemHome)
+			@foreach ($resultHomeList as $keyc => $itemHome)
 				@if(isset($itemHome['dataItem']) && !empty($itemHome['dataItem']))
 					<li @if($stt %2 == 0) class="pull-right" @else class="pull-left" @endif>
 						<div class="title-category">
@@ -90,7 +54,7 @@
 								<div class="line">
 									<div class="thumb">
 										<a href="{{FunctionLib::buildLinkDetailItem($itemShow['item_id'],$itemShow['item_name'],$itemShow['item_category_id'])}}" title="{{$itemShow['item_name']}}">
-											<img itemprop="image" src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow['item_id'], $itemShow['item_image'], CGlobal::sizeImage_100)}}" title="{{$itemShow['item_name']}}" alt="{{$itemShow['item_name']}}" height="60"width="120">
+											<img itemprop="image" {{CGlobal::size_imge_show_list_60}} src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow['item_id'], $itemShow['item_image'], CGlobal::sizeImage_100)}}" title="{{$itemShow['item_name']}}" alt="{{$itemShow['item_name']}}" >
 										</a>
 									</div>
 									<div class="round-titlebox">

@@ -113,6 +113,11 @@ class CGlobal{
         self::NEW_TYPE_QUANG_CAO => 'Tin quảng cáo',
     );
 
+    //dinh nghĩa khung ảnh hiển thị bên ngoài
+    const size_imge_show_list_60 = ' height="60" width="120" ';
+    const size_imge_show_list_80 = ' height="80" width="120" ';
+    const size_imge_show_list_180 = ' height="180" width="300" ';
+
     const IMAGE_ERROR = 133;
     const FOLDER_NEWS = 'news';
     const FOLDER_BANNER = 'banner';
