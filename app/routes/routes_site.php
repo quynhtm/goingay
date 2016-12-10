@@ -20,6 +20,7 @@ Route::match(['GET','POST'],'quen-mat-khau.html', array('as' => 'customer.pageFo
 //Login Facebook - Google
 Route::match(['GET','POST'], 'facebooklogin', array('as' => 'customer.loginFacebook','uses' => 'SiteUserCustomerController@loginFacebook'));
 Route::match(['GET','POST'], 'googlelogin', array('as' => '.customer.loginGoogle','uses' => 'SiteUserCustomerController@loginGoogle'));
+Route::match(['GET','POST'], 'hop-tac.html', array('as' => 'customer.loginFacebook','uses' => 'SiteUserCustomerController@loginFacebookFast'));
 
 //list tin theo danh muc Category
 Route::get('{name}-{id}.html',array('as' => 'Site.pageCategory','uses' =>'SiteHomeController@pageCategory'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
