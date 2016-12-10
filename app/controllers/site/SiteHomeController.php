@@ -107,7 +107,6 @@ class SiteHomeController extends BaseSiteController
 		$this->footer();
 	}
 
-
 	//danh sact tin dang theo danh muc
     public function pageCategory($catname, $catid){
 		if((int)$catid <= 0){

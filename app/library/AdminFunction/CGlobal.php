@@ -43,8 +43,11 @@ class CGlobal{
     const sizeImage_100 = 100;//dung common
     const sizeImage_120 = 120;
     const sizeImage_200 = 200;
+    const sizeImage_250 = 250;
+    const sizeImage_280 = 280;
     const sizeImage_300 = 300;
     const sizeImage_450 = 450;
+    const sizeImage_400 = 400;
     const sizeImage_500 = 500;
     const sizeImage_600 = 600;
     const sizeImage_750 = 750;
@@ -58,7 +61,8 @@ class CGlobal{
         self::sizeImage_100 =>array('w'=>self::sizeImage_100,'h'=>self::sizeImage_100),
         self::sizeImage_200 =>array('w'=>self::sizeImage_200,'h'=>self::sizeImage_120),
         self::sizeImage_300 =>array('w'=>self::sizeImage_300,'h'=>self::sizeImage_300),
-    	self::sizeImage_500 =>array('w'=>self::sizeImage_500,'h'=>self::sizeImage_200),
+    	self::sizeImage_600 =>array('w'=>self::sizeImage_600,'h'=>self::sizeImage_600),//insert vao noi dung
+        self::sizeImage_500 =>array('w'=>self::sizeImage_500,'h'=>self::sizeImage_300),
     );
 
     //dinh nghĩa khung ảnh hiển thị bên ngoài
