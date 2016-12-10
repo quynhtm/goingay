@@ -26,8 +26,8 @@
 		<ul>
 			@foreach ($resultHomeSlider as $keySlider => $itemHomeSlider)
 			<li>
-				<a class="img-hot" href="{{FunctionLib::buildLinkDetailItem($itemHomeSlider['item_id'],$itemHomeSlider['item_name'],$itemHomeSlider['item_category_id'])}}" title="{{$itemHomeSlider['item_name']}}">
-					<img {{CGlobal::size_imge_show_list_80}} src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHomeSlider['item_id'], $itemHomeSlider['item_image'], CGlobal::sizeImage_100)}}" title="{{$itemHomeSlider['item_name']}}" alt="{{$itemHomeSlider['item_name']}}" >
+				<a class="img-slider" href="{{FunctionLib::buildLinkDetailItem($itemHomeSlider['item_id'],$itemHomeSlider['item_name'],$itemHomeSlider['item_category_id'])}}" title="{{$itemHomeSlider['item_name']}}">
+					<img {{CGlobal::size_imge_show_list_150}} src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHomeSlider['item_id'], $itemHomeSlider['item_image'], CGlobal::sizeImage_150)}}" title="{{$itemHomeSlider['item_name']}}" alt="{{$itemHomeSlider['item_name']}}" >
 			   </a>
 			   <h2>
 				   <a itemprop="name" class="title-item-hot" href="{{FunctionLib::buildLinkDetailItem($itemHomeSlider['item_id'],$itemHomeSlider['item_name'],$itemHomeSlider['item_category_id'])}}" title="{{$itemHomeSlider['item_name']}}">{{$itemHomeSlider['item_name']}}</a>
@@ -54,7 +54,7 @@
 								<div class="line">
 									<div class="thumb">
 										<a href="{{FunctionLib::buildLinkDetailItem($itemShow['item_id'],$itemShow['item_name'],$itemShow['item_category_id'])}}" title="{{$itemShow['item_name']}}">
-											<img itemprop="image" {{CGlobal::size_imge_show_list_60}} src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow['item_id'], $itemShow['item_image'], CGlobal::sizeImage_100)}}" title="{{$itemShow['item_name']}}" alt="{{$itemShow['item_name']}}" >
+											<img itemprop="image" {{CGlobal::size_imge_show_list_60}} src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow['item_id'], $itemShow['item_image'], CGlobal::sizeImage_150)}}" title="{{$itemShow['item_name']}}" alt="{{$itemShow['item_name']}}" >
 										</a>
 									</div>
 									<div class="round-titlebox">

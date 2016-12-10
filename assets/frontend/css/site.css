@@ -340,6 +340,19 @@ h1, h2, h3, h4, h5, h6{
     position: absolute;
     right: 0;
 }
+
+.box-home-post-hot ul li .img-slider {
+    float: left;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+.box-home-post-hot ul li .img-slider img {
+
+}
+
 .box-home-post-hot.ext li{
 	width:19%;	
 }
