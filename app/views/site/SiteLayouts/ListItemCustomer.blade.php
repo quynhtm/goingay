@@ -28,7 +28,11 @@
 						</div>
 						<div class="info-item">
 							<ul>
-								<li class="pull-left local"><i class="fa fa-location-arrow"></i><a href="">@if(isset($arrProvince[$itemHot->item_province_id])){{$arrProvince[$itemHot->item_province_id]}}@else Toàn quốc @endif</a></li>
+								<li class="pull-left local"><i class="fa fa-location-arrow"></i>
+									<a href="{{FunctionLib::buildLinkCategory($itemHot->item_category_id, $itemHot->item_category_name,$itemHot->item_province_id, $itemHot->item_province_name)}}" title="Rao vặt theo tỉnh thành {{$itemHot->item_province_name}}">
+										@if(isset($arrProvince[$itemHot->item_province_id])){{$arrProvince[$itemHot->item_province_id]}}@else Toàn quốc @endif
+									</a>
+								</li>
 								<li class="pull-right time-post"><i class="fa fa-clock-o"></i>{{date('H:i',$itemHot->time_ontop)}} - {{date('d/m/Y',$itemHot->time_ontop)}}</li>
 							</ul>
 						</div>
@@ -81,7 +85,9 @@
 									<ul class="pull-left">
 										<li class="local">
 											<i class="fa fa-location-arrow"></i>
-											<a href="">@if(isset($arrProvince[$itemCate->item_province_id])){{$arrProvince[$itemCate->item_province_id]}}@else Toàn quốc @endif</a>
+											<a href="{{FunctionLib::buildLinkCategory($itemCate->item_category_id, $itemCate->item_category_name,$itemCate->item_province_id, $itemCate->item_province_name)}}" title="Rao vặt theo tỉnh thành {{$itemCate->item_province_name}}">
+												@if(isset($arrProvince[$itemCate->item_province_id])){{$arrProvince[$itemCate->item_province_id]}}@else Toàn quốc @endif
+											</a>
 										</li>
 										<li class="">
 											<i class="fa fa-clock-o"></i> {{date('H:i',$itemCate->time_ontop)}} - {{date('d/m/Y',$itemCate->time_ontop)}}
