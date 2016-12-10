@@ -121,8 +121,8 @@
                                 </td>
                                 <td class="text-left text-middle">
                                         <b>KH:</b> [{{$item->customer_id}}] <a href="{{URL::route('admin.customerView',array('customer_id' => $item->customer_id))}}" target="_blank" title="view thông tin khách hàng">{{ $item->customer_name}}</a>
-                                        <br/>Top: {{date ('d-m-Y H:i',$item->time_created)}}
-                                        <br/>Tạo: {{date ('d-m-Y H:i',$item->time_ontop)}}
+                                        <br/>Top: {{date ('d-m-Y H:i',$item->time_ontop)}}
+                                        <br/>Tạo: {{date ('d-m-Y H:i',$item->time_created)}}
                                         <br/>Sửa: {{date ('d-m-Y H:i',$item->time_update)}}
                                 </td>
                                 <td class="text-center text-middle">

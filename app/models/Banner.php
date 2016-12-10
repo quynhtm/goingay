@@ -72,7 +72,7 @@ class Banner extends Eloquent
             if (isset($dataSearch['banner_type']) && $dataSearch['banner_type'] > -1) {
                 $query->where('banner_type', $dataSearch['banner_type']);
             }
-            if (isset($dataSearch['banner_page']) && $dataSearch['banner_page'] > -1) {
+            if (isset($dataSearch['banner_page']) && $dataSearch['banner_page'] > 0) {
                 $query->where('banner_page', $dataSearch['banner_page']);
             }
             $total = $query->count();

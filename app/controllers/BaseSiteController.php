@@ -32,6 +32,11 @@ class BaseSiteController extends BaseController
 			$this->popupHide();
 		}
 		$arrBannerHead = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
+		/*
+		$userAdmin = User::user_login();
+		if(!empty($userAdmin)){
+			FunctionLib::debug($arrBannerHead);
+		}*/
 		$this->layout->header = View::make("site.BaseLayouts.header")
 								->with('user_customer', $user_customer)
 								->with('messages', $messages)

@@ -215,7 +215,7 @@ class SiteHomeController extends BaseSiteController
 	}
 
 	//ham dung common cho site
-	public function getItemHot($search = array(),$limit){
+	public function getItemHot($search = array(),$limit,$off){
 		$data = array();
 		if(!empty($search)){
 			$data = Items::getItemsSite($search,$limit,0,$totalSearch);
