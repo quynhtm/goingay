@@ -983,6 +983,114 @@ class SiteUserCustomerController extends BaseSiteController{
 			echo '<script>window.close();</script>';
 		}
 	}
+	public function loginFacebookFast(){
+		if (UserCustomer::isLogin()) {
+			return Redirect::route('site.home');
+		}
+		$fb = new Facebook\Facebook ([
+				'app_id' => '1806153732995309',
+				'app_secret' => '9ffa193548158f07eb1e28eaff4a5403',
+				'default_graph_version' => 'v2.8',
+				'persistent_data_handler' => 'session'
+				]);
+			
+		$helper = $fb->getRedirectLoginHelper();
+			
+		try{
+			$accessToken = $helper->getAccessToken();
+		}catch(Facebook\Exceptions\FacebookResponseException $e) {
+			//When Graph returns an error
+			echo 'Graph returned an error: ' . $e->getMessage();
+			exit;
+		}catch(Facebook\Exceptions\FacebookSDKException $e) {
+			//When validation fails or other local issues
+			echo 'Facebook SDK returned an error: ' . $e->getMessage();
+			exit;
+		}
+			
+		if (!isset($accessToken)) {
+			$permissions = array('public_profile','email'); //Optional permissions
+			$loginUrl = $helper->getLoginUrl(Config::get('config.WEB_ROOT').'/hop-tac.html', $permissions);
+			header("Location: ".$loginUrl);
+			exit;
+		}
+			
+		try{
+			//Returns a 'Facebook\FacebookResponse' object
+			$fields = array('id', 'name', 'email','first_name', 'last_name', 'birthday', 'gender', 'locale');
+			$response = $fb->get('/me?fields='.implode(',', $fields).'', $accessToken);
+		}catch(Facebook\Exceptions\FacebookResponseException $e) {
+			echo 'Graph returned an error: ' . $e->getMessage();
+			exit;
+		}catch(Facebook\Exceptions\FacebookSDKException $e) {
+			echo 'Facebook SDK returned an error: ' . $e->getMessage();
+			exit;
+		}
+			
+		$user = $response->getGraphUser();
+		
+		if(sizeof($user) > 0){
+			$data = array();
+				
+			if(isset($user['id'])){
+				$data['customer_id_facebook'] = $user['id'];
+			}
+			if(isset($user['email'])){
+				$data['customer_email'] = $user['email'];
+			}
+			if(isset($user['name'])){
+				$data['customer_name'] = $user['name'];
+			}else{
+				$data['customer_name'] = '';
+			}
+			if(isset($user['gender'])){
+				if($user['gender'] == 'male'){
+					$data['customer_gender'] = 1;//Nam
+				}else{
+					$data['customer_gender'] = 0;//Nu
+				}
+			}else{
+				$data['customer_gender'] = 0;//Nu
+			}
+			if(isset($data['customer_id_facebook']) && $data['customer_id_facebook'] != ''){
+				if(isset($data['customer_email']) && $data['customer_email'] != ''){
+						
+					$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
+					if(sizeof($customer) > 0){
+						if(($customer->customer_id_facebook == '' || $customer->customer_id_facebook == null) && $customer->customer_status != CGlobal::status_block){
+							$dataUpdate = array(
+									'customer_id_facebook' => $data['customer_id_facebook'],
+									'customer_status' => CGlobal::status_show,
+							);
+							UserCustomer::updateData($customer->customer_id, $dataUpdate);
+							$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
+						}
+					}else{
+						$data['customer_time_created'] = time();
+						$data['customer_status'] = CGlobal::status_show;
+						$data['customer_time_login'] = time();
+						$data['customer_phone'] = '';
+						$data['customer_address'] = '';
+						$data['customer_email'] = $data['customer_email'];
+						$data['customer_gender'] = $data['customer_gender'];
+						$data['customer_name'] = $data['customer_name'];
+						$data['is_customer'] = CGlobal::CUSTOMER_FREE;
+	
+						UserCustomer::addData($data);
+						$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
+					}
+						
+					Session::put('user_customer', $customer, 60*24);
+					Session::save();
+					echo "<center>Cảm ơn bạn đã hợp tác</center>";die;
+				}else{
+					echo '<script>alert("Bạn chưa công khai email!"); window.close();</script>';
+				}
+			}
+				
+			echo '<script>window.close();</script>';
+		}
+	}
 	public function loginGoogle(){
 	$client_id = '803912434754-0lpl6oc4t68ld167qn90i4uhldrlsi33.apps.googleusercontent.com'; 
 		$client_secret = 'BZJ1GVA-mG57HHOeJSKJBKeB';
