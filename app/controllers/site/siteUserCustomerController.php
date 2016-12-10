@@ -966,6 +966,7 @@ class SiteUserCustomerController extends BaseSiteController{
 						$data['customer_email'] = $data['customer_email'];
 						$data['customer_gender'] = $data['customer_gender'];
 						$data['customer_name'] = $data['customer_name'];
+						$data['is_customer'] = CGlobal::CUSTOMER_FREE;
 						
 						UserCustomer::addData($data);
 						$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
@@ -1052,6 +1053,8 @@ class SiteUserCustomerController extends BaseSiteController{
 							$data['customer_email'] = $data['customer_email'];
 							$data['customer_gender'] = $data['customer_gender'];
 							$data['customer_name'] = $data['customer_name'];
+							$data['is_customer'] = CGlobal::CUSTOMER_FREE;
+							
 							UserCustomer::addData($data);
 							$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
 						}
