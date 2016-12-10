@@ -83,7 +83,7 @@ class SiteUserCustomerController extends BaseSiteController{
     		$dataSess = Session::get('user_customer');
     		if(isset($dataSess['customer_id']) && (int)$dataSess['customer_id'] > 0){
     			$dataUpdate = array(
-    					'is_login'=>0,
+    					'is_login'=>CGlobal::not_login,
     					'customer_time_logout'=>time(),
     			);
     			UserCustomer::updateData($dataSess['customer_id'], $dataUpdate);
@@ -184,7 +184,7 @@ class SiteUserCustomerController extends BaseSiteController{
     			$customer_id =  (int)$arrKey[2];
     			$dataUpdate = array(
     					'customer_status'=>CGlobal::status_show,
-    					'is_login'=>1,
+    					'is_login'=>CGlobal::is_login,
     					'customer_time_active'=>time(),
     					'customer_time_login'=>time(),
     			);
@@ -967,6 +967,7 @@ class SiteUserCustomerController extends BaseSiteController{
 						$data['customer_gender'] = $data['customer_gender'];
 						$data['customer_name'] = $data['customer_name'];
 						$data['is_customer'] = CGlobal::CUSTOMER_FREE;
+						$data['is_login'] = CGlobal::is_login;
 						
 						UserCustomer::addData($data);
 						$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
@@ -1075,7 +1076,8 @@ class SiteUserCustomerController extends BaseSiteController{
 						$data['customer_gender'] = $data['customer_gender'];
 						$data['customer_name'] = $data['customer_name'];
 						$data['is_customer'] = CGlobal::CUSTOMER_FREE;
-	
+						$data['is_login'] = CGlobal::is_login;
+						
 						UserCustomer::addData($data);
 						$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
 					}
@@ -1162,6 +1164,7 @@ class SiteUserCustomerController extends BaseSiteController{
 							$data['customer_gender'] = $data['customer_gender'];
 							$data['customer_name'] = $data['customer_name'];
 							$data['is_customer'] = CGlobal::CUSTOMER_FREE;
+							$data['is_login'] = CGlobal::is_login;
 							
 							UserCustomer::addData($data);
 							$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
