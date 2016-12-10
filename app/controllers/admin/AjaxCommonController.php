@@ -51,7 +51,8 @@ class AjaxCommonController extends BaseSiteController
                         $item_id = News::addData($new_row);
                         break;
                     case 2://img Item
-                        $user_customer = UserCustomer::user_login();
+                        $customerLogin = UserCustomer::user_login();
+                        $user_customer = UserCustomer::getByID($customerLogin->customer_id);//lay thông tin mới nhất của user
                         if(sizeof($user_customer) > 0){
                         	$new_row['time_created'] = time();
                         	$new_row['time_ontop'] = time();
@@ -60,6 +61,11 @@ class AjaxCommonController extends BaseSiteController
                         	$new_row['customer_name'] = $user_customer->customer_name;
                         	$new_row['item_province_id'] = $user_customer->customer_province_id;
                         	$item_id = Items::addData($new_row);
+                            if($item_id > 0){
+                                //cập nhật số lượng up tin
+                                $dataCustomer['customer_up_item'] = $user_customer->customer_up_item + 1;;
+                                UserCustomer::updateData($user_customer->customer_id,$dataCustomer);
+                            }
                         }
                         break;
                     case 3://img banner
