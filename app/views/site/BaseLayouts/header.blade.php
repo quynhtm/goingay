@@ -94,7 +94,7 @@
 			}else{
 				$rel = '';
 			}
-			if($slider->banner_is_target == 0){
+			if($slider->banner_is_target == 1){
 				$target = 'target="_blank"';
 			}else{
 				$target = '';

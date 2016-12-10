@@ -98,6 +98,7 @@ class SiteHomeController extends BaseSiteController
 		$offset = 0;
 		$search = $data = array();
 		$totalSearch = 0;
+		$search['str_not_item_id'] = $itemShow->item_id;
 		$search['item_category_id'] = $itemShow->item_category_id;
 		$search['field_get'] = $this->str_field_items_get;
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
