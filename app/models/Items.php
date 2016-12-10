@@ -72,6 +72,7 @@ class Items extends Eloquent
                         'item_category_id'=>$itm['item_category_id'],
                         'item_category_name'=>$itm['item_category_name'],
                         'item_province_id'=>$itm['item_province_id'],
+                        'item_province_name'=>$itm['item_province_name'],
                         'time_ontop'=>$itm['time_ontop'],
                         'customer_id'=>$itm['customer_id'],
                         'customer_name'=>$itm['customer_name']);

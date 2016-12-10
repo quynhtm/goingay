@@ -6,7 +6,7 @@ class SiteHomeController extends BaseSiteController
         parent::__construct();
     }
 
-    private $str_field_items_get = 'item_id,item_name,item_type_price,item_price_sell,item_content,item_image,item_image_other,item_category_id,item_category_name,item_number_view,item_status,item_is_hot,item_province_id,item_district_id,customer_id,is_customer,customer_name,time_ontop';//cac truong can lay
+    private $str_field_items_get = 'item_id,item_name,item_type_price,item_price_sell,item_content,item_image,item_image_other,item_category_id,item_category_name,item_number_view,item_status,item_is_hot,item_province_id,item_province_name,item_district_id,customer_id,is_customer,customer_name,time_ontop';//cac truong can lay
 
     //trang chu
     public function index(){
@@ -107,15 +107,6 @@ class SiteHomeController extends BaseSiteController
 		$this->footer();
 	}
 
-	public function page404(){
-		$meta_title = $meta_keywords = $meta_description = '404';
-		$meta_img= '';
-		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
-		
-		$this->header();
-    	$this->layout->content = View::make('site.SiteLayouts.page404');
-    	$this->footer();
-    }
 
 	//danh sact tin dang theo danh muc
     public function pageCategory($catname, $catid){
@@ -128,6 +119,15 @@ class SiteHomeController extends BaseSiteController
 
     	$this->header();
     	$this->menuLeft($catid);
+
+		//tinh thanh
+		$arrProvince = Province::getAllProvince();
+
+		//thong tin danh muc
+		$arrCategory = Category::getCategoriessAll();
+
+		//neu co tim kiem theo tinh thanh
+		$province_id = Request::get('city_id',0);
 
 		//List san pham noi bat TOP
 		$number_show_hot = 3;
@@ -142,27 +142,84 @@ class SiteHomeController extends BaseSiteController
 		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cï¿½i n?i b?t ? trï¿½n ?i
 		$search = $data = array();
 		$totalSearch = 0;
+		$province_name = '';
+		if($province_id > 0 && isset($arrProvince[$province_id])){
+			$search['item_province_id'] = $catid;
+			$province_name = $arrProvince[$province_id];
+		}
 		$search['item_category_id'] = $catid;
 		$search['field_get'] = $this->str_field_items_get;
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
 
-		//tinh thï¿½nh
-		$arrProvince = Province::getAllProvince();
 
-		//thong tin danh m?c
-		$arrCategory = Category::getAllParentCategoryId();
 
     	$this->layout->content = View::make('site.SiteLayouts.ListItemCategory')
 			->with('arrProvince', $arrProvince)
 			->with('arrCategory', $arrCategory)
 			->with('category_id', $catid)
+			->with('province_name', $province_name)
 			->with('paging', $paging)
 			->with('total', $totalSearch)
 			->with('resultHot', $resultHot)
 			->with('resultItemCategory', $resultItemCategory);
     	$this->footer();
     }
+
+	//Danh sach tin da dang cua khach
+	public function pageListItemCustomer($customer_name,$customer_id){
+		//thong tin khach dang tin
+		$arrCustomer = UserCustomer::getByID($customer_id);
+		if(empty($arrCustomer)){
+			return Redirect::route('site.home');
+		}
+		$meta_title = $meta_keywords = $meta_description = $customer_name;
+		$meta_img= '';
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+
+		$this->header();
+		$this->menuLeft(0);
+
+		//List san pham cï¿½ng danh muc n?i b?t TOP
+		$number_show_hot = 3;
+		$searchHot['customer_id'] = $customer_id;
+		$searchHot['item_image'] = 1;//check cï¿½ ?nh ??i di?n
+		$searchHot['field_get'] = $this->str_field_items_get;
+		$resultHot = self::getItemHot($searchHot,$number_show_hot);
+
+		//danh sach tin dang cua danh m?c
+		$pageNo = (int) Request::get('page_no',1);
+		$limit = CGlobal::number_limit_show;
+		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cï¿½i n?i b?t ? trï¿½n ?i
+		$search = $data = array();
+		$totalSearch = 0;
+		$search['customer_id'] = $customer_id;
+		$search['field_get'] = $this->str_field_items_get;
+		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
+		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
+
+		//t?nh thï¿½nh
+		$arrProvince = Province::getAllProvince();
+
+		$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer')
+			->with('arrProvince', $arrProvince)
+			->with('arrCustomer', $arrCustomer)
+			->with('paging', $paging)
+			->with('total', $totalSearch)
+			->with('resultHot', $resultHot)
+			->with('resultItemCategory', $resultItemCategory);
+		$this->footer();
+	}
+
+	//ham dung common cho site
+	public function getItemHot($search = array(),$limit){
+		$data = array();
+		if(!empty($search)){
+			$data = Items::getItemsSite($search,$limit,0,$totalSearch);
+		}
+		return $data;
+	}
+
 	public function pageNews(){
 		$this->header();
 		$this->menuLeft();
@@ -204,58 +261,15 @@ class SiteHomeController extends BaseSiteController
     	$this->footer();
     }
 
-    //Danh sach tin da dang cua khach
-	public function pageListItemCustomer($customer_name,$customer_id){
-		//thong tin khach dang tin
-		$arrCustomer = UserCustomer::getByID($customer_id);
-		if(empty($arrCustomer)){
-			return Redirect::route('site.home');
-		}
-		$meta_title = $meta_keywords = $meta_description = $customer_name;
+	public function page404(){
+		$meta_title = $meta_keywords = $meta_description = '404';
 		$meta_img= '';
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 
 		$this->header();
-		$this->menuLeft(0);
-
-		//List san pham cï¿½ng danh muc n?i b?t TOP
-		$number_show_hot = 3;
-		$searchHot['customer_id'] = $customer_id;
-		$searchHot['item_image'] = 1;//check cï¿½ ?nh ??i di?n
-		$searchHot['field_get'] = $this->str_field_items_get;
-		$resultHot = self::getItemHot($searchHot,$number_show_hot);
-
-		//danh sach tin dang cua danh m?c
-		$pageNo = (int) Request::get('page_no',1);
-		$limit = CGlobal::number_limit_show;
-		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cï¿½i n?i b?t ? trï¿½n ?i
-		$search = $data = array();
-		$totalSearch = 0;
-		$search['customer_id'] = $customer_id;
-		$search['field_get'] = $this->str_field_items_get;
-		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
-		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
-
-		//t?nh thï¿½nh
-		$arrProvince = Province::getAllProvince();
-
-    	$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer')
-			->with('arrProvince', $arrProvince)
-			->with('arrCustomer', $arrCustomer)
-			->with('paging', $paging)
-			->with('total', $totalSearch)
-			->with('resultHot', $resultHot)
-			->with('resultItemCategory', $resultItemCategory);
-    	$this->footer();
-    }
-
-	//ham dung common cho site
-	public function getItemHot($search = array(),$limit){
-		$data = array();
-		if(!empty($search)){
-			$data = Items::getItemsSite($search,$limit,0,$totalSearch);
-		}
-		return $data;
+		$this->layout->content = View::make('site.SiteLayouts.page404');
+		$this->footer();
 	}
+
 }
 

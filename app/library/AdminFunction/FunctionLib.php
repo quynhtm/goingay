@@ -431,12 +431,17 @@ class FunctionLib {
     	$replacer="...";
     	return substr($str,0,$posSpace).$replacer;
     }
+
     //Buid Link Category
-    static function buildLinkCategory($cat_id = 0, $cat_title = 'Danh-mục'){
+    static function buildLinkCategory($cat_id = 0, $cat_title = 'Danh-mục', $province_id=0, $province_name=''){
+        $link_view = '#';
     	if($cat_id > 0){
-    		return URL::route('Site.pageCategory', array('id'=>$cat_id, 'name'=>strtolower(FunctionLib::safe_title($cat_title))));
+            $link_view = URL::route('Site.pageCategory', array('id'=>$cat_id, 'name'=>strtolower(FunctionLib::safe_title($cat_title))));
+            if($province_id > 0 && $province_name != ''){
+                $link_view .= '?city_id='.$province_id.'&tinh='.$province_name;
+            }
     	}
-    	return '#';
+    	return $link_view;
     }
     //Buid Link danh sach tin dang cua nguoi dung
     static function buildLinkItemsCustomer($customer_id = 0, $customer_name = 'Khách hàng'){

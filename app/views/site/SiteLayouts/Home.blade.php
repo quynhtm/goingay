@@ -67,7 +67,9 @@
 											<ul>
 												<li class="local">
 													<i class="fa fa-location-arrow"></i>
-													<a href="">@if(isset($arrProvince[$itemShow['item_province_id']])){{$arrProvince[$itemShow['item_province_id']]}}@else Toàn quốc @endif</a>
+													<a href="{{FunctionLib::buildLinkCategory($itemShow['item_category_id'], $itemShow['item_category_name'],$itemShow['item_province_id'], $itemShow['item_province_name'])}}" title="Tin đăng theo tỉnh thành {{$itemShow['item_province_name']}}">
+														@if(isset($arrProvince[$itemShow['item_province_id']])){{$arrProvince[$itemShow['item_province_id']]}}@else Toàn quốc @endif
+													</a>
 												</li>
 												<li class="price">
 													@if($itemShow['item_type_price'] == CGlobal::TYPE_PRICE_NUMBER)

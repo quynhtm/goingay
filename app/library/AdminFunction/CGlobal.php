@@ -16,9 +16,9 @@ class CGlobal{
     public static $pageAdminTitle = 'Dashboard Admin';
     public static $pageShopTitle = 'Shop Admin';
 
-    const code_shop_share = 'raotinnhanh.vn';
-    const web_name = 'Raotinnhanh.vn';
-    public static $pageTitle = 'Raotinnhanh.vn';
+    const code_shop_share = 'Tinraonhanh.vn';
+    const web_name = 'Tinraonhanh.vn';
+    public static $pageTitle = 'Tinraonhanh.vn';
 
     const phoneSupport = '0985.10.10.26 - 0913.922.986';
 

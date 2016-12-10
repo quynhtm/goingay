@@ -36,7 +36,7 @@
 				<input value="Search" class="btn-seach" type="submit">
 			</form>
 		</div>
-		<div class="box-provice">
+		{{--<div class="box-provice">
 			<i class="icon-address"></i>
 			<div class="panel-list-provice" style="display: none">
 				<ul>
@@ -48,7 +48,7 @@
 					<li><a href="" title="">Buôn Ma Thuột</a></li>
 				</ul>
 			</div>
-		</div>
+		</div>--}}
 		<div class="btn-post-text">
 			<a href="{{URL::route('customer.ItemsAdd')}}">Đăng tin</a>
 		</div>

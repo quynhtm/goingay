@@ -1,6 +1,9 @@
 <div class="col-left-92">
 	<div class="head-info">
-		<h2><a href=""><i class="fa fa-building"></i>@if(isset($arrCategory[$category_id])){{$arrCategory[$category_id]}} @endif</a></h2>
+		<h2><a href="">@if(isset($arrCategory[$category_id]['category_icons']))<i class="{{$arrCategory[$category_id]['category_icons']}}"></i>@endif
+				@if(isset($arrCategory[$category_id]['category_name'])){{$arrCategory[$category_id]['category_name']}} @endif
+				@if(isset($province_name) && $province_name != '') - {{$province_name}} @endif
+			</a></h2>
 	</div>
 	@if(isset($resultHot) && !empty($resultHot))
 	<div class="content-boxcat">
@@ -41,7 +44,7 @@
 	<div class="content-boxcat">
 		<div class="col-653 pull-left">
 			<div class="form-seach-inboxcat">
-				<h2>Tìm kiếm @if(isset($arrCategory[$category_id])){{$arrCategory[$category_id]}} @endif</h2>
+				<h2>Tìm kiếm @if(isset($arrCategory[$category_id]['category_name'])){{$arrCategory[$category_id]['category_name']}} @endif</h2>
 				<form>
 					<input class="seach-keyword" placeholder="Nhập từ khóa tìm kiếm hoặc tỉnh thành" name="q" value="" autocomplete="off" type="text">
 					<input class="submit-seach" value="Tìm kiếm" type="submit">

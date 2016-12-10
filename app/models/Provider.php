@@ -55,8 +55,8 @@ class Provider extends Eloquent
     public static function getProviderAll() {
         $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_PROVIDER) : array();
         if (sizeof($data) == 0) {
-            $shop = Provider::where('provider_id', '>', 0)->get();
-            foreach($shop as $itm) {
+            $provider = Provider::where('provider_id', '>', 0)->get();
+            foreach($provider as $itm) {
                 $data[$itm['provider_id']] = $itm['provider_name'];
             }
             if(!empty($data) && Memcache::CACHE_ON){

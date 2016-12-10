@@ -614,12 +614,15 @@ class SiteUserCustomerController extends BaseSiteController{
 
 		$this->validInforItem($dataSave);
 		if(empty($this->error)){
+			//tinh thanh
+			$arrProvince = Province::getAllProvince();
 			//lay tên danh mục
 			$dataSave['item_category_name'] = isset($arrCategory[$dataSave['item_category_id']])?$arrCategory[$dataSave['item_category_id']]: '';
 			$dataSave['customer_id'] = $this->user_customer['customer_id'];
 			$dataSave['customer_name'] = $this->user_customer['customer_name'];
 			$dataSave['is_customer'] = $this->user_customer['is_customer'];
 			$dataSave['item_province_id'] = $this->user_customer['customer_province_id'];
+			$dataSave['item_province_name'] = isset($arrProvince[$this->user_customer['customer_province_id']])? $arrProvince[$this->user_customer['customer_province_id']] : 'Toàn quốc';
 			$dataSave['item_district_id'] = $this->user_customer['customer_district_id'];
 			$dataSave['item_block'] = CGlobal::ITEMS_NOT_BLOCK;
 
