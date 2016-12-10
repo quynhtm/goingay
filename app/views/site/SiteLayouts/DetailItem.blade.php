@@ -2,7 +2,7 @@
 	<div class="head-info">
 		<h2>
 			<a title="{{$itemShow->item_category_name}}" href="{{FunctionLib::buildLinkCategory($itemShow->item_category_id, $itemShow->item_category_name)}}">
-				<i class="fa fa-building"></i>{{$itemShow->item_category_name}}
+				@if(isset($arrCategory[$itemShow->item_category_id]['category_icons']))<i class="{{$arrCategory[$itemShow->item_category_id]['category_icons']}}"></i>@endif{{$itemShow->item_category_name}}
 			</a>
 		</h2>
 	</div>
@@ -56,7 +56,8 @@
 			<div class="head-info">
 				<h2>
 					<a title="{{$itemShow->item_category_name}}" href="{{FunctionLib::buildLinkCategory($itemShow->item_category_id, $itemShow->item_category_name)}}">
-						<i class="fa fa-building"></i>Tin khác cùng danh mục
+						@if(isset($arrCategory[$itemShow->item_category_id]['category_icons']))<i class="{{$arrCategory[$itemShow->item_category_id]['category_icons']}}"></i>@endif
+							Tin cùng danh mục
 					</a>
 				</h2>
 			</div>

@@ -11,7 +11,7 @@ if(session_status() == PHP_SESSION_NONE){
 class SiteUserCustomerController extends BaseSiteController{
     protected $user_customer = array();
 	private $arrStatusProduct = array(-1 => '---- Trạng thái----',CGlobal::status_show => 'Hiển thị',CGlobal::status_hide => 'Ẩn');
-	private $arrTypePrice = array(CGlobal::TYPE_PRICE_NUMBER => 'Hiển thị giá bán', CGlobal::TYPE_PRICE_CONTACT => 'Liên hệ với shop');
+	private $arrTypePrice = array(CGlobal::TYPE_PRICE_NUMBER => 'Hiển thị giá bán', CGlobal::TYPE_PRICE_CONTACT => 'Liên hệ với người đăng');
 	private $error = array();
 
 	public function __construct(){
@@ -24,6 +24,13 @@ class SiteUserCustomerController extends BaseSiteController{
 		if(Session::has('user_customer')){
 			$this->user_customer = Session::get('user_customer');
 		}
+
+		//seo
+		$meta_title = CGlobal::web_name;
+		$meta_keywords = CGlobal::web_name;
+		$meta_description = CGlobal::web_name;;
+		$meta_img= '';
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 	}
 	//Register - Login
     public function pageLogin($url=''){
@@ -453,7 +460,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		$optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCategory, -1);
 
 		$optionStatusProduct = FunctionLib::getOption($this->arrStatusProduct,CGlobal::status_show);
-		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice,CGlobal::TYPE_PRICE_NUMBER);
+		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice,CGlobal::TYPE_PRICE_CONTACT);
 
 		$this->layout->content = View::make('site.CustomerLayouts.ItemEdit')
 			->with('error', array())
@@ -579,7 +586,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		$dataSave['item_category_id'] = addslashes(Request::get('item_category_id'));
 		$dataSave['item_status'] = addslashes(Request::get('item_status'));
 		$dataSave['item_content'] = Request::get('item_content');
-		$dataSave['item_type_price'] = addslashes(Request::get('item_type_price',CGlobal::TYPE_PRICE_NUMBER));
+		$dataSave['item_type_price'] = addslashes(Request::get('item_type_price',CGlobal::TYPE_PRICE_CONTACT));
 		$dataSave['item_price_sell'] = (int)str_replace('.','',Request::get('item_price_sell'));
 		$dataSave['item_image'] = $imagePrimary = addslashes(Request::get('image_primary'));
 

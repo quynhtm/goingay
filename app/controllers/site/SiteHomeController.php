@@ -75,7 +75,7 @@ class SiteHomeController extends BaseSiteController
 		}
 
 		$this->header();
-		$this->menuLeft();
+		$this->menuLeft($itemShow->item_category_id);
 		//seo
 		$meta_title = $itemShow->item_name;
 		$meta_keywords = CGlobal::web_name;
@@ -90,6 +90,9 @@ class SiteHomeController extends BaseSiteController
 		//t?nh thï¿½nh
 		$arrProvince = Province::getAllProvince();
 
+		//thong tin danh muc
+		$arrCategory = Category::getCategoriessAll();//hien thi icons cua danh muc
+
 		//tin dang cua cung danh muc
 		$limit = CGlobal::number_show_15;
 		$offset = 0;
@@ -103,6 +106,7 @@ class SiteHomeController extends BaseSiteController
 			->with('itemShow', $itemShow)
 			->with('arrProvince', $arrProvince)
 			->with('resultItemCategory', $resultItemCategory)
+			->with('arrCategory', $arrCategory)
 			->with('arrCustomer', $arrCustomer);
 		$this->footer();
 	}
