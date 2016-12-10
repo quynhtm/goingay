@@ -40,7 +40,7 @@ class SiteHomeController extends BaseSiteController
 		$number_show_hot = 5;
 		$searchHomeSlider['item_image'] = 1;//check lay truong anh
 		$searchHomeSlider['field_get'] = $this->str_field_items_get;
-		$resultHomeSlider = self::getItemHot($searchHomeSlider,$number_show_hot);
+		$resultHomeSlider = self::getItemHot($searchHomeSlider,$number_show_hot,$number_show_hot+1);
 
 		//lay du lieu hien thi theo danh mục
 		//lay mang danh mục hiển thị ra ngoài trang chủ
@@ -147,7 +147,7 @@ class SiteHomeController extends BaseSiteController
 		$totalSearch = 0;
 		$province_name = '';
 		if($province_id > 0 && isset($arrProvince[$province_id])){
-			$search['item_province_id'] = $catid;
+			$search['item_province_id'] = $province_id;
 			$province_name = $arrProvince[$province_id];
 		}
 		$search['item_category_id'] = $catid;
@@ -215,10 +215,10 @@ class SiteHomeController extends BaseSiteController
 	}
 
 	//ham dung common cho site
-	public function getItemHot($search = array(),$limit,$off){
+	public function getItemHot($search = array(),$limit=10,$offset = 0){
 		$data = array();
 		if(!empty($search)){
-			$data = Items::getItemsSite($search,$limit,0,$totalSearch);
+			$data = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 		}
 		return $data;
 	}
