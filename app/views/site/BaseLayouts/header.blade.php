@@ -50,7 +50,15 @@
 			</div>
 		</div>--}}
 		<div class="btn-post-text">
-			<a href="{{URL::route('customer.ItemsAdd')}}">Đăng tin</a>
+			<?php 
+				$link = 'javascript:void(0)';
+				$class = 'class="aRegPost"';
+				if(isset($user_customer['customer_id']) && $user_customer['customer_id'] > 0){
+					$link = URL::route('customer.ItemsAdd');
+					$class = '';
+				}
+			?>
+			<a {{$class}} href="{{$link}}">Đăng tin</a>
 		</div>
 		@if(empty($user_customer))
 		<ul class="list-link">

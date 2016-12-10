@@ -107,7 +107,7 @@ USER_CUSTOMMER = {
 		});
 	},
 	login:function(){
-		jQuery('.clickLogin').unbind('click').click(function(){
+		jQuery('.clickLogin, .aRegPost').unbind('click').click(function(){
 			jQuery('.content-popup-show').modal('hide');
 			jQuery('#sys-popup-login').modal('show');
 			jQuery('#btnLogin').click(function(){
