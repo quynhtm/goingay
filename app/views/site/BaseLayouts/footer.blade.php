@@ -14,8 +14,8 @@
 						<a hreft="">Quy chế hoạt động</a>
 					</div>
 					<ul class="f-box-link">
-						<li><a href="" title="Quy chế đăng tin">Quy chế đăng tin</a></li>
-						<li><a href="" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
+						<li><a href="http://raovatphuly.vn/chi-tiet/tin-tuc-1/quy-che-dang-tin.html" title="Quy chế đăng tin">Quy chế đăng tin</a></li>
+						<li><a href="http://raovatphuly.vn/chi-tiet/tin-tuc-2/chinh-sach-bao-mat.html" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
 						<li><a href="">Quy trình giải quyết khiếu nại</a></li>
 						<li><a href="">Quy trình thanh toán</a></li>
 					</ul>
@@ -29,7 +29,6 @@
 						<li><a href="" title="Hỗ trợ">Hỗ trợ</a></li>
 						<li><a href="">Bảng giá đăng tin</a></li>
 						<li><a href="" target="_blank" title="Bảng giá quảng cáo">Bảng giá quảng cáo</a></li>
-						<li><a href="" title="FAQ">FAQ</a></li>
 						<li><a href="" title="Liên hệ">Liên hệ</a></li>
 					</ul>
 				</div>

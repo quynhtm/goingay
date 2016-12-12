@@ -93,32 +93,22 @@ class CGlobal{
     const province_id_hanoi = 22;
 
     //Tin tuc
-    const NEW_CATEGORY_CUSTOMER = 1;
-    const NEW_CATEGORY_SHOP = 2;
-    const NEW_CATEGORY_GIOI_THIEU = 3;
-    const NEW_CATEGORY_GIAI_TRI = 4;
-    const NEW_CATEGORY_THI_TRUONG = 5;
-    const NEW_CATEGORY_GOC_GIA_DINH = 6;
-    const NEW_CATEGORY_TIN_TUC_CHUNG = 7;
-    const NEW_CATEGORY_QUANG_CAO = 8;
-    const NEW_TYPE_DAC_BIET = 1;// di voi danh muc: 1,2,3
-    const NEW_TYPE_NOI_BAT = 2;// di voi danh muc: 4,5,6,7
-    const NEW_TYPE_TIN_TUC = 3;// di voi danh muc: 4,5,6,7
-    const NEW_TYPE_QUANG_CAO = 4;// di voi danh muc: 8
+    const NEW_CATEGORY_TIN_TUC_CHUNG = 1;
+    const NEW_CATEGORY_GIOI_THIEU = 2;
+    const NEW_CATEGORY_QUANG_CAO = 3;
+
+    const NEW_TYPE_TIN_TUC = 1;
+    const NEW_TYPE_GIOI_THIEU = 2;
+    const NEW_TYPE_QUANG_CAO = 3;
+
     public static $arrCategoryNew = array(-1 => '--- Chọn danh mục ---',
         self::NEW_CATEGORY_TIN_TUC_CHUNG => 'Tin tức chung',
-        self::NEW_CATEGORY_GOC_GIA_DINH => 'Góc gia đinh',
-        self::NEW_CATEGORY_THI_TRUONG => 'Thị trường',
-        self::NEW_CATEGORY_GIAI_TRI => 'Giải trí',
         self::NEW_CATEGORY_GIOI_THIEU => 'Tin giới thiệu',
-        self::NEW_CATEGORY_SHOP => 'Tin của Shop',
-        self::NEW_CATEGORY_CUSTOMER => 'Tin của khách',
         self::NEW_CATEGORY_QUANG_CAO => 'Tin quảng cáo',
     );
     public static $arrTypeNew = array(-1 => '--- Chọn kiểu tin ---',
         self::NEW_TYPE_TIN_TUC => 'Tin tức chung',
-        self::NEW_TYPE_NOI_BAT => 'Tin nổi bật',
-        self::NEW_TYPE_DAC_BIET => 'Tin đặc biệt',
+        self::NEW_TYPE_GIOI_THIEU => 'Tin Hỗ trợ',
         self::NEW_TYPE_QUANG_CAO => 'Tin quảng cáo',
     );
 
