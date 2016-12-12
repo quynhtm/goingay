@@ -103,11 +103,15 @@ class SiteHomeController extends BaseSiteController
 		$search['field_get'] = $this->str_field_items_get;
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 
+		//quang cao ben phải
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_LEFT);
+
 		$this->layout->content = View::make('site.SiteLayouts.DetailItem')
 			->with('itemShow', $itemShow)
 			->with('arrProvince', $arrProvince)
 			->with('resultItemCategory', $resultItemCategory)
 			->with('arrCategory', $arrCategory)
+			->with('arrBannerRight', $arrBannerRight)
 			->with('arrCustomer', $arrCustomer);
 		$this->footer();
 	}
@@ -156,7 +160,8 @@ class SiteHomeController extends BaseSiteController
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
 
-
+		//quang cao ben phải
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_LEFT);
 
     	$this->layout->content = View::make('site.SiteLayouts.ListItemCategory')
 			->with('arrProvince', $arrProvince)
@@ -166,6 +171,7 @@ class SiteHomeController extends BaseSiteController
 			->with('paging', $paging)
 			->with('total', $totalSearch)
 			->with('resultHot', $resultHot)
+			->with('arrBannerRight', $arrBannerRight)
 			->with('resultItemCategory', $resultItemCategory);
     	$this->footer();
     }
@@ -205,11 +211,15 @@ class SiteHomeController extends BaseSiteController
 		//t?nh thï¿½nh
 		$arrProvince = Province::getAllProvince();
 
+		//quang cao ben phải
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_LEFT);
+
 		$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer')
 			->with('arrProvince', $arrProvince)
 			->with('arrCustomer', $arrCustomer)
 			->with('paging', $paging)
 			->with('total', $totalSearch)
+			->with('arrBannerRight', $arrBannerRight)
 			->with('resultHot', $resultHot)
 			->with('resultItemCategory', $resultItemCategory);
 		$this->footer();

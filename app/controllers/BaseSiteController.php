@@ -53,6 +53,11 @@ class BaseSiteController extends BaseController
 								->with('catid', $catid)
 								->with('menuCategoriessAll', $menuCategoriessAll);
 	}
+	//dung chung quang cao cac page
+	public function bannerRight($banner_type = 0, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0){
+		$arrBannerRight = Banner::getBannerAdvanced($banner_type, $banner_page, $banner_category_id, $banner_province_id);
+		return $arrBannerRight;
+	}
     public function footer(){
 		$address='';
 		$arrAddress = Info::getItemByKeyword('SITE_FOOTER_LEFT');

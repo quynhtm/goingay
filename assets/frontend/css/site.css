@@ -617,6 +617,12 @@ h1, h2, h3, h4, h5, h6{
     margin-left: 2%;
     width: 74%;
 }
+.col-left-92 {
+    display: inline-block;
+    float: left;
+    margin-left: 2%;
+    width: 92%;
+}
 .head-info{
     border-bottom: 2px solid #ff7300;
     margin-bottom: 10px;
