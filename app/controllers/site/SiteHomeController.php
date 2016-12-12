@@ -104,7 +104,7 @@ class SiteHomeController extends BaseSiteController
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 
 		//quang cao ben phải
-		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_LEFT);
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
 
 		$this->layout->content = View::make('site.SiteLayouts.DetailItem')
 			->with('itemShow', $itemShow)
@@ -161,7 +161,7 @@ class SiteHomeController extends BaseSiteController
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
 
 		//quang cao ben phải
-		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_LEFT);
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
 
     	$this->layout->content = View::make('site.SiteLayouts.ListItemCategory')
 			->with('arrProvince', $arrProvince)
@@ -212,7 +212,7 @@ class SiteHomeController extends BaseSiteController
 		$arrProvince = Province::getAllProvince();
 
 		//quang cao ben phải
-		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_LEFT);
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
 
 		$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer')
 			->with('arrProvince', $arrProvince)

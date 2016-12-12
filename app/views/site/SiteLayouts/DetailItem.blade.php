@@ -50,7 +50,7 @@
 	<div class="content-boxcat">
 		<div class="col-653 pull-left">
 			<div class="detail-content-post">
-				{{$itemShow->item_content}}
+				{{stripcslashes($itemShow->item_content)}}
 			</div>
 
 			<div class="head-info">

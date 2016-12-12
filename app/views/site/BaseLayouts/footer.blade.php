@@ -3,9 +3,11 @@
 		<div class="box-footer">
 			<div class="box-60">
 				<div class="address">
+					<!--
 					{{$address}}
-				</div>
+					-->
 			</div>
+		</div>
 			<div class="box-40">
 				<div class="percent-45">
 					<div class="f-title">

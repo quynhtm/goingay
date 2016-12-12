@@ -60,7 +60,7 @@
 				jQuery("#sliderLeft").responsiveSlides({
 				    maxwidth: 1000,
 				    speed: 800,
-				    timeout: 10000,
+				    timeout: 5000,
 			    });
 			});
 		</script>
