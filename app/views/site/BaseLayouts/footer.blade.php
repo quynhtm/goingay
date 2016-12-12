@@ -11,7 +11,7 @@
 			<div class="box-40">
 				<div class="percent-45">
 					<div class="f-title">
-						<a hreft="">Quy chế hoạt động</a>
+						<a hreft="">Quy chế về tin đăng</a>
 					</div>
 					<ul class="f-box-link">
 						<li><a href="http://raovatphuly.vn/chi-tiet/tin-tuc-1/quy-che-dang-tin.html" title="Quy chế đăng tin">Quy chế đăng tin</a></li>
@@ -27,7 +27,6 @@
 					<ul class="f-box-link">
 						<li><a href="" target="_blank" title="Giới thiệu">Giới thiệu</a></li>
 						<li><a href="" title="Hỗ trợ">Hỗ trợ</a></li>
-						<li><a href="">Bảng giá đăng tin</a></li>
 						<li><a href="" target="_blank" title="Bảng giá quảng cáo">Bảng giá quảng cáo</a></li>
 						<li><a href="" title="Liên hệ">Liên hệ</a></li>
 					</ul>
