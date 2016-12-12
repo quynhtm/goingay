@@ -89,7 +89,9 @@ class CGlobal{
     //is_login Customer
     const not_login = 0;
     const is_login = 1;
-    
+
+    const province_id_hanoi = 22;
+
     //Tin tuc
     const NEW_CATEGORY_CUSTOMER = 1;
     const NEW_CATEGORY_SHOP = 2;

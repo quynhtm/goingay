@@ -953,6 +953,8 @@ class SiteUserCustomerController extends BaseSiteController{
 							$dataUpdate = array(
 									'customer_id_facebook' => $data['customer_id_facebook'],
 									'customer_status' => CGlobal::status_show,
+									'is_login' => CGlobal::is_login,
+									'customer_time_login' => time(),
 							);
 							UserCustomer::updateData($customer->customer_id, $dataUpdate);
 							$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
@@ -963,11 +965,13 @@ class SiteUserCustomerController extends BaseSiteController{
 						$data['customer_time_login'] = time();
 						$data['customer_phone'] = '';
 						$data['customer_address'] = '';
+						$data['customer_id_facebook'] = $data['customer_id_facebook'];
 						$data['customer_email'] = $data['customer_email'];
 						$data['customer_gender'] = $data['customer_gender'];
 						$data['customer_name'] = $data['customer_name'];
 						$data['is_customer'] = CGlobal::CUSTOMER_FREE;
 						$data['is_login'] = CGlobal::is_login;
+						$data['customer_province_id'] = CGlobal::province_id_hanoi;
 						
 						UserCustomer::addData($data);
 						$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
@@ -1150,6 +1154,8 @@ class SiteUserCustomerController extends BaseSiteController{
 								$dataUpdate = array(
 									'customer_id_google' => $data['customer_id_google'],
 									'customer_status' => CGlobal::status_show,
+									'is_login' => CGlobal::is_login,
+									'customer_time_login' => time(),
 								);
 								UserCustomer::updateData($customer->customer_id, $dataUpdate);
 								$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
@@ -1160,12 +1166,14 @@ class SiteUserCustomerController extends BaseSiteController{
 							$data['customer_time_login'] = time();
 							$data['customer_phone'] = '';
 							$data['customer_address'] = '';
+							$data['customer_id_google'] = $data['customer_id_google'];
 							$data['customer_email'] = $data['customer_email'];
 							$data['customer_gender'] = $data['customer_gender'];
 							$data['customer_name'] = $data['customer_name'];
 							$data['is_customer'] = CGlobal::CUSTOMER_FREE;
 							$data['is_login'] = CGlobal::is_login;
-							
+							$data['customer_province_id'] = CGlobal::province_id_hanoi;
+
 							UserCustomer::addData($data);
 							$customer = UserCustomer::getUserCustomerByEmail($data['customer_email']);
 						}

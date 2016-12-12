@@ -71,9 +71,9 @@
                             <th width="5%" class="text-center">STT <input type="checkbox" class="check" id="checkAll"></th>
                             <th width="33%">Thông tin KH</th>
                             <th width="22%">Thông tin thêm</th>
+                            <th width="10%" class="text-center text-middle">Loại đăng ký</th>
                             <th width="10%" class="text-center text-middle">Online</th>
                             <th width="10%" class="text-center text-middle">Ngày tạo</th>
-                            <th width="10%" class="text-center text-middle">Ngày active</th>
                             <th width="12%" class="text-center text-middle">Thao tác</th>
                         </tr>
                         </thead>
@@ -100,6 +100,18 @@
                                     <br/>∑ lượt share: <b>{{ $item->customer_number_share }}</b>
                                 </td>
                                 <td class="text-center text-middle">
+                                    @if($item->customer_id_facebook != '' || $item->customer_id_google != '')
+                                        @if($item->customer_id_facebook != '')
+                                            Facebook
+                                        @endif
+                                        @if($item->customer_id_google != '')
+                                            Gmail ++
+                                        @endif
+                                    @else
+                                        Đăng ký thường
+                                    @endif
+                                </td>
+                                <td class="text-center text-middle">
                                     @if($item->is_login == CGlobal::CUSTOMER_ONLINE)
                                         <i class="fa fa-smile-o fa-2x green"></i>
                                         <br/>{{date('H:i:s d-m-Y',$item->customer_time_login)}}
@@ -109,7 +121,7 @@
                                     @endif
                                 </td>
                                 <td class="text-center text-middle">{{date('d-m-Y H:i:s ',$item->customer_time_created)}}</td>
-                                <td class="text-center text-middle">{{date('d-m-Y H:i:s ',$item->customer_time_active)}}</td>
+
                                 <td class="text-center text-middle">
                                     @if($item->customer_status == 1)
                                         <a href="javascript:void(0);"title="Hiện"><i class="fa fa-check fa-2x"></i></a>
