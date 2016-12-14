@@ -35,6 +35,20 @@ class ToolsCommonController extends BaseAdminController
         ));
     }
 
+    //cập nhật thêm quyền cho hệ thông
+    public function addPermit(){
+        $arrPermit = ArrayPermission::$arrPermit;
+        foreach($arrPermit as $permit=> $infor){
+            $arrInsert = array('permission_code'=>$permit,
+                'permission_name'=>$infor['name_permit'],
+                'permission_group_name'=>$infor['group_permit'],
+                'permission_status'=>1);
+            if (!Permission::checkExitsPermissionCode($permit)) {
+                Permission::createPermission($arrInsert);
+            }
+        }
+        FunctionLib::debug($arrPermit);
+    }
     /************************************************************************************************************************************
      * @return mixed
      * Quản lý lượt share của shop

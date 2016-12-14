@@ -32,7 +32,6 @@ class GroupUserPermission extends Eloquent
         $tbl_group_user_permission = with(new GroupUserPermission())->getTable();
         $query = DB::table($tbl_group_user_permission);
         $query->join($tbl_permission, function ($join) use ($tbl_permission, $tbl_group_user_permission) {
-
             $join->on($tbl_group_user_permission . '.permission_id', '=', $tbl_permission . '.permission_id');
         });
         $query->where($tbl_permission . '.permission_status', '=', 1);

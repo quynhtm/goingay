@@ -5,6 +5,8 @@
  */
 class ArrayPermission{
     public static $arrPermit = array(
+        'root' => array('name_permit'=>'Root','group_permit'=>'Root'),
+
         'user_view' => array('name_permit'=>'Xem danh sách user Admin','group_permit'=>'Tài khoản Admin'),
         'user_create' => array('name_permit'=>'Tạo user Admin','group_permit'=>'Tài khoản Admin'),
         'user_edit' => array('name_permit'=>'Sửa user Admin','group_permit'=>'Tài khoản Admin'),
