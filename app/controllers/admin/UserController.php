@@ -206,7 +206,7 @@ class UserController extends BaseAdminController
         $old_password = Request::get('old_password', '');
         $new_password = Request::get('new_password', '');
         $confirm_new_password = Request::get('confirm_new_password', '');
-        if(!in_array($this->permission_change_pass, $this->permission)){
+        if(!$this->is_root && !in_array($this->permission_change_pass, $this->permission)){
             $user_byId = User::getUserById($id);
             if($old_password == ''){
                 $error[] = 'Bạn chưa nhập mật khẩu hiện tại';
