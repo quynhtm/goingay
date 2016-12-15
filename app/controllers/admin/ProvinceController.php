@@ -52,6 +52,11 @@ class ProvinceController extends BaseAdminController{
 								->with('data', $data)
 								->with('total', $total)
 								->with('paging', $paging)
+								->with('is_root', $this->is_root)
+								->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)
+								->with('permission_create', in_array($this->permission_create, $this->permission) ? 1 : 0)
+								->with('permission_delete', in_array($this->permission_delete, $this->permission) ? 1 : 0)
+								->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0)
 								->with('arrStatus', $this->arrStatus)
 								->with('optionStatus', $optionStatus)
 								->with('search', $search);

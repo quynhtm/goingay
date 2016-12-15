@@ -33,6 +33,12 @@ class ArrayPermission{
         'category_create' => array('name_permit'=>'Tạo danh mục','group_permit'=>'Quyền danh mục'),
         'category_edit' => array('name_permit'=>'Sửa danh mục','group_permit'=>'Quyền danh mục'),
 
+        'items_full' => array('name_permit'=>'Full tin rao','group_permit'=>'Quyền tin rao'),
+        'items_view' => array('name_permit'=>'Xem tin rao','group_permit'=>'Quyền tin rao'),
+        'items_delete' => array('name_permit'=>'Xóa tin rao','group_permit'=>'Quyền tin rao'),
+        'items_create' => array('name_permit'=>'Tạo tin rao','group_permit'=>'Quyền tin rao'),
+        'items_edit' => array('name_permit'=>'Sửa tin rao','group_permit'=>'Quyền tin rao'),
+
         'news_full' => array('name_permit'=>'Full tin tức','group_permit'=>'Quyền tin tức'),
         'news_view' => array('name_permit'=>'Xem tin tức','group_permit'=>'Quyền tin tức'),
         'news_delete' => array('name_permit'=>'Xóa tin tức','group_permit'=>'Quyền tin tức'),

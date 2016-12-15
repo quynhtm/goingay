@@ -88,17 +88,17 @@
                                 </td>
                                 <td class="text-center" align="center">
                                     <br/>
-                                    @if($permission_edit)
+                                    @if($is_root || $permission_edit)
                                         <a href="{{URL::route('admin.user_edit',array('id' => $item['user_id']))}}" class="btn btn-xs btn-primary" data-content="Sửa thông tin tài khoản" data-placement="bottom" data-trigger="hover" data-rel="popover">
                                             <i class="ace-icon fa fa-edit bigger-120"></i>
                                         </a>
                                     @endif
-                                    @if($permission_change_pass)
+                                    @if($is_root || $permission_change_pass)
                                         <a href="{{URL::route('admin.user_change',array('id' => base64_encode($item['user_id'])))}}" class="btn btn-xs btn-success" data-content="Đổi mật khẩu" data-placement="bottom" data-trigger="hover" data-rel="popover">
                                             <i class="ace-icon fa fa-unlock bigger-120"></i>
                                         </a>
                                     @endif
-                                    @if($permission_remove)
+                                    @if($is_root || $permission_remove)
                                         <a href="javascript:void(0)" class="btn btn-xs btn-danger sys_delete_user" data-content="Xóa tài khoản" data-placement="bottom" data-trigger="hover" data-rel="popover" data-id="{{$item['user_id']}}">
                                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                         </a>

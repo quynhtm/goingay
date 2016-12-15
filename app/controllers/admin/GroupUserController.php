@@ -13,10 +13,9 @@ class GroupUserController extends BaseAdminController
         parent::__construct();
     }
 
-    public function view()
-    {
+    public function view(){
         //check permission
-        if (!in_array($this->permission_view, $this->permission)) {
+        if (!$this->is_root && !in_array($this->permission_view, $this->permission)) {
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
 
@@ -65,6 +64,8 @@ class GroupUserController extends BaseAdminController
             ->with('total', $total)
             ->with('start', ($page_no - 1) * $limit)
             ->with('paging', $paging)
+            ->with('is_root', $this->is_root)
+            ->with('permission_view', in_array($this->permission_view, $this->permission) ? 1 : 0)
             ->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0)
             ->with('permission_create', in_array($this->permission_create, $this->permission) ? 1 : 0)
             ->with('arrStatus', $this->arrStatus);
@@ -74,36 +75,32 @@ class GroupUserController extends BaseAdminController
     public function createInfo()
     {
 //        CGlobal::$pageTitle = "Tạo nhóm User | Admin Seo";
-        if (!in_array($this->permission_create, $this->permission)) {
+        if (!$this->is_root && !in_array($this->permission_view, $this->permission) && !in_array($this->permission_create, $this->permission)) {
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
         // Show the page
         $listPermission = Permission::getListPermission();
         $arrPermissionByController = $this->buildArrayPermissionByController($listPermission);
         $this->layout->content = View::make('admin.GroupUser.create')
-//            ->with('optionStatus',$optionStatus)
+            ->with('is_root', $this->is_root)
+            ->with('permission_view', in_array($this->permission_view, $this->permission) ? 1 : 0)
+            ->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0)
+            ->with('permission_create', in_array($this->permission_create, $this->permission) ? 1 : 0)
             ->with('arrPermissionByController', $arrPermissionByController);
     }
 
     public function create()
     {
         //check permission
-        if (!in_array($this->permission_create, $this->permission)) {
+        if (!$this->is_root && !in_array($this->permission_view, $this->permission) && !in_array($this->permission_create, $this->permission)) {
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
 
         $error = array();
         $data['group_user_name'] = htmlspecialchars(trim(Request::get('group_user_name', '')));
-
-        //encode các ký tự html
-
         $data['group_user_status'] = 1;
 
         $arrPermission = Request::get('permission_id', array());
-//        if(!empty($arrPermission)){
-//            $strPermission = implode(',',$arrPermission);
-//            $dataSave['strPermission'] = $strPermission;
-//        }
 
         if ($data['group_user_name'] == '') {
             $error[] = 'Tên nhóm người dùng không được để trống ';
@@ -118,6 +115,10 @@ class GroupUserController extends BaseAdminController
             $this->layout->content = View::make('admin.GroupUser.create')
                 ->with('error', $error)
                 ->with('data', $data)
+                ->with('is_root', $this->is_root)
+                ->with('permission_view', in_array($this->permission_view, $this->permission) ? 1 : 0)
+                ->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0)
+                ->with('permission_create', in_array($this->permission_create, $this->permission) ? 1 : 0)
                 ->with('arrPermissionByController', $arrPermissionByController);
         } else {
             //urlencode dữ liệu
@@ -133,6 +134,10 @@ class GroupUserController extends BaseAdminController
                 $this->layout->content = View::make('admin.GroupUser.create')
                     ->with('error', $error)
                     ->with('data', $data)
+                    ->with('is_root', $this->is_root)
+                    ->with('permission_view', in_array($this->permission_view, $this->permission) ? 1 : 0)
+                    ->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0)
+                    ->with('permission_create', in_array($this->permission_create, $this->permission) ? 1 : 0)
                     ->with('arrPermissionByController', $arrPermissionByController);
             }
         }
@@ -141,7 +146,7 @@ class GroupUserController extends BaseAdminController
     public function editInfo($id)
     {
 //        CGlobal::$pageTitle = "Sửa nhóm User | Admin Seo";
-        if (!in_array($this->permission_edit, $this->permission)) {
+        if (!$this->is_root && !in_array($this->permission_view, $this->permission) && !in_array($this->permission_edit, $this->permission)) {
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
 
@@ -162,14 +167,17 @@ class GroupUserController extends BaseAdminController
         $this->layout->content = View::make('admin.GroupUser.edit')
             ->with('data', $data)
             ->with('arrStatus', $this->arrStatus)
-//            ->with('arrType',$this->arrType)
+            ->with('is_root', $this->is_root)
+            ->with('permission_view', in_array($this->permission_view, $this->permission) ? 1 : 0)
+            ->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0)
+            ->with('permission_create', in_array($this->permission_create, $this->permission) ? 1 : 0)
             ->with('arrPermissionByController', $arrPermissionByController);
     }
 
     public function edit($id)
     {
         //check permission
-        if (!in_array($this->permission_edit, $this->permission)) {
+        if (!$this->is_root && !in_array($this->permission_view, $this->permission) && !in_array($this->permission_edit, $this->permission)) {
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
         $error = array();
@@ -192,6 +200,10 @@ class GroupUserController extends BaseAdminController
             $this->layout->content = View::make('admin.GroupUser.edit')
                 ->with('error', $error)
                 ->with('data', $data)
+                ->with('is_root', $this->is_root)
+                ->with('permission_view', in_array($this->permission_view, $this->permission) ? 1 : 0)
+                ->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0)
+                ->with('permission_create', in_array($this->permission_create, $this->permission) ? 1 : 0)
                 ->with('arrStatus', $this->arrStatus)
                 ->with('arrPermissionByController', $arrPermissionByController);
         } else {
@@ -206,15 +218,17 @@ class GroupUserController extends BaseAdminController
                 $this->layout->content = View::make('admin.GroupUser.edit')
                     ->with('error', $error)
                     ->with('data', $data)
+                    ->with('is_root', $this->is_root)
+                    ->with('permission_view', in_array($this->permission_view, $this->permission) ? 1 : 0)
+                    ->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0)
+                    ->with('permission_create', in_array($this->permission_create, $this->permission) ? 1 : 0)
                     ->with('arrStatus', $this->arrStatus)
                     ->with('arrPermissionByController', $arrPermissionByController);
             }
         }
     }
 
-    private function buildArrayPermissionByController($listPermission)
-    {
-
+    private function buildArrayPermissionByController($listPermission){
         $arrPermissionByController = array();
         if (!empty($listPermission)) {
             foreach ($listPermission as $permission) {
