@@ -22,7 +22,7 @@ class Permission extends Eloquent{
     }
 
 
-    public static function createPermission($data, $arr_group = array())
+    public static function createPermission($data)
     {
         try {
             // tạo 1 quyen
@@ -36,14 +36,18 @@ class Permission extends Eloquent{
             $permission->save();
 
             // tạo môi quan hê nhóm quyên
-            if (is_array($arr_group) && count($arr_group) > 0) {
+            if ($permission->permission_id == 1) {
                 $dataEx = array();
                 $permission_id = $permission->permission_id;
-                foreach ($arr_group as $k => $group) {
-                    $dataEx[$k]['group_user_id'] = $group;
-                    $dataEx[$k]['permission_id'] = $permission_id;
-                }
+                $dataEx['group_user_id'] = 1;
+                $dataEx['permission_id'] = $permission_id;
                 DB::table('group_user_permission')->insert($dataEx);
+
+                $dataEx2['group_user_id'] = 1;
+                $dataEx2['group_user_name'] = $permission->permission_name;
+                $dataEx2['group_user_status'] = 1;
+                $dataEx2['group_user_type'] = 1;
+                DB::table('group_user')->insert($dataEx2);
             }
 
             DB::connection()->getPdo()->commit();

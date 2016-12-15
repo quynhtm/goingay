@@ -83,7 +83,9 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="form-group col-sm-12 text-right">
-                    <button class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
+                    @if($is_root || $permission_edit || $permission_view)
+                        <button class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
+                    @endif
                 </div>
                 {{ Form::close() }}
                 <!-- PAGE CONTENT ENDS -->

@@ -56,7 +56,7 @@ class BaseAdminController extends BaseController
             'icon'=>'fa fa-code-fork',
             'arr_link_sub'=>array('admin.province',),
             'sub'=>array(
-                array('name'=>'Tỉnh/Thành', 'RouteName'=>'admin.province', 'icon'=>'fa fa-map-marker icon-4x', 'showcontent'=>1, 'permission'=>'abc', 'clear'=>1),
+                array('name'=>'Tỉnh/Thành', 'RouteName'=>'admin.province', 'icon'=>'fa fa-map-marker icon-4x', 'showcontent'=>1, 'permission'=>'province_full', 'clear'=>1),
             ),
         );
 
@@ -67,7 +67,7 @@ class BaseAdminController extends BaseController
             'arr_link_sub'=>array('admin.customerView','admin.itemsView','admin.category_list',),
             'sub'=>array(
                 array('name'=>'Khách đăng tin', 'RouteName'=>'admin.customerView', 'icon'=>'fa fa-users icon-4x', 'showcontent'=>1, 'permission'=>'user_customer_full'),
-                array('name'=>'Danh mục tin', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1, 'permission'=>'items_full'),
+                array('name'=>'Danh mục tin', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1, 'permission'=>'category_full'),
                 array('name'=>'Danh sách tin đăng', 'RouteName'=>'admin.itemsView', 'icon'=>'fa fa-file-text-o icon-4x', 'showcontent'=>1, 'permission'=>'items_full'),
             ),
         );
@@ -80,7 +80,7 @@ class BaseAdminController extends BaseController
             'sub'=>array(
                 array('name'=>'Tin tức', 'RouteName'=>'admin.newsView', 'icon'=>'fa fa-book icon-4x', 'showcontent'=>1, 'permission'=>'news_full'),
                 array('name'=>'Banner quảng cáo', 'RouteName'=>'admin.bannerView', 'icon'=>'fa fa-globe icon-4x', 'showcontent'=>1, 'permission'=>'banner_full'),
-                array('name'=>'Lượt Share', 'RouteName'=>'admin.viewClickShare', 'icon'=>'fa fa-thumbs-o-up icon-4x', 'showcontent'=>1, 'permission'=>'banner_full'),
+                array('name'=>'Lượt Share', 'RouteName'=>'admin.viewClickShare', 'icon'=>'fa fa-thumbs-o-up icon-4x', 'showcontent'=>1, 'permission'=>'toolsCommon_full'),
             ),
         );
         return $menu;

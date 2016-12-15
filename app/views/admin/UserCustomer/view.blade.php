@@ -133,10 +133,10 @@
                                         <a href="javascript:void(0);" style="color: red" title="Khóa"><i class="fa fa-close fa-2x"></i></a>
                                     @endif
 
-                                    @if($is_root || $permission_full ==1|| $permission_edit ==1  )
+                                    @if($is_root || $permission_full ==1|| $permission_edit == 1  )
                                         <a href="{{URL::route('admin.getCustomerEdit',array('id' => $item->customer_id))}}" title="Sửa item"><i class="fa fa-edit fa-2x"></i></a>
                                     @endif
-                                    @if($is_root || $permission_full ==1 || $permission_delete == 2)
+                                    @if($is_root || $permission_full ==1 || $permission_delete == 1)
                                        <a href="javascript:void(0);" onclick="Admin.deleteItem({{$item->customer_id}},2)" title="Xóa Item"><i class="fa fa-trash fa-2x"></i></a>
                                     @endif
                                     <br/>
