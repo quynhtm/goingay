@@ -37,11 +37,12 @@ class ToolsCommonController extends BaseAdminController
 
     //cập nhật thêm quyền cho hệ thông
     public function addPermit(){
+        die('tạm dừng chức năng này');
         $arrPermit = ArrayPermission::$arrPermit;
-        DB::table('permission')->truncate();
+        /*DB::table('permission')->truncate();
         DB::table('group_user')->truncate();
-        DB::table('group_user_permission')->truncate();
-        foreach($arrPermit as $permit=> $infor){
+        DB::table('group_user_permission')->truncate();*/
+        /*foreach($arrPermit as $permit=> $infor){
             $arrInsert = array('permission_code'=>$permit,
                 'permission_name'=>$infor['name_permit'],
                 'permission_group_name'=>$infor['group_permit'],
@@ -49,7 +50,7 @@ class ToolsCommonController extends BaseAdminController
             if (!Permission::checkExitsPermissionCode($permit)) {
                 Permission::createPermission($arrInsert);
             }
-        }
+        }*/
         FunctionLib::debug($arrPermit);
     }
     /************************************************************************************************************************************
