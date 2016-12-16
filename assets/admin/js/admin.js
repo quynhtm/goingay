@@ -20,6 +20,8 @@ var Admin = {
                 url_ajax = 'deletePermission';
             }else if(type == 10){
             	url_ajax = 'deleteCategory';
+            }else if(type == 11){
+            	url_ajax = 'deleteInfor';
             }
             if(url_ajax != ''){
                 $.ajax({

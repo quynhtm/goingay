@@ -115,10 +115,8 @@ class Info extends Eloquent {
     	}
     	if($id > 0){
     		Info::updateData($id, $data_post);
-    		Utility::messages('messages', 'Cập nhật thành công!');
     	}else{
     		Info::addData($data_post);
-    		Utility::messages('messages', 'Thêm mới thành công!');
     	}
     
     }
@@ -131,13 +129,14 @@ class Info extends Eloquent {
     			//Remove Img
     			$info_img = ($data->info_img != '') ? $data->info_img : '';
     			if($info_img != ''){
-    				$path = Config::get('config.DIR_ROOT').'uploads/'.CGlobal::FOLDER_INFO.'/'.$id;
-    				if(is_file($path.'/'.$data->info_img)){
-    					@unlink($path.'/'.$data->info_img);
-    				}
-    				if(is_dir($path)) {
-    					@rmdir($path);
-    				}
+					//xoa anh upload
+					FunctionLib::deleteFileUpload($data->info_img,$data->info_id,CGlobal::FOLDER_INFORSEO);
+					//x�a anh thumb
+					$arrSizeThumb = CGlobal::$arrBannerSizeImage;
+					foreach($arrSizeThumb as $k=>$size){
+						$sizeThumb = $size['w'].'x'.$size['h'];
+						FunctionLib::deleteFileThumb($data->info_img,$data->info_id,CGlobal::FOLDER_INFORSEO,$sizeThumb);
+					}
     			}
     			//End Remove Img
     			
