@@ -16,9 +16,11 @@ class CGlobal{
     public static $pageAdminTitle = 'Dashboard Admin';
     public static $pageShopTitle = 'Shop Admin';
 
-    const code_shop_share = 'Tinraonhanh.vn';
-    const web_name = 'Tinraonhanh.vn';
-    public static $pageTitle = 'Tinraonhanh.vn';
+    const code_shop_share = 'Raovat30s.vn';
+    const web_name = 'Raovat30s.vn';
+    const web_keywords= 'Raovat30s.vn: Rao vặt, mua bán nhà đất, máy tính, máy tính xách tay, laptop, điện tử, kỹ thuật số, sim, xe máy, xe đạp, ôtô, điện lạnh, điện máy, mua sắm, nội thất, thuê, cho thuê, thời trang, mỹ phẩm, dịch vụ, dịch vụ tận nhà, dịch vụ doanh nghiệp, dịch vụ cá nhân, lao động, lao động phổ thông, lao động trí óc, du lịch, cơ hội giao thương, giao thương, tổng hợp';
+    const web_description= 'Raovat30s.vn: Rao vặt toàn quốc miễn phí đăng tin, lượt up top tin';
+    public static $pageTitle = 'Raovat30s.vn';
 
     const phoneSupport = '0985.10.10.26 - 0913.922.986';
 
