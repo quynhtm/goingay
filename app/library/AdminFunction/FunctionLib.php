@@ -690,11 +690,11 @@ class FunctionLib {
     	$str .= "\n".'<meta name="description" content="'.$meta_description.'">';
     
     	//Facebook
-    	$str .= "\n".'<meta content="article" property="og:type">';
-    	$str .= "\n".'<meta content="'.$meta_title.'" property="og:title">';
-    	$str .= "\n".'<meta content="'.$meta_description.'" property="og:description">';
-    	$str .= "\n".'<meta content="'.CGlobal::web_name.'" property="og:site_name">';
-    	$str .= "\n".'<meta content="'.$img.'" itemprop="thumbnailUrl" property="og:image">';
+    	$str .= "\n".'<meta property="og:type" content="article" >';
+    	$str .= "\n".'<meta property="og:title" content="'.$meta_title.'" >';
+    	$str .= "\n".'<meta property="og:description" content="'.$meta_description.'" >';
+    	$str .= "\n".'<meta property="og:site_name" content="'.CGlobal::web_name.'" >';
+    	$str .= "\n".'<meta itemprop="thumbnailUrl" property="og:image" content="'.$img.'" >';
     
     	//Twitter
     	$str .= "\n".'<meta name="twitter:title" content="'.$meta_title.'">';
@@ -706,7 +706,6 @@ class FunctionLib {
     		$str .= "\n".'<meta property="og:url" itemprop="url" content="'.$url.'">';
     		$str .= "\n".'<meta name="twitter:url" content="'.$url.'">';
     	}
-    
     	CGlobal::$extraMeta = $str;
     }
 
