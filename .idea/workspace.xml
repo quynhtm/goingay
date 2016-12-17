@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c717333-8288-4d8a-8ab4-ffaa1fccb75d" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\xampp\htdocs\goingay\app\views\site\SiteLayouts\searchProduct.blade.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/BaseSiteController.php" afterPath="$PROJECT_DIR$/app/controllers/BaseSiteController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/site/SiteHomeController.php" afterPath="$PROJECT_DIR$/app/controllers/site/SiteHomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php" afterPath="$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/routes_site.php" afterPath="$PROJECT_DIR$/app/routes/routes_site.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="webtintuc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,10 +24,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SiteHomeController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SiteHomeController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/site/SiteHomeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5644172">
+            <state vertical-scroll-proportion="-17.692308">
               <caret line="85" column="25" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
               <folding>
                 <element signature="n#index#0;n#SiteHomeController#0;n#!!top" expanded="false" />
@@ -45,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseSiteController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BaseSiteController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/BaseSiteController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.4150944">
-              <caret line="43" column="40" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.16687116">
+              <caret line="31" column="54" selection-start-line="31" selection-start-column="54" selection-end-line="31" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -141,9 +136,9 @@
         <option value="$PROJECT_DIR$/app/library/AdminFunction/FunctionLib.php" />
         <option value="$PROJECT_DIR$/app/routes/routes_site.php" />
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/searchItems.blade.php" />
-        <option value="$PROJECT_DIR$/app/controllers/BaseSiteController.php" />
         <option value="$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/site/SiteHomeController.php" />
+        <option value="$PROJECT_DIR$/app/controllers/BaseSiteController.php" />
       </list>
     </option>
   </component>
@@ -936,22 +931,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077">
-          <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/BaseSiteController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.4150944">
-          <caret line="43" column="40" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/site/SiteLayouts/searchItems.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-100.69231">
@@ -962,7 +941,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/site/SiteHomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5644172">
+        <state vertical-scroll-proportion="-17.692308">
           <caret line="85" column="25" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
           <folding>
             <element signature="n#index#0;n#SiteHomeController#0;n#!!top" expanded="false" />
@@ -971,6 +950,22 @@
             <element signature="n#pageNews#0;n#SiteHomeController#0;n#!!top" expanded="false" />
             <element signature="n#pageDetailNew#0;n#SiteHomeController#0;n#!!top" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.423077">
+          <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/BaseSiteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16687116">
+          <caret line="31" column="54" selection-start-line="31" selection-start-column="54" selection-end-line="31" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>
