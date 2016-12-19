@@ -23,20 +23,19 @@
 
 	@if(!empty($resultHomeSlider))
 	<div class="box-home-post-hot ext">
-		<ul id="owl-slider">
+		<div id="owl-slider">
 			@foreach ($resultHomeSlider as $keySlider => $itemHomeSlider)
-			<li>
+			<div class="item">
 				<a class="img-slider" href="{{FunctionLib::buildLinkDetailItem($itemHomeSlider['item_id'],$itemHomeSlider['item_name'],$itemHomeSlider['item_category_id'])}}" title="{{$itemHomeSlider['item_name']}}">
 					<img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHomeSlider['item_id'], $itemHomeSlider['item_image'], CGlobal::sizeImage_200)}}" title="{{$itemHomeSlider['item_name']}}" alt="{{$itemHomeSlider['item_name']}}" >
 			   </a>
 			   <h2>
 				   <a itemprop="name" class="title-item-hot" href="{{FunctionLib::buildLinkDetailItem($itemHomeSlider['item_id'],$itemHomeSlider['item_name'],$itemHomeSlider['item_category_id'])}}" title="{{$itemHomeSlider['item_name']}}">{{$itemHomeSlider['item_name']}}</a>
 			   </h2>
-			</li>
+			</div>
 			@endforeach
-		</ul>
+		</div>
 	</div>
-	
 	<script>
     $(document).ready(function(){
       $("#owl-slider").owlCarousel({

@@ -3,19 +3,17 @@
 		<div class="box-footer">
 			<div class="box-60">
 				<div class="address">
-					<!--
 					{{$address}}
-					-->
+				</div>
 			</div>
-		</div>
 			<div class="box-40">
 				<div class="percent-45">
 					<div class="f-title">
 						<a hreft="">Quy chế về tin đăng</a>
 					</div>
 					<ul class="f-box-link">
-						<li><a href="http://raovatphuly.vn/chi-tiet/tin-tuc-1/quy-che-dang-tin.html" title="Quy chế đăng tin">Quy chế đăng tin</a></li>
-						<li><a href="http://raovatphuly.vn/chi-tiet/tin-tuc-2/chinh-sach-bao-mat.html" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
+						<li><a href="{{URL::route('site.home')}}/chi-tiet/tin-tuc-1/quy-che-dang-tin.html" title="Quy chế đăng tin">Quy chế đăng tin</a></li>
+						<li><a href="{{URL::route('site.home')}}/chi-tiet/tin-tuc-2/chinh-sach-bao-mat.html" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
 						<li><a href="">Quy trình giải quyết khiếu nại</a></li>
 						<li><a href="">Quy trình thanh toán</a></li>
 					</ul>

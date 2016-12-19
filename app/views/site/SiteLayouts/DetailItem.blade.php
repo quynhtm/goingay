@@ -7,9 +7,27 @@
 		</h2>
 	</div>
 	<div class="content-boxcat">
-		<div class="slide-detail-post">
-			<img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $itemShow->item_image, CGlobal::sizeImage_500)}}" title="{{$itemShow->item_name}}" alt="{{$itemShow->item_name}}">
+		<div id="owl-slider-view" class="slide-detail-post">
+			@if($itemShow->item_image_other != '')
+			<?php $itemShow->item_image_other = unserialize($itemShow->item_image_other); ?>
+			@if(!empty($itemShow->item_image_other))
+				@foreach( $itemShow->item_image_other as $img)
+				<div><img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $img, CGlobal::sizeImage_500)}}" title="{{$itemShow->item_name}}" alt="{{$itemShow->item_name}}"></div>
+				@endforeach
+			@endif
+			@else
+			<div><img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $itemShow->item_image, CGlobal::sizeImage_500)}}" title="{{$itemShow->item_name}}" alt="{{$itemShow->item_name}}"></div>
+			@endif
 		</div>
+		<script>
+		    $(document).ready(function(){
+		      $("#owl-slider-view").owlCarousel({
+		        items : 1,
+		        navigation : true,
+		      });
+		    });
+		 </script>
+		    
 		<div class="info-detail-post">
 			@if($itemShow->item_type_price == CGlobal::TYPE_PRICE_NUMBER)
 				<h4 class="price-detail">{{FunctionLib::numberFormat($itemShow->item_price_sell)}} đ</h4>
