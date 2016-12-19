@@ -63,6 +63,49 @@ class SiteHomeController extends BaseSiteController
         $this->footer();
     }
 
+	//tim kiem tin
+	public function searchItems(){
+		$meta_title = $meta_keywords = $meta_description = 'Tìm kiếm nhanh';
+		$meta_img= '';
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+		$this->header();
+		$this->menuLeft(0);
+
+		//List san pham cï¿½ng danh muc n?i b?t TOP
+		$number_show_hot = 3;
+		$searchHot['customer_id'] = 1;
+		$searchHot['item_image'] = 1;//check cï¿½ ?nh ??i di?n
+		$searchHot['field_get'] = $this->str_field_items_get;
+		$resultHot = self::getItemHot($searchHot,$number_show_hot);
+
+		//danh sach tin dang cua danh m?c
+		$pageNo = (int) Request::get('page_no',1);
+		$limit = CGlobal::number_limit_show;
+		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cï¿½i n?i b?t ? trï¿½n ?i
+		$search = $data = array();
+		$totalSearch = 0;
+		$search['customer_id'] = 1;
+		$search['field_get'] = $this->str_field_items_get;
+		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
+		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
+
+		//t?nh thï¿½nh
+		$arrProvince = Province::getAllProvince();
+
+		//quang cao ben phải
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
+
+		$this->layout->content = View::make('site.SiteLayouts.searchItems')
+			->with('arrProvince', $arrProvince)
+			->with('arrCustomer', array())
+			->with('paging', $paging)
+			->with('total', $totalSearch)
+			->with('arrBannerRight', $arrBannerRight)
+			->with('resultHot', $resultHot)
+			->with('resultItemCategory', $resultItemCategory);
+		$this->footer();
+	}
+
 	//chi tiet tin rao
 	public function pageDetailItem( $item_name, $item_category_id,$item_id){
 		if((int)$item_id <= 0){
@@ -77,11 +120,12 @@ class SiteHomeController extends BaseSiteController
 		$this->header();
 		$this->menuLeft($itemShow->item_category_id);
 		//seo
-		$meta_title = $itemShow->item_name;
-		$meta_keywords = CGlobal::web_name;
-		$meta_description = FunctionLib::substring($itemShow->item_content,300);
-		$meta_img= '';
-		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+		$meta_title = addslashes($itemShow->item_name);
+		$meta_keywords = CGlobal::web_name.' - '.addslashes($itemShow->item_name);
+		$meta_description = addslashes(FunctionLib::substring($itemShow->item_content,200));
+		$meta_img= ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $itemShow->item_image, CGlobal::sizeImage_200);
+		$url_detail = FunctionLib::buildLinkDetailItem($itemShow->item_id, $itemShow->item_name, $itemShow->item_category_id);
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description,$url_detail);
 
 		//thong tin khach dang tin
 		$arrCustomer = UserCustomer::getByID($itemShow->customer_id);
@@ -121,9 +165,9 @@ class SiteHomeController extends BaseSiteController
 		if((int)$catid <= 0){
 			return Redirect::route('site.home');
 		}
-		$meta_title = $meta_keywords = $meta_description = $catname;
-		$meta_img= '';
-		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+		$meta_title = $meta_keywords = $meta_description = $meta_img= '';
+		$url_seo = FunctionLib::buildLinkCategory($catid, $catname);
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description,$url_seo);
 
     	$this->header();
     	$this->menuLeft($catid);
@@ -183,9 +227,9 @@ class SiteHomeController extends BaseSiteController
 		if(empty($arrCustomer)){
 			return Redirect::route('site.home');
 		}
-		$meta_title = $meta_keywords = $meta_description = $customer_name;
-		$meta_img= '';
-		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+		$meta_title = $meta_keywords = $meta_description = $meta_img= '';
+		$url_seo = FunctionLib::buildLinkItemsCustomer($arrCustomer->customer_id, $arrCustomer->customer_name);
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description,$url_seo);
 
 		$this->header();
 		$this->menuLeft(0);
@@ -284,6 +328,5 @@ class SiteHomeController extends BaseSiteController
 		$this->layout->content = View::make('site.SiteLayouts.page404');
 		$this->footer();
 	}
-
 }
 

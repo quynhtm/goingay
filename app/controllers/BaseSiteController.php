@@ -25,7 +25,10 @@ class BaseSiteController extends BaseController
     	
     	FunctionLib::site_js('lib/sticky/jquery.sticky.js', CGlobal::$POS_END);
     }
-    public function header(){
+    public function header($category_id = 0, $province_id = 0){
+		//tim kiem
+		$keyword = htmlspecialchars(Request::get('keyword', ''));
+
         $messages = FunctionLib::messages('messages');
 		$user_customer = $this->user_customer;
 		if(empty($user_customer)){
@@ -38,6 +41,9 @@ class BaseSiteController extends BaseController
 			FunctionLib::debug($arrBannerHead);
 		}*/
 		$this->layout->header = View::make("site.BaseLayouts.header")
+								->with('keyword', $keyword)
+								->with('keyword', $keyword)
+								->with('keyword', $keyword)
 								->with('user_customer', $user_customer)
 								->with('messages', $messages)
 								->with('arrBannerHead', $arrBannerHead);

@@ -9,6 +9,7 @@
 //Home
 Route::any('/', array('as' => 'site.home','uses' => 'SiteHomeController@index'));
 Route::get('404.html',array('as' => 'site.page404','uses' =>'SiteHomeController@page404'));
+Route::get('tim-kiem.html',array('as' => 'site.searchItems','uses' =>'SiteHomeController@searchItems'));
 
 //Register - Login
 Route::match(['GET','POST'],'dang-ky.html', array('as' => 'customer.pageRegister','uses' => 'SiteUserCustomerController@pageRegister'));
@@ -38,7 +39,7 @@ Route::get('chi-tiet/tin-tuc-{new_id}/{news_title}.html',array('as' => 'Site.pag
 
 
 /******************************************************************************************************************************
- * Thao tac co phan dang nh?p cua Kh�ch h�ng
+ * Thao tac co phan dang nhap cua khach hang
 //Quan ly tin dang
  * /***************************************************************************************************************************
  * */

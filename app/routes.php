@@ -125,10 +125,10 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('banner/deleteBanner', array('as' => 'admin.deleteBanner','uses' => 'BannerController@deleteBanner'));//ajax
 
     //Thong tin cau hinh chung: hotline, thong tin chan trang...
-    Route::get('info', array('as' => 'admin.info','uses' => 'InfoController@listView'));
-    Route::get('info/edit/{id?}', array('as' => 'admin.info_edit','uses' => 'InfoController@getItem'))->where('id', '[0-9]+');
-    Route::post('info/edit/{id?}', array('as' => 'admin.info_edit','uses' => 'InfoController@postItem'))->where('id', '[0-9]+');
-    Route::match(['GET','POST'],'info/delete', array('as' => 'admin.info_delete','uses' => 'InfoController@delete'));
+    Route::get('info/view', array('as' => 'admin.info','uses' => 'InfoController@listView'));
+    Route::get('info/edit/{id?}', array('as' => 'admin.infoEdit','uses' => 'InfoController@getItem'))->where('id', '[0-9]+');
+    Route::post('info/edit/{id?}', array('as' => 'admin.infoEdit','uses' => 'InfoController@postItem'))->where('id', '[0-9]+');
+    Route::post('info/deleteInfor', array('as' => 'admin.infoDelete','uses' => 'InfoController@deleteInfor'));
     //Thung rac
     Route::get('trash', array('as' => 'admin.trash','uses' => 'TrashController@listView'));
     Route::get('trash/edit/{id?}', array('as' => 'admin.trash_edit','uses' => 'TrashController@getItem'))->where('id', '[0-9]+');

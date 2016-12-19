@@ -146,10 +146,7 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="clearfix"></div>
-
                 </div>
 
                 <div style="float: left;width: 40%">

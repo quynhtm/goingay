@@ -34,7 +34,7 @@
 					<div class="panel-footer text-right">
 						@if($is_root || $permission_full ==1 || $permission_create == 1)
 							<span class="">
-                            <a class="btn btn-danger btn-sm" href="{{URL::route('admin.newsEdit')}}">
+                            <a class="btn btn-danger btn-sm" href="{{URL::route('admin.provinceEdit')}}">
 								<i class="ace-icon fa fa-plus-circle"></i>
 								Thêm mới
 							</a>

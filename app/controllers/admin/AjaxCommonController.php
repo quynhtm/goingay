@@ -25,9 +25,8 @@ class AjaxCommonController extends BaseSiteController
                 $this->sizeImageShowUpload = CGlobal::sizeImage_300;
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, CGlobal::FOLDER_BANNER, $type);
                 break;
-            case 4://img logo shop
-                	$this->sizeImageShowUpload = CGlobal::sizeImage_300;
-                	$aryData = $this->uploadImageToFolder($dataImg, $id_hiden, CGlobal::FOLDER_LOGO_SHOP, $type);
+            case 4://img thông tin seo
+                	$aryData = $this->uploadImageToFolder($dataImg, $id_hiden, CGlobal::FOLDER_INFORSEO, $type);
                 	break;
             default:
                 break;
@@ -72,6 +71,11 @@ class AjaxCommonController extends BaseSiteController
                         $new_row['banner_create_time'] = time();
                         $new_row['banner_status'] = CGlobal::IMAGE_ERROR;
                         $item_id = Banner::addData($new_row);
+                        break;
+                    case 4://img inforSeo
+                        $new_row['info_created'] = time();
+                        $new_row['info_status'] = CGlobal::IMAGE_ERROR;
+                        $item_id = Info::addData($new_row);
                         break;
                     default:
                         break;
@@ -135,19 +139,16 @@ class AjaxCommonController extends BaseSiteController
                         }
                     }
                     if($type == 4){//anh logo shop
-                    	$logo = UserShop::getByID($item_id);
+                    	$logo = Info::getByID($item_id);
                     	if($logo){
-                    		if($logo->shop_logo != ''){//xoa anh cũ
+                    		if($logo->info_img != ''){//xoa anh cũ
                     			//xoa anh upload
-                    			FunctionLib::deleteFileUpload($logo->shop_logo,$item_id,CGlobal::FOLDER_LOGO_SHOP);
+                    			FunctionLib::deleteFileUpload($logo->info_img,$item_id,CGlobal::FOLDER_INFORSEO);
                     			//xoa anh thumb
-                    			$arrSizeThumb = CGlobal::$arrBannerSizeImage;
-                    			foreach($arrSizeThumb as $k=>$size){
-                    				$sizeThumb = $size['w'].'x'.$size['h'];
-                    				FunctionLib::deleteFileThumb($logo->shop_logo,$item_id,CGlobal::FOLDER_LOGO_SHOP,$sizeThumb);
-                    			}
+                                $sizeThumb = $this->sizeImageShowUpload.'x'.$this->sizeImageShowUpload;
+                                FunctionLib::deleteFileThumb($logo->info_img,$item_id,CGlobal::FOLDER_INFORSEO,$sizeThumb);
                     		}
-                    		UserShop::updateData($item_id,array('shop_logo'=>$file_name));//cap nhat anh moi
+                            Info::updateData($item_id,array('info_img'=>$file_name));//cap nhat anh moi
                     	}
                     }
                 }
@@ -207,22 +208,25 @@ class AjaxCommonController extends BaseSiteController
                         }
                     }
                     break;
-                    case 4 ://xoa logo shop
-                    	$logo = UserShop::getByID($item_id);
-                    	if($logo){
-                    		if($logo->shop_logo != '' && strcmp(trim($logo->shop_logo),$nameImage) == 0){//xoa anh cu
-                    			//xoa anh upload
-                    			FunctionLib::deleteFileUpload($logo->shop_logo,$item_id,CGlobal::FOLDER_LOGO_SHOP);
-                    			//xóa anh thumb
-                    			$arrSizeThumb = CGlobal::$arrBannerSizeImage;
-                    			foreach($arrSizeThumb as $k=>$size){
-                    				$sizeThumb = $size['w'].'x'.$size['h'];
-                    				FunctionLib::deleteFileThumb($logo->shop_logo,$item_id,CGlobal::FOLDER_LOGO_SHOP,$sizeThumb);
-                    			}
-                    			$aryData['intIsOK'] = 1;
-                    		}
-                    	}
-                    	break;
+                case 4 ://xoa ảnh infor
+                    $data = Info::find($item_id);
+                    if($data != null){
+                        //Remove Img
+                        $info_img = ($data->info_img != '') ? $data->info_img : '';
+                        if($info_img != ''){
+                            //xoa anh upload
+                            FunctionLib::deleteFileUpload($data->info_img,$data->info_id,CGlobal::FOLDER_INFORSEO);
+                            //x�a anh thumb
+                            $arrSizeThumb = CGlobal::$arrBannerSizeImage;
+                            foreach($arrSizeThumb as $k=>$size){
+                                $sizeThumb = $size['w'].'x'.$size['h'];
+                                FunctionLib::deleteFileThumb($data->info_img,$data->info_id,CGlobal::FOLDER_INFORSEO,$sizeThumb);
+                            }
+                        }
+                        //End Remove Img
+                         $aryData['intIsOK'] = 1;
+                    }
+                    break;
                 default:
                     break;
             }
