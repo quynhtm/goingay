@@ -31,8 +31,8 @@
 	        </div>
 		</div>
 		<div class="box-search">
-			<form class="seach" action="" method="get">
-				<input name="q" class="keyword" placeholder="Tìm kiếm..." type="text">
+			<form class="seach" action="{{URL::route('site.searchItems')}}" method="get">
+				<input id="sys_keyword" name="keyword" class="keyword" placeholder="Nhập tiêu đề tin cần tìm" type="text" value="{{$keyword}}">
 				<input value="Search" class="btn-seach" type="submit">
 			</form>
 		</div>
