@@ -5,7 +5,7 @@
 				@foreach ($resultHomeTop as $keytop => $itemHomeTop)
 					<li>
 						<a class="img-hot" href="{{FunctionLib::buildLinkDetailItem($itemHomeTop['item_id'],$itemHomeTop['item_name'],$itemHomeTop['item_category_id'])}}" title="{{$itemHomeTop['item_name']}}">
-							<img {{CGlobal::size_imge_show_list_180}} src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHomeTop['item_id'], $itemHomeTop['item_image'], CGlobal::sizeImage_300)}}" title="{{$itemHomeTop['item_name']}}" alt="{{$itemHomeTop['item_name']}}" >
+							<img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHomeTop['item_id'], $itemHomeTop['item_image'], CGlobal::sizeImage_300)}}" title="{{$itemHomeTop['item_name']}}" alt="{{$itemHomeTop['item_name']}}" >
 							@if($itemHomeTop['item_type_price'] == CGlobal::TYPE_PRICE_NUMBER)
 								<span class="price-hot">{{FunctionLib::numberFormat($itemHomeTop['item_price_sell'])}} đ</span>
 							@else
@@ -27,7 +27,7 @@
 			@foreach ($resultHomeSlider as $keySlider => $itemHomeSlider)
 			<li>
 				<a class="img-slider" href="{{FunctionLib::buildLinkDetailItem($itemHomeSlider['item_id'],$itemHomeSlider['item_name'],$itemHomeSlider['item_category_id'])}}" title="{{$itemHomeSlider['item_name']}}">
-					<img {{CGlobal::size_imge_show_list_150}} src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHomeSlider['item_id'], $itemHomeSlider['item_image'], CGlobal::sizeImage_150)}}" title="{{$itemHomeSlider['item_name']}}" alt="{{$itemHomeSlider['item_name']}}" >
+					<img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHomeSlider['item_id'], $itemHomeSlider['item_image'], CGlobal::sizeImage_200)}}" title="{{$itemHomeSlider['item_name']}}" alt="{{$itemHomeSlider['item_name']}}" >
 			   </a>
 			   <h2>
 				   <a itemprop="name" class="title-item-hot" href="{{FunctionLib::buildLinkDetailItem($itemHomeSlider['item_id'],$itemHomeSlider['item_name'],$itemHomeSlider['item_category_id'])}}" title="{{$itemHomeSlider['item_name']}}">{{$itemHomeSlider['item_name']}}</a>
@@ -54,7 +54,7 @@
 								<div class="line">
 									<div class="thumb">
 										<a href="{{FunctionLib::buildLinkDetailItem($itemShow['item_id'],$itemShow['item_name'],$itemShow['item_category_id'])}}" title="{{$itemShow['item_name']}}">
-											<img itemprop="image" {{CGlobal::size_imge_show_list_60}} src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow['item_id'], $itemShow['item_image'], CGlobal::sizeImage_150)}}" title="{{$itemShow['item_name']}}" alt="{{$itemShow['item_name']}}" >
+											<img itemprop="image" src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow['item_id'], $itemShow['item_image'], CGlobal::sizeImage_150)}}" title="{{$itemShow['item_name']}}" alt="{{$itemShow['item_name']}}" >
 										</a>
 									</div>
 									<div class="round-titlebox">
