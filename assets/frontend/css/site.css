@@ -312,6 +312,7 @@ h1, h2, h3, h4, h5, h6{
     margin: 0 2px 10px;
     vertical-align: top;
     width: 32.4%;
+	border: 1px solid #ddd;
 }
 .box-home-post-hot ul li .img-hot {
     float: left;
@@ -356,8 +357,9 @@ h1, h2, h3, h4, h5, h6{
 .box-home-post-hot ul li .img-slider img {
     width: auto;
 }
-.box-home-post-hot.ext li{
-	width:19%;	
+.box-home-post-hot.ext li {
+    width: 95%;
+    margin: 0;
 }
 .box-home-post-hot.ext li .title-item-hot {
     font: 400 13px/18px arial;
@@ -1332,4 +1334,40 @@ h1, h2, h3, h4, h5, h6{
     color: #549cfe;
     font-size: 13px;
     line-height: 1.2;
+}
+.box-home-post-hot.ext .owl-carousel .owl-item {
+    float: left;
+    width: 153px !important;
+}
+.box-home-post-hot.ext .owl-buttons {
+    width: 100%;
+}
+.box-home-post-hot.ext .owl-buttons .owl-prev {
+    background: url(../img/icon.png) no-repeat -175px -55px;
+    width: 25px;
+    height: 32px;
+    z-index: 10;
+    text-indent: -99999em;
+	left:0;
+	position: absolute;
+    top: 30%;
+}
+.box-home-post-hot.ext .owl-buttons .owl-prev:hover {
+    background: url(../img/icon.png) no-repeat -175px -88px;
+}
+.box-home-post-hot.ext .owl-buttons .owl-next {
+    background: url(../img/icon.png) no-repeat -205px -55px;
+    width: 25px;
+    height: 32px;
+    z-index: 10;
+    text-indent: -99999em;
+	right: 0;
+	position: absolute;
+    top: 30%;
+}
+.box-home-post-hot.ext .owl-buttons .owl-next:hover {
+    background: url(../img/icon.png) no-repeat -205px -88px;
+}
+#sliderHead .slide{
+	width: 100%;
 }

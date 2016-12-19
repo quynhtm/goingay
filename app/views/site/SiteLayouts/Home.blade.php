@@ -23,7 +23,7 @@
 
 	@if(!empty($resultHomeSlider))
 	<div class="box-home-post-hot ext">
-		<ul>
+		<ul id="owl-slider">
 			@foreach ($resultHomeSlider as $keySlider => $itemHomeSlider)
 			<li>
 				<a class="img-slider" href="{{FunctionLib::buildLinkDetailItem($itemHomeSlider['item_id'],$itemHomeSlider['item_name'],$itemHomeSlider['item_category_id'])}}" title="{{$itemHomeSlider['item_name']}}">
@@ -36,6 +36,16 @@
 			@endforeach
 		</ul>
 	</div>
+	
+	<script>
+    $(document).ready(function(){
+      $("#owl-slider").owlCarousel({
+        items : 5,
+        navigation : true,
+      });
+    });
+    </script>
+	
 	@endif
 
 	<div class="box-home-category">
