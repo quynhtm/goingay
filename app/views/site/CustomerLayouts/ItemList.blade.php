@@ -75,7 +75,7 @@
 						@endif
 						@if($item->item_category_name != '')<br/><b>Mục tin: </b>{{ $item->item_category_name }}@endif
 						@if(isset($arrTypeAction[$item->item_type_action]))
-							<br/><b>Loại tin: </b>{{ $arrTypeAction[$item->item_type_action] }}
+							<br/><b @if($item->item_type_action == CGlobal::ITEMS_TYPE_ACTION_1) style="color: red!important;" @else style="color: green!important;" @endif>{{ $arrTypeAction[$item->item_type_action] }}</b>
 						@endif
 					</td>
 					<td class="text-center text-middle">

@@ -122,7 +122,7 @@
                                         <br/><b class="red">{{ $arrTypeProduct[$item->item_is_hot] }}</b>
                                     @endif
                                     @if(isset($arrTypeAction[$item->item_type_action]))
-                                        <br/><b class="green">{{ $arrTypeAction[$item->item_type_action] }}</b>
+                                        <br/><b class="@if($item->item_type_action == CGlobal::ITEMS_TYPE_ACTION_1) red @else green @endif">{{ $arrTypeAction[$item->item_type_action] }}</b>
                                     @endif
                                 </td>
                                 <td class="text-left text-middle">
