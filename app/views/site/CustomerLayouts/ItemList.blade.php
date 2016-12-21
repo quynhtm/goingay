@@ -16,12 +16,18 @@
 				</select>
 			</div>
 			<div class="form-group col-lg-3">
+				<label for="item_status">Loại tin đăng</label>
+				<select name="item_type_action" id="item_type_action" class="form-control input-sm">
+					{{$optionTypeAction}}
+				</select>
+			</div>
+			<div class="form-group col-lg-3">
 				<label for="item_category_id">Danh mục</label>
 				<select name="item_category_id" id="item_category_id" class="form-control input-sm">
 					{{$optionCategory}}
 				</select>
 			</div>
-			<div class="form-group col-lg-12 text-right">
+			<div class="form-group col-lg-9 text-right padding-10">
 				<span class="">
 				<a class="btn btn-danger btn-sm" href="{{URL::route('customer.ItemsAdd')}}">
 					<i class="ace-icon fa fa-plus-circle"></i>
@@ -68,6 +74,9 @@
 							{{ $item->item_name }}
 						@endif
 						@if($item->item_category_name != '')<br/><b>Mục tin: </b>{{ $item->item_category_name }}@endif
+						@if(isset($arrTypeAction[$item->item_type_action]))
+							<br/><b>Loại tin: </b>{{ $arrTypeAction[$item->item_type_action] }}
+						@endif
 					</td>
 					<td class="text-center text-middle">
 						<span style="font-size: 9px;color: green">Top: {{ date('d-m-Y h:i',$item->time_ontop) }}</span>

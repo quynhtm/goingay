@@ -12,6 +12,7 @@ class SiteUserCustomerController extends BaseSiteController{
     protected $user_customer = array();
 	private $arrStatusProduct = array(-1 => '---- Trạng thái----',CGlobal::status_show => 'Hiển thị',CGlobal::status_hide => 'Ẩn');
 	private $arrTypePrice = array(CGlobal::TYPE_PRICE_NUMBER => 'Hiển thị giá bán', CGlobal::TYPE_PRICE_CONTACT => 'Liên hệ với người đăng');
+	private $arrTypeAction = array(CGlobal::ITEMS_TYPE_ACTION_1 => 'Cần bán/ Tuyển sinh', CGlobal::ITEMS_TYPE_ACTION_2 => 'Cần mua/ Tuyển dụng');
 	private $error = array();
 
 	public function __construct(){
@@ -400,6 +401,7 @@ class SiteUserCustomerController extends BaseSiteController{
 
 		$search['item_name'] = addslashes(Request::get('item_name',''));
 		$search['item_status'] = addslashes(Request::get('item_status',-1));
+		$search['item_type_action'] = addslashes(Request::get('item_type_action',0));
 		$search['item_category_id'] = Request::get('item_category_id',-1);
 		$search['customer_id'] = (isset($this->user_customer['customer_id']) && $this->user_customer['customer_id'] > 0)?(int)$this->user_customer['customer_id']: 0;//tìm theo khach
 		//$search['field_get'] = 'order_id,order_product_name,order_status';//cac truong can lay
@@ -415,6 +417,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		$optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCategory, $search['item_category_id']);
 
 		$optionStatus = FunctionLib::getOption($this->arrStatusProduct,$search['item_status']);
+		$optionTypeAction = FunctionLib::getOption(array(0=>'--- Chọn loại tin đăng ---')+$this->arrTypeAction, $search['item_type_action']);
 		$this->layout->content = View::make('site.CustomerLayouts.ItemList')
 			->with('paging', $paging)
 			->with('stt', ($pageNo-1)*$limit)
@@ -422,8 +425,10 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('sizeShow', count($data))
 			->with('data', $dataSearch)
 			->with('search', $search)
+			->with('optionTypeAction', $optionTypeAction)
 			->with('optionCategory', $optionCategory)
 			->with('optionStatus', $optionStatus)
+			->with('arrTypeAction', $this->arrTypeAction)
 			->with('user_customer',$this->user_customer)
 			->with('arrBannerRight',$arrBannerRight);
 		$this->footer();
@@ -461,6 +466,7 @@ class SiteUserCustomerController extends BaseSiteController{
 
 		$optionStatusProduct = FunctionLib::getOption($this->arrStatusProduct,CGlobal::status_show);
 		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice,CGlobal::TYPE_PRICE_CONTACT);
+		$optionTypeAction = FunctionLib::getOption($this->arrTypeAction,CGlobal::ITEMS_TYPE_ACTION_1);
 
 		$this->layout->content = View::make('site.CustomerLayouts.ItemEdit')
 			->with('error', array())
@@ -471,6 +477,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('imagePrimary', $imagePrimary)
 			->with('imageHover', $imageHover)
 			->with('optionCategory', $optionCategory)
+			->with('optionTypeAction', $optionTypeAction)
 			->with('optionStatusProduct', $optionStatusProduct)
 			->with('optionTypePrice', $optionTypePrice)
 			->with('arrBannerRight', $arrBannerRight);
@@ -529,6 +536,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			'item_name'=>$items->item_name,
 			'item_category_id'=>$items->item_category_id,
 			'item_status'=>$items->item_status,
+			'item_type_action'=>$items->item_type_action,
 			'item_content'=>$items->item_content,
 			'item_type_price'=>$items->item_type_price,
 			'item_price_sell'=>$items->item_price_sell,
@@ -542,6 +550,7 @@ class SiteUserCustomerController extends BaseSiteController{
 
 		$optionStatusProduct = FunctionLib::getOption($this->arrStatusProduct,isset($items->item_status)? $items->item_status :CGlobal::status_hide);
 		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice,isset($items->item_type_price)? $items->item_type_price:CGlobal::TYPE_PRICE_NUMBER);
+		$optionTypeAction = FunctionLib::getOption($this->arrTypeAction,isset($items->item_type_action)? $items->item_type_action:CGlobal::ITEMS_TYPE_ACTION_1);
 
 		$this->layout->content = View::make('site.CustomerLayouts.ItemEdit')
 			->with('error', $this->error)
@@ -550,6 +559,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('data', $dataShow)
 			->with('arrViewImgOther', $arrViewImgOther)
 			->with('imagePrimary', $imagePrimary)
+			->with('optionTypeAction', $optionTypeAction)
 			->with('imageHover', $imageHover)
 			->with('optionCategory', $optionCategory)
 			->with('optionStatusProduct', $optionStatusProduct)
@@ -587,6 +597,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		$dataSave['item_status'] = addslashes(Request::get('item_status'));
 		$dataSave['item_content'] = Request::get('item_content');
 		$dataSave['item_type_price'] = addslashes(Request::get('item_type_price',CGlobal::TYPE_PRICE_CONTACT));
+		$dataSave['item_type_action'] = (int)(Request::get('item_type_action',CGlobal::ITEMS_TYPE_ACTION_1));
 		$dataSave['item_price_sell'] = (int)str_replace('.','',Request::get('item_price_sell'));
 		$dataSave['item_image'] = $imagePrimary = addslashes(Request::get('image_primary'));
 
@@ -675,6 +686,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		$optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCategory,$dataSave['item_category_id']);
 		$optionStatusProduct = FunctionLib::getOption($this->arrStatusProduct,$dataSave['item_status']);
 		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice,$dataSave['item_type_price']);
+		$optionTypeAction = FunctionLib::getOption($this->arrTypeAction,$dataSave['item_type_action']);
 
 		$this->layout->content = View::make('site.CustomerLayouts.ItemEdit')
 			->with('error', $this->error)
@@ -685,6 +697,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('imagePrimary', $imagePrimary)
 			->with('imageHover', $imageHover)
 			->with('optionCategory', $optionCategory)
+			->with('optionTypeAction', $optionTypeAction)
 			->with('optionStatusProduct', $optionStatusProduct)
 			->with('optionTypePrice', $optionTypePrice)
 			->with('arrBannerRight', $arrBannerRight);

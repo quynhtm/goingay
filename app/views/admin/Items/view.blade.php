@@ -37,6 +37,12 @@
                             </select>
                         </div>
                         <div class="form-group col-lg-3">
+                            <label for="order_status">Loại tin đăng</label>
+                            <select name="item_type_action" id="item_type_action" class="form-control input-sm">
+                                {{$optionTypeAction}}
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3">
                             <label for="order_status">Kiểu khóa SP</label>
                             <select name="item_block" id="item_block" class="form-control input-sm">
                                 {{$optionBlock}}
@@ -112,8 +118,11 @@
                                     @if($item->item_price_sell > 0)
                                         <br/><b>Giá:</b> <b class="red">{{ FunctionLib::numberFormat($item->item_price_sell) }} đ</b>
                                     @endif
-                                    @if(isset($arrTypeProduct[$item->item_is_hot]) && $item->item_is_hot != CGlobal::PRODUCT_NOMAL)
+                                    @if(isset($arrTypeProduct[$item->item_is_hot]) && $item->item_is_hot != CGlobal::ITEMS_NOMAL)
                                         <br/><b class="red">{{ $arrTypeProduct[$item->item_is_hot] }}</b>
+                                    @endif
+                                    @if(isset($arrTypeAction[$item->item_type_action]))
+                                        <br/><b class="green">{{ $arrTypeAction[$item->item_type_action] }}</b>
                                     @endif
                                 </td>
                                 <td class="text-left text-middle">

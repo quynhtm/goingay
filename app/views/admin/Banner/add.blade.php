@@ -50,6 +50,16 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
+                        <label for="name" class="control-label">Vị trí hiển thị</label>
+                        <div class="form-group">
+                            <select name="banner_position" id="banner_position" class="form-control input-sm">
+                                {{$optionPosition}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
                         <label for="name" class="control-label">Page quảng cáo</label>
                         <div class="form-group">
                             <select name="banner_page" id="banner_page" class="form-control input-sm">
@@ -72,8 +82,8 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="name" class="control-label">Thứ hiển thị</label>
-                        <input type="text" placeholder="Vị trí hiển thị" id="banner_order" name="banner_order"  class="form-control input-sm" value="@if(isset($data['banner_order'])){{$data['banner_order']}}@endif">
+                        <label for="name" class="control-label">Thứ tự hiển thị</label>
+                        <input type="text" placeholder="Thứ tự hiển thị" id="banner_order" name="banner_order"  class="form-control input-sm" value="@if(isset($data['banner_order'])){{$data['banner_order']}}@endif">
                     </div>
                 </div>
                 <div class="col-sm-4">

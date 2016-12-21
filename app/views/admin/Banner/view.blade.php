@@ -44,6 +44,12 @@
                                 {{$optionStatus}}
                             </select>
                         </div>
+                        <div class="form-group col-lg-3">
+                            <label for="category_status">Vị trí hiển thị</label>
+                            <select name="banner_position" id="banner_position" class="form-control input-sm">
+                                {{$optionPosition}}
+                            </select>
+                        </div>
                         <div class="form-group col-lg-9 text-right">
                             @if($is_root || $permission_full ==1 || $permission_create == 1)
                                 <a class="btn btn-danger btn-sm" href="{{URL::route('admin.bannerEdit')}}">
@@ -86,10 +92,11 @@
                                 </td>
                                 <td class="text-center text-middle">
                                     @if(isset($arrTypeBanner[$item->banner_type])){{$arrTypeBanner[$item->banner_type]}}@else ---- @endif
+                                    @if($item->banner_position > 0)<br/>Vị trí: {{$arrPosition[$item->banner_position]}}@endif
+                                    @if($item->banner_order > 0)<br/>Thứ tự: {{$item->banner_order}}@endif
                                 </td>
                                 <td class="text-center text-middle">
                                     @if(isset($arrPage[$item->banner_page])){{$arrPage[$item->banner_page]}}@else ---- @endif
-
                                 </td>
                                 <td>
                                     <br/><b>Danh mục: </b>@if(isset($arrCategory[$item->banner_category_id])){{$arrCategory[$item->banner_category_id]}}@else ----- @endif

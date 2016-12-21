@@ -131,7 +131,10 @@ class CGlobal{
     const CUSTOMER_GENDER_GIRL = 0;
     const CUSTOMER_GENDER_BOY = 1;
 
-    //product
+    //items
+    const ITEMS_TYPE_ACTION_1 = 1; //1: Cần bán/ Tuyển sinh,
+    const ITEMS_TYPE_ACTION_2 = 2; //2:Cần mua/ Tuyển dụng
+
     const TYPE_PRICE_NUMBER = 1;
     const TYPE_PRICE_CONTACT = 2;
     const ITEMS_NOMAL = 1;

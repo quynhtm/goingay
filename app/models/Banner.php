@@ -12,8 +12,8 @@ class Banner extends Eloquent
     //cac truong trong DB
     protected $fillable = array('banner_id','banner_name', 'banner_link',
         'banner_image', 'banner_image_temp', 'banner_total_click',
-        'banner_is_target', 'banner_is_rel', 'banner_type',
-        'banner_order',//vị trí hiển thị
+        'banner_is_target', 'banner_is_rel', 'banner_type','banner_position','banner_parent_id',
+        'banner_order',//thứ tụ hiển thị
         'banner_page',// thuoc page nao
         'banner_province_id',//tỉnh thành
         'banner_category_id', //danh mục
@@ -74,6 +74,9 @@ class Banner extends Eloquent
             }
             if (isset($dataSearch['banner_page']) && $dataSearch['banner_page'] > 0) {
                 $query->where('banner_page', $dataSearch['banner_page']);
+            }
+            if (isset($dataSearch['banner_position']) && $dataSearch['banner_position'] > 0) {
+                $query->where('banner_position', $dataSearch['banner_position']);
             }
             $total = $query->count();
             $query->orderBy('banner_id', 'desc');

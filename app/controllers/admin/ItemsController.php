@@ -25,6 +25,7 @@ class ItemsController extends BaseAdminController
     private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
     private $arrBlock = array(-1 => 'Chọn kiểu khóa SP', CGlobal::ITEMS_NOT_BLOCK => 'Đang mở', CGlobal::ITEMS_BLOCK => 'Đang khóa');
     private $arrTypePrice = array(CGlobal::TYPE_PRICE_NUMBER => 'Hiển thị giá bán', CGlobal::TYPE_PRICE_CONTACT => 'Liên hệ với shop');
+    private $arrTypeAction = array(CGlobal::ITEMS_TYPE_ACTION_1 => 'Cần bán/ Tuyển sinh', CGlobal::ITEMS_TYPE_ACTION_2 => 'Cần mua/ Tuyển dụng');
     private $arrTypeProduct = array(-1 => '--Chọn loại sản phẩm--', CGlobal::ITEMS_NOMAL => 'Sản phẩm bình thường', CGlobal::ITEMS_HOT => 'Sản phẩm nổi bật', CGlobal::ITEMS_SELLOFF => 'Sản phẩm giảm giá');
     private $error =  array();
     private $arrShop =  array();
@@ -64,6 +65,7 @@ class ItemsController extends BaseAdminController
 
         $search['item_name'] = addslashes(Request::get('item_name',''));
         $search['item_id'] = (int)Request::get('item_id',0);
+        $search['item_type_action'] = (int)Request::get('item_type_action',0);
         $search['item_status'] = (int)Request::get('item_status',-1);
         $search['item_is_hot'] = (int)Request::get('item_is_hot',-1);
         $search['category_id'] = (int)Request::get('category_id',-1);
@@ -77,6 +79,7 @@ class ItemsController extends BaseAdminController
         //FunctionLib::debug($search);
 
         $optionStatus = FunctionLib::getOption($this->arrStatus, $search['item_status']);
+        $optionTypeAction = FunctionLib::getOption(array(0=>'--- Chọn loại tin đăng ---')+$this->arrTypeAction, $search['item_type_action']);
         $optionType = FunctionLib::getOption($this->arrTypeProduct, $search['item_is_hot']);
         $optionBlock = FunctionLib::getOption($this->arrBlock, $search['item_block']);
         $optionStatusUpdate = FunctionLib::getOption($this->arrStatusUpdate, -1);
@@ -92,7 +95,9 @@ class ItemsController extends BaseAdminController
             ->with('data', $dataSearch)
             ->with('search', $search)
             ->with('arrShop', $this->arrShop)
+            ->with('arrTypeAction', $this->arrTypeAction)
             ->with('arrTypeProduct', $this->arrTypeProduct)
+            ->with('optionTypeAction', $optionTypeAction)
             ->with('optionStatus', $optionStatus)
             ->with('optionType', $optionType)
             ->with('optionCategory', $optionCategory)

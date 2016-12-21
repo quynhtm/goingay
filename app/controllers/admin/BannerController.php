@@ -16,6 +16,7 @@ class BannerController extends BaseAdminController
     private $arrRunTime = array(-1 => '--Chọn thời gian chạy--', CGlobal::BANNER_NOT_RUN_TIME => 'Chạy mãi mãi', CGlobal::BANNER_IS_RUN_TIME => 'Chạy theo thời gian');
     private $arrProvince = array();
     private $arrRel = array(CGlobal::LINK_NOFOLLOW => 'Nofollow', CGlobal::LINK_FOLLOW => 'Follow');
+    private $arrPosition = array(0=>'---Chọn vị trí hiển thị ---',1=> 'Vị trí Top',2=> 'Vị trí Center',3=> 'Vị trí Bottom',);
 
     private $arrTypeBanner = array(-1 => '--- Chọn loại Banner --',
         CGlobal::BANNER_TYPE_TOP => 'Banner Top Header',
@@ -70,6 +71,7 @@ class BannerController extends BaseAdminController
         $search['banner_status'] = (int)Request::get('banner_status',-1);
         $search['banner_page'] = (int)Request::get('banner_page',-1);
         $search['banner_type'] = (int)Request::get('banner_type',-1);
+        $search['banner_position'] = (int)Request::get('banner_position',0);
         $search['banner_province_id'] = (int)Request::get('banner_province_id',-1);
         //$search['field_get'] = 'category_id,news_title,news_status';//cac truong can lay
 
@@ -80,6 +82,7 @@ class BannerController extends BaseAdminController
         $optionStatus = FunctionLib::getOption($this->arrStatus, $search['banner_status']);
         $optionType = FunctionLib::getOption($this->arrTypeBanner, $search['banner_type']);
         $optionPage = FunctionLib::getOption($this->arrPage, $search['banner_page']);
+        $optionPosition = FunctionLib::getOption($this->arrPosition, $search['banner_position']);
         $optionProvince = FunctionLib::getOption(array(0=>'--- Toàn quốc ---')+$this->arrProvince, $search['banner_province_id']);
         $this->layout->content = View::make('admin.Banner.view')
             ->with('paging', $paging)
@@ -91,7 +94,9 @@ class BannerController extends BaseAdminController
             ->with('optionStatus', $optionStatus)
             ->with('optionType', $optionType)
             ->with('optionPage', $optionPage)
+            ->with('optionPosition', $optionPosition)
             ->with('optionProvince', $optionProvince)
+            ->with('arrPosition', $this->arrPosition)
             ->with('arrStatus', $this->arrStatus)
             ->with('arrTypeBanner', $this->arrTypeBanner)
             ->with('arrPage', $this->arrPage)
@@ -116,6 +121,7 @@ class BannerController extends BaseAdminController
                 'banner_name'=>$banner->banner_name,
                 'banner_image'=>$banner->banner_image,
                 'banner_link'=>$banner->banner_link,
+                'banner_position'=>$banner->banner_position,
                 'banner_order'=>$banner->banner_order,
                 'banner_is_target'=>$banner->banner_is_target,
                 'banner_is_rel'=>$banner->banner_is_rel,
@@ -129,6 +135,7 @@ class BannerController extends BaseAdminController
                 'banner_status'=>$banner->banner_status);
         }
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['banner_status'])? $data['banner_status']: CGlobal::status_show);
+        $optionPosition = FunctionLib::getOption($this->arrPosition, isset($data['banner_position'])? $data['banner_position']: 1);
         $optionRunTime = FunctionLib::getOption($this->arrRunTime, isset($data['banner_is_run_time'])? $data['banner_is_run_time']: CGlobal::BANNER_NOT_RUN_TIME);
 
         $optionTypeBanner = FunctionLib::getOption($this->arrTypeBanner, isset($data['banner_type'])? $data['banner_type']: -1);
@@ -142,6 +149,7 @@ class BannerController extends BaseAdminController
             ->with('id', $id)
             ->with('data', $data)
             ->with('optionStatus', $optionStatus)
+            ->with('optionPosition', $optionPosition)
             ->with('optionCategory', $optionCategory)
             ->with('optionRunTime', $optionRunTime)
             ->with('optionTypeBanner', $optionTypeBanner)
@@ -161,6 +169,7 @@ class BannerController extends BaseAdminController
         $data['banner_image'] = addslashes(Request::get('image_primary'));//ảnh chính
         $data['banner_order'] = addslashes(Request::get('banner_order'));
 
+        $data['banner_position'] = (int)Request::get('banner_position', 1);
         $data['banner_is_target'] = (int)Request::get('banner_is_target', 0);
         $data['banner_is_rel'] = (int)Request::get('banner_is_rel', 0);
         $data['banner_type'] = (int)Request::get('banner_type',0);
@@ -186,6 +195,7 @@ class BannerController extends BaseAdminController
                 }
             }
         }
+        $optionPosition = FunctionLib::getOption($this->arrPosition, isset($data['banner_position'])? $data['banner_position']: 1);
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['banner_status'])? $data['banner_status']: CGlobal::STASTUS_HIDE);
         $optionRunTime = FunctionLib::getOption($this->arrRunTime, isset($data['banner_is_run_time'])? $data['banner_is_run_time']: CGlobal::BANNER_NOT_RUN_TIME);
         $optionTypeBanner = FunctionLib::getOption($this->arrTypeBanner, isset($data['banner_type'])? $data['banner_type']: -1);
@@ -202,6 +212,7 @@ class BannerController extends BaseAdminController
             ->with('error', $this->error)
             ->with('data', $data)
             ->with('optionStatus', $optionStatus)
+            ->with('optionPosition', $optionPosition)
             ->with('optionCategory', $optionCategory)
             ->with('optionRunTime', $optionRunTime)
             ->with('optionTypeBanner', $optionTypeBanner)

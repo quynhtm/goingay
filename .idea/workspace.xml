@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c717333-8288-4d8a-8ab4-ffaa1fccb75d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/BaseSiteController.php" afterPath="$PROJECT_DIR$/app/controllers/BaseSiteController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Banner.php" afterPath="$PROJECT_DIR$/app/models/Banner.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/admin/BannerController.php" afterPath="$PROJECT_DIR$/app/controllers/admin/BannerController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" afterPath="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemEdit.blade.php" afterPath="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemEdit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php" afterPath="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Items.php" afterPath="$PROJECT_DIR$/app/models/Items.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/admin/ItemsController.php" afterPath="$PROJECT_DIR$/app/controllers/admin/ItemsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/admin/Banner/add.blade.php" afterPath="$PROJECT_DIR$/app/views/admin/Banner/add.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php" afterPath="$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/admin/Banner/view.blade.php" afterPath="$PROJECT_DIR$/app/views/admin/Banner/view.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/admin/Items/view.blade.php" afterPath="$PROJECT_DIR$/app/views/admin/Items/view.blade.php" />
     </list>
     <ignored path="webtintuc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,57 +34,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SiteHomeController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/site/SiteHomeController.php">
+      <file leaf-file-name="ItemsController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/admin/ItemsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.692308">
-              <caret line="85" column="25" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
+            <state vertical-scroll-proportion="-12.653846">
+              <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="57" />
               <folding>
-                <element signature="n#index#0;n#SiteHomeController#0;n#!!top" expanded="false" />
-                <element signature="n#pageCategory#0;n#SiteHomeController#0;n#!!top" expanded="false" />
-                <element signature="n#getItemHot#0;n#SiteHomeController#0;n#!!top" expanded="false" />
-                <element signature="n#pageNews#0;n#SiteHomeController#0;n#!!top" expanded="false" />
-                <element signature="n#pageDetailNew#0;n#SiteHomeController#0;n#!!top" expanded="false" />
+                <element signature="n#getItems#0;n#ItemsController#0;n#!!top" expanded="false" />
+                <element signature="n#postItems#0;n#ItemsController#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseSiteController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/BaseSiteController.php">
+      <file leaf-file-name="siteUserCustomerController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16687116">
-              <caret line="31" column="54" selection-start-line="31" selection-start-column="54" selection-end-line="31" selection-end-column="54" />
+            <state vertical-scroll-proportion="-22.884615">
+              <caret line="430" column="57" selection-start-line="430" selection-start-column="57" selection-end-line="430" selection-end-column="57" />
+              <folding>
+                <element signature="n#pageLogin#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+                <element signature="n#logout#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+                <element signature="n#pageRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+                <element signature="n#pageActiveRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+                <element signature="n#pageChageInfo#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+                <element signature="n#validChageInfo#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+                <element signature="n#getDistrictCustomer#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+                <element signature="n#pageChagePass#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+                <element signature="n#pageForgetPass#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ItemList.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.56319016">
+              <caret line="29" column="65" selection-start-line="29" selection-start-column="65" selection-end-line="29" selection-end-column="65" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="searchItems.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/site/SiteLayouts/searchItems.blade.php">
+      <file leaf-file-name="view.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/admin/Items/view.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-100.69231">
-              <caret line="172" column="6" selection-start-line="172" selection-start-column="6" selection-end-line="172" selection-end-column="6" />
+            <state vertical-scroll-proportion="-22.346153">
+              <caret line="125" column="42" selection-start-line="123" selection-start-column="36" selection-end-line="125" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php">
+      <file leaf-file-name="CGlobal.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.423077">
-              <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+            <state vertical-scroll-proportion="-7.8076925">
+              <caret line="134" column="29" selection-start-line="134" selection-start-column="10" selection-end-line="134" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes_site.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes/routes_site.php">
+      <file leaf-file-name="Items.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/Items.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.8545455">
-              <caret line="11" column="58" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="58" />
+            <state vertical-scroll-proportion="-26.153847">
+              <caret line="195" column="51" selection-start-line="195" selection-start-column="35" selection-end-line="195" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -88,23 +115,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/views/admin/Category/view.blade.php" />
-        <option value="$PROJECT_DIR$/app/library/AdminFunction/Memcache.php" />
         <option value="$PROJECT_DIR$/app/models/Category.php" />
         <option value="$PROJECT_DIR$/app/models/Provider.php" />
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/Home.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/admin/Items/view.blade.php" />
-        <option value="$PROJECT_DIR$/app/controllers/admin/BannerController.php" />
-        <option value="$PROJECT_DIR$/app/models/Banner.php" />
-        <option value="$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php" />
-        <option value="$PROJECT_DIR$/app/models/Items.php" />
         <option value="$PROJECT_DIR$/app/views/site/BaseLayouts/bannerRight.blade.php" />
         <option value="$PROJECT_DIR$/app/views/site/BaseLayouts/index.blade.php" />
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/ListItemCategory.blade.php" />
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/ListItemCustomer.blade.php" />
         <option value="$PROJECT_DIR$/app/views/site/CustomerLayouts/EditCustomer.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemEdit.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php" />
         <option value="$PROJECT_DIR$/app/views/site/BaseLayouts/menuLeft.blade.php" />
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/DetailItem.blade.php" />
         <option value="$PROJECT_DIR$/assets/frontend/css/site.css" />
@@ -126,19 +144,28 @@
         <option value="$PROJECT_DIR$/app/views/admin/Province/list.blade.php" />
         <option value="$PROJECT_DIR$/app/views/admin/info/list.blade.php" />
         <option value="$PROJECT_DIR$/assets/admin/js/admin.js" />
-        <option value="$PROJECT_DIR$/app/views/admin/Banner/add.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/admin/InfoController.php" />
         <option value="$PROJECT_DIR$/app/routes.php" />
         <option value="$PROJECT_DIR$/app/models/Info.php" />
         <option value="$PROJECT_DIR$/app/views/admin/info/add.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/admin/AjaxCommonController.php" />
-        <option value="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" />
         <option value="$PROJECT_DIR$/app/library/AdminFunction/FunctionLib.php" />
         <option value="$PROJECT_DIR$/app/routes/routes_site.php" />
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/searchItems.blade.php" />
         <option value="$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/site/SiteHomeController.php" />
         <option value="$PROJECT_DIR$/app/controllers/BaseSiteController.php" />
+        <option value="$PROJECT_DIR$/app/models/Banner.php" />
+        <option value="$PROJECT_DIR$/app/views/admin/Banner/view.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/admin/BannerController.php" />
+        <option value="$PROJECT_DIR$/app/views/admin/Banner/add.blade.php" />
+        <option value="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" />
+        <option value="$PROJECT_DIR$/app/models/Items.php" />
+        <option value="$PROJECT_DIR$/app/views/admin/Items/view.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/admin/ItemsController.php" />
+        <option value="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemEdit.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php" />
+        <option value="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php" />
       </list>
     </option>
   </component>
@@ -183,7 +210,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -226,46 +252,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webtintuc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="goingay" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webtintuc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="goingay" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -332,7 +318,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SiteLayouts" />
+              <option name="myItemId" value="CustomerLayouts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -354,11 +340,33 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="site" />
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webtintuc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="goingay" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="BaseLayouts" />
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Items" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -377,6 +385,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webtintuc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="goingay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -444,6 +470,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -496,7 +523,7 @@
     <frame x="-8" y="-8" width="1284" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30228758" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2761438" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -552,12 +579,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php</url>
-          <line>425</line>
+          <line>429</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php</url>
-          <line>685</line>
+          <line>697</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -567,74 +594,30 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/controllers/admin/ItemsController.php</url>
-          <line>52</line>
+          <line>53</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php</url>
-          <line>204</line>
+          <line>205</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/controllers/site/SiteHomeController.php</url>
-          <line>109</line>
+          <line>111</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php</url>
+          <line>388</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="14" />
+      <option name="time" value="15" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/GroupUserPermission.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.3846154">
-          <caret line="12" column="45" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin/PermissionController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.7636366">
-          <caret line="114" column="44" selection-start-line="114" selection-start-column="28" selection-end-line="114" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/GroupUser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1923075">
-          <caret line="11" column="34" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Permission.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72883433">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/GroupUser/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.23077">
-          <caret line="67" column="73" selection-start-line="67" selection-start-column="57" selection-end-line="67" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/GroupUser/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.538462">
-          <caret line="85" column="72" selection-start-line="85" selection-start-column="72" selection-end-line="85" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/GroupUser/view.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.538462">
-          <caret line="84" column="88" selection-start-line="84" selection-start-column="88" selection-end-line="84" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/admin/GroupUserController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="13.115385">
@@ -674,17 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.7116565">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin/ItemsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37546012">
-          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-          <folding>
-            <element signature="n#getItems#0;n#ItemsController#0;n#!!top" expanded="false" />
-            <element signature="n#postItems#0;n#ItemsController#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -772,13 +744,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/Banner/add.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1923075">
-          <caret line="140" column="61" selection-start-line="140" selection-start-column="61" selection-end-line="140" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/library/PHPThumb/ThumbImg.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34355828">
@@ -837,14 +802,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Banner.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64662576">
-          <caret line="178" column="21" selection-start-line="171" selection-start-column="20" selection-end-line="178" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/admin/info/add.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.39631903">
@@ -871,7 +828,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="182" selection-start-line="34" selection-start-column="91" selection-end-line="34" selection-end-column="182" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -887,15 +843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="47" column="143" selection-start-line="47" selection-start-column="143" selection-end-line="47" selection-end-column="143" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="18" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -903,7 +850,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.31165645">
           <caret line="127" column="16" selection-start-line="127" selection-start-column="16" selection-end-line="127" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -911,7 +857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.730769">
           <caret line="66" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="175" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -919,13 +864,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.076923">
           <caret line="44" column="32" selection-start-line="0" selection-start-column="0" selection-end-line="172" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/routes_site.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8545455">
+        <state vertical-scroll-proportion="0.0">
           <caret line="11" column="58" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="58" />
           <folding />
         </state>
@@ -933,7 +877,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/site/SiteLayouts/searchItems.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-100.69231">
+        <state vertical-scroll-proportion="0.0">
           <caret line="172" column="6" selection-start-line="172" selection-start-column="6" selection-end-line="172" selection-end-column="6" />
           <folding />
         </state>
@@ -941,8 +885,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/site/SiteHomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.692308">
-          <caret line="85" column="25" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="87" column="25" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
           <folding>
             <element signature="n#index#0;n#SiteHomeController#0;n#!!top" expanded="false" />
             <element signature="n#pageCategory#0;n#SiteHomeController#0;n#!!top" expanded="false" />
@@ -955,7 +899,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077">
+        <state vertical-scroll-proportion="0.0">
           <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
           <folding />
         </state>
@@ -963,8 +907,109 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/BaseSiteController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16687116">
+        <state vertical-scroll-proportion="-0.0">
           <caret line="31" column="54" selection-start-line="31" selection-start-column="54" selection-end-line="31" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/Banner.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.9230769">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/BannerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.20981595">
+          <caret line="137" column="97" selection-start-line="137" selection-start-column="82" selection-end-line="137" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/Banner/add.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.7730061">
+          <caret line="85" column="63" selection-start-line="85" selection-start-column="63" selection-end-line="85" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/Banner/view.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.73006135">
+          <caret line="95" column="79" selection-start-line="95" selection-start-column="79" selection-end-line="95" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/Items.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-26.153847">
+          <caret line="195" column="51" selection-start-line="195" selection-start-column="35" selection-end-line="195" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8076925">
+          <caret line="134" column="29" selection-start-line="134" selection-start-column="10" selection-end-line="134" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemEdit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9386503">
+          <caret line="89" column="39" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/Items/view.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.346153">
+          <caret line="125" column="42" selection-start-line="123" selection-start-column="36" selection-end-line="125" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/ItemsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.653846">
+          <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="57" />
+          <folding>
+            <element signature="n#getItems#0;n#ItemsController#0;n#!!top" expanded="false" />
+            <element signature="n#postItems#0;n#ItemsController#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.884615">
+          <caret line="430" column="57" selection-start-line="430" selection-start-column="57" selection-end-line="430" selection-end-column="57" />
+          <folding>
+            <element signature="n#pageLogin#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#logout#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#pageRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#pageActiveRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#pageChageInfo#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#validChageInfo#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#getDistrictCustomer#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#pageChagePass#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#pageForgetPass#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.56319016">
+          <caret line="29" column="65" selection-start-line="29" selection-start-column="65" selection-end-line="29" selection-end-column="65" />
           <folding />
         </state>
       </provider>

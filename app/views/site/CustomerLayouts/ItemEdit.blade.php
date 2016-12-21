@@ -34,6 +34,16 @@
 		</div>
 		<div class="col-sm-12">
 			<div class="form-group">
+				<label for="name" class="control-label">Loại tin đăng</label>
+				<div class="form-group">
+					<select name="item_type_action" id="item_type_action" class="form-control input-sm">
+						{{$optionTypeAction}}
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="form-group">
 				<label for="name" class="control-label">Trạng thái Ẩn/Hiện</label>
 				<div class="form-group">
 					<select name="item_status" id="item_status" class="form-control input-sm">

@@ -10,7 +10,7 @@ class Items extends Eloquent
     public $timestamps = false;
 
     //cac truong trong DB
-    protected $fillable = array('item_id','item_name', 'item_type_price', 'item_price_sell', 'item_area_price', 'item_content',
+    protected $fillable = array('item_id','item_name', 'item_type_price', 'item_type_action', 'item_price_sell', 'item_area_price', 'item_content',
         'item_image', 'item_image_other', 'item_category_id','item_category_name','item_category_parent_id','item_category_parent_name',
         'item_number_view', 'item_status','item_is_hot','item_block','item_province_id','item_province_name',
         'item_district_id','item_district_name','customer_id','customer_name','is_customer',
@@ -123,6 +123,9 @@ class Items extends Eloquent
             if (isset($dataSearch['item_is_hot']) && $dataSearch['item_is_hot'] > 0) {
                 $query->where('item_is_hot', $dataSearch['item_is_hot']);
             }
+            if (isset($dataSearch['item_type_action']) && $dataSearch['item_type_action'] > 0) {
+                $query->where('item_type_action', $dataSearch['item_type_action']);
+            }
             //lay theo id SP truyen vào và sap xep theo vi tri đã truyề vào
             if(isset($dataSearch['str_item_id']) && $dataSearch['str_item_id'] != ''){
                 $arrItemsId = explode(',', trim($dataSearch['str_item_id']));
@@ -189,6 +192,9 @@ class Items extends Eloquent
 
             if (isset($dataSearch['item_is_hot']) && $dataSearch['item_is_hot'] > 0) {
                 $query->where('item_is_hot', $dataSearch['item_is_hot']);
+            }
+            if (isset($dataSearch['item_type_action']) && $dataSearch['item_type_action'] > 0) {
+                $query->where('item_type_action', $dataSearch['item_type_action']);
             }
 
             //lay khong thuoc arr items_id
