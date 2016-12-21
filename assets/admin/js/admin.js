@@ -22,6 +22,8 @@ var Admin = {
             	url_ajax = 'deleteCategory';
             }else if(type == 11){
             	url_ajax = 'deleteInfor';
+            }else if(type == 12){
+            	url_ajax = 'deleteContract';
             }
             if(url_ajax != ''){
                 $.ajax({

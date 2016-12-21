@@ -129,12 +129,19 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::get('info/edit/{id?}', array('as' => 'admin.infoEdit','uses' => 'InfoController@getItem'))->where('id', '[0-9]+');
     Route::post('info/edit/{id?}', array('as' => 'admin.infoEdit','uses' => 'InfoController@postItem'))->where('id', '[0-9]+');
     Route::post('info/deleteInfor', array('as' => 'admin.infoDelete','uses' => 'InfoController@deleteInfor'));
+
     //Thung rac
     Route::get('trash', array('as' => 'admin.trash','uses' => 'TrashController@listView'));
     Route::get('trash/edit/{id?}', array('as' => 'admin.trash_edit','uses' => 'TrashController@getItem'))->where('id', '[0-9]+');
     Route::post('trash/edit/{id?}', array('as' => 'admin.trash_edit','uses' => 'TrashController@postItem'))->where('id', '[0-9]+');
     Route::match(['GET','POST'],'trash/delete', array('as' => 'admin.trash_delete','uses' => 'TrashController@delete'));
     Route::match(['GET','POST'],'trash/restore', array('as' => 'admin.trash_delete','uses' => 'TrashController@restore'));
+
+    //Liên hệ
+    Route::get('contract/view', array('as' => 'admin.contract','uses' => 'ContactController@viewContract'));
+    Route::get('contract/edit/{id?}', array('as' => 'admin.contractEdit','uses' => 'ContactController@getItem'))->where('id', '[0-9]+');
+    Route::post('contract/deleteContract', array('as' => 'admin.deleteContract','uses' => 'ContactController@deleteContact'));//ajax
+
     //Tinh thanh
     Route::get('province/view', array('as' => 'admin.province','uses' => 'ProvinceController@listView'));
     Route::get('province/edit/{id?}', array('as' => 'admin.provinceEdit','uses' => 'ProvinceController@getItem'))->where('id', '[0-9]+');

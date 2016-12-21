@@ -16,49 +16,21 @@ class Contact extends Eloquent
         'contact_type', 'contact_reason', 'contact_time_update');
 
     public static function getByID($id) {
-        $provider = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_PROVIDER_ID.$id) : array();
-        if (sizeof($provider) == 0) {
-            $provider = Contact::where('contact_id', $id)->first();
-            if($provider && Memcache::CACHE_ON){
-                Cache::put(Memcache::CACHE_PROVIDER_ID.$id, $provider, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
-            }
-        }
-        return $provider;
-    }
-
-    public static function getProviderShopByID($id,$shop_id) {
-        $provider = Contact::getByID($id);
-        if (sizeof($provider) > 0) {
-            if($provider->provider_shop_id == $shop_id){
-                return $provider;
-            }
-        }
-        return array();
+        $contact = Contact::where('contact_id', $id)->first();
+        return $contact;
     }
 
     public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){
         try{
             $query = Contact::where('contact_id','>',0);
-            if (isset($dataSearch['provider_name']) && $dataSearch['provider_name'] != '') {
-                $query->where('provider_name','LIKE', '%' . $dataSearch['provider_name'] . '%');
+            if (isset($dataSearch['contact_title']) && $dataSearch['contact_title'] != '') {
+                $query->where('contact_title','LIKE', '%' . $dataSearch['contact_title'] . '%');
             }
-            if (isset($dataSearch['provider_phone']) && $dataSearch['provider_phone'] != '') {
-                $query->where('provider_phone','LIKE', '%' . $dataSearch['provider_phone'] . '%');
-            }
-            if (isset($dataSearch['provider_email']) && $dataSearch['provider_email'] != '') {
-                $query->where('provider_email','LIKE', '%' . $dataSearch['provider_email'] . '%');
-            }
-            if (isset($dataSearch['provider_status']) && $dataSearch['provider_status'] != -1) {
-                $query->where('provider_status', $dataSearch['provider_status']);
-            }
-            if (isset($dataSearch['contact_id']) && $dataSearch['contact_id'] > 0) {
-                $query->where('contact_id', $dataSearch['contact_id']);
-            }
-            if (isset($dataSearch['provider_shop_id']) && $dataSearch['provider_shop_id'] > 0) {
-                $query->where('provider_shop_id', $dataSearch['provider_shop_id']);
+            if (isset($dataSearch['contact_user_name_send']) && $dataSearch['contact_user_name_send'] != '') {
+                $query->where('contact_user_name_send','LIKE', '%' . $dataSearch['contact_user_name_send'] . '%');
             }
             $total = $query->count();
-            $query->orderBy('provider_time_creater', 'desc');
+            $query->orderBy('contact_time_creater', 'desc');
 
             //get field can lay du lieu
             $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
@@ -92,9 +64,6 @@ class Contact extends Eloquent
             }
             if ($data->save()) {
                 DB::connection()->getPdo()->commit();
-                if(isset($data->contact_id) && $data->contact_id > 0){
-                    self::removeCache($data->contact_id);
-                }
                 return $data->contact_id;
             }
             DB::connection()->getPdo()->commit();
@@ -121,9 +90,6 @@ class Contact extends Eloquent
                 $dataSave->update($dataInput);
             }
             DB::connection()->getPdo()->commit();
-            if(isset($dataSave->contact_id) && $dataSave->contact_id > 0){
-                self::removeCache($dataSave->contact_id);
-            }
             return true;
         } catch (PDOException $e) {
             DB::connection()->getPdo()->rollBack();
@@ -145,9 +111,6 @@ class Contact extends Eloquent
             $dataSave = Contact::find($id);
             $dataSave->delete();
             DB::connection()->getPdo()->commit();
-            if(isset($dataSave->contact_id) && $dataSave->contact_id > 0){
-                self::removeCache($dataSave->contact_id);
-            }
             return true;
         } catch (PDOException $e) {
             DB::connection()->getPdo()->rollBack();
@@ -159,10 +122,10 @@ class Contact extends Eloquent
      * @param int $id
      */
     public static function removeCache($id = 0){
-        if($id > 0){
+        /*if($id > 0){
             Cache::forget(Memcache::CACHE_PROVIDER_ID.$id);
         }
-        Cache::forget(Memcache::CACHE_ALL_PROVIDER);
+        Cache::forget(Memcache::CACHE_ALL_PROVIDER);*/
     }
 
 }
