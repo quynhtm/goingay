@@ -52,7 +52,7 @@ class Items extends Eloquent
     }
 
     public static function getItemsHomeSite($item_category_id = 0){
-        $key_cache = Memcache::CACHE_ITEM_HOME_CATEGORY_ID.'_'.$item_category_id;
+        $key_cache = Memcache::CACHE_ITEM_HOME_CATEGORY_ID.$item_category_id;
         $itemsHomeSite = (Memcache::CACHE_ON)? Cache::get($key_cache) : array();
         if (sizeof($itemsHomeSite) == 0) {
             $itemHome = Items::where('item_id' ,'>', 0)
@@ -247,7 +247,7 @@ class Items extends Eloquent
             if ($data->save()) {
                 DB::connection()->getPdo()->commit();
                 if(isset($data->item_id) && $data->item_id > 0){
-                    self::removeCache($data->item_id);
+                    self::removeCache($data);
                 }
                 return $data->item_id;
             }
@@ -274,7 +274,7 @@ class Items extends Eloquent
             if (!empty($dataInput)){
                 $dataSave->update($dataInput);
                 if(isset($dataSave->item_id) && $dataSave->item_id > 0){
-                    self::removeCache($dataSave->item_id);
+                    self::removeCache($dataSave);
                 }
             }
             DB::connection()->getPdo()->commit();
@@ -316,7 +316,7 @@ class Items extends Eloquent
                 }
             }
             if(isset($dataSave->item_id) && $dataSave->item_id > 0){
-                self::removeCache($dataSave->item_id);
+                self::removeCache($dataSave);
             }
             DB::connection()->getPdo()->commit();
             return true;
@@ -326,9 +326,10 @@ class Items extends Eloquent
         }
     }
 
-    public static function removeCache($id = 0){
-        if($id > 0){
-            Cache::forget(Memcache::CACHE_ITEM_ID.$id);
+    public static function removeCache($item){
+        if($item){
+            Cache::forget(Memcache::CACHE_ITEM_HOME_CATEGORY_ID.$item->item_category_id);
+            Cache::forget(Memcache::CACHE_ITEM_ID.$item->item_id);
         }
     }
 }
