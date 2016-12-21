@@ -1,57 +1,10 @@
 <div class="col-left-92">
 	<div class="head-info">
-		<h2><a href=""><i class="fa fa-building"></i>Tin đã đăng @if(!empty($arrCustomer) && isset($arrCustomer->customer_name)) của {{$arrCustomer->customer_name}} @endif</a></h2>
+		<h2><a href=""><i class="fa fa-building"></i>Kết quả tìm kiếm</a></h2>
 	</div>
-	@if(isset($resultHot) && !empty($resultHot))
-		<div class="content-boxcat">
-			@foreach ($resultHot as $keyh => $itemHot)
-				<div class="one-focus-item">
-					<div class="item-wrap">
-						<div class="thumb-image">
-							<a class="image-item" title="{{$itemHot->item_name}}" href="{{FunctionLib::buildLinkDetailItem($itemHot->item_id,$itemHot->item_name,$itemHot->item_category_id)}}">
-								@if($itemHot->item_image != '')
-									<span>
-								<img itemprop="image" src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHot->item_id, $itemHot->item_image, CGlobal::sizeImage_300)}}" title="{{$itemHot->item_name}}" alt="{{$itemHot->item_name}}">
-							</span>
-								@endif
-								@if($itemHot->item_type_price == CGlobal::TYPE_PRICE_NUMBER)
-									<span class="price-item">{{FunctionLib::numberFormat($itemHot->item_price_sell)}} đ</span>
-								@else
-									<span class="price-item">Liên hệ</span>
-								@endif
-							</a>
-						</div>
-						<div class="title-item">
-							<h2>
-								<a href="" title="{{$itemHot->item_name}}">{{$itemHot->item_name}}</a>
-							</h2>
-						</div>
-						<div class="info-item">
-							<ul>
-								<li class="pull-left local"><i class="fa fa-location-arrow"></i>
-									<a href="{{FunctionLib::buildLinkCategory($itemHot->item_category_id, $itemHot->item_category_name,$itemHot->item_province_id, $itemHot->item_province_name)}}" title="Rao vặt theo tỉnh thành {{$itemHot->item_province_name}}">
-										@if(isset($arrProvince[$itemHot->item_province_id])){{$arrProvince[$itemHot->item_province_id]}}@else Toàn quốc @endif
-									</a>
-								</li>
-								<li class="pull-right time-post"><i class="fa fa-clock-o"></i>{{date('H:i',$itemHot->time_ontop)}} - {{date('d/m/Y',$itemHot->time_ontop)}}</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			@endforeach
-		</div>
-	@endif
-
 	<div class="content-boxcat">
 		<div class="col-653 pull-left">
-			<div class="form-seach-inboxcat">
-				<h2>Tìm kiếm tin đã đăng</h2>
-				<form>
-					<input class="seach-keyword" placeholder="Nhập từ khóa tìm kiếm hoặc tỉnh thành" name="q" value="" autocomplete="off" type="text">
-					<input class="submit-seach" value="Tìm kiếm" type="submit">
-				</form>
-			</div>
-			@if(isset($resultItemCategory) && !empty($resultItemCategory))
+			@if(isset($resultSearch) && !empty($resultSearch))
 				<div class="filter-item">
 					<div class="filter-list-action">
 						<ul>
@@ -62,7 +15,7 @@
 				</div>
 				<div class="list-item-filter">
 					<ul>
-						@foreach ($resultItemCategory as $keyc => $itemCate)
+						@foreach ($resultSearch as $keyc => $itemCate)
 							<li>
 								<a class="img" href="{{FunctionLib::buildLinkDetailItem($itemCate->item_id,$itemCate->item_name,$itemCate->item_category_id)}}">
 									<img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemCate->item_id, $itemCate->item_image, CGlobal::sizeImage_200)}}" alt="{{$itemCate->item_name}}" title="{{$itemCate->item_name}}">

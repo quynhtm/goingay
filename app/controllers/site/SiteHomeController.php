@@ -65,33 +65,41 @@ class SiteHomeController extends BaseSiteController
         $this->footer();
     }
 
-	//tim kiem tin
+	//tim kiem tin đăng
 	public function searchItems(){
+		$keyword = htmlspecialchars(trim(Request::get('keyword','')));
+		$category_id = (int)(trim(Request::get('category_id',0)));
+		$province_id = (int)(trim(Request::get('city_id',0)));
+
+		if($keyword == ''){
+			return Redirect::route('site.home');
+		}
 		$meta_title = $meta_keywords = $meta_description = 'Tìm kiếm nhanh';
 		$meta_img= '';
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
-		$this->header();
+		$this->header($category_id, $province_id, $keyword);
 		$this->menuLeft(0);
 
-		//List san pham cï¿½ng danh muc n?i b?t TOP
-		$number_show_hot = 3;
-		$searchHot['customer_id'] = 1;
-		$searchHot['item_image'] = 1;//check cï¿½ ?nh ??i di?n
-		$searchHot['field_get'] = $this->str_field_items_get;
-		$resultHot = self::getItemHot($searchHot,$number_show_hot);
+		//List san pham tim kiếm
+		$search = $data = array();
+		$totalSearch = 0;
+		if($category_id > 0){
+			$search['item_category_id'] = $category_id;
+		}
+		if($province_id > 0){
+			$search['item_province_id'] = $province_id;
+		}
+		$search['item_name'] = $keyword;
+		$search['field_get'] = $this->str_field_items_get;
 
 		//danh sach tin dang cua danh m?c
 		$pageNo = (int) Request::get('page_no',1);
 		$limit = CGlobal::number_limit_show;
-		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cï¿½i n?i b?t ? trï¿½n ?i
-		$search = $data = array();
-		$totalSearch = 0;
-		$search['customer_id'] = 1;
-		$search['field_get'] = $this->str_field_items_get;
-		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
+		$offset = ($pageNo == 1)? 0: ($pageNo - 1) * $limit;
+		$resultSearch = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
 
-		//t?nh thï¿½nh
+		//tỉnh thành
 		$arrProvince = Province::getAllProvince();
 
 		//quang cao ben phải
@@ -103,8 +111,7 @@ class SiteHomeController extends BaseSiteController
 			->with('paging', $paging)
 			->with('total', $totalSearch)
 			->with('arrBannerRight', $arrBannerRight)
-			->with('resultHot', $resultHot)
-			->with('resultItemCategory', $resultItemCategory);
+			->with('resultSearch', $resultSearch);
 		$this->footer();
 	}
 
@@ -119,7 +126,7 @@ class SiteHomeController extends BaseSiteController
 			return Redirect::route('site.home');
 		}
 
-		$this->header();
+		$this->header($itemShow->item_category_id, $itemShow->item_province_id);
 		$this->menuLeft($itemShow->item_category_id);
 		//seo
 		$meta_title = addslashes($itemShow->item_name);
@@ -167,11 +174,14 @@ class SiteHomeController extends BaseSiteController
 		if((int)$catid <= 0){
 			return Redirect::route('site.home');
 		}
+		//neu co tim kiem theo tinh thanh
+		$province_id = Request::get('city_id',0);
+
 		$meta_title = $meta_keywords = $meta_description = $meta_img= '';
 		$url_seo = FunctionLib::buildLinkCategory($catid, $catname);
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description,$url_seo);
 
-    	$this->header();
+    	$this->header($catid,$province_id);
     	$this->menuLeft($catid);
 
 		//tinh thanh
@@ -179,9 +189,6 @@ class SiteHomeController extends BaseSiteController
 
 		//thong tin danh muc
 		$arrCategory = Category::getCategoriessAll();
-
-		//neu co tim kiem theo tinh thanh
-		$province_id = Request::get('city_id',0);
 
 		//List san pham noi bat TOP
 		$number_show_hot = 3;

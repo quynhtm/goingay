@@ -33,6 +33,8 @@
 		<div class="box-search">
 			<form class="seach" action="{{URL::route('site.searchItems')}}" method="get">
 				<input id="sys_keyword" name="keyword" class="keyword" placeholder="Nhập tiêu đề tin cần tìm" type="text" value="{{$keyword}}">
+				<input value="{{$category_id}}" name="category_id" id="category_id_search" type="hidden">
+				<input value="{{$province_id}}" name="city_id" id="city_id_search" type="hidden">
 				<input value="Search" class="btn-seach" type="submit">
 			</form>
 		</div>

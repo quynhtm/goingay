@@ -25,7 +25,7 @@ class BaseSiteController extends BaseController
     	
     	FunctionLib::site_js('lib/sticky/jquery.sticky.js', CGlobal::$POS_END);
     }
-    public function header($category_id = 0, $province_id = 0){
+    public function header($category_id = 0, $province_id = 0, $keyword = ''){
 		//tim kiem
 		$keyword = htmlspecialchars(Request::get('keyword', ''));
 
@@ -42,8 +42,8 @@ class BaseSiteController extends BaseController
 		}*/
 		$this->layout->header = View::make("site.BaseLayouts.header")
 								->with('keyword', $keyword)
-								->with('keyword', $keyword)
-								->with('keyword', $keyword)
+								->with('category_id', $category_id)//dung cho search
+								->with('province_id', $province_id)//dung cho search
 								->with('user_customer', $user_customer)
 								->with('messages', $messages)
 								->with('arrBannerHead', $arrBannerHead);
