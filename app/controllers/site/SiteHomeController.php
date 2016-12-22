@@ -26,7 +26,7 @@ class SiteHomeController extends BaseSiteController
     		$meta_description = $arrMeta->meta_description;
     		$meta_img = $arrMeta->info_img;
     		if($meta_img != ''){
-    			//$meta_img = ThumbImg::thumbBaseNormal(CGlobal::FOLDER_INFO, $arrMeta->info_id, $arrMeta->info_img, 550, 0, '', true, true);
+    			$meta_img = ThumbImg::thumbBaseNormal(CGlobal::FOLDER_INFO, $arrMeta->info_id, $arrMeta->info_img, 550, 0, '', true, true);
     		}
     	}
     	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
