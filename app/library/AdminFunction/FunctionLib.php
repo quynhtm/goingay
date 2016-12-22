@@ -664,7 +664,7 @@ class FunctionLib {
     
     public static function SEO($img='', $meta_title='', $meta_keywords='', $meta_description='', $url=''){
     	if($img == ''){
-    		$img = Config::get('config.WEB_ROOT').'uploads/default/default-logo-shop.jpg';
+    		$img = Config::get('config.WEB_ROOT').'uploads/default.jpg';
     	}
     	if($meta_title ==''){
     		$meta_title = CGlobal::web_name;
