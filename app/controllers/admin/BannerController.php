@@ -72,6 +72,7 @@ class BannerController extends BaseAdminController
         $search['banner_page'] = (int)Request::get('banner_page',-1);
         $search['banner_type'] = (int)Request::get('banner_type',-1);
         $search['banner_position'] = (int)Request::get('banner_position',0);
+        $search['banner_parent_id'] = (int)Request::get('banner_parent_id',0);
         $search['banner_province_id'] = (int)Request::get('banner_province_id',-1);
         //$search['field_get'] = 'category_id,news_title,news_status';//cac truong can lay
 
@@ -122,6 +123,7 @@ class BannerController extends BaseAdminController
                 'banner_image'=>$banner->banner_image,
                 'banner_link'=>$banner->banner_link,
                 'banner_position'=>$banner->banner_position,
+                'banner_parent_id'=>$banner->banner_parent_id,
                 'banner_order'=>$banner->banner_order,
                 'banner_is_target'=>$banner->banner_is_target,
                 'banner_is_rel'=>$banner->banner_is_rel,
@@ -171,6 +173,7 @@ class BannerController extends BaseAdminController
 
         $data['banner_position'] = (int)Request::get('banner_position', 1);
         $data['banner_is_target'] = (int)Request::get('banner_is_target', 0);
+        $data['banner_parent_id'] = (int)Request::get('banner_parent_id', 0);
         $data['banner_is_rel'] = (int)Request::get('banner_is_rel', 0);
         $data['banner_type'] = (int)Request::get('banner_type',0);
         $data['banner_page'] = (int)Request::get('banner_page',0);
@@ -185,12 +188,18 @@ class BannerController extends BaseAdminController
         //FunctionLib::debug($data);
         if($this->valid($data) && empty($this->error)) {
             $id = ($id == 0)?$id_hiden: $id;
+            $data['banner_start_time'] = strtotime($data['banner_start_time']);
+            $data['banner_end_time'] = strtotime($data['banner_end_time']);
             if($id > 0) {
                 //cap nhat
-                $data['banner_start_time'] = strtotime($data['banner_start_time']);
-                $data['banner_end_time'] = strtotime($data['banner_end_time']);
                 $data['banner_update_time'] = time();
                 if(Banner::updateData($id, $data)) {
+                    return Redirect::route('admin.bannerView');
+                }
+            }else{
+                //thêm mới
+                $data['banner_create_time'] = time();
+                if(Banner::addData($data)) {
                     return Redirect::route('admin.bannerView');
                 }
             }
@@ -246,7 +255,7 @@ class BannerController extends BaseAdminController
             if(isset($data['banner_link']) && trim($data['banner_link']) == '') {
                 $this->error[] = 'Chưa có link view cho banner';
             }
-            if(isset($data['banner_image']) && trim($data['banner_image']) == '') {
+            if(isset($data['banner_image']) && trim($data['banner_image']) == '' && isset($data['banner_parent_id']) && (int)trim($data['banner_parent_id']) == 0) {
                 $this->error[] = 'Chưa up ảnh banner quảng cáo';
             }
             if(isset($data['banner_is_run_time']) && $data['banner_is_run_time'] == 1) {

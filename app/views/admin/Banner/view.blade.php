@@ -70,10 +70,10 @@
                         <tr class="">
                             <th width="2%" class="text-center">TT</th>
                             <th width="10%" class="text-center">Ảnh</th>
-                            <th width="23%">Tên banner</th>
-                            <th width="10%" class="text-center">Loại banner</th>
-                            <th width="15%" class="text-center">Thuộc page</th>
-                            <th width="15%" class="text-center">Thông tin banner</th>
+                            <th width="20%">Tên banner</th>
+                            <th width="15%">Thông tin banner</th>
+                            <th width="13%">Loại banner</th>
+                            <th width="10%" class="text-center">Thuộc page</th>
                             <th width="10%" class="text-center">Ngày chạy</th>
                             <th width="10%" class="text-center">Thao tác</th>
                         </tr>
@@ -83,30 +83,31 @@
                             <tr>
                                 <td class="text-center text-middle">{{ $stt + $key+1 }}</td>
                                 <td class="text-center text-middle">
-                                    <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_BANNER, $item->banner_id, $item->banner_image, CGlobal::sizeImage_100, '', true, CGlobal::type_thumb_image_banner, false)}}">
+                                    <img src="{{ ThumbImg::getImageThumbBanner($item->banner_id,$item->banner_parent_id, $item->banner_image, CGlobal::sizeImage_100, $item->banner_name, true, CGlobal::type_thumb_image_banner)}}">
                                 </td>
                                 <td>
                                     [<b>{{ $item->banner_id }}</b>] {{ $item->banner_name }}
-                                    <br/>C: {{date('h:i d-m-Y',$item->banner_create_time)}}
-                                    <br/>U: {{date('h:i d-m-Y',$item->banner_update_time)}}
-                                </td>
-                                <td class="text-center text-middle">
-                                    @if(isset($arrTypeBanner[$item->banner_type])){{$arrTypeBanner[$item->banner_type]}}@else ---- @endif
-                                    @if($item->banner_position > 0)<br/>Vị trí: {{$arrPosition[$item->banner_position]}}@endif
-                                    @if($item->banner_order > 0)<br/>Thứ tự: {{$item->banner_order}}@endif
-                                </td>
-                                <td class="text-center text-middle">
-                                    @if(isset($arrPage[$item->banner_page])){{$arrPage[$item->banner_page]}}@else ---- @endif
+                                    <br/>C: {{date('d-m-Y h:i',$item->banner_create_time)}}
+                                   @if($item->banner_update_time > 0)<br/>U: {{date('d-m-Y h:i',$item->banner_update_time)}}@endif
                                 </td>
                                 <td>
+                                    @if($item->banner_parent_id > 0)Banner ID cha: {{$item->banner_parent_id}} <br/>@endif
+                                    @if($item->banner_position > 0){{$arrPosition[$item->banner_position]}} <br/>@endif
+                                    @if($item->banner_order > 0)Thứ tự: {{$item->banner_order}} <br/>@endif
+                                </td>
+                                <td>
+                                    @if(isset($arrTypeBanner[$item->banner_type])){{$arrTypeBanner[$item->banner_type]}}@else ---- @endif
                                     <br/><b>Danh mục: </b>@if(isset($arrCategory[$item->banner_category_id])){{$arrCategory[$item->banner_category_id]}}@else ----- @endif
                                     <br/><b>Tỉnh: </b>@if(isset($arrProvince[$item->banner_province_id])){{$arrProvince[$item->banner_province_id]}}@else Toàn quốc @endif
                                     <br/>@if($item->banner_is_rel == 1)Follow @else Nofollow @endif
                                 </td>
                                 <td class="text-center text-middle">
+                                    @if(isset($arrPage[$item->banner_page])){{$arrPage[$item->banner_page]}}@else ---- @endif
+                                </td>
+                                <td class="text-center text-middle">
                                     @if($item->banner_is_run_time == CGlobal::BANNER_IS_RUN_TIME)
-                                        S:{{date('d-m-Y',$item->banner_start_time)}}
-                                        <br/>E:{{date('d-m-Y',$item->banner_end_time)}}
+                                        S:{{date('d-m-Y h:i',$item->banner_start_time)}}
+                                        <br/>E:{{date('d-m-Y h:i',$item->banner_end_time)}}
                                     @else
                                         Không giới hạn
                                     @endif

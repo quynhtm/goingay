@@ -75,6 +75,9 @@ class Banner extends Eloquent
             if (isset($dataSearch['banner_page']) && $dataSearch['banner_page'] > 0) {
                 $query->where('banner_page', $dataSearch['banner_page']);
             }
+            if (isset($dataSearch['banner_parent_id']) && $dataSearch['banner_parent_id'] > 0) {
+                $query->where('banner_parent_id', $dataSearch['banner_parent_id']);
+            }
             if (isset($dataSearch['banner_position']) && $dataSearch['banner_position'] > 0) {
                 $query->where('banner_position', $dataSearch['banner_position']);
             }

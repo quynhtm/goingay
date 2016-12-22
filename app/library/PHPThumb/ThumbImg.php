@@ -107,6 +107,92 @@ if(!class_exists('ThumbImg') ){
 			}
 		}
 
+		public static function getImageThumbBanner($banner_id = 0,$banner_parent_id = 0, $file_name='', $size_image = CGlobal::sizeImage_100, $alt = '', $returnPath = true, $type=1){
+			$folder = CGlobal::FOLDER_BANNER;
+			$banner_image = $file_name;
+			$id = ($banner_id > 0)? $banner_id : $banner_parent_id;
+			if($banner_parent_id > 0){
+				$bannerShow = Banner::getBannerByID($banner_parent_id);
+				if(isset($bannerShow->banner_image)){
+					$banner_image = $bannerShow->banner_image;
+					$id = $banner_parent_id;
+				}
+			}
+
+			if(!preg_match("/.jpg|.jpeg|.JPEG|.JPG|.png|.gif/",strtolower($banner_image))) return ' ';
+			$arrSizeThumb = ($type == CGlobal::type_thumb_image_banner)?CGlobal::$arrBannerSizeImage : CGlobal::$arrSizeImage;
+			$width = isset($arrSizeThumb[$size_image])? $arrSizeThumb[$size_image]['w']: CGlobal::sizeImage_100;
+			$height = isset($arrSizeThumb[$size_image])? $arrSizeThumb[$size_image]['h']: CGlobal::sizeImage_100;
+
+			$imagSource = Config::get('config.DIR_ROOT').'/uploads/' .$folder. '/'. $id. '/' .$banner_image;
+			$path_thumb =  $width."x".$height.'/'.$banner_image;
+			$thumbPath = Config::get('config.DIR_ROOT').'/uploads/thumbs/'.$folder.'/'.$id.'/'. $path_thumb;
+			$url_img = Config::get('config.WEB_ROOT').'uploads/thumbs/'.$folder.'/'.$id.'/'. $path_thumb;
+			if(!file_exists($thumbPath)){
+				if(file_exists($imagSource)){
+					$objThumb = new PHPThumb\GD($imagSource);
+					$objThumb->resize($width, $height);
+					if(!file_exists($thumbPath)){
+						if(!self::makeDir($folder, $id, $path_thumb)){
+							return '';
+						}
+						self::saveCustom($imagSource);
+					}
+				}else{
+					$url_img = '';
+				}
+			}
+
+			if($returnPath){
+				return $url_img;
+			}else{
+				return '<img src="'.$url_img.'" alt="'.$alt.'"/>';
+			}
+		}
+
+		public static function thumbImageBannerNormal($banner_id=0, $banner_parent_id = 0, $file_name='', $width=100, $height=100, $alt='', $isThumb=true, $returnPath=false){
+		$folder = CGlobal::FOLDER_BANNER;
+		$banner_image = $file_name;
+		$id = ($banner_id > 0)? $banner_id : $banner_parent_id;
+		if($banner_parent_id > 0){
+			$bannerShow = Banner::getBannerByID($banner_parent_id);
+			if(isset($bannerShow->banner_image)){
+				$banner_image = $bannerShow->banner_image;
+				$id = $banner_parent_id;
+			}
+		}
+		if(!preg_match("/.jpg|.jpeg|.JPEG|.JPG|.png|.gif/",strtolower($banner_image))) return ' ';
+		$domain = Config::get('config.WEB_ROOT');
+		$url_img = '';
+		if($isThumb){
+			$imagSource = Config::get('config.DIR_ROOT').'/uploads/' .$folder. '/'. $id. '/' .$banner_image;
+			$paths =  $width."x".$height.'/'.$banner_image;
+			$thumbPath = Config::get('config.DIR_ROOT').'/uploads/thumbs/'.$folder.'/'.$id.'/'. $paths;
+			$url_img = $domain.'uploads/thumbs/'.$folder.'/'.$id.'/'. $paths;
+			if(!file_exists($thumbPath)){
+				if(file_exists($imagSource)){
+					$objThumb = new PHPThumb\GD($imagSource);
+					$objThumb->resize($width, $height);
+					if(!file_exists($thumbPath)){
+						if(!self::makeDir($folder, $id, $paths)){
+							return '';
+						}
+						self::saveCustom($imagSource);
+					}
+					$objThumb->show(true, $thumbPath);
+				}else{
+					$url_img = '';
+				}
+			}
+		}
+
+		if($returnPath){
+			return $url_img;
+		}else{
+			return '<img src="'.$url_img.'" alt="'.$alt.'"/>';
+		}
+	}
+
 		public static function saveCustom($fileName){
 			@chmod($fileName, 0777);
 			return true;

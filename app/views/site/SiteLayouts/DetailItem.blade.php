@@ -168,7 +168,7 @@
 							@if($banner_is_run_time == 1)
 								<div class="slide text-center">
 									<a {{$target}} {{$rel}} href="@if($slider->banner_link != '') {{$slider->banner_link}} @else javascript:void(0) @endif" title="{{$slider->banner_name}}">
-										<img src="{{ThumbImg::thumbBaseNormal(CGlobal::FOLDER_BANNER, $slider->banner_id, $slider->banner_image, 300, 0, '', true, true, false)}}" alt="{{$slider->banner_name}}" />
+										<img src="{{ThumbImg::thumbImageBannerNormal($slider->banner_id,$slider->banner_parent_id, $slider->banner_image, CGlobal::sizeImage_300,0, $slider->banner_name,true,true)}}" alt="{{$slider->banner_name}}" />
 									</a>
 								</div>
 							@endif

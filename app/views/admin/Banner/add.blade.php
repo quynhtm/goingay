@@ -23,21 +23,27 @@
                     </div>
                 @endif
                 <div style="float: left;width: 60%">
-                <div class="col-sm-4">
+                <div class="col-sm-9">
                     <div class="form-group">
                         <label for="name" class="control-label">Tên banner <span class="red"> (*) </span></label>
                         <input type="text" placeholder="Tên banner" id="banner_name" name="banner_name"  class="form-control input-sm" value="@if(isset($data['banner_name'])){{$data['banner_name']}}@endif">
                     </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="name" class="control-label">BannerId show ảnh</label>
+                        <input type="text" placeholder="Banner parent show ảnh" id="banner_parent_id" name="banner_parent_id"  class="form-control input-sm" value="@if(isset($data['banner_parent_id'])){{$data['banner_parent_id']}}@endif">
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label for="name" class="control-label">Link URL <span class="red"> (*) </span></label>
                         <input type="text" placeholder="url banner" id="banner_link" name="banner_link"  class="form-control input-sm" value="@if(isset($data['banner_link'])){{$data['banner_link']}}@endif">
                     </div>
                 </div>
+
                 <div class="clearfix"></div>
-
-
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="name" class="control-label">Loại quảng cáo</label>
@@ -68,6 +74,8 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="clearfix"></div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="name" class="control-label">Danh mục quảng cáo</label>
@@ -77,7 +85,26 @@
                             </select>
                         </div>
                     </div>
-                </div>
+                </div><div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Taget bank</label>
+                            <div class="form-group">
+                                <select name="banner_is_target" id="banner_is_target" class="form-control input-sm">
+                                    {{$optionTarget}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Nofollow</label>
+                            <div class="form-group">
+                                <select name="banner_is_rel" id="banner_is_rel" class="form-control input-sm">
+                                    {{$optionRel}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
                 <div class="clearfix"></div>
                 <div class="col-sm-4">
@@ -135,27 +162,8 @@
                     </div>
                 </div>
 
-                <div class="clearfix"></div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Taget bank</label>
-                        <div class="form-group">
-                            <select name="banner_is_target" id="banner_is_target" class="form-control input-sm">
-                                {{$optionTarget}}
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Nofollow</label>
-                        <div class="form-group">
-                            <select name="banner_is_rel" id="banner_is_rel" class="form-control input-sm">
-                                {{$optionRel}}
-                            </select>
-                        </div>
-                    </div>
-                </div>
+
+
                 <div class="clearfix"></div>
                 </div>
 
