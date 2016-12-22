@@ -15,7 +15,7 @@ $dir_root.=$dir_root[strlen($dir_root)-1]!='/'?'/':'';
 
 return array(
     'TIME_NOW'=> time(),
-    'DEVMODE'=> true,
+    'DEVMODE'=> false,//false: tren server, True: local
     'REDIS_ON'=> false,
     'WEB_ROOT' => $strWebroot,
     'DIR_ROOT' => $dir_root,
