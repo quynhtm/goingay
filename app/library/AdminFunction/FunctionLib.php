@@ -759,7 +759,7 @@ class FunctionLib {
      * @param string $outputType
      * @param bool|false $signature
      */
-    public static function pdfOutput($html, $filename, $outputType = 'I', $signature = false){
+   public static function pdfOutput($html, $filename, $outputType = 'I', $signature = false){
         $pdf = new MYPDF(PDF_PAGE_ORIENTATION, 'px', PDF_PAGE_FORMAT, true, 'UTF-8', false, false, $signature);
 
         // set document information
@@ -799,5 +799,57 @@ class FunctionLib {
 
         //Close and output PDF document
         $pdf->Output($filename, $outputType);
+   }
+
+    /**
+     * QuynhTM
+     * @param $p_strngay1
+     * @param $p_strngay2
+     * @param string $p_strkieu
+     * @return int|number
+     */
+   public static function khoangcachngay($p_strngay1,$p_strngay2,$p_strkieu = 'ngay'){
+        $m_arrngay1 = explode('/',$p_strngay1);
+        $m_arrngay2 = explode('/',$p_strngay2);
+        $m_intngay1 = mktime(0,0,0,$m_arrngay1[1],$m_arrngay1[0],$m_arrngay1[2]);
+        $m_intngay2 = mktime(0,0,0,$m_arrngay2[1],$m_arrngay2[0],$m_arrngay2[2]);
+
+        $m_int = abs($m_intngay1 - $m_intngay2);
+        switch ($p_strkieu)
+        {
+            case 'ngay': $m_int /= 86400;break;
+            case 'gio' : $m_int /= 3600;break;
+            case 'phut': $m_int /= 60;break;
+            default : break;
+        }
+        return $m_int;
+   }
+    /**
+     * QuynhTM
+     * @param int $start_Time
+     * @param int $end_Time
+     * @param int $numberDateCheck
+     * @param bool|false $is_root
+     * @param bool|false $default
+     */
+    public static function setDateDefaultSearch(&$start_Time = 0, &$end_Time = 0, $numberDateCheck = 7, $is_root = false, $default = false){
+        $oneDay = 24*60*60;
+        if($is_root) return; // quyền root thi không check giới hạn ngày
+        if($start_Time != 0 && $end_Time != 0){
+            $so_ngay = FunctionLib::khoangcachngay(date('d/m/Y',$start_Time),date('d/m/Y',$end_Time));
+            if($so_ngay > $numberDateCheck){
+                $start_Time = $end_Time - $numberDateCheck*$oneDay;
+            }
+        }else{
+            if($end_Time != ''){
+                $start_Time = $end_Time - $numberDateCheck*$oneDay;
+            }elseif($start_Time != 0){
+                $end_Time = $start_Time + $numberDateCheck*$oneDay;
+            }elseif($default){
+                $start_Time = time() - $numberDateCheck*$oneDay;
+                $end_Time = time();
+            }
+        }
     }
+
 }
