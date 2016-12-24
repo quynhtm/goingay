@@ -107,7 +107,7 @@ if(!class_exists('ThumbImg') ){
 			}
 		}
 
-		public static function getImageThumbBanner($banner_id = 0,$banner_parent_id = 0, $file_name='', $size_image = CGlobal::sizeImage_100, $alt = '', $returnPath = true, $type=1){
+		public static function getImageThumbBanner($banner_id = 0,$banner_parent_id = 0, $file_name='', $size_image = CGlobal::sizeImage_100, $alt = '', $returnPath = true){
 			$folder = CGlobal::FOLDER_BANNER;
 			$banner_image = $file_name;
 			$id = ($banner_id > 0)? $banner_id : $banner_parent_id;
@@ -120,7 +120,7 @@ if(!class_exists('ThumbImg') ){
 			}
 
 			if(!preg_match("/.jpg|.jpeg|.JPEG|.JPG|.png|.gif/",strtolower($banner_image))) return ' ';
-			$arrSizeThumb = ($type == CGlobal::type_thumb_image_banner)?CGlobal::$arrBannerSizeImage : CGlobal::$arrSizeImage;
+			$arrSizeThumb = CGlobal::$arrBannerSizeImage;
 			$width = isset($arrSizeThumb[$size_image])? $arrSizeThumb[$size_image]['w']: CGlobal::sizeImage_100;
 			$height = isset($arrSizeThumb[$size_image])? $arrSizeThumb[$size_image]['h']: CGlobal::sizeImage_100;
 
@@ -142,7 +142,6 @@ if(!class_exists('ThumbImg') ){
 					$url_img = '';
 				}
 			}
-
 			if($returnPath){
 				return $url_img;
 			}else{

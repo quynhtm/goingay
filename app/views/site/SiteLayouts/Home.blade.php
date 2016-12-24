@@ -44,7 +44,7 @@
       });
     });
     </script>
-	
+
 	@endif
 
 	<div class="box-home-category">

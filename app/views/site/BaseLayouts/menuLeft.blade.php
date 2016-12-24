@@ -18,17 +18,6 @@
 		<ul class="rslides" id="sliderLeft">
 			@foreach($arrBannerLeft as $slider)
 			<?php 
-			if($slider->banner_is_rel == 0){
-				$rel = 'rel="nofollow"';
-			}else{
-				$rel = '';
-			}
-			if($slider->banner_is_target == 0){
-				$target = 'target="_blank"';
-			}else{
-				$target = '';
-			}
-			
 			$banner_is_run_time = 1;
 			if($slider->banner_is_run_time == CGlobal::status_hide){
 				$banner_is_run_time = 1;
@@ -48,7 +37,7 @@
 			?>
 			@if($banner_is_run_time == 1)
 			<div class="slide ">
-				<a {{$target}} {{$rel}} href="@if($slider->banner_link != '') {{$slider->banner_link}} @else javascript:void(0) @endif" title="{{$slider->banner_name}}">
+				<a @if($slider->banner_is_rel == 0) rel="nofollow" @endif @if($slider->banner_is_target == 0) target="_blank" @endif href="@if($slider->banner_link != '') {{$slider->banner_link}} @else javascript:void(0) @endif" title="{{$slider->banner_name}}">
 					<img src="{{ThumbImg::thumbImageBannerNormal($slider->banner_id,$slider->banner_parent_id, $slider->banner_image, CGlobal::sizeImage_200,CGlobal::sizeImage_600, $slider->banner_name,true,true)}}" alt="{{$slider->banner_name}}" />
 				</a>
 			</div>
