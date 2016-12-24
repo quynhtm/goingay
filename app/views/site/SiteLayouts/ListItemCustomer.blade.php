@@ -11,7 +11,7 @@
 							<a class="image-item" title="{{$itemHot->item_name}}" href="{{FunctionLib::buildLinkDetailItem($itemHot->item_id,$itemHot->item_name,$itemHot->item_category_id)}}">
 								@if($itemHot->item_image != '')
 									<span>
-								<img itemprop="image" src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHot->item_id, $itemHot->item_image, CGlobal::sizeImage_300)}}" title="{{$itemHot->item_name}}" alt="{{$itemHot->item_name}}">
+								<img itemprop="image" {{CGlobal::size_imge_show_list_180}} src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHot->item_id, $itemHot->item_image, CGlobal::sizeImage_300)}}" title="{{$itemHot->item_name}}" alt="{{$itemHot->item_name}}">
 							</span>
 								@endif
 								@if($itemHot->item_type_price == CGlobal::TYPE_PRICE_NUMBER)
@@ -23,7 +23,7 @@
 						</div>
 						<div class="title-item">
 							<h2>
-								<a href="" title="{{$itemHot->item_name}}">{{$itemHot->item_name}}</a>
+								<a href="{{FunctionLib::buildLinkDetailItem($itemHot->item_id,$itemHot->item_name,$itemHot->item_category_id)}}" title="{{$itemHot->item_name}}">{{$itemHot->item_name}}</a>
 							</h2>
 						</div>
 						<div class="info-item">
@@ -58,7 +58,7 @@
 						@foreach ($resultItemCategory as $keyc => $itemCate)
 							<li>
 								<a class="img" href="{{FunctionLib::buildLinkDetailItem($itemCate->item_id,$itemCate->item_name,$itemCate->item_category_id)}}">
-									<img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemCate->item_id, $itemCate->item_image, CGlobal::sizeImage_200)}}" alt="{{$itemCate->item_name}}" title="{{$itemCate->item_name}}">
+									<img {{CGlobal::size_imge_show_list_60}} src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemCate->item_id, $itemCate->item_image, CGlobal::sizeImage_200)}}" alt="{{$itemCate->item_name}}" title="{{$itemCate->item_name}}">
 								</a>
 								<div class="title-post">
 									<h2>
@@ -105,62 +105,34 @@
 			@endif
 		</div>
 
-		<!--quảng cáo bên phải-->
+		<!-- quang cao ben phải-->
 		@if(isset($arrBannerRight) && sizeof($arrBannerRight) > 0)
-				<!-- Home Page -->
-		<div class="col-327 pull-right">
-			<div class="box-ads">
-				<ul class="rslides" id="sliderRight">
-					@foreach($arrBannerRight as $slider)
-						<?php
-						if($slider->banner_is_rel == 0){
-							$rel = 'rel="nofollow"';
-						}else{
-							$rel = '';
-						}
-						if($slider->banner_is_target == 0){
-							$target = 'target="_blank"';
-						}else{
-							$target = '';
-						}
-
-						$banner_is_run_time = 1;
-						if($slider->banner_is_run_time == CGlobal::status_hide){
-							$banner_is_run_time = 1;
-						}else{
-							$banner_start_time = $slider->banner_start_time;
-							$banner_end_time = $slider->banner_end_time;
-							$date_current = time();
-
-							if($banner_start_time > 0 && $banner_end_time > 0 && $banner_start_time <= $banner_end_time){
-								if($banner_start_time <= $date_current && $date_current <= $banner_end_time){
-									$banner_is_run_time = 1;
-								}
-							}else{
-								$banner_is_run_time = 0;
-							}
-						}
-						?>
-						@if($banner_is_run_time == 1)
-							<div class="slide text-center">
-								<a {{$target}} {{$rel}} href="@if($slider->banner_link != '') {{$slider->banner_link}} @else javascript:void(0) @endif" title="{{$slider->banner_name}}">
-									<img src="{{ThumbImg::thumbImageBannerNormal($slider->banner_id,$slider->banner_parent_id, $slider->banner_image, CGlobal::sizeImage_300,0, $slider->banner_name,true,true)}}" alt="{{$slider->banner_name}}" />
-								</a>
-							</div>
-						@endif
-					@endforeach
-				</ul>
-				<script type="text/javascript">
-					jQuery(document).ready(function() {
-						jQuery("#sliderRight").responsiveSlides({
-							maxwidth: 1000,
-							speed: 800,
-							timeout: 10000,
-						});
-					});
-				</script>
+			<div class="col-327 pull-right">
+				@if(sizeof($arrBannerRight) > 0)
+					<div class="box-ads" >
+						@foreach($arrBannerRight as $key_position =>$bannerShow)
+							<ul class="rslides" id="sliderRight_{{$key_position}}" style="padding-bottom: 25px">
+								@foreach($bannerShow as $slider)
+									<div class="slide ">
+										<a @if($slider->banner_is_rel == 0) rel="nofollow" @endif @if($slider->banner_is_target == 0) target="_blank" @endif href="@if($slider->banner_link != '') {{$slider->banner_link}} @else javascript:void(0) @endif" title="{{$slider->banner_name}}">
+											<img src="{{ThumbImg::thumbImageBannerNormal($slider->banner_id,$slider->banner_parent_id, $slider->banner_image, CGlobal::sizeImage_200,CGlobal::sizeImage_600, $slider->banner_name,true,true)}}" alt="{{$slider->banner_name}}" />
+										</a>
+									</div>
+								@endforeach
+							</ul>
+							<script type="text/javascript">
+								jQuery(document).ready(function() {
+									jQuery("#sliderRight_{{$key_position}}").responsiveSlides({
+										maxwidth: 1000,
+										speed: 800,
+										timeout: 5000,
+									});
+								});
+							</script>
+						@endforeach
+					</div>
+				@endif
 			</div>
-		</div>
 		@endif
 	</div>
 </div>

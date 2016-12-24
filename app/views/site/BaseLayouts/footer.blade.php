@@ -36,7 +36,7 @@
 <span id="back-top"></span>
 <div class="icon-pin">
 	<ul>
-		<li><a class="pin icon-post" href="">Post</a></li>
-		<li><a class="pin icon-contact" href="">Contact</a></li>
+		<!--<li><a class="pin icon-post" href="">Post</a></li>-->
+		<li><a class="pin icon-contact" href="" title="Liên hệ với quản trị {{CGlobal::web_name}}">Contact</a></li>
 	</ul>
 </div>

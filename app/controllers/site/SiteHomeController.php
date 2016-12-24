@@ -70,7 +70,7 @@ class SiteHomeController extends BaseSiteController
 		if($keyword == ''){
 			return Redirect::route('site.home');
 		}
-		$meta_title = $meta_keywords = $meta_description = 'Tìm kiếm nhanh';
+		$meta_title = $meta_keywords = $meta_description = 'Tìm kiếm nhanh'.($keyword != '')?$keyword:'';
 		$meta_img= '';
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 		$this->header($category_id, $province_id, $keyword);
@@ -100,6 +100,7 @@ class SiteHomeController extends BaseSiteController
 
 		//quang cao ben phải
 		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
+
 
 		$this->layout->content = View::make('site.SiteLayouts.searchItems')
 			->with('arrProvince', $arrProvince)

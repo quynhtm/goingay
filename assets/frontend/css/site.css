@@ -95,7 +95,7 @@ h1, h2, h3, h4, h5, h6{
 	display:inline-block
 }
 .box-search {
-    border-right: 1px solid #ddd;
+    /*border-right: 1px solid #ddd;*/
     display: inline-block;
     float: left;
     height: 45px;
@@ -935,7 +935,7 @@ h1, h2, h3, h4, h5, h6{
     margin-right: 5px;
 }
 .col-653 {
-    width: 69.3%;
+    width: 77.3%;
     position: relative;
     padding-right: 2%;
 }
@@ -1062,7 +1062,7 @@ h1, h2, h3, h4, h5, h6{
     padding-bottom: 0;
 }
 .col-327 {
-    width: 28.7%;
+    width: 22.7%;
 
 }
 /*Detail*/

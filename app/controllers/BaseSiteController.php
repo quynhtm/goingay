@@ -28,18 +28,12 @@ class BaseSiteController extends BaseController
     public function header($category_id = 0, $province_id = 0, $keyword = ''){
 		//tim kiem
 		$keyword = htmlspecialchars(Request::get('keyword', ''));
-
         $messages = FunctionLib::messages('messages');
 		$user_customer = $this->user_customer;
 		if(empty($user_customer)){
 			$this->popupHide();
 		}
 		$arrBannerHead = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
-		/*
-		$userAdmin = User::user_login();
-		if(!empty($userAdmin)){
-			FunctionLib::debug($arrBannerHead);
-		}*/
 		$this->layout->header = View::make("site.BaseLayouts.header")
 								->with('keyword', $keyword)
 								->with('category_id', $category_id)//dung cho search
@@ -48,29 +42,61 @@ class BaseSiteController extends BaseController
 								->with('messages', $messages)
 								->with('arrBannerHead', $arrBannerHead);
     }
+	public function footer(){
+		$address='';
+		$arrAddress = Info::getItemByKeyword('SITE_FOOTER_LEFT');
+		if(!empty($arrAddress)){
+			$address = $arrAddress->info_content;
+		}
+		$this->layout->footer = View::make("site.BaseLayouts.footer")
+			->with('address', $address);
+	}
 	public function popupHide(){
 		$this->layout->popupHide = View::make("site.BaseLayouts.popupHide");
 	}
 	public function menuLeft($catid = 0){
 		$menuCategoriessAll = Category::getCategoriessAll();
+
 		$arrBannerLeft = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_LEFT, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
+		$arrBannerShow = $this->getBannerWithPosition($arrBannerLeft);// hi?n th? theo: TOP, CENTER, BOTTOM
+
 		$this->layout->menuLeft = View::make("site.BaseLayouts.menuLeft")
-								->with('arrBannerLeft', $arrBannerLeft)
+								->with('arrBannerShow', $arrBannerShow)
 								->with('catid', $catid)
 								->with('menuCategoriessAll', $menuCategoriessAll);
 	}
 	//dung chung quang cao cac page
 	public function bannerRight($banner_type = 0, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0){
 		$arrBannerRight = Banner::getBannerAdvanced($banner_type, $banner_page, $banner_category_id, $banner_province_id);
-		return $arrBannerRight;
+		$arrBannerShow = $this->getBannerWithPosition($arrBannerRight); // hi?n th? theo: TOP, CENTER, BOTTOM
+		return $arrBannerShow;
 	}
-    public function footer(){
-		$address='';
-		$arrAddress = Info::getItemByKeyword('SITE_FOOTER_LEFT');
-		if(!empty($arrAddress)){
-			$address = $arrAddress->info_content;
+
+	public function getBannerWithPosition($arrBanner = array()){
+		$arrBannerShow = array();
+		if(sizeof($arrBanner) > 0){
+			foreach($arrBanner as $id_banner =>$valu){
+				$banner_is_run_time = 1;
+				if($valu->banner_is_run_time == CGlobal::BANNER_NOT_RUN_TIME){
+					$banner_is_run_time = 1;
+				}else{
+					$banner_start_time = $valu->banner_start_time;
+					$banner_end_time = $valu->banner_end_time;
+					$date_current = time();
+					if($banner_start_time > 0 && $banner_end_time > 0 && $banner_start_time <= $banner_end_time){
+						if($banner_start_time <= $date_current && $date_current <= $banner_end_time){
+							$banner_is_run_time = 1;
+						}
+					}else{
+						$banner_is_run_time = 0;
+					}
+				}
+				if($banner_is_run_time == 1){
+					$arrBannerShow[$valu->banner_position][] = $valu;
+				}
+			}
 		}
-        $this->layout->footer = View::make("site.BaseLayouts.footer")
-								->with('address', $address);
-    }
+		return $arrBannerShow;
+	}
+
 }

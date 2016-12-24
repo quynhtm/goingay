@@ -30,7 +30,7 @@ class Banner extends Eloquent
                 ->where('banner_page',$banner_page)
                 ->where('banner_category_id',$banner_category_id)
                 ->where('banner_province_id',$banner_province_id)
-                ->orderBy('banner_order','asc')->get();
+                ->orderBy('banner_position','asc')->orderBy('banner_order','asc')->get();
             if($banner){
                 foreach($banner as $itm) {
                     $bannerAdvanced[$itm['banner_id']] = $itm;

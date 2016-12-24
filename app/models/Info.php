@@ -160,7 +160,7 @@ class Info extends Eloquent {
     	$result = (Memcache::CACHE_ON) ? Cache::get(Memcache::CACHE_INFO_KEYWORD.$keyword) : array();
     	try {
     		if(empty($result)){
-    			$result = Info::where('info_keyword', $keyword)->first();
+    			$result = Info::where('info_keyword', $keyword)->where('info_status', CGlobal::status_show)->first();
     			if($result && Memcache::CACHE_ON){
     				Cache::put(Memcache::CACHE_INFO_KEYWORD.$keyword, $result, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
     			}

@@ -9,7 +9,7 @@
       			<a href="{{URL::route('site.home')}}"><img src="{{URL::route('site.home')}}/assets/frontend/img/logo.png" alt="{{CGlobal::web_name}}"></a>
       		</div>
       	@endif
-		<div class="like-social">
+		<div class="like-social" style="display: none">
 			<div class="fb">
 				<div id="fb-root"></div>
 				<script>(function(d, s, id) {

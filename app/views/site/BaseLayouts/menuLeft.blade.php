@@ -13,46 +13,28 @@
 		@endforeach
 		@endif
 	</ul>
-	@if(sizeof($arrBannerLeft) > 0)
-	<div class="box-ads">
-		<ul class="rslides" id="sliderLeft">
-			@foreach($arrBannerLeft as $slider)
-			<?php 
-			$banner_is_run_time = 1;
-			if($slider->banner_is_run_time == CGlobal::status_hide){
-				$banner_is_run_time = 1;
-			}else{
-				$banner_start_time = $slider->banner_start_time;
-				$banner_end_time = $slider->banner_end_time;
-				$date_current = time();
-			
-				if($banner_start_time > 0 && $banner_end_time > 0 && $banner_start_time <= $banner_end_time){
-					if($banner_start_time <= $date_current && $date_current <= $banner_end_time){
-						$banner_is_run_time = 1;
-					}
-				}else{
-					$banner_is_run_time = 0;
-				}
-			}
-			?>
-			@if($banner_is_run_time == 1)
-			<div class="slide ">
-				<a @if($slider->banner_is_rel == 0) rel="nofollow" @endif @if($slider->banner_is_target == 0) target="_blank" @endif href="@if($slider->banner_link != '') {{$slider->banner_link}} @else javascript:void(0) @endif" title="{{$slider->banner_name}}">
-					<img src="{{ThumbImg::thumbImageBannerNormal($slider->banner_id,$slider->banner_parent_id, $slider->banner_image, CGlobal::sizeImage_200,CGlobal::sizeImage_600, $slider->banner_name,true,true)}}" alt="{{$slider->banner_name}}" />
-				</a>
-			</div>
-			@endif
-			@endforeach
-		 </ul>
-		<script type="text/javascript">
-			jQuery(document).ready(function() {
-				jQuery("#sliderLeft").responsiveSlides({
-				    maxwidth: 1000,
-				    speed: 800,
-				    timeout: 5000,
-			    });
-			});
-		</script>
+	@if(sizeof($arrBannerShow) > 0)
+	<div class="box-ads" >
+		@foreach($arrBannerShow as $key_position =>$bannerShow)
+			<ul class="rslides" id="sliderLeft_{{$key_position}}" style="padding-bottom: 25px">
+				@foreach($bannerShow as $slider)
+				<div class="slide ">
+					<a @if($slider->banner_is_rel == 0) rel="nofollow" @endif @if($slider->banner_is_target == 0) target="_blank" @endif href="@if($slider->banner_link != '') {{$slider->banner_link}} @else javascript:void(0) @endif" title="{{$slider->banner_name}}">
+						<img src="{{ThumbImg::thumbImageBannerNormal($slider->banner_id,$slider->banner_parent_id, $slider->banner_image, CGlobal::sizeImage_200,CGlobal::sizeImage_600, $slider->banner_name,true,true)}}" alt="{{$slider->banner_name}}" />
+					</a>
+				</div>
+				@endforeach
+			 </ul>
+			<script type="text/javascript">
+				jQuery(document).ready(function() {
+					jQuery("#sliderLeft_{{$key_position}}").responsiveSlides({
+						maxwidth: 1000,
+						speed: 800,
+						timeout: 5000,
+					});
+				});
+			</script>
+		@endforeach
 	</div>
 	@endif
 </div>
