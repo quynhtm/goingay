@@ -81,6 +81,7 @@ class CGlobal{
     	self::sizeImage_750 =>array('w'=>self::sizeImage_750,'h'=>self::sizeImage_450),
     	self::sizeImage_1020 =>array('w'=>self::sizeImage_1020,'h'=>0),
     	self::freeSizeImage_300 =>array('w'=>self::freeSizeImage_300,'h'=>0),
+    	1 =>array('w'=>970,'h'=>90),//banner header
     );
 	
     
