@@ -26,12 +26,7 @@
                                 {{$optionProvince}}
                             </select>
                         </div>
-                        <div class="form-group col-lg-3">
-                            <label for="banner_type">Loại</label>
-                            <select name="banner_type" id="banner_type" class="form-control input-sm">
-                                {{$optionType}}
-                            </select>
-                        </div>
+
                         <div class="form-group col-lg-3">
                             <label for="banner_page">Thuộc page</label>
                             <select name="banner_page" id="banner_page" class="form-control input-sm">
@@ -42,6 +37,12 @@
                             <label for="category_status">Trạng thái</label>
                             <select name="banner_status" id="banner_status" class="form-control input-sm">
                                 {{$optionStatus}}
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label for="banner_type">Loại</label>
+                            <select name="banner_type" id="banner_type" class="form-control input-sm">
+                                {{$optionType}}
                             </select>
                         </div>
                         <div class="form-group col-lg-3">
@@ -83,7 +84,12 @@
                             <tr>
                                 <td class="text-center text-middle">{{ $stt + $key+1 }}</td>
                                 <td class="text-center text-middle">
-                                    <img src="{{ ThumbImg::getImageThumbBanner($item->banner_id,$item->banner_parent_id, $item->banner_image, CGlobal::sizeImage_100, $item->banner_name, true)}}">
+                                    <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_BANNER, $item->banner_id, $item->banner_image, CGlobal::sizeImage_100)}}">
+                                    @if($item->banner_parent_id > 0)<br/>
+                                        <a href="{{URL::route('admin.bannerEdit',array('id' => $item->banner_id))}}" title="Xem banner gốc" target="_blank">
+                                            <b>Banner cha: {{$item->banner_parent_id}} </b>
+                                        </a>
+                                    @endif
                                 </td>
                                 <td>
                                     [<b>{{ $item->banner_id }}</b>] {{ $item->banner_name }}
@@ -91,13 +97,12 @@
                                    @if($item->banner_update_time > 0)<br/>U: {{date('d-m-Y h:i',$item->banner_update_time)}}@endif
                                 </td>
                                 <td>
-                                    @if($item->banner_parent_id > 0)Banner ID cha: {{$item->banner_parent_id}} <br/>@endif
                                     @if($item->banner_position > 0){{$arrPosition[$item->banner_position]}} <br/>@endif
+                                    @if(isset($arrTypeBanner[$item->banner_type])){{$arrTypeBanner[$item->banner_type]}} <br/> @endif
                                     @if($item->banner_order > 0)Thứ tự: {{$item->banner_order}} <br/>@endif
                                 </td>
                                 <td>
-                                    @if(isset($arrTypeBanner[$item->banner_type])){{$arrTypeBanner[$item->banner_type]}}@else ---- @endif
-                                    <br/><b>Danh mục: </b>@if(isset($arrCategory[$item->banner_category_id])){{$arrCategory[$item->banner_category_id]}}@else ----- @endif
+                                    <b>Danh mục: </b>@if(isset($arrCategory[$item->banner_category_id])){{$arrCategory[$item->banner_category_id]}}@else ----- @endif
                                     <br/><b>Tỉnh: </b>@if(isset($arrProvince[$item->banner_province_id])){{$arrProvince[$item->banner_province_id]}}@else Toàn quốc @endif
                                     <br/>@if($item->banner_is_rel == 1)Follow @else Nofollow @endif
                                 </td>
