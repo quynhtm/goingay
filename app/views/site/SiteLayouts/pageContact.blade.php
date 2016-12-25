@@ -20,11 +20,11 @@
 							<label class="control-label">Địa chỉ<span>(*)</span></label>
 							<input id="txtAddress" name="txtAddress" class="form-control" type="text">
 						</div>
+						<div class="form-group">
+							<label class="control-label">Tiêu đề liên hệ<span>(*)</span></label>
+							<input id="txtName" name="txtName" class="form-control" type="text">
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">Tiêu đề liên hệ<span>(*)</span></label>
-					<input id="txtName" name="txtName" class="form-control" type="text">
 				</div>
 				<div class="form-group">
 					<label class="control-label">Nội dung<span>(*)</span></label>
