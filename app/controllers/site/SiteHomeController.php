@@ -334,5 +334,17 @@ class SiteHomeController extends BaseSiteController
 		$this->layout->content = View::make('site.SiteLayouts.page404');
 		$this->footer();
 	}
+	public function pageContact(){
+		$meta_title = $meta_keywords = $meta_description = 'Liên hệ Raovat30s.vn';
+		$meta_img= '';
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
+		
+		$this->header();
+		$this->menuLeft();
+		$this->layout->content = View::make('site.SiteLayouts.pageContact')
+								->with('arrBannerRight', $arrBannerRight);
+		$this->footer();
+	}
 }
 
