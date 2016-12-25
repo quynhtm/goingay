@@ -37,6 +37,13 @@ class ClickShare extends Eloquent
             if (isset($dataSearch['object_id']) && $dataSearch['object_id'] > 0) {
                 $query->where('object_id',$dataSearch['object_id']);
             }
+            if (isset($dataSearch['start_time']) && $dataSearch['start_time'] > 0) {
+                $query->where('share_time','>=',$dataSearch['start_time']);
+            }
+            if (isset($dataSearch['end_time']) && $dataSearch['end_time'] > 0) {
+                $query->where('share_time','<=',$dataSearch['end_time']);
+            }
+
             if (isset($dataSearch['object_name']) && $dataSearch['object_name'] != '') {
                 $query->where('object_name','LIKE', '%' . $dataSearch['object_name'] . '%');
             }

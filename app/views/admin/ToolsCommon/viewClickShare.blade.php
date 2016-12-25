@@ -24,6 +24,14 @@
                             <label for="object_name">Tên đối tượng share</label>
                             <input type="text" class="form-control input-sm" id="object_name" name="object_name" placeholder="Tên đối tượng share" @if(isset($search['object_name']) && $search['object_name'] != '')value="{{$search['object_name']}}"@endif>
                         </div>
+                        <div class="form-group col-lg-3">
+                            <label for="object_name">Ngày từ</label>
+                            <input type="text" class="form-control" id="start_time" name="start_time"  data-date-format="dd-mm-yyyy" value="@if(isset($search['start_time']) && $search['start_time'] > 0){{date('d-m-Y',$search['start_time'])}}@endif">
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label for="object_name">đến</label>
+                            <input type="text" class="form-control" id="end_time" name="end_time"  data-date-format="dd-mm-yyyy" value="@if(isset($search['end_time']) && $search['end_time'] > 0){{date('d-m-Y',$search['end_time'])}}@endif">
+                        </div>
                     </div>
                     <div class="panel-footer text-right">
                         <span class="">
@@ -78,3 +86,10 @@
         <!-- /.row -->
     </div><!-- /.page-content -->
 </div>
+
+<script>
+    $(document).ready(function(){
+        var checkin = $('#start_time').datepicker({ });
+        var checkout = $('#end_time').datepicker({ });
+    });
+</script>

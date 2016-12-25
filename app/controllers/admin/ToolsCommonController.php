@@ -53,9 +53,22 @@ class ToolsCommonController extends BaseAdminController
 
         $search['object_name'] = addslashes(Request::get('object_name',''));
         $search['object_id'] = (int)Request::get('object_id',0);
+        $dataFilter = $search;
+
+        //ngay bat dau
+        $star_time = Request::get('start_time','');
+        if($star_time != '') {
+            $dataFilter['start_time'] = $star_time;
+            $search['start_time'] = strtotime($star_time . ' 00:00:00');
+        }
+        $end_time = Request::get('end_time','');
+        if($end_time != '') {
+            $dataFilter['end_time'] = $end_time;
+            $search['end_time'] = strtotime($end_time . ' 23:59:59');
+        }
 
         $dataSearch = ClickShare::searchByCondition($search, $limit, $offset,$total);
-        $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
+        $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $dataFilter) : '';
 
         $this->layout->content = View::make('admin.ToolsCommon.viewClickShare')
             ->with('paging', $paging)
