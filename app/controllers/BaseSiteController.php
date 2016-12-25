@@ -34,6 +34,19 @@ class BaseSiteController extends BaseController
 			$this->popupHide();
 		}
 		$arrBannerHead = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
+
+
+		//cap nhat luot click tu cac site gan link
+		$url_source = trim(Request::get('url_source', ''));
+		if(trim($url_source) != ''){
+			$nameSite = base64_decode($url_source);
+			$hostIp = Request::getClientIp();
+			$clickBanner = ClickShare::addData(array('share_ip'=>$hostIp,
+				'share_time'=>time(),
+				'object_id'=>13,
+				'object_name'=>$nameSite));
+		}
+
 		$this->layout->header = View::make("site.BaseLayouts.header")
 								->with('keyword', $keyword)
 								->with('category_id', $category_id)//dung cho search
