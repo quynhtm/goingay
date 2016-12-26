@@ -10,7 +10,7 @@
 Route::any('/', array('as' => 'site.home','uses' => 'SiteHomeController@index'));
 Route::get('404.html',array('as' => 'site.page404','uses' =>'SiteHomeController@page404'));
 Route::get('tim-kiem.html',array('as' => 'site.searchItems','uses' =>'SiteHomeController@searchItems'));
-Route::get('lien-he.html',array('as' => 'site.pageContact','uses' =>'SiteHomeController@pageContact'));
+Route::match(['GET','POST'],'lien-he.html',array('as' => 'site.pageContact','uses' =>'SiteHomeController@pageContact'));
 //Register - Login
 Route::match(['GET','POST'],'dang-ky.html', array('as' => 'customer.pageRegister','uses' => 'SiteUserCustomerController@pageRegister'));
 Route::match(['GET','POST'],'kich-hoat-tai-khoan.html', array('as' => 'customer.pageActiveRegister','uses' => 'SiteUserCustomerController@pageActiveRegister'));

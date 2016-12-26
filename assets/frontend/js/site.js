@@ -1,6 +1,7 @@
 jQuery(document).ready(function($){
 	SITE.menuFixed();
 	SITE.backTop();
+	SITE.contact();
 });
 
 SITE={
@@ -142,5 +143,46 @@ SITE={
 		if (confirm('Bạn có muốn chọn ảnh này làm ảnh đại diện?')) {
 			jQuery('#image_primary').val(nameImage);
 		}
+	},
+	contact:function(){
+		jQuery('#submitContact').click(function(){
+			var valid = true;
+			if(jQuery('#txtName').val() == ''){
+				jQuery('#txtName').addClass('error');
+				valid = false;
+			}else{
+				jQuery('#txtName').removeClass('error');
+			}
+			
+			if(jQuery('#txtMobile').val() == ''){
+				jQuery('#txtMobile').addClass('error');
+				valid = false;
+			}else{
+				
+				var regex = /^[0-9-+]+$/;
+				var phone = jQuery('#txtMobile').val();
+				if (regex.test(phone)) {
+			        jQuery('#txtMobile').removeClass('error');
+			    }else{
+					jQuery('#txtMobile').addClass('error');	
+				}
+			}
+			if(jQuery('#txtTitle').val() == ''){
+				jQuery('#txtTitle').addClass('error');
+				valid = false;
+			}else{
+				jQuery('#txtTitle').removeClass('error');
+			}
+			if(jQuery('#txtMessage').val() == ''){
+				jQuery('#txtMessage').addClass('error');
+				valid = false;
+			}else{
+				jQuery('#txtMessage').removeClass('error');
+			}
+			if(valid==false){
+				return false;
+			}
+			return valid;
+		});
 	},
 }
