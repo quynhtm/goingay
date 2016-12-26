@@ -595,7 +595,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		$dataSave['item_name'] = addslashes(Request::get('item_name'));
 		$dataSave['item_category_id'] = addslashes(Request::get('item_category_id'));
 		$dataSave['item_status'] = addslashes(Request::get('item_status'));
-		$dataSave['item_content'] = Request::get('item_content');
+		$dataSave['item_content'] = addslashes(FunctionLib::strReplace(Request::get('item_content'), '\r\n', ''));
 		$dataSave['item_type_price'] = addslashes(Request::get('item_type_price',CGlobal::TYPE_PRICE_CONTACT));
 		$dataSave['item_type_action'] = (int)(Request::get('item_type_action',CGlobal::ITEMS_TYPE_ACTION_1));
 		$dataSave['item_price_sell'] = (int)str_replace('.','',Request::get('item_price_sell'));

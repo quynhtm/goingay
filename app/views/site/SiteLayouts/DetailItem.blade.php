@@ -68,7 +68,7 @@
 	<div class="content-boxcat">
 		<div class="col-653 pull-left">
 			<div class="detail-content-post">
-				{{stripcslashes($itemShow->item_content)}}
+				{{FunctionLib::setNofollow(stripcslashes($itemShow->item_content))}}
 			</div>
 
 			<div class="head-info">

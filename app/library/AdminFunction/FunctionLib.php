@@ -710,7 +710,7 @@ class FunctionLib {
     }
 
     //Set nofollow tag a
-    static function setNofollow($str){
+    public static function setNofollow($str){
         return preg_replace('/(<a.*?)(rel=[\"|\'].*?[\"|\'])?(.*?\/a>)/i', '$1 rel="nofollow" $3', $str);
     }
     //Set messages
@@ -851,5 +851,16 @@ class FunctionLib {
             }
         }
     }
-
+    /**
+     * Duynx
+     * @param string $strInput
+     * @param string $strReplace
+     * @param string $text
+     */
+    public static function strReplace($text='', $strInput='', $strReplace=''){
+    	if($text !='' && $strInput != ''){
+	    	$text = str_replace($strInput, $strReplace, $text);
+    	}
+    	return $text;
+    }
 }
