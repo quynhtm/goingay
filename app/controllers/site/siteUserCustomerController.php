@@ -1113,7 +1113,7 @@ class SiteUserCustomerController extends BaseSiteController{
 	public function loginGoogle(){
 	$client_id = '803912434754-0lpl6oc4t68ld167qn90i4uhldrlsi33.apps.googleusercontent.com'; 
 		$client_secret = 'BZJ1GVA-mG57HHOeJSKJBKeB';
-		$redirect_uri = 'http://raovat30s.vn/googlelogin';
+		$redirect_uri = Config::get('config.WEB_ROOT').'/googlelogin';
 		
 		$client = new Google_Client();
 		$client->setClientId($client_id);
