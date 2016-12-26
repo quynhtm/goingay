@@ -1031,7 +1031,7 @@ h1, h2, h3, h4, h5, h6{
 }
 .list-item-filter ul li a.img img {
     float: left;
-    width: 100%;
+    max-width: 100%;
 }
 .list-item-filter ul li .title-post h2 {
     float: left;

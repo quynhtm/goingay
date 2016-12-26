@@ -915,7 +915,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			
 		if (!isset($accessToken)) {
 			$permissions = array('public_profile','email'); //Optional permissions
-			$loginUrl = $helper->getLoginUrl(Config::get('config.WEB_ROOT').'/facebooklogin', $permissions);
+			$loginUrl = $helper->getLoginUrl(Config::get('config.WEB_ROOT').'facebooklogin', $permissions);
 			header("Location: ".$loginUrl);
 			exit;
 		}
@@ -1028,7 +1028,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			
 		if (!isset($accessToken)) {
 			$permissions = array('public_profile','email'); //Optional permissions
-			$loginUrl = $helper->getLoginUrl(Config::get('config.WEB_ROOT').'/hop-tac.html', $permissions);
+			$loginUrl = $helper->getLoginUrl(Config::get('config.WEB_ROOT').'hop-tac.html', $permissions);
 			header("Location: ".$loginUrl);
 			exit;
 		}
@@ -1111,9 +1111,9 @@ class SiteUserCustomerController extends BaseSiteController{
 		}
 	}
 	public function loginGoogle(){
-	$client_id = '803912434754-0lpl6oc4t68ld167qn90i4uhldrlsi33.apps.googleusercontent.com'; 
-		$client_secret = 'BZJ1GVA-mG57HHOeJSKJBKeB';
-		$redirect_uri = Config::get('config.WEB_ROOT').'/googlelogin';
+		$client_id = '803912434754-97ldh5muaqfst1imgvkd008ufn73gpmk.apps.googleusercontent.com'; 
+		$client_secret = 'lDU7GbU7cVslfcxHW4AvwUT7'; 
+		$redirect_uri = Config::get('config.WEB_ROOT').'googlelogin';
 		
 		$client = new Google_Client();
 		$client->setClientId($client_id);
