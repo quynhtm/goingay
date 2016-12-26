@@ -893,8 +893,8 @@ class SiteUserCustomerController extends BaseSiteController{
 	public function loginFacebook(){
 		
 		$fb = new Facebook\Facebook ([
-				'app_id' => '1806153732995309',
-				'app_secret' => '9ffa193548158f07eb1e28eaff4a5403',
+				'app_id' => '732736640216505',
+				'app_secret' => 'fcc290c4ee0cc38231a736c9fd272fa2',
 				'default_graph_version' => 'v2.8',
 				'persistent_data_handler' => 'session'
 				]);
@@ -1006,8 +1006,8 @@ class SiteUserCustomerController extends BaseSiteController{
 			return Redirect::route('site.home');
 		}
 		$fb = new Facebook\Facebook ([
-				'app_id' => '1806153732995309',
-				'app_secret' => '9ffa193548158f07eb1e28eaff4a5403',
+				'app_id' => '732736640216505',
+				'app_secret' => 'fcc290c4ee0cc38231a736c9fd272fa2',
 				'default_graph_version' => 'v2.8',
 				'persistent_data_handler' => 'session'
 				]);
@@ -1113,7 +1113,7 @@ class SiteUserCustomerController extends BaseSiteController{
 	public function loginGoogle(){
 	$client_id = '803912434754-0lpl6oc4t68ld167qn90i4uhldrlsi33.apps.googleusercontent.com'; 
 		$client_secret = 'BZJ1GVA-mG57HHOeJSKJBKeB';
-		$redirect_uri = 'http://dev.sanphamredep.com/googlelogin';
+		$redirect_uri = 'http://raovat30s.vn/googlelogin';
 		
 		$client = new Google_Client();
 		$client->setClientId($client_id);
