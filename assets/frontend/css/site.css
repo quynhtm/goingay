@@ -248,9 +248,10 @@ h1, h2, h3, h4, h5, h6{
 }
 .item-home-cat li .line {
     border-bottom: 1px dotted #ddd;
+    display: inline-block;
     float: left;
-    margin-bottom: 7px;
-    padding-bottom: 7px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
     width: 100%;
 }
 .item-home-cat li .line:last-child,
@@ -262,8 +263,8 @@ h1, h2, h3, h4, h5, h6{
 .item-home-cat li .line .thumb {
     float: left;
     margin-right: 10px;
-    width: 30%;
-    height: 70px;
+    width: 20%;
+    height: 60px;
     overflow: hidden;
 }
 .item-home-cat li .line .thumb img {
@@ -1034,7 +1035,7 @@ h1, h2, h3, h4, h5, h6{
     margin-bottom: 5px;
     margin-right: 10px;
     text-align: center !important;
-    width: 19%;
+    width: 15%;
 }
 .list-item-filter ul li a.img img {
     float: none;
