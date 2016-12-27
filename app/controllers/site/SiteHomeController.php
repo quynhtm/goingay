@@ -351,8 +351,13 @@ class SiteHomeController extends BaseSiteController
 				$contact_email = addslashes(Request::get('txtEmail', ''));
 				$contact_title = addslashes(Request::get('txtTitle', ''));
 				$contact_content = addslashes(Request::get('txtMessage', ''));
+				$get_code = addslashes(Request::get('captcha', ''));
 				$contact_created = time();
-				if($contact_title != '' && $contact_name != '' && $contact_phone !=''  && $contact_content !=''){
+				$code = '';
+				if(Session::has('security_code')){
+					$code = Session::get('security_code');
+				}
+				if($contact_title != '' && $contact_name != '' && $contact_phone !=''  && $contact_content !='' && $get_code != '' && $code == $get_code){
 					$dataInput = array(
 							'contact_user_name_send'=>$contact_name,
 							'contact_phone_send'=>$contact_phone,
@@ -367,7 +372,11 @@ class SiteHomeController extends BaseSiteController
 						$messages = FunctionLib::messages('messages', 'Cảm ơn bạn đã gửi thông tin liên hệ. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất!');
 						return Redirect::route('site.pageContact');
 					}
+				}else{
+					$messages = FunctionLib::messages('messages', 'Mã xác nhận chưa đúng!', 'error');
+					return Redirect::route('site.pageContact');
 				}
+				
 			}
 		}
 		
@@ -376,5 +385,21 @@ class SiteHomeController extends BaseSiteController
 								->with('messages', $messages);
 		$this->footer();
 	}
+	public function linkCaptcha(){
+		$captchaImages = new captchaImages(60,30,4);
+	}
+	function captchaCheckAjax(){
+		$code = '';
+		if(Session::has('security_code')){
+			$code = Session::get('security_code');
+		}
+		$get_code = addslashes(Request::get('captcha', ''));
+		if($get_code != '' && $code == $get_code){
+			echo 1;
+		}else{
+			echo 0;
+			Session::forget('security_code');
+		}
+		exit();
+	}
 }
-

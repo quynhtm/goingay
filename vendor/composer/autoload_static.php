@@ -238,6 +238,7 @@ class ComposerStaticInit38700b5d60c6531f9f5e7914caa602d1
         'Abstract_Renderer' => __DIR__ . '/..' . '/dompdf/dompdf/include/abstract_renderer.cls.php',
         'Adobe_Font_Metrics' => __DIR__ . '/..' . '/phenx/php-font-lib/classes/Adobe_Font_Metrics.php',
         'AjaxCommonController' => __DIR__ . '/../..' . '/app/controllers/admin/AjaxCommonController.php',
+        'ArrayPermission' => __DIR__ . '/../..' . '/app/library/AdminFunction/ArrayPermission.php',
         'Attribute_Translator' => __DIR__ . '/..' . '/dompdf/dompdf/include/attribute_translator.cls.php',
         'Banner' => __DIR__ . '/../..' . '/app/models/Banner.php',
         'BannerController' => __DIR__ . '/../..' . '/app/controllers/admin/BannerController.php',
@@ -3830,6 +3831,7 @@ class ComposerStaticInit38700b5d60c6531f9f5e7914caa602d1
         'Image_Frame_Reflower' => __DIR__ . '/..' . '/dompdf/dompdf/include/image_frame_reflower.cls.php',
         'Image_Renderer' => __DIR__ . '/..' . '/dompdf/dompdf/include/image_renderer.cls.php',
         'Info' => __DIR__ . '/../..' . '/app/models/Info.php',
+        'InfoController' => __DIR__ . '/../..' . '/app/controllers/admin/InfoController.php',
         'Inline_Frame_Decorator' => __DIR__ . '/..' . '/dompdf/dompdf/include/inline_frame_decorator.cls.php',
         'Inline_Frame_Reflower' => __DIR__ . '/..' . '/dompdf/dompdf/include/inline_frame_reflower.cls.php',
         'Inline_Positioner' => __DIR__ . '/..' . '/dompdf/dompdf/include/inline_positioner.cls.php',
@@ -5297,8 +5299,6 @@ class ComposerStaticInit38700b5d60c6531f9f5e7914caa602d1
         'UserController' => __DIR__ . '/../..' . '/app/controllers/admin/UserController.php',
         'UserCustomer' => __DIR__ . '/../..' . '/app/models/UserCustomer.php',
         'UserCustomerController' => __DIR__ . '/../..' . '/app/controllers/admin/UserCustomerController.php',
-        'UserShop' => __DIR__ . '/../..' . '/app/models/UserShop.php',
-        'UserShopController' => __DIR__ . '/../..' . '/app/controllers/admin/UserShopController.php',
         'ValidForm' => __DIR__ . '/../..' . '/app/library/AdminFunction/ValidForm.php',
         'Whoops\\Exception\\ErrorException' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/ErrorException.php',
         'Whoops\\Exception\\Formatter' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Formatter.php',
@@ -5321,6 +5321,7 @@ class ComposerStaticInit38700b5d60c6531f9f5e7914caa602d1
         'Whoops\\Run' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Run.php',
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'captchaImages' => __DIR__ . '/../..' . '/app/library/AdminFunction/captchaImages.php',
         'trendClass' => __DIR__ . '/../..' . '/app/library/class_phpexcel/PHPExcel/Shared/trend/trendClass.php',
     );
 

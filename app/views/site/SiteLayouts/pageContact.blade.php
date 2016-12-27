@@ -30,14 +30,12 @@
 					<label class="control-label">Nội dung<span>(*)</span></label>
 					<textarea id="txtMessage" name="txtMessage" class="form-control" rows="5"></textarea>
 				</div>
-				<!--
 				<div class="form-group">
 					<label class="control-label labelInputCaptchar">Xác nhận<span>(*)</span></label>
-					<input name="captcha" class="txtInputCaptchar" type="text">
-					<img src="http://raovat.vnexpress.net/ajax/captcha/01dd0e6f73b03a6abd9f894532daef9a" class="imageCaptchar">
-					<a href="javascript:void(0)" class="iconRefreh"></a>
+					<input type="text" id="securityCode" name="captcha" maxlength="255" class="txtInputCaptchar"/>
+					<img id="imageCaptchar" src="{{URL::route('site.home')}}/captcha?rand=<?php echo rand();?>" class="imageCaptchar">
+					<a href="javascript:void(0)" class="iconRefreh" onclick="SITE.refreshCaptcha();" title="Mã an toàn mới"></a>
 				</div>
-				-->
 				<div class="form-group mgt10">
 					<button type="submit" id="submitContact" class="btn btn-primary">Gửi đi</button>
 				</div>
