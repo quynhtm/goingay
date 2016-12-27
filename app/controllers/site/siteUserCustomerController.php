@@ -148,12 +148,18 @@ class SiteUserCustomerController extends BaseSiteController{
 	    				'customer_phone'=>$phone,
 	    				'customer_address'=>$address,
 	    				'customer_time_created'=>time(),
+	    				'customer_time_login'=>time(),
 	    				'is_customer' => CGlobal::CUSTOMER_FREE,
-	    				'customer_status'=>CGlobal::status_hide,
+	    				'customer_status'=>CGlobal::status_show,
 	    			);
 	    			$id = UserCustomer::addData($data);
 	    			//Send mail active
 	    			if($id > 0){
+						//tam thời cho login luôn
+						$customer = UserCustomer::getByID($id);
+						Session::put('user_customer', $customer, 60*24);
+						Session::save();
+
 	    				$key_secret = base64_encode($mail .'/'.$phone.'/'.$id);
 	    				$emails = [$mail, CGlobal::emailAdmin];
 	    				$dataTheme = array(

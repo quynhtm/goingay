@@ -82,7 +82,7 @@ class UserCustomer extends Eloquent
         $result = $query->get();
         if($result){
             foreach($result as $k =>$customer){
-                $dataInput = array('is_login'=>0,'customer_time_logout'=>$customer->customer_time_logout);
+                $dataInput = array('is_login'=>0,'customer_time_logout'=>$customer->customer_time_login);
                 $customer->update($dataInput);
             }
         }
