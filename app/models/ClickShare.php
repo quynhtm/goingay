@@ -13,22 +13,21 @@ class ClickShare extends Eloquent
     protected $fillable = array('share_id','object_id', 'object_name','share_ip','share_time');
 
     public static function checkIpShareObject($object_id) {
-        //$shopShare = Cache::get(Memcache::CACHE_SHARE_SHOP_ID.$object_id);
-        $shopShare = array();
-        if ($shopShare || sizeof($shopShare) == 0) {
+        $userShare = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_SHARE_OBJECT_ID.$object_id): array();
+        if (sizeof($userShare) == 0) {
             if($object_id > 0){
                 $data = ClickShare::where('object_id', '=', $object_id)->orderBy('share_time','desc')->get();
                 if($data){
                     foreach($data as $itm) {
-                        $shopShare[$itm->share_ip] = $itm->object_id;
+                        $userShare[$itm->share_ip] = $itm->object_id;
                     }
                 }
-                if($shopShare){
-                    Cache::put(Memcache::CACHE_SHARE_OBJECT_ID.$object_id, $shopShare, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+                if($userShare){
+                    Cache::put(Memcache::CACHE_SHARE_OBJECT_ID.$object_id, $userShare, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
                 }
             }
         }
-        return $shopShare? $shopShare : array();
+        return $userShare? $userShare : array();
     }
 
     public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){

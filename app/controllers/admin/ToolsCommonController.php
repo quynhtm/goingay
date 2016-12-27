@@ -52,7 +52,11 @@ class ToolsCommonController extends BaseAdminController
         $total = 0;
 
         $search['object_name'] = addslashes(Request::get('object_name',''));
-        $search['object_id'] = (int)Request::get('object_id',0);
+        if(!$this->is_root){
+            $search['object_id'] = isset($this->user)? $this->user['user_id']:0;
+        }else{
+            $search['object_id'] = (int)Request::get('object_id',0);
+        }
         $dataFilter = $search;
 
         //ngay bat dau
@@ -70,6 +74,11 @@ class ToolsCommonController extends BaseAdminController
         $dataSearch = ClickShare::searchByCondition($search, $limit, $offset,$total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $dataFilter) : '';
 
+        //build link cho CTV share link click
+        $string_base = $this->user['user_id'].'_'.$this->user['user_name'];
+        $param_sv = '?sv_share='.base64_encode($string_base);
+        $url_link_share = 'http://raovat30s.vn'.$param_sv;
+
         $this->layout->content = View::make('admin.ToolsCommon.viewClickShare')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
@@ -77,6 +86,7 @@ class ToolsCommonController extends BaseAdminController
             ->with('sizeShow', count($data))
             ->with('data', $dataSearch)
             ->with('search', $search)
+            ->with('url_link_share', $url_link_share)
 
             ->with('is_root', $this->is_root)//dùng common
             ->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)//dùng common
@@ -87,8 +97,10 @@ class ToolsCommonController extends BaseAdminController
 
     //cập nhật thêm quyền cho hệ thông
     public function addPermit(){
+        echo base64_encode('FacebookShopCuaTui');
         die('tạm dừng chức năng này');
         $arrPermit = ArrayPermission::$arrPermit;
+
         /*DB::table('permission')->truncate();
         DB::table('group_user')->truncate();
         DB::table('group_user_permission')->truncate();*/
