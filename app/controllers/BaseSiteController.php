@@ -35,7 +35,6 @@ class BaseSiteController extends BaseController
 		}
 		$arrBannerHead = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
 
-
 		//cap nhat luot click tu cac site gan link
 		$url_source = trim(Request::get('url_source', ''));
 		if(trim($url_source) != ''){
@@ -45,6 +44,24 @@ class BaseSiteController extends BaseController
 				'share_time'=>time(),
 				'object_id'=>13,
 				'object_name'=>$nameSite));
+		}
+
+		//cap nhat luot click CTV click link
+		$sv_share = trim(Request::get('sv_share', ''));
+		if(trim($sv_share) != ''){
+			$stringUserShare = base64_decode($sv_share);
+			$pos1 = strrpos($stringUserShare, "_");
+			$object_id = (int)substr($stringUserShare, 0, $pos1);
+			$object_name = substr($stringUserShare, $pos1+1, strlen($stringUserShare));
+
+			$hostIp = Request::getClientIp(); //$ip = $_SERVER['REMOTE_ADDR'];
+			$userShare = ClickShare::checkIpShareObject($object_id);
+			if(!in_array($hostIp,array_keys($userShare))){
+				$clickBanner = ClickShare::addData(array('share_ip'=>$hostIp,
+					'share_time'=>time(),
+					'object_id'=>$object_id,
+					'object_name'=>$object_name));
+			}
 		}
 
 		$this->layout->header = View::make("site.BaseLayouts.header")
