@@ -29,13 +29,12 @@
 		 </script>
 		    
 		<div class="info-detail-post">
+			<h1 class="title-detail">{{$itemShow->item_name}}</h1>
 			@if($itemShow->item_type_price == CGlobal::TYPE_PRICE_NUMBER)
 				<h4 class="price-detail">{{FunctionLib::numberFormat($itemShow->item_price_sell)}} đ</h4>
 			@else
 				<h4 class="price-detail">Liên hệ</h4>
 			@endif
-
-			<h1 class="title-detail">{{$itemShow->item_name}}</h1>
 			<div class="post-now">
 				<i class="fa fa-clock-o"></i>{{date('H:i',$itemShow->time_ontop)}} - {{date('d/m/Y',$itemShow->time_ontop)}}
 			</div>
@@ -68,7 +67,7 @@
 	<div class="content-boxcat">
 		<div class="col-653 pull-left">
 			<div class="detail-content-post">
-				{{stripcslashes($itemShow->item_content)}}
+				{{FunctionLib::setNofollow(stripcslashes($itemShow->item_content))}}
 			</div>
 
 			<div class="head-info">

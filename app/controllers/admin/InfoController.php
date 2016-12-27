@@ -97,7 +97,7 @@ class InfoController extends BaseAdminController{
 				'info_title'=>array('value'=>addslashes(Request::get('info_title')), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
 				'info_keyword'=>array('value'=>addslashes(Request::get('info_keyword')),'require'=>1, 'messages'=>'Từ khóa không được trống!'),
 				'info_intro'=>array('value'=>addslashes(Request::get('info_intro')),'require'=>0),
-				'info_content'=>array('value'=>addslashes(Request::get('info_content')),'require'=>0),
+				'info_content'=>array('value'=>addslashes(FunctionLib::strReplace(Request::get('info_content'), '\r\n', '')),'require'=>0),
 				'info_order_no'=>array('value'=>(int)addslashes(Request::get('info_order_no')),'require'=>0),
 				'info_created'=>array('value'=>time()),
 				'info_status'=>array('value'=>(int)Request::get('info_status', -1),'require'=>0),

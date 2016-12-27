@@ -595,7 +595,7 @@ class SiteUserCustomerController extends BaseSiteController{
 		$dataSave['item_name'] = addslashes(Request::get('item_name'));
 		$dataSave['item_category_id'] = addslashes(Request::get('item_category_id'));
 		$dataSave['item_status'] = addslashes(Request::get('item_status'));
-		$dataSave['item_content'] = Request::get('item_content');
+		$dataSave['item_content'] = addslashes(FunctionLib::strReplace(Request::get('item_content'), '\r\n', ''));
 		$dataSave['item_type_price'] = addslashes(Request::get('item_type_price',CGlobal::TYPE_PRICE_CONTACT));
 		$dataSave['item_type_action'] = (int)(Request::get('item_type_action',CGlobal::ITEMS_TYPE_ACTION_1));
 		$dataSave['item_price_sell'] = (int)str_replace('.','',Request::get('item_price_sell'));
@@ -893,8 +893,8 @@ class SiteUserCustomerController extends BaseSiteController{
 	public function loginFacebook(){
 		
 		$fb = new Facebook\Facebook ([
-				'app_id' => '1806153732995309',
-				'app_secret' => '9ffa193548158f07eb1e28eaff4a5403',
+				'app_id' => '732736640216505',
+				'app_secret' => 'fcc290c4ee0cc38231a736c9fd272fa2',
 				'default_graph_version' => 'v2.8',
 				'persistent_data_handler' => 'session'
 				]);
@@ -915,7 +915,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			
 		if (!isset($accessToken)) {
 			$permissions = array('public_profile','email'); //Optional permissions
-			$loginUrl = $helper->getLoginUrl(Config::get('config.WEB_ROOT').'/facebooklogin', $permissions);
+			$loginUrl = $helper->getLoginUrl(Config::get('config.WEB_ROOT').'facebooklogin', $permissions);
 			header("Location: ".$loginUrl);
 			exit;
 		}
@@ -1006,8 +1006,8 @@ class SiteUserCustomerController extends BaseSiteController{
 			return Redirect::route('site.home');
 		}
 		$fb = new Facebook\Facebook ([
-				'app_id' => '1806153732995309',
-				'app_secret' => '9ffa193548158f07eb1e28eaff4a5403',
+				'app_id' => '732736640216505',
+				'app_secret' => 'fcc290c4ee0cc38231a736c9fd272fa2',
 				'default_graph_version' => 'v2.8',
 				'persistent_data_handler' => 'session'
 				]);
@@ -1028,7 +1028,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			
 		if (!isset($accessToken)) {
 			$permissions = array('public_profile','email'); //Optional permissions
-			$loginUrl = $helper->getLoginUrl(Config::get('config.WEB_ROOT').'/hop-tac.html', $permissions);
+			$loginUrl = $helper->getLoginUrl(Config::get('config.WEB_ROOT').'hop-tac.html', $permissions);
 			header("Location: ".$loginUrl);
 			exit;
 		}
@@ -1111,9 +1111,9 @@ class SiteUserCustomerController extends BaseSiteController{
 		}
 	}
 	public function loginGoogle(){
-	$client_id = '803912434754-0lpl6oc4t68ld167qn90i4uhldrlsi33.apps.googleusercontent.com'; 
-		$client_secret = 'BZJ1GVA-mG57HHOeJSKJBKeB';
-		$redirect_uri = 'http://dev.sanphamredep.com/googlelogin';
+		$client_id = '803912434754-97ldh5muaqfst1imgvkd008ufn73gpmk.apps.googleusercontent.com'; 
+		$client_secret = 'lDU7GbU7cVslfcxHW4AvwUT7'; 
+		$redirect_uri = Config::get('config.WEB_ROOT').'googlelogin';
 		
 		$client = new Google_Client();
 		$client->setClientId($client_id);

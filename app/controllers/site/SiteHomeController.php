@@ -342,8 +342,38 @@ class SiteHomeController extends BaseSiteController
 		
 		$this->header();
 		$this->menuLeft();
+		$messages = FunctionLib::messages('messages');
+		if(!empty($_POST)){
+			$token = Request::get('_token', '');
+			if(Session::token() === $token){
+				$contact_name = addslashes(Request::get('txtName', ''));
+				$contact_phone = addslashes(Request::get('txtMobile', ''));
+				$contact_email = addslashes(Request::get('txtEmail', ''));
+				$contact_title = addslashes(Request::get('txtTitle', ''));
+				$contact_content = addslashes(Request::get('txtMessage', ''));
+				$contact_created = time();
+				if($contact_title != '' && $contact_name != '' && $contact_phone !=''  && $contact_content !=''){
+					$dataInput = array(
+							'contact_user_name_send'=>$contact_name,
+							'contact_phone_send'=>$contact_phone,
+							'contact_email_send'=>$contact_email,
+							'contact_title'=>$contact_title,
+							'contact_content'=>$contact_content,
+							'contact_time_creater'=>$contact_created,
+							'contact_status'=>0,
+					);
+					$query = Contact::addData($dataInput);
+					if($query > 0){
+						$messages = FunctionLib::messages('messages', 'Cảm ơn bạn đã gửi thông tin liên hệ. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất!');
+						return Redirect::route('site.pageContact');
+					}
+				}
+			}
+		}
+		
 		$this->layout->content = View::make('site.SiteLayouts.pageContact')
-								->with('arrBannerRight', $arrBannerRight);
+								->with('arrBannerRight', $arrBannerRight)
+								->with('messages', $messages);
 		$this->footer();
 	}
 }

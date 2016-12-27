@@ -28,20 +28,17 @@ class CronjobsController extends BaseSiteController
     	$total = 0;
     	switch( $type ){
         		case 1://cập nhật link ảnh trong sản phẩm
-        			$dataSearch['field_get'] = 'product_id,product_content';
-        			$data = Product::searchByCondition($dataSearch,500,0,$total);
+        			$dataSearch['field_get'] = 'item_id,item_content';
+        			$data = Items::searchByCondition($dataSearch,500,0,$total);
         			if($data){
         				foreach($data as $k=>$product){
-        					$content = stripcslashes($product->product_content);
-        			
-        					$url_old1 = 'http://www.shopcuatui.com.vn/image.php?type_dir=product&amp;id='.$product->product_id.'&amp;width=700&amp;height=700&amp;image=';
-        					$content1 = str_replace($url_old1, '',$content);
-        			
-        					$url_old2 = 'http://shopcuatui.com.vn/image.php?type_dir=product&amp;id='.$product->product_id.'&amp;width=700&amp;height=700&amp;image=';
-        					$content2 = str_replace($url_old2, '',$content1);
-        					$dataUpdate['product_content'] = $content2;
-        			
-        					Product::updateData($product->product_id,$dataUpdate);
+        					$content = stripcslashes($product->item_content);
+        					
+        					$url_old = '600x600';
+        					$content = str_replace($url_old, '500x300',$content);
+        					
+        					$dataUpdate['item_content'] = $content;
+        					Items::updateData($product->item_id,$dataUpdate);
         				}
         			}
         			break;

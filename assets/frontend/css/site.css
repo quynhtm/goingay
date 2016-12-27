@@ -234,7 +234,7 @@ h1, h2, h3, h4, h5, h6{
 }
 .item-home-cat li .title-category{
     background: #f5f5f5;
-    border-bottom: 1px solid #ff7300;
+    border-bottom: 1px solid #00A859;
     box-sizing: border-box;
     margin-bottom: 15px;
     padding: 8px 5px 5px 8px;
@@ -242,7 +242,8 @@ h1, h2, h3, h4, h5, h6{
     width: 100%;
 }
 .item-home-cat li .title-category a {
-    color: #ff7300;
+    /*color: #ff7300;*/
+    color: #00A859;
     font: 400 18px arial;
 }
 .item-home-cat li .line {
@@ -284,16 +285,19 @@ h1, h2, h3, h4, h5, h6{
     width: auto;
 }
 .item-home-cat .location-price li a {
-    color: #666;
+    color: #ff7300;
 }
 .item-home-cat .price a {
-    background: #f2f2f2;
+    /*background: #f2f2f2;*/
     color: #666;
     font: 700 12px arial;
     padding: 2px;
 }
 .item-home-cat .local{
 	float:left;
+}
+.item-home-cat .local a{
+	color: #333!important;
 }
 .item-home-cat .price{
 	float:right;
@@ -394,9 +398,10 @@ h1, h2, h3, h4, h5, h6{
     float: left;
     width: 60%;
 }
-.box-60 .address{
+.box-60 .address, .box-60 .address *{
     margin-bottom: 20px;
-    width: 80%;
+    width: 90%;
+	font-size: 12px
 }
 .box-60 .address p, .box-60 .address p a {
     color: #656565;
@@ -620,7 +625,7 @@ h1, h2, h3, h4, h5, h6{
     width: 92%;
 }
 .head-info{
-    border-bottom: 2px solid #ff7300;
+    border-bottom: 2px solid #00A859;
     margin-bottom: 10px;
 	display: inline-block;
     width: 100%;
@@ -631,7 +636,8 @@ h1, h2, h3, h4, h5, h6{
     padding-right: 25px;
 }
 .head-info h2 a{
-    color: #ff7300;
+    /*color: #ff7300;*/
+    color: #00A859;
     font: 700 20px arial;
 }
 .head-info h2 a i{
@@ -747,8 +753,8 @@ h1, h2, h3, h4, h5, h6{
     width: 100%;
 }
 .box-top-common label.bdbt {
-    border-bottom: 2px solid #ff7300;
-    color: #ff7300;
+    border-bottom: 2px solid #00A859;
+    color: #00A859;
     display: inline-block;
     float: left;
     font: 700 14px arial;
@@ -808,7 +814,7 @@ h1, h2, h3, h4, h5, h6{
 }
 .icon-address{
     font-size: 2em !important;
-	color: #ff7300;
+	color: #00A859;
 	cursor: pointer;
 	margin-top: 2px;
 	background: url(../img/map-marker-2-24.png) no-repeat;
@@ -1031,7 +1037,7 @@ h1, h2, h3, h4, h5, h6{
 }
 .list-item-filter ul li a.img img {
     float: left;
-    width: 100%;
+    max-width: 100%;
 }
 .list-item-filter ul li .title-post h2 {
     float: left;
@@ -1041,8 +1047,7 @@ h1, h2, h3, h4, h5, h6{
     font: 13px arial;
 }
 .list-item-filter ul li .price a {
-    background: #f2f2f2;
-    color: #666;
+    color: #ff7300;
     font: 700 12px arial;
     padding: 2px;
 }
@@ -1076,7 +1081,7 @@ h1, h2, h3, h4, h5, h6{
     text-align: center;
 }
 .slide-detail-post img{
-	width: 100%;
+	max-width: 100%;
     height: 100%;
 }
 .info-detail-post{
@@ -1086,8 +1091,7 @@ h1, h2, h3, h4, h5, h6{
 }
 .price-detail{
     font: 700 14px arial;
-    color: #fff;
-    background: #ed1c24;
+    color: #ff7300;
     padding: 5px 10px;
     display: inline-block;
     margin-bottom: 5px;
@@ -1470,4 +1474,12 @@ h1, h2, h3, h4, h5, h6{
     display: inline-block;
     margin-top: 10px;
     width: 100%;
+}
+#header .rslides img {
+    height: auto;
+    max-width: 100%;
+    width: auto;
+}
+#header .line-ads {
+    margin-top: 5px;
 }
