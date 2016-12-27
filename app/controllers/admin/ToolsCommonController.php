@@ -87,8 +87,10 @@ class ToolsCommonController extends BaseAdminController
 
     //cập nhật thêm quyền cho hệ thông
     public function addPermit(){
+        echo base64_encode('FacebookShopCuaTui');
         die('tạm dừng chức năng này');
         $arrPermit = ArrayPermission::$arrPermit;
+
         /*DB::table('permission')->truncate();
         DB::table('group_user')->truncate();
         DB::table('group_user_permission')->truncate();*/
