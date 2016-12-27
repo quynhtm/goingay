@@ -101,7 +101,6 @@ class SiteHomeController extends BaseSiteController
 		//quang cao ben phải
 		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
 
-
 		$this->layout->content = View::make('site.SiteLayouts.searchItems')
 			->with('arrProvince', $arrProvince)
 			->with('arrCustomer', array())
@@ -319,8 +318,12 @@ class SiteHomeController extends BaseSiteController
 		$arrListNew = News::searchByCondition($search, CGlobal::number_show_15, 0,$total);
 		//FunctionLib::debug($arrListNew);
 
+		//quang cao ben phải
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
+
     	$this->layout->content = View::make('site.SiteLayouts.DetailNews')
 			->with('inforNew', $inforNew)
+			->with('arrBannerRight', $arrBannerRight)
 			->with('arrListNew', $arrListNew);
     	$this->footer();
     }
