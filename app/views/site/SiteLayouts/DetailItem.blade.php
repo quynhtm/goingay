@@ -48,7 +48,7 @@
 				<div class="head-contact"><h3>Thông tin liên hệ</h3></div>
 				<p class="person-post">
 					<i class="fa fa-user"></i>
-					<span>@if($arrCustomer->customer_gender==CGlobal::CUSTOMER_GENDER_GIRL)Chị:@else Anh: @endif
+					<span>Đăng bởi: 
 						<a title="Tin đã đăng của {{$arrCustomer->customer_name}}" href="{{FunctionLib::buildLinkItemsCustomer($arrCustomer->customer_id, $arrCustomer->customer_name)}}">
 							<strong>{{$arrCustomer->customer_name}}</strong>
 						</a>

@@ -1029,15 +1029,18 @@ h1, h2, h3, h4, h5, h6{
 .list-item-filter ul li:last-child{
 	border-bottom:none;
 }
-.list-item-filter ul li a.img{
+.list-item-filter ul li a.img {
     float: left;
-    width: 19%;
-    margin-right: 10px;
     margin-bottom: 5px;
+    margin-right: 10px;
+    text-align: center !important;
+    width: 19%;
 }
 .list-item-filter ul li a.img img {
-    float: left;
+    float: none;
     max-width: 100%;
+    text-align: center;
+    width: auto !important;
 }
 .list-item-filter ul li .title-post h2 {
     float: left;
@@ -1291,7 +1294,7 @@ h1, h2, h3, h4, h5, h6{
 .post-title-view{
 	color: #333;
 	font-weight: 700;
-	font-size: 28px;
+	font-size: 22px;
 	line-height: 1.2;
 	margin-bottom: 10px;
 }
@@ -1482,4 +1485,7 @@ h1, h2, h3, h4, h5, h6{
 }
 #header .line-ads {
     margin-top: 5px;
+}
+.red {
+    color: #ff0000;
 }
