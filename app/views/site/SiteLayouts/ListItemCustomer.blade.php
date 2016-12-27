@@ -11,7 +11,7 @@
 							<a class="image-item" title="{{$itemHot->item_name}}" href="{{FunctionLib::buildLinkDetailItem($itemHot->item_id,$itemHot->item_name,$itemHot->item_category_id)}}">
 								@if($itemHot->item_image != '')
 									<span>
-								<img itemprop="image" {{CGlobal::size_imge_show_list_180}} src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHot->item_id, $itemHot->item_image, CGlobal::sizeImage_300)}}" title="{{$itemHot->item_name}}" alt="{{$itemHot->item_name}}">
+								<img itemprop="image" {{CGlobal::size_imge_show_list_180}} src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemHot->item_id, $itemHot->item_image, CGlobal::sizeImage_500)}}" title="{{$itemHot->item_name}}" alt="{{$itemHot->item_name}}">
 							</span>
 								@endif
 								@if($itemHot->item_type_price == CGlobal::TYPE_PRICE_NUMBER)

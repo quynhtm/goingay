@@ -35,8 +35,8 @@ Route::get('{item_name}-cat{item_category_id}-tin{item_id}.html',array('as' => '
 //tin tuc
 Route::get('tin-tuc.html',array('as' => 'Site.pageNews','uses' =>'SiteHomeController@pageNews'));
 Route::get('chi-tiet/tin-tuc-{new_id}/{news_title}.html',array('as' => 'Site.pageDetailNew','uses' =>'SiteHomeController@pageDetailNew'))->where('new_id', '[0-9]+')->where('news_title', '[A-Z0-9a-z_\-]+');
-
-
+Route::match(['GET','POST'], 'captcha', array('as' => 'Site.linkCaptcha','uses' =>'SiteHomeController@linkCaptcha'));
+Route::match(['GET','POST'], 'captchaCheckAjax', array('as' => 'Site.captchaCheckAjax','uses' =>'SiteHomeController@captchaCheckAjax'));
 
 /******************************************************************************************************************************
  * Thao tac co phan dang nhap cua khach hang
