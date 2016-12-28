@@ -96,7 +96,7 @@
 							@foreach($bannerShowHeader as $sliderHeader)
 								<div class="slide ">
 									<a @if($sliderHeader->banner_is_rel == CGlobal::LINK_NOFOLLOW) rel="nofollow" @endif @if($sliderHeader->banner_is_target == CGlobal::BANNER_TARGET_BLANK) target="_blank" @endif href="@if($sliderHeader->banner_link != '') {{$sliderHeader->banner_link}} @else javascript:void(0) @endif" title="{{$sliderHeader->banner_name}}">
-										<img src="{{ThumbImg::thumbImageBannerNormal($sliderHeader->banner_id,$sliderHeader->banner_parent_id, $sliderHeader->banner_image, CGlobal::sizeImage_970,CGlobal::sizeImage_90, $sliderHeader->banner_name,true,true)}}" alt="{{$sliderHeader->banner_name}}" />
+										<img src="{{ThumbImg::thumbImageBannerNormal($sliderHeader->banner_id,$sliderHeader->banner_parent_id, $sliderHeader->banner_image, CGlobal::sizeImage_1010,CGlobal::sizeImage_90, $sliderHeader->banner_name,true,true)}}" alt="{{$sliderHeader->banner_name}}" />
 									</a>
 								</div>
 							@endforeach

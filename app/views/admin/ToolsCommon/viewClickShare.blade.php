@@ -52,9 +52,9 @@
                         <thead class="thin-border-bottom">
                         <tr class="">
                             <th width="5%" class="text-center">STT</th>
-                            <th width="55%">Tên đối tượng</th>
+                            <th width="65%">Tên đối tượng</th>
                             <th width="20%" class="text-center">IP share</th>
-                            <th width="20%" class="text-center">Thời gian</th>
+                            <th width="10%" class="text-center">Thời gian</th>
                         </tr>
                         </thead>
                         <tbody>

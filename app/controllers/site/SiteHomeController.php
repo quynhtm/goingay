@@ -38,7 +38,7 @@ class SiteHomeController extends BaseSiteController
 		$number_show_slider = 10;
 		$searchHomeSlider['item_image'] = 1;//check lay truong anh
 		$searchHomeSlider['field_get'] = $this->str_field_items_get;
-		$resultHomeSlider = self::getItemHot($searchHomeSlider,$number_show_slider,$number_show_hot+1);
+		$resultHomeSlider = self::getItemHot($searchHomeSlider,$number_show_slider,$number_show_hot);
 
 		//lay du lieu hien thi theo danh mục
 		//lay mang danh mục hiển thị ra ngoài trang chủ

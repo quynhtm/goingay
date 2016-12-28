@@ -771,17 +771,14 @@ class SiteUserCustomerController extends BaseSiteController{
 	}
 	private function validInforItem($data=array()) {
 		if(!empty($data)) {
-			if(isset($data['product_name']) && trim($data['product_name']) == '') {
-				$this->error[] = 'Tên sản phẩm không được bỏ trống';
+			if(isset($data['item_name']) && trim($data['item_name']) == '') {
+				$this->error[] = 'Tiêu đề tin đăng không được bỏ trống';
 			}
-			if(isset($data['product_image']) && trim($data['product_image']) == '') {
-				$this->error[] = 'Chưa up ảnh sản phẩm';
+			if(isset($data['item_category_id']) && $data['item_category_id'] == -1) {
+				$this->error[] = 'Chưa chọn danh mục đăng tin';
 			}
-			if(isset($data['category_id']) && $data['category_id'] == -1) {
-				$this->error[] = 'Chưa chọn danh mục';
-			}
-			if(isset($data['product_type_price']) && $data['product_type_price'] == CGlobal::TYPE_PRICE_NUMBER) {
-				if(isset($data['product_price_sell']) && $data['product_price_sell'] <= 0) {
+			if(isset($data['item_type_price']) && $data['item_type_price'] == CGlobal::TYPE_PRICE_NUMBER) {
+				if(isset($data['item_price_sell']) && $data['item_price_sell'] <= 0) {
 					$this->error[] = 'Chưa nhập giá bán';
 				}
 			}
