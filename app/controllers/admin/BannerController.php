@@ -16,7 +16,15 @@ class BannerController extends BaseAdminController
     private $arrRunTime = array(-1 => '--Chọn thời gian chạy--', CGlobal::BANNER_NOT_RUN_TIME => 'Chạy mãi mãi', CGlobal::BANNER_IS_RUN_TIME => 'Chạy theo thời gian');
     private $arrProvince = array();
     private $arrRel = array(CGlobal::LINK_NOFOLLOW => 'Nofollow', CGlobal::LINK_FOLLOW => 'Follow');
-    private $arrPosition = array(0=>'---Chọn vị trí hiển thị ---',1=> 'Vị trí Top',2=> 'Vị trí Center',3=> 'Vị trí Bottom',);
+    private $arrPosition = array(0=>'---Chọn vị trí hiển thị ---',
+        1=> 'Vị trí Top',
+        2=> 'Vị trí Center',
+        3=> 'Vị trí Bottom',
+        4=> 'Vị trí Bottom 1',
+        5=> 'Vị trí Bottom 2',
+        6=> 'Vị trí Bottom 3',
+        7=> 'Vị trí Bottom 4',
+        );
 
     private $arrTypeBanner = array(-1 => '--- Chọn loại Banner --',
         CGlobal::BANNER_TYPE_TOP => 'Banner Top Header',

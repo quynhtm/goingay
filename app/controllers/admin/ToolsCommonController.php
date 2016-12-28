@@ -97,7 +97,9 @@ class ToolsCommonController extends BaseAdminController
 
     //cập nhật thêm quyền cho hệ thông
     public function addPermit(){
-        echo base64_encode('FacebookShopCuaTui');
+        //http://raovat30s.vn?url_source=aHR0cDovL21pbmhkdWNwcm9wZXJ0eS5jb20v //minh đức
+        echo base64_encode('http://minhducproperty.com/');
+        die();
         die('tạm dừng chức năng này');
         $arrPermit = ArrayPermission::$arrPermit;
 
