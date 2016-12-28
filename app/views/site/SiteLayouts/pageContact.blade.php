@@ -50,7 +50,7 @@
 							<ul class="rslides" id="sliderRight_{{$key_position}}" style="padding-bottom: 25px">
 								@foreach($bannerShow as $slider)
 									<div class="slide ">
-										<a @if($slider->banner_is_rel == 0) rel="nofollow" @endif @if($slider->banner_is_target == 1) target="_blank" @endif href="@if($slider->banner_link != '') {{$slider->banner_link}} @else javascript:void(0) @endif" title="{{$slider->banner_name}}">
+										<a @if($slider->banner_is_rel == CGlobal::LINK_NOFOLLOW) rel="nofollow" @endif @if($slider->banner_is_target == CGlobal::BANNER_TARGET_BLANK) target="_blank" @endif href="@if($slider->banner_link != '') {{$slider->banner_link}} @else javascript:void(0) @endif" title="{{$slider->banner_name}}">
 											<img src="{{ThumbImg::thumbImageBannerNormal($slider->banner_id,$slider->banner_parent_id, $slider->banner_image, CGlobal::sizeImage_200,CGlobal::sizeImage_600, $slider->banner_name,true,true)}}" alt="{{$slider->banner_name}}" />
 										</a>
 									</div>
