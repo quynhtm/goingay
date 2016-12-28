@@ -87,57 +87,34 @@
 </div>
 @if(sizeof($arrBannerHead) > 0)
 <div class="line-ads">
-	<div class="container">
-		<ul class="rslides" id="sliderHead">
-			@foreach($arrBannerHead as $slider)
-			<?php 
-			if($slider->banner_is_rel == CGlobal::LINK_NOFOLLOW){
-				$rel = 'rel="nofollow"';
-			}else{
-				$rel = '';
-			}
-			if($slider->banner_is_target == CGlobal::BANNER_TARGET_BLANK){
-				$target = 'target="_blank"';
-			}else{
-				$target = '';
-			}
-			
-			$banner_is_run_time = 1;
-			if($slider->banner_is_run_time == CGlobal::status_hide){
-				$banner_is_run_time = 1;
-			}else{
-				$banner_start_time = $slider->banner_start_time;
-				$banner_end_time = $slider->banner_end_time;
-				$date_current = time();
-			
-				if($banner_start_time > 0 && $banner_end_time > 0 && $banner_start_time <= $banner_end_time){
-					if($banner_start_time <= $date_current && $date_current <= $banner_end_time){
-						$banner_is_run_time = 1;
-					}
-				}else{
-					$banner_is_run_time = 0;
-				}
-			}
-			?>
-			@if($banner_is_run_time == 1)
-			<div class="slide ">
-				<a {{$target}} {{$rel}} href="@if($slider->banner_link != '') {{$slider->banner_link}} @else javascript:void(0) @endif" title="{{$slider->banner_name}}">
-					<img src="{{ThumbImg::thumbBaseNormal(CGlobal::FOLDER_BANNER, $slider->banner_id, $slider->banner_image, 970, 90, '', true, true, false)}}" alt="{{$slider->banner_name}}" />
-				</a>
-			</div>
+	@if(isset($arrBannerHead) && sizeof($arrBannerHead) > 0)
+		<div class="container">
+			@if(sizeof($arrBannerHead) > 0)
+				<div class="box-ads" >
+					@foreach($arrBannerHead as $key_posi_header =>$bannerShowHeader)
+						<ul class="rslides" id="sliderHead_{{$key_posi_header}}">
+							@foreach($bannerShowHeader as $sliderHeader)
+								<div class="slide ">
+									<a @if($sliderHeader->banner_is_rel == CGlobal::LINK_NOFOLLOW) rel="nofollow" @endif @if($sliderHeader->banner_is_target == CGlobal::BANNER_TARGET_BLANK) target="_blank" @endif href="@if($sliderHeader->banner_link != '') {{$sliderHeader->banner_link}} @else javascript:void(0) @endif" title="{{$sliderHeader->banner_name}}">
+										<img src="{{ThumbImg::thumbImageBannerNormal($sliderHeader->banner_id,$sliderHeader->banner_parent_id, $sliderHeader->banner_image, CGlobal::sizeImage_970,CGlobal::sizeImage_90, $sliderHeader->banner_name,true,true)}}" alt="{{$sliderHeader->banner_name}}" />
+									</a>
+								</div>
+							@endforeach
+						</ul>
+						<script type="text/javascript">
+							jQuery(document).ready(function() {
+								jQuery("#sliderHead_{{$key_posi_header}}").responsiveSlides({
+									maxwidth: 1000,
+									speed: 800,
+									timeout: 5000,
+								});
+							});
+						</script>
+					@endforeach
+				</div>
 			@endif
-			@endforeach
-		 </ul>
-		<script type="text/javascript">
-			jQuery(document).ready(function() {
-				jQuery("#sliderHead").responsiveSlides({
-				    maxwidth: 1000,
-				    speed: 800,
-				    timeout: 10000,
-			    });
-			});
-		</script>
-	</div>
+		</div>
+	@endif
 </div>
 @endif
 @if($messages != '')

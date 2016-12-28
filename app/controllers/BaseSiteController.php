@@ -33,17 +33,22 @@ class BaseSiteController extends BaseController
 		if(empty($user_customer)){
 			$this->popupHide();
 		}
-		$arrBannerHead = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
+		//banner header quang cáo
+		$arrBanner = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
+		$arrBannerHead = $this->getBannerWithPosition($arrBanner);// hi?n th? theo: TOP, CENTER, BOTTOM
 
 		//cap nhat luot click tu cac site gan link
 		$url_source = trim(Request::get('url_source', ''));
 		if(trim($url_source) != ''){
 			$nameSite = base64_decode($url_source);
 			$hostIp = Request::getClientIp();
-			$clickBanner = ClickShare::addData(array('share_ip'=>$hostIp,
-				'share_time'=>time(),
-				'object_id'=>13,
-				'object_name'=>$nameSite));
+			$userShareClick = ClickShare::checkIpShareObject(13);
+			if(!in_array($hostIp,array_keys($userShareClick))){
+				$clickBanner = ClickShare::addData(array('share_ip'=>$hostIp,
+					'share_time'=>time(),
+					'object_id'=>13,
+					'object_name'=>$nameSite));
+			}
 		}
 
 		//cap nhat luot click CTV click link
