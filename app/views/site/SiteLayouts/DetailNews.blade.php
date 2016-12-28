@@ -18,9 +18,6 @@
 			<div class="event-box">
 				<div class="event-box-title">Tin nổi bật</div>
 				<div class="even-box-content">
-					<div class="main-img">
-						<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/30/583e3ac6909fb-Image-307354715-ExtractWord-0-8075-5937-1480404429_300x180.png" alt="event_img">
-					</div>
 					@if(!empty($arrListNew))
 					<div class="main-text">
 						<ul class="event-block-list">
@@ -34,6 +31,31 @@
 					@endif
 				</div>
 			</div>
+			@if(sizeof($arrBannerRight) > 0)
+				<div class="box-ads" >
+					@foreach($arrBannerRight as $key_position =>$bannerShow)
+						<ul class="rslides" id="sliderRight_{{$key_position}}" style="padding-bottom: 25px">
+							@foreach($bannerShow as $slider)
+								<div class="slide ">
+									<a @if($slider->banner_is_rel == 0) rel="nofollow" @endif @if($slider->banner_is_target == 0) target="_blank" @endif href="@if($slider->banner_link != '') {{$slider->banner_link}} @else javascript:void(0) @endif" title="{{$slider->banner_name}}">
+										<img src="{{ThumbImg::thumbImageBannerNormal($slider->banner_id,$slider->banner_parent_id, $slider->banner_image, CGlobal::sizeImage_200,CGlobal::sizeImage_600, $slider->banner_name,true,true)}}" alt="{{$slider->banner_name}}" />
+									</a>
+								</div>
+							@endforeach
+						</ul>
+						<script type="text/javascript">
+							jQuery(document).ready(function() {
+								jQuery("#sliderRight_{{$key_position}}").responsiveSlides({
+									maxwidth: 1000,
+									speed: 800,
+									timeout: 5000,
+								});
+							});
+						</script>
+					@endforeach
+				</div>
+			@endif
+
 		</div>
 	</div>
 </div>

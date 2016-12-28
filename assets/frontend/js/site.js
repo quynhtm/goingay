@@ -2,6 +2,7 @@ jQuery(document).ready(function($){
 	SITE.menuFixed();
 	SITE.backTop();
 	SITE.contact();
+	SITE.captchaCheckAjax();
 });
 
 SITE={
@@ -179,10 +180,43 @@ SITE={
 			}else{
 				jQuery('#txtMessage').removeClass('error');
 			}
-			if(valid==false){
+			
+			if(jQuery('#securityCode').val() == ''){
+				jQuery('#securityCode').addClass('error');
+				valid = false;
+			}else{
+				SITE.captchaCheckAjax();
+			}
+			
+			var error = jQuery('#formSendContact .error').length;
+			if(error > 0){
 				return false;
 			}
 			return valid;
 		});
+	},
+	refreshCaptcha:function(){
+		var img = document.images['imageCaptchar'];
+		img.src = img.src.substring(0,img.src.lastIndexOf("?"))+"?rand="+Math.round(1000*Math.random());
+	},
+	captchaCheckAjax:function(){
+		var captcha = jQuery('#securityCode').val();
+		if(captcha != ''){
+			var url = WEB_ROOT + '/captchaCheckAjax';
+			jQuery.ajax({
+				type: "POST",
+				url: url,
+				data: "captcha="+encodeURI(captcha),
+				success: function(data){
+					if(data == 0){
+						jQuery('#securityCode').addClass('error');
+						SITE.refreshCaptcha();
+					}else{
+						jQuery('#securityCode').removeClass('error');
+					}
+					return false;
+				}
+			});
+		}
 	},
 }
