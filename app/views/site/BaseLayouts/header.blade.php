@@ -91,12 +91,12 @@
 		<ul class="rslides" id="sliderHead">
 			@foreach($arrBannerHead as $slider)
 			<?php 
-			if($slider->banner_is_rel == 0){
+			if($slider->banner_is_rel == CGlobal::LINK_NOFOLLOW){
 				$rel = 'rel="nofollow"';
 			}else{
 				$rel = '';
 			}
-			if($slider->banner_is_target == 1){
+			if($slider->banner_is_target == CGlobal::BANNER_TARGET_BLANK){
 				$target = 'target="_blank"';
 			}else{
 				$target = '';
