@@ -117,7 +117,7 @@ class UserCustomer extends Eloquent
                 $query->where('customer_time_active','>', 0);//d� active
             }
             $total = $query->count();
-            $query->orderBy('customer_time_login', 'desc')->orderBy('customer_time_logout', 'desc');
+            $query->orderBy('is_login', 'desc')->orderBy('customer_time_login', 'desc')->orderBy('customer_time_logout', 'desc');
 
             //get field can lay du lieu
             $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
