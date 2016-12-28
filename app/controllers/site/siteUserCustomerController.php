@@ -416,8 +416,6 @@ class SiteUserCustomerController extends BaseSiteController{
 		$dataSearch = (isset($this->user_customer['customer_id']) && $this->user_customer['customer_id'] > 0) ? Items::searchByCondition($search, $limit, $offset,$total): array();
 		$paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
 
-		//Banner right
-		$arrBannerRight = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_RIGHT, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
 		//danh muc
 		$arrCategory = Category::getAllParentCategoryId();
 		$optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $arrCategory, $search['item_category_id']);
@@ -435,8 +433,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('optionCategory', $optionCategory)
 			->with('optionStatus', $optionStatus)
 			->with('arrTypeAction', $this->arrTypeAction)
-			->with('user_customer',$this->user_customer)
-			->with('arrBannerRight',$arrBannerRight);
+			->with('user_customer',$this->user_customer);
 		$this->footer();
 	}
 	public function getAddItem($item_id = 0){

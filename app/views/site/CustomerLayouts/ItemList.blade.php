@@ -50,6 +50,7 @@
 			<tr class="">
 				<th width="10%" class="text-center">Ảnh</th>
 				<th width="55%">Thông tin</th>
+				<th width="10%">Giá bán</th>
 				<th width="16%" class="text-center">Ngày thao tác</th>
 				<th width="17%" class="text-center">Thao tác</th>
 			</tr>
@@ -76,6 +77,13 @@
 						@if($item->item_category_name != '')<br/><b>Mục tin: </b>{{ $item->item_category_name }}@endif
 						@if(isset($arrTypeAction[$item->item_type_action]))
 							<br/><b @if($item->item_type_action == CGlobal::ITEMS_TYPE_ACTION_1) style="color: red!important;" @else style="color: green!important;" @endif>{{ $arrTypeAction[$item->item_type_action] }}</b>
+						@endif
+					</td>
+					<td>
+						@if($item->item_type_price == CGlobal::TYPE_PRICE_NUMBER)
+							<b style="color: red">{{FunctionLib::numberFormat($item->item_price_sell)}} đ</b>
+						@else
+							<b style="color: red">Liên hệ</b>
 						@endif
 					</td>
 					<td class="text-center text-middle">
