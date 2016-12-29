@@ -125,7 +125,7 @@
 			<label for="name" class="control-label">Thông tin chi tiết <span class="red"> (*) </span>
 				<div class="controls"><button type="button" onclick="SITE.insertImageContentItem()" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
 				</label>
-				<textarea class="form-control input-sm" rows="8" name="item_content" id="item_content">@if(isset($data['item_content'])){{$data['item_content']}}@endif</textarea>
+				<textarea class="form-control input-sm" rows="8" name="item_content" id="item_content">@if(isset($data['item_content'])){{FunctionLib::setNofollow(stripslashes($data['item_content']))}}@endif</textarea>
 			</div>
 		</div>
 		<div class="clearfix"></div>
