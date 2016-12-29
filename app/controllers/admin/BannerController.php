@@ -33,12 +33,22 @@ class BannerController extends BaseAdminController
         CGlobal::BANNER_TYPE_BOTTOM => 'Banner Dưới Footer',
         CGlobal::BANNER_TYPE_CENTER => 'Banner Giữa nội dung');
 
+    const BANNER_PAGE_HOME = 1;
+    const BANNER_PAGE_DETAIL = 3;
+    const BANNER_PAGE_CATEGORY = 4;
+    const BANNER_PAGE_CUSTOMER_ITEMS = 5;
+    const BANNER_PAGE_CONTACT = 6;
+    const BANNER_PAGE_SEARCH = 7;
+    const BANNER_PAGE_OTHER = 8;
+
     private $arrPage = array(0 => '-- Chọn page --',
         CGlobal::BANNER_PAGE_HOME => 'Page trang chủ',
-        CGlobal::BANNER_PAGE_LIST => 'Page danh sách',
         CGlobal::BANNER_PAGE_DETAIL=> 'Page chi tiết',
         CGlobal::BANNER_PAGE_CATEGORY => 'Page danh mục',
-        CGlobal::BANNER_PAGE_DETAIL=> 'Page thông tin khác');
+        CGlobal::BANNER_PAGE_CUSTOMER_ITEMS => 'Page Khách đăng tin',
+        CGlobal::BANNER_PAGE_SEARCH=> 'Page tìm kiếm',
+        CGlobal::BANNER_PAGE_CONTACT => 'Page liên hệ',
+        CGlobal::BANNER_PAGE_OTHER => 'Page khác');
 
     private $error = array();
     private $arrCategoryParent = array();

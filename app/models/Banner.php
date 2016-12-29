@@ -27,9 +27,9 @@ class Banner extends Eloquent
             $banner = Banner::where('banner_id' ,'>', 0)
                 ->where('banner_status',CGlobal::status_show)
                 ->where('banner_type',$banner_type)
-                ->where('banner_page',$banner_page)
-                ->where('banner_category_id',$banner_category_id)
-                ->where('banner_province_id',$banner_province_id)
+                ->whereIn('banner_page',array(0,$banner_page))
+                ->whereIn('banner_category_id',array(0,$banner_category_id))
+                ->whereIn('banner_province_id',array(0,$banner_province_id))
                 ->orderBy('banner_position','asc')->orderBy('banner_order','asc')->get();
             if($banner){
                 foreach($banner as $itm) {

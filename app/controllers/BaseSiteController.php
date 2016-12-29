@@ -25,7 +25,7 @@ class BaseSiteController extends BaseController
     	
     	FunctionLib::site_js('lib/sticky/jquery.sticky.js', CGlobal::$POS_END);
     }
-    public function header($category_id = 0, $province_id = 0, $keyword = ''){
+    public function header($banner_page = 0, $category_id = 0, $province_id = 0, $keyword = ''){
 		//tim kiem
 		$keyword = htmlspecialchars(Request::get('keyword', ''));
         $messages = FunctionLib::messages('messages');
@@ -33,8 +33,9 @@ class BaseSiteController extends BaseController
 		if(empty($user_customer)){
 			$this->popupHide();
 		}
+
 		//banner header quang cáo
-		$arrBanner = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
+		$arrBanner = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $banner_page, $category_id);
 		$arrBannerHead = $this->getBannerWithPosition($arrBanner);// hi?n th? theo: TOP, CENTER, BOTTOM
 
 		//cap nhat luot click tu cac site gan link
@@ -89,15 +90,15 @@ class BaseSiteController extends BaseController
 	public function popupHide(){
 		$this->layout->popupHide = View::make("site.BaseLayouts.popupHide");
 	}
-	public function menuLeft($catid = 0){
+	public function menuLeft($banner_page = 0, $category_id = 0, $province_id = 0){
 		$menuCategoriessAll = Category::getCategoriessAll();
 
-		$arrBannerLeft = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_LEFT, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
+		$arrBannerLeft = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_LEFT, $banner_page, $category_id, $province_id);
 		$arrBannerShow = $this->getBannerWithPosition($arrBannerLeft);// hi?n th? theo: TOP, CENTER, BOTTOM
 
 		$this->layout->menuLeft = View::make("site.BaseLayouts.menuLeft")
 								->with('arrBannerShow', $arrBannerShow)
-								->with('catid', $catid)
+								->with('catid', $category_id)
 								->with('menuCategoriessAll', $menuCategoriessAll);
 	}
 	//dung chung quang cao cac page
@@ -106,7 +107,6 @@ class BaseSiteController extends BaseController
 		$arrBannerShow = $this->getBannerWithPosition($arrBannerRight); // hi?n th? theo: TOP, CENTER, BOTTOM
 		return $arrBannerShow;
 	}
-
 	public function getBannerWithPosition($arrBanner = array()){
 		$arrBannerShow = array();
 		if(sizeof($arrBanner) > 0){
@@ -132,6 +132,12 @@ class BaseSiteController extends BaseController
 			}
 		}
 		return $arrBannerShow;
+	}
+
+	public function getControllerAction(){
+		$controller = Route::currentRouteAction();
+		$action = substr($controller, (strpos($controller, '@')+1));
+		return $pageCurrent = isset(CGlobal::$arrPageCurrent[$action]) ? CGlobal::$arrPageCurrent[$action] : 0;
 	}
 
 }

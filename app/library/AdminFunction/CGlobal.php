@@ -118,6 +118,8 @@ class CGlobal{
         self::NEW_TYPE_QUANG_CAO => 'Tin quảng cáo',
     );
 
+
+
     const IMAGE_ERROR = 133;
     const FOLDER_NEWS = 'news';
     const FOLDER_BANNER = 'banner';
@@ -160,11 +162,28 @@ class CGlobal{
     const BANNER_TYPE_BOTTOM = 4;
     const BANNER_TYPE_CENTER = 5;
 
+    //page gắn link quảng cáo
     const BANNER_PAGE_HOME = 1;
-    const BANNER_PAGE_LIST = 2;
-    const BANNER_PAGE_DETAIL = 3;
-    const BANNER_PAGE_CATEGORY = 4;
-    const BANNER_PAGE_OTHER = 6;
+    const BANNER_PAGE_DETAIL = 2;
+    const BANNER_PAGE_CATEGORY = 3;
+    const BANNER_PAGE_CUSTOMER_ITEMS = 4;
+    const BANNER_PAGE_CONTACT = 5;
+    const BANNER_PAGE_SEARCH = 6;
+    const BANNER_PAGE_OTHER = 7;
+
+    public static $arrPageCurrent = array(
+        'home' => self::BANNER_PAGE_HOME,
+        'pageListItemCustomer' => self::BANNER_PAGE_CUSTOMER_ITEMS,
+        'pageCategory' => self::BANNER_PAGE_CATEGORY,
+        'pageContact' => self::BANNER_PAGE_CONTACT,
+        'searchItems' => self::BANNER_PAGE_SEARCH,
+
+        'pageDetailItem' => self::BANNER_PAGE_DETAIL,
+        'pageDetailNew' => self::BANNER_PAGE_DETAIL,
+
+        'page404' => self::BANNER_PAGE_OTHER,
+        'pageNews' => self::BANNER_PAGE_OTHER,
+    );
 
     const LINK_NOFOLLOW = 0;
     const LINK_FOLLOW = 1;

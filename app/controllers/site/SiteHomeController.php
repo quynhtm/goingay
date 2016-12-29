@@ -12,8 +12,9 @@ class SiteHomeController extends BaseSiteController
 
     //trang chu
     public function index(){
-    	$this->header();
-    	$this->menuLeft();
+		$banner_page = $this->getControllerAction();
+    	$this->header($banner_page);
+    	$this->menuLeft($banner_page);
     	//Meta title
     	$meta_title='';
     	$meta_keywords='';
@@ -73,8 +74,9 @@ class SiteHomeController extends BaseSiteController
 		$meta_title = $meta_keywords = $meta_description = 'Tìm kiếm nhanh'.($keyword != '')?$keyword:'';
 		$meta_img= '';
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
-		$this->header($category_id, $province_id, $keyword);
-		$this->menuLeft(0);
+		$banner_page = $this->getControllerAction();
+		$this->header($banner_page, $category_id, $province_id, $keyword);
+		$this->menuLeft($banner_page,0);
 
 		//List san pham tim kiếm
 		$search = $data = array();
@@ -90,7 +92,7 @@ class SiteHomeController extends BaseSiteController
 
 		//danh sach tin dang cua danh m?c
 		$pageNo = (int) Request::get('page_no',1);
-		$limit = CGlobal::number_limit_show;
+		$limit = CGlobal::number_show_20;
 		$offset = ($pageNo == 1)? 0: ($pageNo - 1) * $limit;
 		$resultSearch = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
@@ -99,7 +101,7 @@ class SiteHomeController extends BaseSiteController
 		$arrProvince = Province::getAllProvince();
 
 		//quang cao ben phải
-		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT,$banner_page, $category_id, $province_id);
 
 		$this->layout->content = View::make('site.SiteLayouts.searchItems')
 			->with('arrProvince', $arrProvince)
@@ -121,9 +123,14 @@ class SiteHomeController extends BaseSiteController
 		if(empty($itemShow)){
 			return Redirect::route('site.home');
 		}
+		if($itemShow->item_status != CGlobal::status_show || $itemShow->item_block != CGlobal::ITEMS_NOT_BLOCK){
+			return Redirect::route('site.home');
+		}
 
-		$this->header($itemShow->item_category_id, $itemShow->item_province_id);
-		$this->menuLeft($itemShow->item_category_id);
+		$banner_page = $this->getControllerAction();
+		$this->header($banner_page, $itemShow->item_category_id, $itemShow->item_province_id);
+		$this->menuLeft($banner_page, $itemShow->item_category_id);
+
 		//seo
 		$meta_title = addslashes($itemShow->item_name);
 		$meta_keywords = CGlobal::web_name.' - '.addslashes($itemShow->item_name);
@@ -153,7 +160,7 @@ class SiteHomeController extends BaseSiteController
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 
 		//quang cao ben phải
-		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT,$banner_page, $itemShow->item_category_id, $itemShow->item_province_id);
 
 		$this->layout->content = View::make('site.SiteLayouts.DetailItem')
 			->with('itemShow', $itemShow)
@@ -177,8 +184,9 @@ class SiteHomeController extends BaseSiteController
 		$url_seo = FunctionLib::buildLinkCategory($catid, $catname);
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description,$url_seo);
 
-    	$this->header($catid,$province_id);
-    	$this->menuLeft($catid);
+		$banner_page = $this->getControllerAction();
+    	$this->header($banner_page, $catid, $province_id);
+    	$this->menuLeft($banner_page, $catid);
 
 		//tinh thanh
 		$arrProvince = Province::getAllProvince();
@@ -210,7 +218,7 @@ class SiteHomeController extends BaseSiteController
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
 
 		//quang cao ben phải
-		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT,$banner_page, $catid, $province_id);
 
     	$this->layout->content = View::make('site.SiteLayouts.ListItemCategory')
 			->with('arrProvince', $arrProvince)
@@ -236,8 +244,9 @@ class SiteHomeController extends BaseSiteController
 		$url_seo = FunctionLib::buildLinkItemsCustomer($arrCustomer->customer_id, $arrCustomer->customer_name);
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description,$url_seo);
 
-		$this->header();
-		$this->menuLeft(0);
+		$banner_page = $this->getControllerAction();
+		$this->header($banner_page);
+		$this->menuLeft($banner_page,0);
 
 		//List san pham cï¿½ng danh muc n?i b?t TOP
 		$number_show_hot = 3;
@@ -248,8 +257,8 @@ class SiteHomeController extends BaseSiteController
 
 		//danh sach tin dang cua danh m?c
 		$pageNo = (int) Request::get('page_no',1);
-		$limit = CGlobal::number_limit_show;
-		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cï¿½i n?i b?t ? trï¿½n ?i
+		$limit = CGlobal::number_show_20;
+		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;
 		$search = $data = array();
 		$totalSearch = 0;
 		$search['customer_id'] = $customer_id;
@@ -261,7 +270,7 @@ class SiteHomeController extends BaseSiteController
 		$arrProvince = Province::getAllProvince();
 
 		//quang cao ben phải
-		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT, $banner_page);
 
 		$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer')
 			->with('arrProvince', $arrProvince)
@@ -284,8 +293,9 @@ class SiteHomeController extends BaseSiteController
 	}
 
 	public function pageNews(){
-		$this->header();
-		$this->menuLeft();
+		$banner_page = CGlobal::BANNER_PAGE_SEARCH; //page tìm kiếm
+		$this->header($banner_page);
+		$this->menuLeft($banner_page);
 		//list tin tuc lien quan
 		$search['news_status'] = CGlobal::status_show;
 		$search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort';//cac truong can lay
@@ -301,8 +311,12 @@ class SiteHomeController extends BaseSiteController
 		if(empty($inforNew)){
 			return Redirect::route('site.home');
 		}
-    	$this->header();
-    	$this->menuLeft();
+		if($inforNew->news_status != CGlobal::status_show){
+			return Redirect::route('site.home');
+		}
+		$banner_page = $this->getControllerAction();
+    	$this->header($banner_page);
+    	$this->menuLeft($banner_page);
 		//seo
 		$meta_title = $inforNew->news_title;
 		$meta_keywords = CGlobal::web_name;
@@ -319,7 +333,7 @@ class SiteHomeController extends BaseSiteController
 		//FunctionLib::debug($arrListNew);
 
 		//quang cao ben phải
-		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT,$banner_page);
 
     	$this->layout->content = View::make('site.SiteLayouts.DetailNews')
 			->with('inforNew', $inforNew)
@@ -332,8 +346,8 @@ class SiteHomeController extends BaseSiteController
 		$meta_title = $meta_keywords = $meta_description = '404';
 		$meta_img= '';
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
-
-		$this->header();
+		$banner_page = CGlobal::BANNER_PAGE_SEARCH; //page tìm kiếm
+		$this->header($banner_page);
 		$this->layout->content = View::make('site.SiteLayouts.page404');
 		$this->footer();
 	}
@@ -341,10 +355,12 @@ class SiteHomeController extends BaseSiteController
 		$meta_title = $meta_keywords = $meta_description = 'Liên hệ Raovat30s.vn';
 		$meta_img= '';
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
-		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT);
-		
-		$this->header();
-		$this->menuLeft();
+
+		$banner_page = $this->getControllerAction();
+		$this->header($banner_page);
+		$this->menuLeft($banner_page);
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT,$banner_page);
+
 		$messages = FunctionLib::messages('messages');
 		if(!empty($_POST)){
 			$token = Request::get('_token', '');
