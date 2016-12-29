@@ -122,6 +122,8 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::any('banner/view',array('as' => 'admin.bannerView','uses' => 'BannerController@view'));
     Route::get('banner/edit/{id?}', array('as' => 'admin.bannerEdit','uses' => 'BannerController@getBanner'))->where('id', '[0-9]+');
     Route::post('banner/edit/{id?}', array('as' => 'admin.bannerEdit','uses' => 'BannerController@postBanner'))->where('id', '[0-9]+');
+    Route::get('banner/copy/{id?}', array('as' => 'admin.bannerCopy','uses' => 'BannerController@getBanner'))->where('id', '[0-9]+');
+    Route::post('banner/copy/{id?}', array('as' => 'admin.bannerCopy','uses' => 'BannerController@postBanner'))->where('id', '[0-9]+');
     Route::post('banner/deleteBanner', array('as' => 'admin.deleteBanner','uses' => 'BannerController@deleteBanner'));//ajax
 
     //Thong tin cau hinh chung: hotline, thong tin chan trang...

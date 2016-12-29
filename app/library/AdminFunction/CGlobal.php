@@ -172,7 +172,7 @@ class CGlobal{
     const BANNER_PAGE_OTHER = 7;
 
     public static $arrPageCurrent = array(
-        'home' => self::BANNER_PAGE_HOME,
+        'index' => self::BANNER_PAGE_HOME,
         'pageListItemCustomer' => self::BANNER_PAGE_CUSTOMER_ITEMS,
         'pageCategory' => self::BANNER_PAGE_CATEGORY,
         'pageContact' => self::BANNER_PAGE_CONTACT,

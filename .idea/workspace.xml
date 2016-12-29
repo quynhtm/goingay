@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c717333-8288-4d8a-8ab4-ffaa1fccb75d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Banner.php" afterPath="$PROJECT_DIR$/app/models/Banner.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/admin/BannerController.php" afterPath="$PROJECT_DIR$/app/controllers/admin/BannerController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/BaseSiteController.php" afterPath="$PROJECT_DIR$/app/controllers/BaseSiteController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/BaseAdminController.php" afterPath="$PROJECT_DIR$/app/controllers/BaseAdminController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" afterPath="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/site/SiteHomeController.php" afterPath="$PROJECT_DIR$/app/controllers/site/SiteHomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes.php" afterPath="$PROJECT_DIR$/app/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/admin/Banner/view.blade.php" afterPath="$PROJECT_DIR$/app/views/admin/Banner/view.blade.php" />
     </list>
     <ignored path="webtintuc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,12 +28,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="routes_site.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="routes_site.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/routes_site.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30788803">
-              <caret line="35" column="54" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="54" />
+            <state vertical-scroll-proportion="-4.7636366">
+              <caret line="35" column="93" selection-start-line="35" selection-start-column="85" selection-end-line="35" selection-end-column="93" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CGlobal.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7398773">
+              <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseSiteController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/BaseSiteController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="19.653847">
+              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+              <folding>
+                <element signature="n#header#0;n#BaseSiteController#0;n#!!top" expanded="false" />
+                <element signature="n#footer#0;n#BaseSiteController#0;n#!!top" expanded="false" />
+                <element signature="n#popupHide#0;n#BaseSiteController#0;n#!!top" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -62,7 +85,6 @@
         <option value="$PROJECT_DIR$/app/views/admin/GroupUser/view.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/admin/GroupUserController.php" />
         <option value="$PROJECT_DIR$/app/library/AdminFunction/ArrayPermission.php" />
-        <option value="$PROJECT_DIR$/app/controllers/BaseAdminController.php" />
         <option value="$PROJECT_DIR$/app/views/admin/User/view.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/admin/UserController.php" />
         <option value="$PROJECT_DIR$/app/controllers/admin/ProvinceController.php" />
@@ -71,7 +93,6 @@
         <option value="$PROJECT_DIR$/assets/admin/js/admin.js" />
         <option value="$PROJECT_DIR$/app/views/admin/Banner/add.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/admin/InfoController.php" />
-        <option value="$PROJECT_DIR$/app/routes.php" />
         <option value="$PROJECT_DIR$/app/views/admin/info/add.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/admin/AjaxCommonController.php" />
         <option value="$PROJECT_DIR$/app/routes/routes_site.php" />
@@ -80,7 +101,6 @@
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/DetailItem.blade.php" />
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/ListItemCustomer.blade.php" />
         <option value="$PROJECT_DIR$/app/models/Info.php" />
-        <option value="$PROJECT_DIR$/app/views/admin/Banner/view.blade.php" />
         <option value="$PROJECT_DIR$/app/library/AdminFunction/FunctionLib.php" />
         <option value="$PROJECT_DIR$/app/models/ClickShare.php" />
         <option value="$PROJECT_DIR$/app/views/site/SiteLayouts/pageContact.blade.php" />
@@ -93,11 +113,14 @@
         <option value="$PROJECT_DIR$/app/views/site/BaseLayouts/header.blade.php" />
         <option value="$PROJECT_DIR$/assets/frontend/css/site.css" />
         <option value="$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php" />
-        <option value="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" />
-        <option value="$PROJECT_DIR$/app/controllers/admin/BannerController.php" />
         <option value="$PROJECT_DIR$/app/models/Banner.php" />
         <option value="$PROJECT_DIR$/app/controllers/BaseSiteController.php" />
         <option value="$PROJECT_DIR$/app/controllers/site/SiteHomeController.php" />
+        <option value="$PROJECT_DIR$/app/views/admin/Banner/view.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/BaseAdminController.php" />
+        <option value="$PROJECT_DIR$/app/routes.php" />
+        <option value="$PROJECT_DIR$/app/controllers/admin/BannerController.php" />
+        <option value="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" />
       </list>
     </option>
   </component>
@@ -189,7 +212,73 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webtintuc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="goingay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webtintuc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="goingay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Banner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webtintuc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="goingay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -528,24 +617,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/Banner/add.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.6065292">
-          <caret line="226" column="14" selection-start-line="226" selection-start-column="14" selection-end-line="226" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/admin/Items/view.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="104" column="160" selection-start-line="104" selection-start-column="36" selection-end-line="104" selection-end-column="160" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="152" column="37" selection-start-line="152" selection-start-column="28" selection-end-line="152" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -561,13 +636,6 @@
         <state vertical-scroll-proportion="-8.418181">
           <caret line="852" column="5" selection-start-line="852" selection-start-column="5" selection-end-line="852" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/BaseAdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.5384617">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -610,13 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-17.0">
           <caret line="26" column="133" selection-start-line="26" selection-start-column="133" selection-end-line="26" selection-end-column="133" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/Banner/view.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5006135">
-          <caret line="127" column="131" selection-start-line="127" selection-start-column="99" selection-end-line="127" selection-end-column="131" />
         </state>
       </provider>
     </entry>
@@ -692,31 +753,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="771" column="52" selection-start-line="771" selection-start-column="52" selection-end-line="771" selection-end-column="52" />
-          <folding>
-            <element signature="n#pageLogin#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#logout#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#pageRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#pageActiveRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#pageChageInfo#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#validChageInfo#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#getDistrictCustomer#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#pageChagePass#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#pageForgetPass#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#getAddItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#getEditItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#postEditItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#getAllImageItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#removeImage#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#validInforItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-            <element signature="n#setTopItems#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/site/CustomerLayouts/ItemList.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -729,14 +765,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.153846">
           <caret line="14" column="50" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin/BannerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08711656">
-          <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -765,17 +793,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46871164">
-          <caret line="173" column="18" selection-start-line="173" selection-start-column="18" selection-end-line="173" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/site/SiteHomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
+        <state vertical-scroll-proportion="0.34478527">
           <caret line="272" column="44" selection-start-line="272" selection-start-column="26" selection-end-line="272" selection-end-column="44" />
           <folding>
             <element signature="n#index#0;n#SiteHomeController#0;n#!!top" expanded="false" />
@@ -786,10 +806,78 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/Banner/add.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.730769">
+          <caret line="180" column="35" selection-start-line="180" selection-start-column="35" selection-end-line="180" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/Banner/view.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.269231">
+          <caret line="124" column="167" selection-start-line="124" selection-start-column="167" selection-end-line="124" selection-end-column="167" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.5">
+          <caret line="125" column="108" selection-start-line="125" selection-start-column="98" selection-end-line="125" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/BannerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.653847">
+          <caret line="212" column="20" selection-start-line="212" selection-start-column="20" selection-end-line="212" selection-end-column="20" />
+          <folding>
+            <element signature="n#__construct#0;n#BannerController#0;n#!!top" expanded="false" />
+            <element signature="n#view#0;n#BannerController#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/BaseAdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-58.846153">
+          <caret line="90" column="26" selection-start-line="90" selection-start-column="26" selection-end-line="90" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/site/siteUserCustomerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="10" column="50" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
+          <folding>
+            <element signature="n#pageLogin#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#logout#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#pageRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#pageActiveRegister#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#pageChageInfo#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#validChageInfo#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#getDistrictCustomer#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#pageChagePass#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#pageForgetPass#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#getAddItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#getEditItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#postEditItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#getAllImageItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#removeImage#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#validInforItem#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+            <element signature="n#setTopItems#0;n#SiteUserCustomerController#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/BaseSiteController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8122699">
-          <caret line="139" column="56" selection-start-line="139" selection-start-column="56" selection-end-line="139" selection-end-column="56" />
+        <state vertical-scroll-proportion="19.653847">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
           <folding>
             <element signature="n#header#0;n#BaseSiteController#0;n#!!top" expanded="false" />
             <element signature="n#footer#0;n#BaseSiteController#0;n#!!top" expanded="false" />
@@ -800,8 +888,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/routes_site.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30788803">
-          <caret line="35" column="54" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="54" />
+        <state vertical-scroll-proportion="-4.7636366">
+          <caret line="35" column="93" selection-start-line="35" selection-start-column="85" selection-end-line="35" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7398773">
+          <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -133,12 +133,16 @@ class BannerController extends BaseAdminController
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
+        $action = $this->getControllerAction();
+        if(strcmp($action,'admin.bannerCopy') == 0 && $id <= 0){
+            return Redirect::route('admin.bannerView');
+        }
         $data = array();
         if($id > 0) {
             $banner = Banner::getBannerByID($id);
             $data = array('banner_id'=>$banner->banner_id,
                 'banner_name'=>$banner->banner_name,
-                'banner_image'=>$banner->banner_image,
+                'banner_image'=>(strcmp($action,'admin.bannerCopy') == 0)? '' : $banner->banner_image,
                 'banner_link'=>$banner->banner_link,
                 'banner_position'=>$banner->banner_position,
                 'banner_parent_id'=>$banner->banner_parent_id,
@@ -166,7 +170,7 @@ class BannerController extends BaseAdminController
         $optionProvince = FunctionLib::getOption(array(0=>'--- Toàn quốc ---')+$this->arrProvince, isset($data['banner_province_id'])? $data['banner_province_id']: 0);
 
         $this->layout->content = View::make('admin.Banner.add')
-            ->with('id', $id)
+            ->with('id', (strcmp($action,'admin.bannerCopy') == 0)? 0:$id)
             ->with('data', $data)
             ->with('optionStatus', $optionStatus)
             ->with('optionPosition', $optionPosition)
@@ -179,6 +183,7 @@ class BannerController extends BaseAdminController
             ->with('optionProvince', $optionProvince)
             ->with('arrStatus', $this->arrStatus);
     }
+
     public function postBanner($id=0) {
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
@@ -202,6 +207,11 @@ class BannerController extends BaseAdminController
         $data['banner_province_id'] = (int)Request::get('banner_province_id',0);
         $data['banner_status'] = (int)Request::get('banner_status', 0);
         $id_hiden = (int)Request::get('id_hiden', 0);
+
+        $action = $this->getControllerAction();
+        if(strcmp($action,'admin.bannerCopy') == 0){
+            $id = 0;
+        }
 
         //FunctionLib::debug($data);
         if($this->valid($data) && empty($this->error)) {

@@ -118,18 +118,20 @@
                                     @endif
                                 </td>
                                 <td class="text-center text-middle">
+                                    @if($is_root || $permission_full ==1|| $permission_edit ==1  )
+                                        <a href="{{URL::route('admin.bannerEdit',array('id' => $item->banner_id))}}" title="Sửa item"><i class="fa fa-edit fa-2x"></i></a>
+                                    @endif
+                                    @if($is_root || $permission_full ==1|| $permission_edit ==1  )
+                                        &nbsp;&nbsp;&nbsp;<a href="{{URL::route('admin.bannerCopy',array('id' => $item->banner_id))}}" title="Copy item" target="_blank"><i class="fa fa-files-o fa-2x"></i></a>
+                                    @endif
+                                        <br/>
                                     @if($item->banner_status  == CGlobal::status_show)
                                         <a href="javascript:void(0);" title="Hiện"><i class="fa fa-check fa-2x"></i></a>
                                     @else
                                         <a href="javascript:void(0);" style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>
                                     @endif
-
-                                    @if($is_root || $permission_full ==1|| $permission_edit ==1  )
-                                        &nbsp;&nbsp;&nbsp; <a href="{{URL::route('admin.bannerEdit',array('id' => $item->banner_id))}}" title="Sửa item"><i class="fa fa-edit fa-2x"></i></a>
-                                    @endif
                                     @if($is_root || $permission_full ==1 || $permission_delete == 1)
-                                       &nbsp;&nbsp;&nbsp;
-                                       <a href="javascript:void(0);" onclick="Admin.deleteItem({{$item->banner_id}},3)" title="Xóa Item"><i class="fa fa-trash fa-2x"></i></a>
+                                        &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);" onclick="Admin.deleteItem({{$item->banner_id}},3)" title="Xóa Item"><i class="fa fa-trash fa-2x"></i></a>
                                     @endif
                                     <span class="img_loading" id="img_loading_{{$item->banner_id}}"></span>
                                 </td>

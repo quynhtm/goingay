@@ -86,4 +86,8 @@ class BaseAdminController extends BaseController
         );
         return $menu;
     }
+
+    public function getControllerAction(){
+        return $routerName = Route::currentRouteName();
+    }
 }
