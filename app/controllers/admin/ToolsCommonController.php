@@ -60,12 +60,12 @@ class ToolsCommonController extends BaseAdminController
         $dataFilter = $search;
 
         //ngay bat dau
-        $star_time = Request::get('start_time','');
+        $star_time = Request::get('start_time',date('d-m-Y',time()));
         if($star_time != '') {
             $dataFilter['start_time'] = $star_time;
             $search['start_time'] = strtotime($star_time . ' 00:00:00');
         }
-        $end_time = Request::get('end_time','');
+        $end_time = Request::get('end_time',date('d-m-Y',time()));
         if($end_time != '') {
             $dataFilter['end_time'] = $end_time;
             $search['end_time'] = strtotime($end_time . ' 23:59:59');
@@ -98,7 +98,9 @@ class ToolsCommonController extends BaseAdminController
     //cập nhật thêm quyền cho hệ thông
     public function addPermit(){
         //http://raovat30s.vn?url_source=aHR0cDovL21pbmhkdWNwcm9wZXJ0eS5jb20v //minh đức
-        echo base64_encode('http://minhducproperty.com/');
+        //echo base64_encode('HuongDanRaoVat30s'); //
+        // http://raovat30s.vn/chi-tiet/tin-tuc-4/huong-dan-dang-tin-rao-vat.html?url_source=SHVvbmdEYW5SYW9WYXQzMHM=
+        //echo base64_encode('http://minhducproperty.com/');
         die();
         die('tạm dừng chức năng này');
         $arrPermit = ArrayPermission::$arrPermit;
