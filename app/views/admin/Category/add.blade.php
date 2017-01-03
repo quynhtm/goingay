@@ -57,17 +57,25 @@
                         <input type="text" placeholder="Icons font" id="category_icons" name="category_icons" class="form-control input-sm" value="@if(isset($data['category_icons'])){{$data['category_icons']}}@endif">
                     </div>
                 </div>
-                <!--<div class="col-sm-4">
+
+                <div class="clearfix"></div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <i>Ảnh NoImage tin danh mục</i>
+                    </div>
+                </div>
+                <div class="col-sm-4">
                     <div class="form-group">
                       <input name="image" type="file"/>
-                      <input name="category_icons" type="hidden" id="category_icons" @if(isset($data['category_icons']))value="{{$data['category_icons']}}"@else value="" @endif>
+                      <input name="category_image_background" type="hidden" id="category_image_background" @if(isset($data['category_image_background']))value="{{$data['category_image_background']}}"@else value="" @endif>
                     </div>
-                    @if(isset($data['category_icons']) && $data['category_icons'] !='')
+                    @if(isset($data['category_image_background']) && $data['category_image_background'] !='')
                     <div class="form-group">
-                       <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_CATEGORY, $data['category_id'], $data['category_icons'], CGlobal::sizeImage_100, '', true, CGlobal::type_thumb_image_banner, false)}}" height="50" width="50">
+                       <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_CATEGORY, $data['category_id'], $data['category_image_background'], CGlobal::sizeImage_300, '', true, CGlobal::type_thumb_image_banner, false)}}">
                     </div>
                     @endif
-                </div>-->
+                </div>
+
                 <div class="clearfix"></div>
                 <div class="col-sm-2">
                     <div class="form-group">
@@ -119,6 +127,7 @@
                 <div class="clearfix"></div>
                 <div class="form-group col-sm-12 text-right">
                     <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
+                    <input type="hidden" id="id_hiden" name="id_hiden" value="{{$id}}"/>
                 </div>
                 {{ Form::close() }}
                 <!-- PAGE CONTENT ENDS -->

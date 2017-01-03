@@ -58,7 +58,7 @@
                             <th width="2%"class="text-center">STT</th>
                             <th width="1%" class="text-center"><input type="checkbox" id="checkAll"/></th>
                             <th width="25%" class="td_list">Tên danh mục</th>
-                            <th width="10%" class="td_list">Danh mục cha</th>
+                            <th width="10%" class="text-center">Ảnh NoImage</th>
                             <th width="5%" class="text-center">Icon font</th>
                             <th width="5%" class="text-center">Vị trí</th>
                             <th width="5%" class="text-center">Status</th>
@@ -75,8 +75,8 @@
                                 <td>
                                     [<b>{{ $item['category_id'] }}</b>] {{ $item['padding_left'].$item['category_name'] }}
                                 </td>
-                                <td>
-                                   {{ $item['padding_left'].$item['category_parent_name'] }}
+                                <td class="text-center">
+                                    <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_CATEGORY, $item['category_id'], $item['category_image_background'], CGlobal::sizeImage_150, '', true, CGlobal::type_thumb_image_banner, false)}}">
                                 </td>
                                 <td class="text-center">
                                    <i class="{{ $item['category_icons']}} fa-3x"></i>

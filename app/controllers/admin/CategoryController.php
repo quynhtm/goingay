@@ -135,9 +135,9 @@ class CategoryController extends BaseAdminController
         $data = array();
         if($id > 0) {
             $data = Category::find($id);
-            if(isset($data['category_icons']) && $data['category_icons'] != ''){
-                //$url_thumb = ThumbImg::getImageThumb(CGlobal::FOLDER_CATEGORY, $id, $data['category_icons'], CGlobal::sizeImage_80, '', true, CGlobal::type_thumb_image_banner, false);
-                //$data['url_src_icon'] = $url_thumb;
+            if(isset($data['category_image_background']) && $data['category_image_background'] != ''){
+                $url_thumb = ThumbImg::getImageThumb(CGlobal::FOLDER_CATEGORY, $id, $data['category_image_background'], CGlobal::sizeImage_80, '', true, CGlobal::type_thumb_image_banner, false);
+                $data['url_src_icon'] = $url_thumb;
             }
         }
 
@@ -168,17 +168,17 @@ class CategoryController extends BaseAdminController
         $dataSave['category_content_front_order'] = (int)Request::get('category_content_front_order', 0);
         $dataSave['category_order'] = (int)Request::get('category_order', 0);
         $dataSave['category_parent_id'] = (int)Request::get('category_parent_id', 0);
-        /*
+
         $file = Input::file('image');
         if($file){
             $filename = $file->getClientOriginalName();
             $destinationPath = Config::get('config.DIR_ROOT').'/uploads/'.CGlobal::FOLDER_CATEGORY.'/'. $id;
             $upload  = Input::file('image')->move($destinationPath, $filename);
-            $dataSave['category_icons'] = $filename;
+            $dataSave['category_image_background'] = $filename;
         }else{
-            $dataSave['category_icons'] = Request::get('category_icons', '');
+            $dataSave['category_image_background'] = Request::get('category_image_background', '');
         }
-		*/
+
         if($this->valid($dataSave) && empty($this->error)) {
             if($id > 0) {
                 //cap nhat
