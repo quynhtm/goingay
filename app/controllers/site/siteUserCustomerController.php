@@ -148,6 +148,7 @@ class SiteUserCustomerController extends BaseSiteController{
 	    				'customer_phone'=>$phone,
 	    				'customer_address'=>$address,
 	    				'customer_time_created'=>time(),
+	    				'is_login'=>1,
 	    				'customer_time_login'=>time(),
 	    				'is_customer' => CGlobal::CUSTOMER_FREE,
 	    				'customer_status'=>CGlobal::status_show,
