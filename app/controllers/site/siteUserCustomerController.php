@@ -527,8 +527,8 @@ class SiteUserCustomerController extends BaseSiteController{
 				$arrImagOther = unserialize($items->item_image_other);
 				if(sizeof($arrImagOther) > 0){
 					foreach($arrImagOther as $k=>$val){
-						$url_thumb = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item_id, $val, CGlobal::sizeImage_300);
-						$url_thumb_content = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item_id, $val, CGlobal::sizeImage_600);
+						$url_thumb = ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $item_id,0 ,$val, CGlobal::sizeImage_300);
+						$url_thumb_content = ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $item_id,0, $val, CGlobal::sizeImage_600);
 						$arrViewImgOther[] = array('img_other'=>$val,'src_img_other'=>$url_thumb,'src_thumb_content'=>$url_thumb_content);
 					}
 				}
@@ -725,8 +725,8 @@ class SiteUserCustomerController extends BaseSiteController{
                     $arrImagOther = unserialize($result->item_image_other);
                     if(sizeof($arrImagOther) > 0){
                         foreach($arrImagOther as $k=>$val){
-                            $url_thumb = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item_id, $val, CGlobal::sizeImage_300);
-                            $url_thumb_content = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item_id, $val, CGlobal::sizeImage_600);
+                            $url_thumb = ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $item_id,0, $val, CGlobal::sizeImage_300);
+                            $url_thumb_content = ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $item_id,0, $val, CGlobal::sizeImage_600);
                             $arrViewImgOther[] = array('item_name'=>$result->item_name,
                                 'src_img_other'=>$url_thumb,
                                 'src_thumb_content'=>$url_thumb_content);

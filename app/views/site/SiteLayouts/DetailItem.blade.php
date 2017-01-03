@@ -12,11 +12,11 @@
 			<?php $itemShow->item_image_other = unserialize($itemShow->item_image_other); ?>
 			@if(!empty($itemShow->item_image_other))
 				@foreach( $itemShow->item_image_other as $img)
-				<div><img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $img, CGlobal::sizeImage_500)}}" title="{{$itemShow->item_name}}" alt="{{$itemShow->item_name}}"></div>
+				<div><img src="{{ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $itemShow->item_id,$itemShow->item_category_id, $img, CGlobal::sizeImage_500)}}" title="{{$itemShow->item_name}}" alt="{{$itemShow->item_name}}"></div>
 				@endforeach
 			@endif
 			@else
-			<div><img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $itemShow->item_image, CGlobal::sizeImage_500)}}" title="{{$itemShow->item_name}}" alt="{{$itemShow->item_name}}"></div>
+			<div><img src="{{ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $itemShow->item_id,$itemShow->item_category_id, $itemShow->item_image, CGlobal::sizeImage_500)}}" title="{{$itemShow->item_name}}" alt="{{$itemShow->item_name}}"></div>
 			@endif
 		</div>
 		<script>
@@ -86,7 +86,7 @@
 					@foreach ($resultItemCategory as $keyc => $itemCate)
 						<li>
 							<a class="img" href="{{FunctionLib::buildLinkDetailItem($itemCate->item_id,$itemCate->item_name,$itemCate->item_category_id)}}">
-								<img {{CGlobal::size_imge_show_list_60}} src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemCate->item_id, $itemCate->item_image, CGlobal::sizeImage_200)}}" alt="{{$itemCate->item_name}}" title="{{$itemCate->item_name}}">
+								<img {{CGlobal::size_imge_show_list_60}} src="{{ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $itemCate->item_id,$itemCate->item_category_id, $itemCate->item_image, CGlobal::sizeImage_200)}}" alt="{{$itemCate->item_name}}" title="{{$itemCate->item_name}}">
 							</a>
 							<div class="title-post">
 								<h2>

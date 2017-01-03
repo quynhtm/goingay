@@ -71,7 +71,7 @@
                     </div>
                     @if(isset($data['category_image_background']) && $data['category_image_background'] !='')
                     <div class="form-group">
-                       <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_CATEGORY, $data['category_id'], $data['category_image_background'], CGlobal::sizeImage_300, '', true, CGlobal::type_thumb_image_banner, false)}}">
+                       <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_CATEGORY, $data['category_id'], $data['category_image_background'], CGlobal::sizeImage_100, '', true, CGlobal::type_thumb_image_banner, false)}}">
                     </div>
                     @endif
                 </div>

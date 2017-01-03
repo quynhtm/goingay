@@ -61,10 +61,10 @@
 					<td class="text-center text-middle">
 						@if($item->item_status == CGlobal::status_show)
 							<a href="{{FunctionLib::buildLinkDetailItem($item->item_id,$item->item_name,$item->item_category_id)}}" title="Chi tiết tin đăng" target="_blank">
-								<img height="40" src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id, $item->item_image, CGlobal::sizeImage_100)}}">
+								<img height="40" src="{{ ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $item->item_id,$item->item_category_id, $item->item_image, CGlobal::sizeImage_100)}}">
 							</a>
 						@else
-							<img height="40" src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id, $item->item_image, CGlobal::sizeImage_100)}}">
+							<img height="40" src="{{ ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $item->item_id,$item->item_category_id, $item->item_image, CGlobal::sizeImage_100)}}">
 						@endif
 					</td>
 					<td>

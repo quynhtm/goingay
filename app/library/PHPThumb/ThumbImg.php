@@ -74,7 +74,47 @@ if(!class_exists('ThumbImg') ){
 		 * @param bool|true $returnPath
 		 * @return string
 		 */
-		public static function getImageThumb($folder='', $id=0, $file_name='', $size_image = CGlobal::sizeImage_100, $alt = '', $returnPath = true, $type=1, $watermark=true){
+		public static function getImageThumb($folder='', $id=0,$file_name='', $size_image = CGlobal::sizeImage_100, $alt = '', $returnPath = true, $type=1, $watermark=true){
+			if(!preg_match("/.jpg|.jpeg|.JPEG|.JPG|.png|.gif/",strtolower($file_name))) return ' ';
+			$arrSizeThumb = ($type == CGlobal::type_thumb_image_banner)?CGlobal::$arrBannerSizeImage : CGlobal::$arrSizeImage;
+			$width = isset($arrSizeThumb[$size_image])? $arrSizeThumb[$size_image]['w']: CGlobal::sizeImage_100;
+			$height = isset($arrSizeThumb[$size_image])? $arrSizeThumb[$size_image]['h']: CGlobal::sizeImage_100;
+
+			$imagSource = Config::get('config.DIR_ROOT').'/uploads/' .$folder. '/'. $id. '/' .$file_name;
+			$path_thumb =  $width."x".$height.'/'.$file_name;
+			$thumbPath = Config::get('config.DIR_ROOT').'/uploads/thumbs/'.$folder.'/'.$id.'/'. $path_thumb;
+			$url_img = Config::get('config.WEB_ROOT').'uploads/thumbs/'.$folder.'/'.$id.'/'. $path_thumb;
+			if(!file_exists($thumbPath)){
+				if(file_exists($imagSource)){
+					$objThumb = new PHPThumb\GD($imagSource);
+					$objThumb->resize($width, $height);
+					if(!file_exists($thumbPath)){
+						if(!self::makeDir($folder, $id, $path_thumb)){
+							return '';
+						}
+						self::saveCustom($imagSource);
+					}
+					$objThumb->show(true, $thumbPath, $watermark);
+				}else{
+					$url_img = '';
+				}
+			}
+
+			if($returnPath){
+				return $url_img;
+			}else{
+				return '<img src="'.$url_img.'" alt="'.$alt.'"/>';
+			}
+		}
+
+		public static function getImageForSite($folder='', $id=0, $category_id = 0, $file_name='', $size_image = CGlobal::sizeImage_100, $alt = '', $returnPath = true, $type=1, $watermark=true){
+			if(trim($file_name) == '' && $category_id > 0){
+				$inforCategory = Category::getByID($category_id);
+				$file_name = $inforCategory->category_image_background;
+				$id = $category_id;
+				$folder = CGlobal::FOLDER_CATEGORY;
+			}
+
 			if(!preg_match("/.jpg|.jpeg|.JPEG|.JPG|.png|.gif/",strtolower($file_name))) return ' ';
 			$arrSizeThumb = ($type == CGlobal::type_thumb_image_banner)?CGlobal::$arrBannerSizeImage : CGlobal::$arrSizeImage;
 			$width = isset($arrSizeThumb[$size_image])? $arrSizeThumb[$size_image]['w']: CGlobal::sizeImage_100;
