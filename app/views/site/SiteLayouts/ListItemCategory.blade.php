@@ -99,9 +99,9 @@
 					</li>
 					@endforeach
 				</ul>
-				<div class="text-right">
-					{{$paging}}
-				</div>
+			</div>
+			<div class="text-right">
+				{{$paging}}
 			</div>
 			@endif
 		</div>
