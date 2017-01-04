@@ -31,13 +31,11 @@ class SiteHomeController extends BaseSiteController
 
 		//List san pham noi bat TOP
 		$number_show_hot = 3;
-		$searchHomeTop['item_image'] = 1;//check lay truong anh
 		$searchHomeTop['field_get'] = $this->str_field_items_get;
 		$resultHomeTop = self::getItemHot($searchHomeTop,$number_show_hot);
 
 		//List san pham noi bat SLIDE
 		$number_show_slider = 10;
-		$searchHomeSlider['item_image'] = 1;//check lay truong anh
 		$searchHomeSlider['field_get'] = $this->str_field_items_get;
 		$resultHomeSlider = self::getItemHot($searchHomeSlider,$number_show_slider,$number_show_hot);
 
@@ -197,7 +195,6 @@ class SiteHomeController extends BaseSiteController
 		//List san pham noi bat TOP
 		$number_show_hot = 3;
 		$searchHot['item_category_id'] = $catid;
-		$searchHot['item_image'] = 1;//check cï¿½ ?nh ??i di?n
 		$searchHot['field_get'] = $this->str_field_items_get;
 		$resultHot = self::getItemHot($searchHot,$number_show_hot);
 
@@ -251,7 +248,6 @@ class SiteHomeController extends BaseSiteController
 		//List san pham cï¿½ng danh muc n?i b?t TOP
 		$number_show_hot = 3;
 		$searchHot['customer_id'] = $customer_id;
-		$searchHot['item_image'] = 1;//check cï¿½ ?nh ??i di?n
 		$searchHot['field_get'] = $this->str_field_items_get;
 		$resultHot = self::getItemHot($searchHot,$number_show_hot);
 
