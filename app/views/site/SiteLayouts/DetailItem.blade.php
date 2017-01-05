@@ -5,6 +5,27 @@
 				@if(isset($arrCategory[$itemShow->item_category_id]['category_icons']))<i class="{{$arrCategory[$itemShow->item_category_id]['category_icons']}}"></i>@endif{{$itemShow->item_category_name}}
 			</a>
 		</h2>
+		<div class="like-social pull-right">
+			<div class="fb">
+				<div id="fb-root"></div>
+				<script>(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));</script>
+				<div class="fb-like" data-href="{{FunctionLib::buildLinkDetailItem($itemShow->item_id,$itemShow->item_name,$itemShow->item_category_id)}}"
+					data-layout="button_count" data-action="like" 
+					data-show-faces="false" data-share="false">
+				</div>
+			</div>
+			<div class="gg">
+	            <script src="https://apis.google.com/js/platform.js" async defer></script>
+	            <g:plus action="share" annotation="bubble"></g:plus>
+	            <div class="g-plusone" data-size="medium"></div>
+	        </div>
+		</div>
 	</div>
 	<div class="content-boxcat">
 		<div id="owl-slider-view" class="slide-detail-post">
