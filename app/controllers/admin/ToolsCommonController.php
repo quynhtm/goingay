@@ -99,7 +99,7 @@ class ToolsCommonController extends BaseAdminController
     public function addPermit(){
         //http://raovat30s.vn?url_source=aHR0cDovL21pbmhkdWNwcm9wZXJ0eS5jb20v //minh đức
         //echo base64_encode('HuongDanRaoVat30s'); //
-        // http://raovat30s.vn/chi-tiet/tin-tuc-4/huong-dan-dang-tin-rao-vat.html?url_source=SHVvbmdEYW5SYW9WYXQzMHM=
+        // http://raovat30s.vn/chi-tiet/tin-tuc-6/gioi-thieu-ve-raovat30s-vn.html?url_source=SHVvbmdEYW5SYW9WYXQzMHM=
         //echo base64_encode('http://minhducproperty.com/');
         die();
         die('tạm dừng chức năng này');
