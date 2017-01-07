@@ -2,6 +2,9 @@
 <!-- Home Page -->
 <div class="col-left-200">
 	<ul class="box-menu-category">
+		<li class="fst">
+			<a title="Hỗ trợ" href="http://raovat30s.vn/chi-tiet/tin-tuc-6/gioi-thieu-ve-raovat30s-vn.html" @if(Route::currentRouteName() == 'Site.pageDetailNew')class="act"@endif><i class="fa fa-weixin"></i> Hỗ trợ</a>
+		</li>
 		@if(!empty($menuCategoriessAll))
 		@foreach($menuCategoriessAll as $cat)
 		<li>
@@ -9,9 +12,6 @@
 	    </li>
 		@endforeach
 		@endif
-		<li class="fst">
-			<a title="Hỗ trợ" href="http://raovat30s.vn/chi-tiet/tin-tuc-6/gioi-thieu-ve-raovat30s-vn.html" @if(Route::currentRouteName() == 'Site.pageDetailNew')class="act"@endif><i class="fa fa-weixin"></i> Hỗ trợ</a>
-		</li>
 	</ul>
 	@if(sizeof($arrBannerShow) > 0)
 	<div class="box-ads" >
@@ -42,6 +42,9 @@
 <!-- Other Page -->
 <div class="col-left-5">
 	<ul class="list-item-panel-icon">
+		<li class="fst">
+			<a title="Hỗ trợ" href="http://raovat30s.vn/chi-tiet/tin-tuc-6/gioi-thieu-ve-raovat30s-vn.html" @if(Route::currentRouteName() == 'Site.pageDetailNew')class="act"@endif><i class="fa fa-weixin"></i></a>
+		</li>
 		@if(!empty($menuCategoriessAll))
 		@foreach($menuCategoriessAll as $cat)
 		<li>
@@ -49,9 +52,6 @@
 	    </li>
 		@endforeach
 		@endif
-		<li class="fst">
-			<a title="Hỗ trợ" href="http://raovat30s.vn/chi-tiet/tin-tuc-6/gioi-thieu-ve-raovat30s-vn.html" @if(Route::currentRouteName() == 'Site.pageDetailNew')class="act"@endif><i class="fa fa-weixin"></i></a>
-		</li>
 	</ul>
 </div>
 @endif
