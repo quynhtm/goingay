@@ -23,7 +23,7 @@
 						<a hreft="">Quy chế hoạt động</a>
 					</div>
 					<ul class="f-box-link">
-						<li><a href="{{URL::route('site.pageContact')}}" target="_blank" title="Giới thiệu">Giới thiệu</a></li>
+						<li><a href="http://raovat30s.vn/chi-tiet/tin-tuc-6/gioi-thieu-ve-raovat30s-vn.html" target="_blank" title="Giới thiệu">Giới thiệu</a></li>
 						<li><a href="http://raovat30s.vn/chi-tiet/tin-tuc-3/huong-dan-dang-ky-account-dang-tin-tren-raovat30s-vn.html" title="Hỗ trợ">Hướng dẫn đăng ký</a></li>
 						<li><a href="{{URL::route('site.pageContact')}}" target="_blank" title="Bảng giá quảng cáo">Bảng giá quảng cáo</a></li>
 						<li><a href="{{URL::route('site.pageContact')}}" title="Liên hệ">Liên hệ</a></li>
