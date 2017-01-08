@@ -79,8 +79,8 @@ h1, h2, h3, h4, h5, h6{
     padding-bottom: 5px;
 }
 .like-social {
-    height: 45px;
-    padding: 5px 0 10px 10px;
+    height: 35px;
+	padding: 2px 0 2px 5px;
 }
 .fb{
     padding-left: 5px;
@@ -1489,4 +1489,23 @@ h1, h2, h3, h4, h5, h6{
 }
 .red {
     color: #ff0000;
+}
+
+.like-social .fa-google-plus {
+    background: #d31a1a;
+	color: #fff;
+	border-radius: 2px;
+	width: 28px;
+	height: 28px;
+	padding: 8px;
+	font-size: 15px;
+}
+.like-social .fa-facebook {
+    background: #3f67a9;
+    color: #fff;
+	border-radius: 2px;
+	width: 28px;
+	height: 28px;
+	padding: 8px;
+	font-size: 15px;
 }
