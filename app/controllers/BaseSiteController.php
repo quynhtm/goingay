@@ -52,21 +52,29 @@ class BaseSiteController extends BaseController
 			}
 		}
 
-		//cap nhat luot click CTV click link
+		//cap nhat luot click Customer share link
 		$customer_share = trim(Request::get('customer_share', ''));
 		if(trim($customer_share) != ''){
 			$stringUserShare = base64_decode($customer_share);
 			$pos1 = strrpos($stringUserShare, "_");
-			$object_id = (int)substr($stringUserShare, 0, $pos1);
+			$customer_id = (int)substr($stringUserShare, 0, $pos1);
 			$object_name = substr($stringUserShare, $pos1+1, strlen($stringUserShare));
 
-			$hostIp = Request::getClientIp(); 
-			$userShare = ClickShare::checkIpShareObject($object_id);
+			$hostIp = Request::getClientIp();
+			$userShare = ClickShare::checkIpShareObject($customer_id);
 			if(!in_array($hostIp,array_keys($userShare))){
-				$clickBanner = ClickShare::addData(array('share_ip'=>$hostIp,
+				$clickShare = ClickShare::addData(array('share_ip'=>$hostIp,
 					'share_time'=>time(),
-					'object_id'=>$object_id,
+					'object_id'=>$customer_id,
 					'object_name'=>$object_name));
+				if($clickShare){
+					//cap nhat l??t share cho user
+					$userCustomer = UserCustomer::getByID($customer_id);
+					if(!empty($userCustomer)){
+						$dataUpdateCust['customer_number_share'] = $userCustomer->customer_number_share +1;
+						UserCustomer::updateData($customer_id,$dataUpdateCust);
+					}
+				}
 			}
 		}
 
