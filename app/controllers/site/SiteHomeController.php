@@ -125,6 +125,11 @@ class SiteHomeController extends BaseSiteController
 			return Redirect::route('site.home');
 		}
 
+		//thong tin khach dang tin
+		$arrCustomer = UserCustomer::getByID($itemShow->customer_id);
+		if(empty($arrCustomer)){
+			return Redirect::route('site.home');
+		}
 		$banner_page = $this->getControllerAction();
 		$this->header($banner_page, $itemShow->item_category_id, $itemShow->item_province_id);
 		$this->menuLeft($banner_page, $itemShow->item_category_id);
@@ -138,10 +143,6 @@ class SiteHomeController extends BaseSiteController
 		$meta_img= ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $itemShow->item_image, CGlobal::sizeImage_200);
 		$url_detail = FunctionLib::buildLinkDetailItem($itemShow->item_id, $itemShow->item_name, $itemShow->item_category_id);
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description,$url_detail);
-
-		//thong tin khach dang tin
-		$arrCustomer = UserCustomer::getByID($itemShow->customer_id);
-		//FunctionLib::debug($itemShow);
 
 		//t?nh thï¿½nh
 		$arrProvince = Province::getAllProvince();
@@ -159,6 +160,14 @@ class SiteHomeController extends BaseSiteController
 		$search['field_get'] = $this->str_field_items_get;
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 
+		//build link cho người dùng share lượt click
+		$url_link_share = FunctionLib::buildLinkDetailItem($itemShow->item_id,$itemShow->item_name,$itemShow->item_category_id);
+		if(!empty($arrCustomer)){
+			$string_base = $arrCustomer->customer_id.'_'.$arrCustomer->customer_email;
+			$param_customer_share = '?customer_share='.base64_encode($string_base);
+			$url_link_share .= $param_customer_share;
+		}
+
 		//quang cao ben phải
 		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT,$banner_page, $itemShow->item_category_id, $itemShow->item_province_id);
 
@@ -168,6 +177,7 @@ class SiteHomeController extends BaseSiteController
 			->with('resultItemCategory', $resultItemCategory)
 			->with('arrCategory', $arrCategory)
 			->with('arrBannerRight', $arrBannerRight)
+			->with('url_link_share', $url_link_share)
 			->with('arrCustomer', $arrCustomer);
 		$this->footer();
 	}
@@ -270,9 +280,15 @@ class SiteHomeController extends BaseSiteController
 		//quang cao ben phải
 		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT, $banner_page);
 
+		//build link cho người dùng share lượt click
+		$string_base = $arrCustomer->customer_id.'_'.$arrCustomer->customer_email;
+		$param_customer_share = '?customer_share='.base64_encode($string_base);
+		$url_link_share = FunctionLib::buildLinkItemsCustomer($arrCustomer->customer_id, $arrCustomer->customer_name).$param_customer_share;
+
 		$this->layout->content = View::make('site.SiteLayouts.ListItemCustomer')
 			->with('arrProvince', $arrProvince)
 			->with('arrCustomer', $arrCustomer)
+			->with('url_link_share', $url_link_share)
 			->with('paging', $paging)
 			->with('total', $totalSearch)
 			->with('arrBannerRight', $arrBannerRight)

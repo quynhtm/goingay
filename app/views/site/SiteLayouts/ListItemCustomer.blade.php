@@ -2,10 +2,10 @@
 	<div class="head-info">
 		<h2><a href=""><i class="fa fa-building"></i>Tin đã đăng @if(!empty($arrCustomer) && isset($arrCustomer->customer_name)) của {{$arrCustomer->customer_name}} @endif</a></h2>
 		<div class="like-social pull-right">
-			<a id="share-google" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên google" data-url="{{FunctionLib::buildLinkItemsCustomer($arrCustomer->customer_id, $arrCustomer->customer_name)}}">
+			<a id="share-google" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên google" data-url="{{$url_link_share}}">
 				<i  class="icon-share fa fa-google-plus"></i>
 			</a>
-			<a id="share-facebook" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên facebook" data-url="{{FunctionLib::buildLinkItemsCustomer($arrCustomer->customer_id, $arrCustomer->customer_name)}}">
+			<a id="share-facebook" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên facebook" data-url="{{$url_link_share}}">
 				<i class="icon-share fa fa-facebook"></i>
 			</a>
 		</div>

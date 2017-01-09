@@ -53,14 +53,14 @@ class BaseSiteController extends BaseController
 		}
 
 		//cap nhat luot click CTV click link
-		$sv_share = trim(Request::get('sv_share', ''));
-		if(trim($sv_share) != ''){
-			$stringUserShare = base64_decode($sv_share);
+		$customer_share = trim(Request::get('customer_share', ''));
+		if(trim($customer_share) != ''){
+			$stringUserShare = base64_decode($customer_share);
 			$pos1 = strrpos($stringUserShare, "_");
 			$object_id = (int)substr($stringUserShare, 0, $pos1);
 			$object_name = substr($stringUserShare, $pos1+1, strlen($stringUserShare));
 
-			$hostIp = Request::getClientIp(); //$ip = $_SERVER['REMOTE_ADDR'];
+			$hostIp = Request::getClientIp(); 
 			$userShare = ClickShare::checkIpShareObject($object_id);
 			if(!in_array($hostIp,array_keys($userShare))){
 				$clickBanner = ClickShare::addData(array('share_ip'=>$hostIp,
