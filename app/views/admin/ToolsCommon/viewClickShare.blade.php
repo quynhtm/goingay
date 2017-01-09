@@ -70,7 +70,7 @@
                                     {{ $item->share_ip }}
                                 </td>
                                 <td class="text-center">
-                                    {{date('H:i:s d-m-Y',$item->share_time)}}
+                                    {{date('H:i d-m-Y',$item->share_time)}}
                                 </td>
                             </tr>
                         @endforeach

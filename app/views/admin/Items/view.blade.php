@@ -102,7 +102,7 @@
                                     <input class="check" type="checkbox" name="checkItems[]" id="sys_checkItems" value="{{$item->item_id}}">
                                 </td>
                                 <td class="text-center text-middle">
-                                    <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id,$item->item_category_id, $item->item_image, CGlobal::sizeImage_100)}}">
+                                    <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id, $item->item_image, CGlobal::sizeImage_100)}}">
                                 </td>
                                 <td class="text-left text-middle">
                                     @if($item->item_status == CGlobal::status_show)
