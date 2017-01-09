@@ -202,8 +202,8 @@ class BannerController extends BaseAdminController
         $data['banner_page'] = (int)Request::get('banner_page',0);
         $data['banner_category_id'] = (int)Request::get('banner_category_id',0);
         $data['banner_is_run_time'] = (int)Request::get('banner_is_run_time');
-        $data['banner_start_time'] = Request::get('banner_start_time');
-        $data['banner_end_time'] = Request::get('banner_end_time');
+        $data['banner_start_time'] = ($data['banner_is_run_time'] == CGlobal::BANNER_IS_RUN_TIME)? Request::get('banner_start_time',''):'';
+        $data['banner_end_time'] = ($data['banner_is_run_time'] == CGlobal::BANNER_IS_RUN_TIME)? Request::get('banner_end_time',''):'';
         $data['banner_province_id'] = (int)Request::get('banner_province_id',0);
         $data['banner_status'] = (int)Request::get('banner_status', 0);
         $id_hiden = (int)Request::get('id_hiden', 0);
@@ -216,8 +216,10 @@ class BannerController extends BaseAdminController
         //FunctionLib::debug($data);
         if($this->valid($data) && empty($this->error)) {
             $id = ($id == 0)?$id_hiden: $id;
-            $data['banner_start_time'] = strtotime($data['banner_start_time']);
-            $data['banner_end_time'] = strtotime($data['banner_end_time']);
+            if($data['banner_start_time'] != '' && $data['banner_start_time'] != ''){
+                $data['banner_start_time'] = strtotime($data['banner_start_time']);
+                $data['banner_end_time'] = strtotime($data['banner_end_time']);
+            }
             if($id > 0) {
                 //cap nhat
                 $data['banner_update_time'] = time();
