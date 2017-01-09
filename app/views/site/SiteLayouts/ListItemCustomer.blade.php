@@ -1,14 +1,6 @@
 <div class="col-left-92">
 	<div class="head-info">
 		<h2><a href=""><i class="fa fa-building"></i>Tin đã đăng @if(!empty($arrCustomer) && isset($arrCustomer->customer_name)) của {{$arrCustomer->customer_name}} @endif</a></h2>
-		<div class="like-social pull-right">
-			<a id="share-google" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên google" data-url="{{$url_link_share}}">
-				<i  class="icon-share fa fa-google-plus"></i>
-			</a>
-			<a id="share-facebook" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên facebook" data-url="{{$url_link_share}}">
-				<i class="icon-share fa fa-facebook"></i>
-			</a>
-		</div>
 	</div>
 	@if(isset($resultHot) && !empty($resultHot))
 		<div class="content-boxcat">
@@ -47,15 +39,37 @@
 			@endforeach
 		</div>
 	@endif
-
+	<div class="head-info">
+		<h2><a href=""><i class="fa fa-user"></i>Thành viên</a></h2>
+	</div>
+	<div class="content-info">
+		<div class="box-avatar ext-bd">
+			<img class="avatar" alt="avatar" src="{{URL::route('site.home')}}/assets/frontend/img/avatar.png">
+			<div class="name-avatar">{{$arrCustomer->customer_name}}</div>
+			<div class="date">
+				<span class="icon-timeup"></span>Gia nhập ngày : <strong>{{date('d/m/Y', $arrCustomer->customer_time_created)}}</strong>
+				@if($arrCustomer->customer_phone != '')
+				<span class="fa fa-phone mgl50"></span> Số điện thoại liên hệ : <strong>{{$arrCustomer->customer_phone}}</strong>
+				@endif
+			</div>
+			
+			<div class="like-social like-page-customer">
+				<a id="share-google" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên google" data-url="{{$url_link_share}}">
+					<i  class="icon-share fa fa-google-plus"></i>
+				</a>
+				<a id="share-facebook" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên facebook" data-url="{{$url_link_share}}">
+					<i class="icon-share fa fa-facebook"></i>
+				</a>
+			</div>
+		</div>
+	</div>
 	<div class="content-boxcat">
 		<div class="col-653 pull-left">
 			@if(isset($resultItemCategory) && !empty($resultItemCategory))
 				<div class="filter-item">
 					<div class="filter-list-action">
 						<ul>
-							<li class="sort"><a href=""><i class="fa fa-list"></i>Sắp xếp</a></li>
-							<li class="active"><a href=""><i class="fa fa-sort-numeric-asc"></i>Mới cập nhật</a></li>
+							<li><i class="fa fa-list"></i>Tổng số tin đăng: <b>{{$total}}</b></li>
 						</ul>
 					</div>
 				</div>

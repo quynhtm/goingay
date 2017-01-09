@@ -5,7 +5,7 @@
 	@if(isset($user_customer) && !empty($user_customer))
 	<div class="content-info">
 		<div class="box-avatar">
-			<img class="avatar" alt="avatar" src="https://stmy.vnexpress.net/myvne/i/v1/graphics/img_60x60.gif" >
+			<img class="avatar" alt="avatar" src="{{URL::route('site.home')}}/assets/frontend/img/avatar.png" >
 			<div class="name-avatar">@if(isset($user_customer['customer_name'])){{$user_customer['customer_name']}}@endif</div>
 			<div class="date">
 				<span class="icon-timeup"></span>Gia nhập ngày : <strong>@if(isset($user_customer['customer_time_created'])){{date('d/m/Y',$user_customer['customer_time_created'])}}@endif</strong>
