@@ -652,6 +652,7 @@ h1, h2, h3, h4, h5, h6{
     padding-bottom: 10px;
 	display: inline-block;
     width: 100%;
+	position: relative;
 }
 .box-avatar .avatar {
     float: left;
@@ -1508,4 +1509,16 @@ h1, h2, h3, h4, h5, h6{
 	height: 28px;
 	padding: 8px;
 	font-size: 15px;
+}
+.mgl50{
+	margin-left:50px;
+}
+.like-page-customer {
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    top: 15px;
+}
+.ext-bd{
+	border-bottom:none;
 }
