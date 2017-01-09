@@ -808,12 +808,13 @@ class SiteUserCustomerController extends BaseSiteController{
 			if(!empty($items)){
 				$inforCustomer = Session::get('user_customer');
 				$today = date('d-m-Y',time());
-				//check trong cung 1 ngay chi duoc 5 lan set ontop
+				//check trong cung 1 ngay chi duoc 5 lan set ontop + so luot da share
 				$numberUpTopCurrent = isset($inforCustomer['customer_number_ontop_in_day']) ? $inforCustomer['customer_number_ontop_in_day']: 5;
+				$numberMaxUpTop = isset($inforCustomer['customer_number_share']) ? ($inforCustomer['customer_number_share']+$numberUpTopCurrent): $numberUpTopCurrent;
 				if(!empty($inforCustomer)){
 					//check cung 1 ngày set top
 					if(isset($inforCustomer['customer_date_ontop']) && strcmp($inforCustomer['customer_date_ontop'],$today) == 0){
-						if($numberUpTopCurrent < 5){
+						if($numberUpTopCurrent < $numberMaxUpTop){
 							if($item_id > 0){//set top
 								$dataSave['time_ontop'] = time();
 								$dataSave['time_update'] = time();
@@ -828,6 +829,7 @@ class SiteUserCustomerController extends BaseSiteController{
 										Session::put('user_customer', $dataNew, 60*24);
 										Session::save();
 									}
+									$numerAction = $numberMaxUpTop - $numberUpTopCurrent - 1;
 									$data['isIntOk'] = 1;
 									$data['msg'] = 'OnTop tin thành công';
 									return Response::json($data);
@@ -839,7 +841,7 @@ class SiteUserCustomerController extends BaseSiteController{
 						}
 					}
 					//check khác ngày settop
-					elseif(isset($inforCustomer['customer_date_ontop']) && strcmp($inforCustomer['customer_date_ontop'],$today) != 0 && ($numberUpTopCurrent == 5 || $numberUpTopCurrent == 0 || $numberUpTopCurrent < 5)){
+					elseif(isset($inforCustomer['customer_date_ontop']) && strcmp($inforCustomer['customer_date_ontop'],$today) != 0 && ($numberUpTopCurrent == $numberMaxUpTop || $numberUpTopCurrent == 0 || $numberUpTopCurrent < $numberMaxUpTop)){
 						if($item_id > 0){//set top
 							$dataSave['time_ontop'] = time();
 							$dataSave['time_update'] = time();
@@ -854,6 +856,7 @@ class SiteUserCustomerController extends BaseSiteController{
 									Session::put('user_customer', $dataNew, 60*24);
 									Session::save();
 								}
+								$numerAction = $numberMaxUpTop - $numberUpTopCurrent -1;
 								$data['isIntOk'] = 1;
 								$data['msg'] = 'OnTop tin thành công';
 								return Response::json($data);
