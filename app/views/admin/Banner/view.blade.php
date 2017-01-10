@@ -111,8 +111,8 @@
                                 </td>
                                 <td class="text-center text-middle">
                                     @if($item->banner_is_run_time == CGlobal::BANNER_IS_RUN_TIME)
-                                        S:{{date('d-m-Y h:i',$item->banner_start_time)}}
-                                        <br/>E:{{date('d-m-Y h:i',$item->banner_end_time)}}
+                                        <b style="color: green">{{date('d-m-Y H:i',$item->banner_start_time)}}</b>
+                                        <br/><b style="color: red">{{date('d-m-Y H:i',$item->banner_end_time)}}</b>
                                     @else
                                         Không giới hạn
                                     @endif

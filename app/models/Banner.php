@@ -44,14 +44,14 @@ class Banner extends Eloquent
     }
 
     public static function getBannerByID($id) {
-        $new = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_BANNER_ID.$id) : array();
-        if (sizeof($new) == 0) {
-            $new = Banner::where('banner_id', $id)->first();
-            if($new && Memcache::CACHE_ON){
-                Cache::put(Memcache::CACHE_BANNER_ID.$id, $new, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+        $banner = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_BANNER_ID.$id) : array();
+        if (sizeof($banner) == 0) {
+            $banner = Banner::where('banner_id', $id)->first();
+            if($banner && Memcache::CACHE_ON){
+                Cache::put(Memcache::CACHE_BANNER_ID.$id, $banner, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
             }
         }
-        return $new;
+        return $banner;
     }
 
     public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){
@@ -61,7 +61,17 @@ class Banner extends Eloquent
                 $query->where('banner_name','LIKE', '%' . $dataSearch['banner_name'] . '%');
             }
             if (isset($dataSearch['banner_status']) && $dataSearch['banner_status'] != -1) {
-                $query->where('banner_status', $dataSearch['banner_status']);
+                if($dataSearch['banner_status'] == 0 || $dataSearch['banner_status'] == 1){
+                    $query->where('banner_status', $dataSearch['banner_status']);
+                }elseif($dataSearch['banner_status'] == 2){ //chạy theo ngày
+                    $query->where('banner_is_run_time', CGlobal::BANNER_IS_RUN_TIME);
+                    $query->where('banner_start_time','<=',time());
+                    $query->where('banner_end_time','>=',time());
+                    $query->where('banner_status', CGlobal::status_show);
+                }elseif($dataSearch['banner_status'] == 3){ //không chạy theo ngày
+                    $query->where('banner_is_run_time', CGlobal::BANNER_NOT_RUN_TIME);
+                    $query->where('banner_status', CGlobal::status_show);
+                }
             }
             if (isset($dataSearch['banner_category_id']) && $dataSearch['banner_category_id'] > -1) {
                 $query->where('banner_category_id', $dataSearch['banner_category_id']);
@@ -149,6 +159,7 @@ class Banner extends Eloquent
                 if(isset($dataSave->banner_id) && $dataSave->banner_id > 0){
                     //x�a cache banner show
                     $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_'.$dataSave->banner_page.'_'.$dataSave->banner_category_id.'_'.$dataSave->banner_province_id;
+                    //Cache::pull($key_cache);
                     Cache::forget($key_cache);
                     self::removeCache($dataSave->banner_id);
                 }

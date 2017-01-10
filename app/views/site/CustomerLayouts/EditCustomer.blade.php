@@ -43,10 +43,12 @@
 							<input name="customer_email" value="@if(isset($user_customer['customer_email'])){{$user_customer['customer_email']}}@endif" placeholder="Nhập vào địa chỉ email" readonly class="upload_input" type="text">
 						</div>
 						<div class="box-item-455 ext">
-							<div class="mail-show">
+							<p>Lượt share chia sẻ</p>
+							<input name="customer_number_share" value="@if(isset($user_customer['customer_number_share'])){{$user_customer['customer_number_share']}}@endif" disabled class="upload_input" type="text">
+							{{--<div class="mail-show">
 								<input name="customer_show_email" value="1" @if(isset($user_customer['customer_show_email']) && $user_customer['customer_show_email'] == 1)checked @endif class="checkbox" type="checkbox">
 								<span class="hien_email">Hiển thị</span>
-							</div>
+							</div>--}}
 						</div>
 					</div>
 					<div class="line">

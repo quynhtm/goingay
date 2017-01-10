@@ -810,7 +810,7 @@ class SiteUserCustomerController extends BaseSiteController{
 				$today = date('d-m-Y',time());
 				//check trong cung 1 ngay chi duoc 5 lan set ontop + so luot da share
 				$numberUpTopCurrent = isset($inforCustomer['customer_number_ontop_in_day']) ? $inforCustomer['customer_number_ontop_in_day']: 5;
-				$numberMaxUpTop = isset($inforCustomer['customer_number_share']) ? ($inforCustomer['customer_number_share']+$numberUpTopCurrent): $numberUpTopCurrent;
+				$numberMaxUpTop = isset($inforCustomer['customer_number_share']) ? ($inforCustomer['customer_number_share']+5): 5;
 				if(!empty($inforCustomer)){
 					//check cung 1 ngày set top
 					if(isset($inforCustomer['customer_date_ontop']) && strcmp($inforCustomer['customer_date_ontop'],$today) == 0){
@@ -831,7 +831,7 @@ class SiteUserCustomerController extends BaseSiteController{
 									}
 									$numerAction = $numberMaxUpTop - $numberUpTopCurrent - 1;
 									$data['isIntOk'] = 1;
-									$data['msg'] = 'OnTop tin thành công';
+									$data['msg'] = 'OnTop tin thành công. Uptop hôm nay còn: '.$numerAction.' lượt';
 									return Response::json($data);
 								}
 							}
@@ -858,7 +858,7 @@ class SiteUserCustomerController extends BaseSiteController{
 								}
 								$numerAction = $numberMaxUpTop - $numberUpTopCurrent -1;
 								$data['isIntOk'] = 1;
-								$data['msg'] = 'OnTop tin thành công';
+								$data['msg'] = 'OnTop tin thành công. Uptop hôm nay còn: '.$numerAction.' lượt';
 								return Response::json($data);
 							}
 						}
