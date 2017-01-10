@@ -11,7 +11,11 @@ class BannerController extends BaseAdminController
     private $permission_delete = 'banner_delete';
     private $permission_create = 'banner_create';
     private $permission_edit = 'banner_edit';
-    private $arrStatus = array(-1 => '--Chọn trạng thái--', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
+    private $arrStatus = array(-1 => '--Chọn trạng thái--',
+        CGlobal::status_hide => 'Ẩn',
+        CGlobal::status_show => 'Hiện',
+        2 => 'Đang chạy có thời gian',
+        3 => 'Đang chạy Không thời gian',);
     private $arrTarget = array(-1 => '--Chọn target link--', CGlobal::BANNER_NOT_TARGET_BLANK => 'Link trên site', CGlobal::BANNER_TARGET_BLANK => 'Mở tab mới');
     private $arrRunTime = array(-1 => '--Chọn thời gian chạy--', CGlobal::BANNER_NOT_RUN_TIME => 'Chạy mãi mãi', CGlobal::BANNER_IS_RUN_TIME => 'Chạy theo thời gian');
     private $arrProvince = array();
@@ -69,7 +73,6 @@ class BannerController extends BaseAdminController
             'lib/upload/jquery.uploadfile.js',
             'lib/ckeditor/ckeditor.js',
             'lib/ckeditor/config.js',
-            'frontend/js/site.js',
             'js/common.js',
         ));
     }
@@ -217,8 +220,8 @@ class BannerController extends BaseAdminController
         if($this->valid($data) && empty($this->error)) {
             $id = ($id == 0)?$id_hiden: $id;
             if($data['banner_start_time'] != '' && $data['banner_start_time'] != ''){
-                $data['banner_start_time'] = strtotime($data['banner_start_time']);
-                $data['banner_end_time'] = strtotime($data['banner_end_time']);
+                $data['banner_start_time'] = strtotime($data['banner_start_time'] . ' 00:00:00');
+                $data['banner_end_time'] = strtotime($data['banner_end_time'] . ' 23:59:59');
             }
             if($id > 0) {
                 //cap nhat

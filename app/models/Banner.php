@@ -61,7 +61,17 @@ class Banner extends Eloquent
                 $query->where('banner_name','LIKE', '%' . $dataSearch['banner_name'] . '%');
             }
             if (isset($dataSearch['banner_status']) && $dataSearch['banner_status'] != -1) {
-                $query->where('banner_status', $dataSearch['banner_status']);
+                if($dataSearch['banner_status'] == 0 || $dataSearch['banner_status'] == 1){
+                    $query->where('banner_status', $dataSearch['banner_status']);
+                }elseif($dataSearch['banner_status'] == 2){ //chạy theo ngày
+                    $query->where('banner_is_run_time', CGlobal::BANNER_IS_RUN_TIME);
+                    $query->where('banner_start_time','<=',time());
+                    $query->where('banner_end_time','>=',time());
+                    $query->where('banner_status', CGlobal::status_show);
+                }elseif($dataSearch['banner_status'] == 3){ //không chạy theo ngày
+                    $query->where('banner_is_run_time', CGlobal::BANNER_NOT_RUN_TIME);
+                    $query->where('banner_status', CGlobal::status_show);
+                }
             }
             if (isset($dataSearch['banner_category_id']) && $dataSearch['banner_category_id'] > -1) {
                 $query->where('banner_category_id', $dataSearch['banner_category_id']);

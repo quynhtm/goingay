@@ -231,7 +231,8 @@
 
 <script>
     $(document).ready(function(){
-        var checkin = $('#banner_start_time').datepicker({ });
-        var checkout = $('#banner_end_time').datepicker({ });
+        var banner_start_time = $('#banner_start_time').datepicker({ });
+        var banner_end_time = $('#banner_end_time').datepicker({ });
     });
 </script>
+
