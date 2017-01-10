@@ -1554,7 +1554,7 @@ h1, h2, h3, h4, h5, h6{
 }
 .detail-content-post td,
 .detail-content-post th{
-    border: 1px solid #ddd;
+    border: 1px solid #fafafa;
     padding: 5px;
 }
 .detail-content-post table *{
