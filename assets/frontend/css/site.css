@@ -1549,19 +1549,3 @@ h1, h2, h3, h4, h5, h6{
 .local .fa-location-arrow{
     color: #999;
 }
-.thumb-tooltip img {
-    width: 100%;
-}
-.title-tooltip{
-	margin-top:5px;
-	font-weight:bold;
-	font-size:15px;
-	text-transform:uppercase;
-	text-align:left;
-}
-.content-tooltip{
-	margin-top:5px;
-	text-align:left;
-	max-height:200px;
-	overflow: hidden;
-}

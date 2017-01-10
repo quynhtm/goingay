@@ -5,11 +5,7 @@ class SiteHomeController extends BaseSiteController
     public function __construct(){
         parent::__construct();
         FunctionLib::site_css('lib/owl.carousel/owl.carousel.css', CGlobal::$POS_HEAD);
-        FunctionLib::site_js('lib/owl.carousel/owl.carousel.min.js', CGlobal::$POS_END);
-        
-        FunctionLib::site_css('lib/naoTooltips/naoTooltips.css', CGlobal::$POS_HEAD);
-        FunctionLib::site_js('lib/naoTooltips/naoTooltips.js', CGlobal::$POS_END);
-        
+        FunctionLib::site_js('lib/owl.carousel/owl.carousel.min.js', CGlobal::$POS_END); 
     }
 
 	private $str_field_items_get = 'item_id,item_name,item_content,item_type_price,item_price_sell,item_content,item_image,item_image_other,item_category_id,item_category_name,item_number_view,item_status,item_is_hot,item_province_id,item_province_name,item_district_id,customer_id,is_customer,customer_name,time_ontop';//cac truong can lay

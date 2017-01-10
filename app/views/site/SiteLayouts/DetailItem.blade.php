@@ -92,16 +92,7 @@
 				@if(!empty($resultItemCategory))
 				<ul>
 					@foreach ($resultItemCategory as $keyc => $itemCate)
-						<li class="naoTooltip-wrap">
-							<div class="naoTooltip nt-top nt-medium">
-								@if($itemShow['item_image'] != '')
-								<div class="thumb-tooltip">
-									<img itemprop="image" src="{{ ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $itemCate['item_id'],$itemCate['item_category_id'], $itemCate['item_image'], CGlobal::sizeImage_300)}}" title="{{$itemCate['item_name']}}" alt="{{$itemCate['item_name']}}" >
-								</div>
-								@endif
-								<div class="title-tooltip">{{$itemCate['item_name']}}</div>
-								<div class="content-tooltip">{{FunctionLib::setNofollow(stripcslashes(preg_replace('/<img[^>]+\>/i', '', $itemCate['item_content'])))}}</div>
-							</div>
+						<li>
 							<a class="img" href="{{FunctionLib::buildLinkDetailItem($itemCate->item_id,$itemCate->item_name,$itemCate->item_category_id)}}">
 								<img {{CGlobal::size_imge_show_list_60}} src="{{ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $itemCate->item_id,$itemCate->item_category_id, $itemCate->item_image, CGlobal::sizeImage_200)}}" alt="{{$itemCate->item_name}}" title="{{$itemCate->item_name}}">
 							</a>
