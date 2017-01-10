@@ -1560,3 +1560,7 @@ h1, h2, h3, h4, h5, h6{
 .detail-content-post table *{
     text-align: left!important;
 }
+
+.detail-content-post img {
+    width: 80%;
+}
