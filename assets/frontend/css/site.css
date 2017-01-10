@@ -1549,3 +1549,14 @@ h1, h2, h3, h4, h5, h6{
 .local .fa-location-arrow{
     color: #999;
 }
+.detail-content-post table{
+	width:100%!important;
+}
+.detail-content-post td,
+.detail-content-post th{
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+.detail-content-post table *{
+    text-align: left!important;
+}

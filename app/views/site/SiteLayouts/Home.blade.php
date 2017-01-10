@@ -41,10 +41,11 @@
       $("#owl-slider").owlCarousel({
         items : 5,
         navigation : true,
+        autoPlay: 5000,
+        loop:true,
       });
     });
     </script>
-
 	@endif
 
 	<div class="box-home-category">
