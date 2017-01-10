@@ -439,7 +439,8 @@ class SiteHomeController extends BaseSiteController
 
 	public function deleteCache(){
 		$tag = Request::get('tag','cache_site');
-		Cache::tags($tag)->flush();
+		//Cache::tags($tag)->flush();
+		Cache::flush();
 		echo $tag;
 	}
 }
