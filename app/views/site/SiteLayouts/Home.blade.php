@@ -80,6 +80,9 @@
 														@if(isset($arrProvince[$itemShow['item_province_id']])){{$arrProvince[$itemShow['item_province_id']]}}@else Toàn quốc @endif
 													</a>
 												</li>
+												@if(isset($itemShow['time_ontop']) && $itemShow['time_ontop'] > 0)
+												<li class="date-uptop"><i class="fa fa-clock-o"></i> {{date('H:i - d/m/Y', $itemShow['time_ontop'])}}</li>
+												@endif
 												<li class="price">
 													@if($itemShow['item_type_price'] == CGlobal::TYPE_PRICE_NUMBER)
 														<a itemprop="price" href="#">{{FunctionLib::numberFormat($itemShow['item_price_sell'])}} đ</a>
