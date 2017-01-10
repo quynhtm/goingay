@@ -260,9 +260,10 @@ h1, h2, h3, h4, h5, h6{
 .item-home-cat li .line .thumb {
     float: left;
     margin-right: 10px;
-    width: 20%;
-    height: 60px;
-    overflow: hidden;
+    width: 12%;
+    border: 1px solid #fafafa;
+    overflow: hidden !important;
+    max-height: 50px;
 }
 .item-home-cat li .line .thumb img {
     float: left;
