@@ -32,15 +32,7 @@
 			<div class="event-box">
 				<div class="event-box-title">Đối tác</div>
 				<div class="even-box-content">
-					<div class="main-img">
-						<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/30/583e3ac6909fb-Image-307354715-ExtractWord-0-8075-5937-1480404429_300x180.png" alt="event_img">
-					</div>
-					<div class="main-img">
-						<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/30/583e3ac6909fb-Image-307354715-ExtractWord-0-8075-5937-1480404429_300x180.png" alt="event_img">
-					</div>
-					<div class="main-img">
-						<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/30/583e3ac6909fb-Image-307354715-ExtractWord-0-8075-5937-1480404429_300x180.png" alt="event_img">
-					</div>
+					
 				</div>
 			</div>
 		</div>

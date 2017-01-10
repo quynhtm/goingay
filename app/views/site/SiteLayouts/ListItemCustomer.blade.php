@@ -102,9 +102,9 @@
 												@if(isset($arrProvince[$itemCate->item_province_id])){{$arrProvince[$itemCate->item_province_id]}}@else Toàn quốc @endif
 											</a>
 										</li>
-										<li class="">
-											<i class="fa fa-clock-o"></i> {{date('H:i',$itemCate->time_ontop)}} - {{date('d/m/Y',$itemCate->time_ontop)}}
-										</li>
+										@if(isset($itemCate->time_ontop) && $itemCate->time_ontop > 0)
+										<li class="date-uptop"><i class="fa fa-clock-o"></i> {{date('H:i - d/m/Y', $itemCate->time_ontop)}}</li>
+										@endif
 									</ul>
 									<ul class="pull-right" style="display: none">
 										<li>
