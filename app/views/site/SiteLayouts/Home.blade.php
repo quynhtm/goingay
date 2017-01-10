@@ -60,7 +60,16 @@
 						</div>
 						<div class="content-category">
 							@foreach ($itemHome['dataItem'] as $kitem => $itemShow)
-								<div class="line">
+								<div class="line naoTooltip-wrap">
+									<div class="naoTooltip nt-top nt-medium">
+										@if($itemShow['item_image'] != '')
+										<div class="thumb-tooltip">
+											<img itemprop="image" src="{{ ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $itemShow['item_id'],$itemShow['item_category_id'], $itemShow['item_image'], CGlobal::sizeImage_300)}}" title="{{$itemShow['item_name']}}" alt="{{$itemShow['item_name']}}" >
+										</div>
+										@endif
+										<div class="title-tooltip">{{$itemShow['item_name']}}</div>
+										<div class="content-tooltip">{{FunctionLib::setNofollow(stripcslashes(preg_replace('/<img[^>]+\>/i', '', $itemShow['item_content'])))}}</div>
+									</div>
 									<div class="thumb">
 										<a href="{{FunctionLib::buildLinkDetailItem($itemShow['item_id'],$itemShow['item_name'],$itemShow['item_category_id'])}}" title="{{$itemShow['item_name']}}">
 											<img itemprop="image" src="{{ ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $itemShow['item_id'],$itemShow['item_category_id'], $itemShow['item_image'], CGlobal::sizeImage_150)}}" title="{{$itemShow['item_name']}}" alt="{{$itemShow['item_name']}}" >

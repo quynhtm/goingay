@@ -4,6 +4,7 @@ jQuery(document).ready(function($){
 	SITE.contact();
 	SITE.captchaCheckAjax();
 	SITE.shareSocial();
+	SITE.naoTooltip();
 });
 
 SITE={
@@ -230,5 +231,8 @@ SITE={
                 b = "https://plus.google.com/share?url=" + a;
             return window.open(b, "_blank", "height=450,width=700,resizable=no,status=no"), !1
         })
+	},
+	naoTooltip:function(){
+		$('.naoTooltip-wrap').naoTooltip();
 	}
 }

@@ -66,6 +66,7 @@ class Items extends Eloquent
                     $itemsHomeSite[$itm['item_id']] = array(
                         'item_id'=>$itm['item_id'],
                         'item_name'=>$itm['item_name'],
+                    	'item_content'=>$itm['item_content'],
                         'item_type_price'=>$itm['item_type_price'],
                         'item_price_sell'=>$itm['item_price_sell'],
                         'item_image'=>$itm['item_image'],
@@ -102,7 +103,8 @@ class Items extends Eloquent
                     $itemsHomeSite[$itm['item_id']] = array(
                         'item_id'=>$itm['item_id'],
                         'item_name'=>$itm['item_name'],
-                        'item_type_price'=>$itm['item_type_price'],
+                    	'item_content'=>$itm['item_content'],
+                    	'item_type_price'=>$itm['item_type_price'],
                         'item_price_sell'=>$itm['item_price_sell'],
                         'item_image'=>$itm['item_image'],
                         'item_category_id'=>$itm['item_category_id'],
