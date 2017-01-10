@@ -8,6 +8,7 @@
 
 //Home
 Route::any('/', array('as' => 'site.home','uses' => 'SiteHomeController@index'));
+Route::get('deleteCache',array('as' => 'site.deleteCache','uses' => 'SiteHomeController@deleteCache'));//xoa cache theo tags
 Route::get('404.html',array('as' => 'site.page404','uses' =>'SiteHomeController@page404'));
 Route::get('tim-kiem.html',array('as' => 'site.searchItems','uses' =>'SiteHomeController@searchItems'));
 Route::match(['GET','POST'],'lien-he.html',array('as' => 'site.pageContact','uses' =>'SiteHomeController@pageContact'));
