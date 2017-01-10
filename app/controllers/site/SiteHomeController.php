@@ -138,7 +138,7 @@ class SiteHomeController extends BaseSiteController
 		$meta_title = addslashes($itemShow->item_name);
 		$meta_keywords = CGlobal::web_name.' - '.addslashes($itemShow->item_name);
 		$meta_description = addslashes(FunctionLib::substring($itemShow->item_content,200));
-		$meta_description = FunctionLib::strReplace($meta_description, array('\r\n', '\\r\\n'),'');
+		$meta_description = FunctionLib::strReplace($meta_description, array('rn', '\r\n', '\\r\\n'),'');
 		
 		$meta_img= ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $itemShow->item_image, CGlobal::sizeImage_200);
 		$url_detail = FunctionLib::buildLinkDetailItem($itemShow->item_id, $itemShow->item_name, $itemShow->item_category_id);
@@ -335,7 +335,7 @@ class SiteHomeController extends BaseSiteController
 		$meta_title = $inforNew->news_title;
 		$meta_keywords = CGlobal::web_name;
 		$meta_description = $inforNew->news_desc_sort;
-		$meta_description = FunctionLib::strReplace($meta_description, array('\r\n', '\\r\\n'),'');
+		$meta_description = FunctionLib::strReplace($meta_description, array('rn', '\r\n', '\\r\\n'),'');
 		$meta_img= '';
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 
