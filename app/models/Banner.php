@@ -54,6 +54,7 @@ class Banner extends Eloquent
         return $banner;
     }
 
+
     public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){
         try{
             $query = Banner::where('banner_id','>',0);
@@ -208,11 +209,40 @@ class Banner extends Eloquent
         }
     }
 
+    /**
+     * Xoa cac banner co ngay chay het thoi gian chay
+     */
+    public static function removeBannerFinish(){
+        $banner = Banner::where('banner_id' ,'>', 0)
+            ->where('banner_is_run_time',CGlobal::BANNER_IS_RUN_TIME)
+            ->where('banner_end_time','<',time())->get();
+        if($banner){
+            foreach($banner as $itm) {
+                if(isset($itm->banner_id) && $itm->banner_id > 0){
+                    $itm->delete();
+                    if($itm->banner_image != ''){//xoa anh cu
+                        //xoa anh upload
+                        FunctionLib::deleteFileUpload($itm->banner_image,$itm->banner_id,CGlobal::FOLDER_BANNER);
+                        //xoa anh thumb
+                        $arrSizeThumb = CGlobal::$arrBannerSizeImage;
+                        foreach($arrSizeThumb as $k=>$size){
+                            $sizeThumb = $size['w'].'x'.$size['h'];
+                            FunctionLib::deleteFileThumb($itm->banner_image,$itm->banner_id,CGlobal::FOLDER_BANNER,$sizeThumb);
+                        }
+                    }
+                    //xoa cache banner show
+                    $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$itm->banner_type.'_'.$itm->banner_page.'_'.$itm->banner_category_id.'_'.$itm->banner_province_id;
+                    Cache::forget($key_cache);
+                    self::removeCache($itm->banner_id);
+                }
+            }
+        }
+    }
+
     public static function removeCache($id = 0){
         if($id > 0){
             Cache::forget(Memcache::CACHE_BANNER_ID.$id);
         }
-
         //xóa phần toàn quốc
         $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_0_0_0_0';
         Cache::forget($key_cache);

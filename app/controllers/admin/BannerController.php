@@ -75,6 +75,9 @@ class BannerController extends BaseAdminController
             'lib/ckeditor/config.js',
             'js/common.js',
         ));
+
+        //xoa anh het time view
+        Banner::removeBannerFinish();
     }
 
     public function view() {
