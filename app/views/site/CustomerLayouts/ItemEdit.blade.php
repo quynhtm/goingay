@@ -42,12 +42,22 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-12">
+		<div class="col-sm-6">
 			<div class="form-group">
 				<label for="name" class="control-label">Trạng thái Ẩn/Hiện</label>
 				<div class="form-group">
 					<select name="item_status" id="item_status" class="form-control input-sm">
 						{{$optionStatusProduct}}
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label for="name" class="control-label">Tỉnh thành đăng tin</label>
+				<div class="form-group">
+					<select name="item_province_id" id="item_province_id" class="form-control input-sm">
+						{{$optionProvince}}
 					</select>
 				</div>
 			</div>
@@ -69,6 +79,12 @@
 			<div class="form-group">
 				<label for="name" class="control-label">Giá bán <span class="red"> (*) </span></label>
 				<input type="text" placeholder="Giá bán" id="item_price_sell" name="item_price_sell" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['item_price_sell'])){{$data['item_price_sell']}}@endif">
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label for="name" class="control-label">Thông tin liên hệ</label>
+				<input type="text" placeholder="Thông tin liên hệ" id="item_infor_contract" name="item_infor_contract" class="form-control"  value="@if(isset($data['item_infor_contract'])){{$data['item_infor_contract']}}@endif">
 			</div>
 		</div>
 	</div>

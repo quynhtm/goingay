@@ -472,6 +472,10 @@ class SiteUserCustomerController extends BaseSiteController{
 		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice,CGlobal::TYPE_PRICE_CONTACT);
 		$optionTypeAction = FunctionLib::getOption($this->arrTypeAction,CGlobal::ITEMS_TYPE_ACTION_1);
 
+		//thong tin tinh thanh
+		$province = Province::getAllProvince();
+		$optionProvince = FunctionLib::getOption(array(0=>'---Chọn tỉnh thành----') + $province, CGlobal::province_id_hanoi);
+
 		$this->layout->content = View::make('site.CustomerLayouts.ItemEdit')
 			->with('error', array())
 			->with('item_id', $item_id)
@@ -482,6 +486,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('imageHover', $imageHover)
 			->with('optionCategory', $optionCategory)
 			->with('optionTypeAction', $optionTypeAction)
+			->with('optionProvince', $optionProvince)
 			->with('optionStatusProduct', $optionStatusProduct)
 			->with('optionTypePrice', $optionTypePrice)
 			->with('arrBannerRight', $arrBannerRight);
@@ -544,6 +549,8 @@ class SiteUserCustomerController extends BaseSiteController{
 			'item_content'=>$items->item_content,
 			'item_type_price'=>$items->item_type_price,
 			'item_price_sell'=>$items->item_price_sell,
+			'item_province_id'=>$items->item_province_id,
+			'item_infor_contract'=>$items->item_infor_contract,
 			'item_image'=>$items->item_image);
 		//Banner right
 		$arrBannerRight = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_RIGHT, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0);
@@ -556,6 +563,10 @@ class SiteUserCustomerController extends BaseSiteController{
 		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice,isset($items->item_type_price)? $items->item_type_price:CGlobal::TYPE_PRICE_NUMBER);
 		$optionTypeAction = FunctionLib::getOption($this->arrTypeAction,isset($items->item_type_action)? $items->item_type_action:CGlobal::ITEMS_TYPE_ACTION_1);
 
+		//thong tin tinh thanh
+		$province = Province::getAllProvince();
+		$optionProvince = FunctionLib::getOption(array(0=>'---Chọn tỉnh thành----') + $province, isset($items->item_province_id)? $items->item_province_id :CGlobal::province_id_hanoi);
+
 		$this->layout->content = View::make('site.CustomerLayouts.ItemEdit')
 			->with('error', $this->error)
 			->with('item_id', $item_id)
@@ -566,6 +577,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('optionTypeAction', $optionTypeAction)
 			->with('imageHover', $imageHover)
 			->with('optionCategory', $optionCategory)
+			->with('optionProvince', $optionProvince)
 			->with('optionStatusProduct', $optionStatusProduct)
 			->with('optionTypePrice', $optionTypePrice)
 			->with('arrBannerRight', $arrBannerRight);
@@ -604,6 +616,9 @@ class SiteUserCustomerController extends BaseSiteController{
 		$dataSave['item_type_action'] = (int)(Request::get('item_type_action',CGlobal::ITEMS_TYPE_ACTION_1));
 		$dataSave['item_price_sell'] = (int)str_replace('.','',Request::get('item_price_sell'));
 		$dataSave['item_image'] = $imagePrimary = addslashes(Request::get('image_primary'));
+
+		$dataSave['item_province_id'] = (int)(Request::get('item_province_id',0));
+		$dataSave['item_infor_contract'] = trim(addslashes(Request::get('item_infor_contract','')));
 
 		if($dataSave['item_content'] != ''){
 			$content = $dataSave['item_content'];
@@ -649,8 +664,9 @@ class SiteUserCustomerController extends BaseSiteController{
 			$dataSave['customer_id'] = $this->user_customer['customer_id'];
 			$dataSave['customer_name'] = $this->user_customer['customer_name'];
 			$dataSave['is_customer'] = $this->user_customer['is_customer'];
-			$dataSave['item_province_id'] = $this->user_customer['customer_province_id'];
-			$dataSave['item_province_name'] = isset($arrProvince[$this->user_customer['customer_province_id']])? $arrProvince[$this->user_customer['customer_province_id']] : 'Toàn quốc';
+			$dataSave['item_province_id'] = ($dataSave['item_province_id'] > 0) ?$dataSave['item_province_id'] : $this->user_customer['customer_province_id'];
+			$dataSave['item_infor_contract'] = ($dataSave['item_infor_contract'] !='') ?$dataSave['item_infor_contract'] :$this->user_customer['customer_about'];
+			$dataSave['item_province_name'] = isset($arrProvince[$dataSave['item_province_id']])? $arrProvince[$dataSave['item_province_id']] : 'Toàn quốc';
 			$dataSave['item_district_id'] = $this->user_customer['customer_district_id'];
 			$dataSave['item_block'] = CGlobal::ITEMS_NOT_BLOCK;
 
@@ -698,6 +714,10 @@ class SiteUserCustomerController extends BaseSiteController{
 		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice,$dataSave['item_type_price']);
 		$optionTypeAction = FunctionLib::getOption($this->arrTypeAction,$dataSave['item_type_action']);
 
+		//thong tin tinh thanh
+		$province = Province::getAllProvince();
+		$optionProvince = FunctionLib::getOption(array(0=>'---Chọn tỉnh thành----') + $province, $dataSave['item_province_id']);
+
 		$this->layout->content = View::make('site.CustomerLayouts.ItemEdit')
 			->with('error', $this->error)
 			->with('item_id', $item_id)
@@ -707,6 +727,7 @@ class SiteUserCustomerController extends BaseSiteController{
 			->with('imagePrimary', $imagePrimary)
 			->with('imageHover', $imageHover)
 			->with('optionCategory', $optionCategory)
+			->with('optionProvince', $optionProvince)
 			->with('optionTypeAction', $optionTypeAction)
 			->with('optionStatusProduct', $optionStatusProduct)
 			->with('optionTypePrice', $optionTypePrice)

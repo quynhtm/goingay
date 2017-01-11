@@ -212,5 +212,9 @@ class Banner extends Eloquent
         if($id > 0){
             Cache::forget(Memcache::CACHE_BANNER_ID.$id);
         }
+
+        //xóa phần toàn quốc
+        $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_0_0_0_0';
+        Cache::forget($key_cache);
     }
 }

@@ -12,7 +12,7 @@ class Items extends Eloquent
     //cac truong trong DB
     protected $fillable = array('item_id','item_name', 'item_type_price', 'item_type_action', 'item_price_sell', 'item_area_price', 'item_content',
         'item_image', 'item_image_other', 'item_category_id','item_category_name','item_category_parent_id','item_category_parent_name',
-        'item_number_view', 'item_status','item_is_hot','item_block','item_province_id','item_province_name',
+        'item_number_view', 'item_status','item_is_hot','item_block','item_infor_contract','item_province_id','item_province_name',
         'item_district_id','item_district_name','customer_id','customer_name','is_customer',
         'time_ontop', 'time_created', 'time_update');
 
