@@ -65,10 +65,10 @@
                     <table class="table table-bordered">
                         <thead class="thin-border-bottom">
                         <tr class="">
-                            <th width="15%" class="text-center">STT</th>
-                            <th width="40%">Thông tin</th>
-                            <th width="15%" class="text-center">Ngày tạo</th>
-                            <th width="20%" class="text-center">Thao tác</th>
+                            <th width="5%" class="text-center">STT</th>
+                            <th width="70%">Thông tin</th>
+                            <th width="10%" class="text-center">Ngày tạo</th>
+                            <th width="15%" class="text-center">Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -89,18 +89,16 @@
                                 <td class="text-center" align="center">
                                     <br/>
                                     @if($is_root || $permission_edit)
-                                        <a href="{{URL::route('admin.user_edit',array('id' => $item['user_id']))}}" class="btn btn-xs btn-primary" data-content="Sửa thông tin tài khoản" data-placement="bottom" data-trigger="hover" data-rel="popover">
-                                            <i class="ace-icon fa fa-edit bigger-120"></i>
-                                        </a>
+                                        <a href="{{URL::route('admin.user_edit',array('id' => $item['user_id']))}}" title="Sửa item"><i class="fa fa-edit fa-2x"></i></a>
                                     @endif
                                     @if($is_root || $permission_change_pass)
-                                        <a href="{{URL::route('admin.user_change',array('id' => base64_encode($item['user_id'])))}}" class="btn btn-xs btn-success" data-content="Đổi mật khẩu" data-placement="bottom" data-trigger="hover" data-rel="popover">
-                                            <i class="ace-icon fa fa-unlock bigger-120"></i>
-                                        </a>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a href="{{URL::route('admin.user_change',array('id' => base64_encode($item['user_id'])))}}" title="Đổi mật khẩu"><i class="fa fa-refresh fa-2x"></i></a>
                                     @endif
                                     @if($is_root || $permission_remove)
-                                        <a href="javascript:void(0)" class="btn btn-xs btn-danger sys_delete_user" data-content="Xóa tài khoản" data-placement="bottom" data-trigger="hover" data-rel="popover" data-id="{{$item['user_id']}}">
-                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a href="javascript:void(0)" class="sys_delete_user" data-content="Xóa tài khoản" data-placement="bottom" data-trigger="hover" data-rel="popover" data-id="{{$item['user_id']}}">
+                                            <i class="fa fa-trash fa-2x"></i>
                                         </a>
                                     @endif
                                 </td>
