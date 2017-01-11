@@ -1119,8 +1119,8 @@ class SiteUserCustomerController extends BaseSiteController{
 		}
 	}
 	public function loginGoogle(){
-		$client_id = '803912434754-97ldh5muaqfst1imgvkd008ufn73gpmk.apps.googleusercontent.com'; 
-		$client_secret = 'lDU7GbU7cVslfcxHW4AvwUT7'; 
+		$client_id = '50590659500-rlpjharjl0bt68o9706rar8mkquf7p56.apps.googleusercontent.com'; 
+		$client_secret = 'qOoBdgVyas-_ESlQk_KGlMrv'; 
 		$redirect_uri = Config::get('config.WEB_ROOT').'googlelogin';
 		
 		$client = new Google_Client();
