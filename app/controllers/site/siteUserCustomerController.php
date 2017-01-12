@@ -896,6 +896,139 @@ class SiteUserCustomerController extends BaseSiteController{
 		}
 	}
 
+	//dat lich set top tin dang tu dong
+	public function getInforEditCalendarUp($feed_home_id){
+		$dataEdit = array();
+		$dataResponse = CalendarUp::show($feed_home_id);
+		if($dataResponse['code'] == 200 && $dataResponse['intIsOK'] == 1 && !empty($dataResponse['data'])){
+			foreach($dataResponse['data'] as $k=>$val){
+				$dataEdit['calendar_up_id'] = $val['calendar_up_id'];
+				$dataEdit['feed_home_id'] = $val['product_sale_id'];
+				$dataEdit['supplier_id'] = $val['supplier_id'];
+				$dataEdit['campaign_id'] = $val['product_id'];
+				$dataEdit['location_id'] = $val['location_id'];
+				$dataEdit['calendar_up_status'] = $val['calendar_up_status'];
+
+				$dataEdit['calendar_up_date']['thu_'.$val['calendar_up_date']] = $val['calendar_up_date'];
+				$dataEdit['calendar_up_time'][$val['calendar_up_time']] = $val['calendar_up_time'];
+			}
+		}
+
+		if(!empty($dataEdit) && isset($dataEdit['calendar_up_time']) && !empty($dataEdit['calendar_up_time'])){
+			$dataEdit['number_up_1'] = 0;//Từ 0h00 đến 5h 59
+			$dataEdit['number_up_2'] = 0;//Từ 6h00 đến 11h59
+			$dataEdit['number_up_3'] = 0;//Từ 12h00 đến 17h59
+			$dataEdit['number_up_4'] = 0;//Từ 18h00 đến 23h59
+			foreach($dataEdit['calendar_up_time'] as $key_time =>&$timeRun){
+				if($timeRun <600){
+					$dataEdit['number_up_1']++;
+				}elseif(600<= $timeRun && $timeRun<1200){
+					$dataEdit['number_up_2']++;
+				}elseif(1200<= $timeRun && $timeRun<1800){
+					$dataEdit['number_up_3']++;
+				}elseif(1800<= $timeRun && $timeRun<2400){
+					$dataEdit['number_up_4']++;
+				}
+				//build string time
+				$timeRun = ($timeRun >0)? ($timeRun <1000)? '0'.substr_replace($timeRun, ':', -2, 0): substr_replace($timeRun, ':', -2, 0) :'00:00';
+			}
+			return $dataEdit;
+		}
+		return array();
+	}
+	public function getAjaxPushUpTimeProduct(){
+		$arrData = array();
+		$arrAjax = array('intReturn' => 0, 'info' => $arrData,'msg'=>'Có lỗi cập nhật dữ liệu');
+
+		//ngày chạy
+		$dataDate = array();
+		$thu_2 = Request::get('thu_2',0);
+		$thu_3 = Request::get('thu_3',0);
+		$thu_4 = Request::get('thu_4',0);
+		$thu_5 = Request::get('thu_5',0);
+		$thu_6 = Request::get('thu_6',0);
+		$thu_7 = Request::get('thu_7',0);
+		$thu_8 = Request::get('thu_8',0);
+		if($thu_2 >0){ $dataDate[] = $thu_2; }
+		if($thu_3 >0){ $dataDate[] = $thu_3; }
+		if($thu_4 >0){ $dataDate[] = $thu_4; }
+		if($thu_5 >0){ $dataDate[] = $thu_5; }
+		if($thu_6 >0){ $dataDate[] = $thu_6; }
+		if($thu_7 >0){ $dataDate[] = $thu_7; }
+		if($thu_8 >0){ $dataDate[] = $thu_8; }
+
+		//thời gian chạy
+		$timeSetting = Request::get('timeSetting',array());
+		$dataTimeUp = array();
+		if(!empty($timeSetting)){
+			foreach($timeSetting as $k =>$strTime){
+				if($strTime !=''){
+					$number = str_replace(':','',$strTime);
+					if(!in_array($number,$dataTimeUp)){
+						$dataTimeUp[] = (int)$number;
+					}
+				}
+			}
+		}
+
+		//data khác
+		$campaign_id = Request::get('campaign_id',0);
+		$feed_home_id = Request::get('feed_home_id',0);
+		$location_id = Request::get('location_id',0);
+
+		$number_up_hold = Request::get('number_up_hold',0);
+		$numberCanUser = Request::get('sys_number_up_can_user_shop',0);
+		$hidden_hold_con_lai = Request::get('sys_hidden_hold_con_lai',0);
+
+		$data['product_id'] = $campaign_id;
+		$data['product_sale_id'] = $feed_home_id;
+		$data['location_id'] = $location_id;
+
+		//check số lần up có vượt quá lượt up cho phép không
+		if(($numberCanUser + $hidden_hold_con_lai) < $number_up_hold){
+			$arrAjax['msg'] = 'Bạn không còn đủ lượt up để thực hiện! <br/>  Tổng số lượt dùng cho deal này > số lượt up bạn có thể dùng';
+			return Response::json($arrAjax);
+		}
+
+		if($number_up_hold == 0){
+			$arrAjax['msg'] = 'Bạn phải nhập Tổng số lượt dùng cho deal này!';
+			return Response::json($arrAjax);
+		}
+
+		if(empty($dataDate)){
+			$arrAjax['msg'] = 'Bạn chưa chọn ngày trong tuần để Up tin';
+			return Response::json($arrAjax);
+		}
+		if(empty($dataTimeUp)){
+			$arrAjax['msg'] = 'Bạn chưa chọn thời gian để up tin';
+			return Response::json($arrAjax);
+		}
+
+		//check tông số đặt lịch xem có cho phép ko
+		$totalSetup = count($dataDate)*count($dataTimeUp);
+		if($totalSetup > $number_up_hold){
+			$arrAjax['msg'] = 'Số lượt up của bạn không đủ thiết lập lịch up tự động này! <br/> Tổng lịch chạy up deal tự động là: '.$totalSetup.'<br/>Tổng số lượt dùng cho deal này: '.$number_up_hold;
+			return Response::json($arrAjax);
+		}
+
+		$dataInsert['data'] = json_encode($data);
+		$dataInsert['date'] = json_encode($dataDate);
+		$dataInsert['time'] = json_encode($dataTimeUp);
+		$dataInsert['product_sale_num_up_hold'] = $number_up_hold;
+		//$dataInsert['key'] = Session::get('key_shop');
+		$dataInsert['key'] = $this->key;
+
+		//insert
+		$dataResponse = CalendarUp::insert($dataInsert);
+
+		if(!empty($dataResponse) && $dataResponse['intIsOK'] == 1 && $dataResponse['code'] == 200){
+			$arrAjax['intReturn'] = 1;
+			$arrAjax['msg'] = 'Bạn đã thiết lập lịch up tự động thành công';
+			return Response::json($arrAjax);
+		}
+		return Response::json($arrAjax);
+	}
+
 	//ajax xóa tin đăng
 	public function removeItems(){
 		$data = array('isIntOk' => 0,'msg' => 'Không set top tin đăng này được');

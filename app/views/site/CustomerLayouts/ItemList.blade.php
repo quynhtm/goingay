@@ -112,4 +112,168 @@
 	@endif
 </div>
 
+<!--Popup đặt lịch-->
+<div class="modal fade" id="sys_PopupSetTimeUpDeal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 1000px">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<img src="{{Config::get('config.WEB_ROOT')}}assets/admin/img/ajax-loader.gif" width="20" style="display: none" id="img_loading_ajax">
+				{{ Form::open(array('class'=>'form-horizontal','id'=>'form_uptime')) }}
+				<div class="form_group">
+					<div class="clearfix" style='margin: 5px; 10px; width:100%;'>
+						<div id="sys_msg_return" style="color: red; font-weight: bold"></div>
+						<div id="sys_infor_popup" class="clearfix" style="display: none">
+
+							<div class="float-left marginTop20" style="width: 100%; padding-bottom: 10px; border-bottom: 1px dotted #ccc">
+								<div class="float-left">
+									<span style="font-weight: bold">Đặt lịch tự động</span>
+								</div>
+								<div class="float-right text-right">
+                                    <span class="control-label font_normal" id="sys_name_deal_up"><span>
+								</div>
+							</div>
+							<div class="clear "></div>
+							<div id="infor_left" style="float: left; width: 60%" class="marginTop20">
+								<!--Block 1-->
+								<div class="col-lg-12">
+									<label for="TestForm_textField" class="control-label">Chọn ngày trong tuần</label>
+								</div>
+								<div class="col-lg-12 marginLeft20 marginTop10">
+									<div class="float-left">
+										<input type="checkbox" id="thu_2" name="thu_2" class="float-left" value="0" > <label for="thu_2" class="float-left font_normal">&nbsp;Thứ 2</label>
+									</div>
+									<div class="float-left marginLeft10">
+										<input type="checkbox" id="thu_3" name="thu_3" class="float-left" value="0"> <label for="thu_3" class="float-left font_normal">&nbsp;Thứ 3</label>
+									</div>
+									<div class="float-left marginLeft10">
+										<input type="checkbox" id="thu_4" name="thu_4" class="float-left" value="0"> <label for="thu_4" class="float-left font_normal">&nbsp;Thứ 4</label>
+									</div>
+									<div class="float-left marginLeft10">
+										<input type="checkbox" id="thu_5" name="thu_5" class="float-left" value="0"> <label for="thu_5" class="float-left font_normal">&nbsp;Thứ 5</label>
+									</div>
+									<div class="float-left marginLeft10">
+										<input type="checkbox" id="thu_6" name="thu_6" class="float-left" value="0"> <label for="thu_6" class="float-left font_normal">&nbsp;Thứ 6</label>
+									</div>
+									<div class="float-left marginLeft10">
+										<input type="checkbox" id="thu_7" name="thu_7" class="float-left" value="0"> <label for="thu_7" class="float-left font_normal">&nbsp;Thứ 7</label>
+									</div>
+									<div class="float-left marginLeft10">
+										<input type="checkbox" id="thu_8" name="thu_8" class="float-left" value="0"> <label for="thu_8" class="float-left font_normal">&nbsp;Chủ nhật</label>
+									</div>
+								</div>
+
+								<!--Block 2-->
+								<div class="clear"></div>
+								<div class="col-lg-12 marginTop10">
+									<label for="TestForm_textField" class="control-label">Số lần up tin</label>
+								</div>
+								<div class="col-lg-12 marginLeft20 marginTop10">
+									<div class="float-left width100">
+										<span class="float-left width30"><i class="fa fa-clock-o"></i> Từ 0h00 đến 5h 59</span>
+										<input type="text" id="number_up_1" name="number_up_1" class="float-left" value="0" size="5">
+									</div>
+									<div class="clear"></div>
+									<div class=" float-left width100 marginTop10">
+										<span class="float-left width30"><i class="fa fa-clock-o"></i> Từ 6h00 đến 11h59</span>
+										<input type="text" id="number_up_2" name="number_up_2" class="float-left" value="0" size="5">
+									</div>
+									<div class="clear"></div>
+									<div class=" float-left width100 marginTop10">
+										<span class="float-left width30"><i class="fa fa-clock-o"></i> Từ 12h00 đến 17h59 &nbsp;&nbsp;</span>
+										<input type="text" id="number_up_3" name="number_up_3" class="float-left" value="0" size="5">
+									</div>
+									<div class="clear"></div>
+									<div class=" float-left width100 marginTop10">
+										<span class="float-left width30"><i class="fa fa-clock-o"></i> Từ 18h00 đến 23h59 &nbsp;&nbsp;</span>
+										<input type="text" id="number_up_4" name="number_up_4" class="float-left" value="0" size="5">
+									</div>
+									<div class="clear"></div>
+									<div class="float-left marginTop10">
+										<a href="javascript:;" class="btn btn-primary" onclick="Product.setUpTime()">Tự động lập lại lịch</a>
+									</div>
+								</div>
+							</div>
+
+							<!--Block ben phai-->
+							<div id="infor_right" class="float-right marginTop20" style="width: 40%;">
+
+								<div class="float-right" style="border: 2px solid #ccc; width: 100%; padding: 10px 0px;">
+									<div class="col-lg-12">
+										<span class="float-left">Tài khoản của bạn còn</span>
+										<span class="float-right text-center" style="width: 50px"><b id="sys_number_up_shop"></b> <br/>lượt</span>
+										<input type="hidden" id="sys_number_up_can_user_shop" name="sys_number_up_can_user_shop" value="0"/>
+									</div>
+
+									<div class="clear"></div>
+									<div class="col-lg-12">
+										<span class="float-left">Tổng số lượt dùng cho deal này</span>
+										<span class="float-right text-center"><input type="text" id="number_up_hold" name="number_up_hold" value="0" size="3" style="text-align: center"><br/>lượt</span>
+									</div>
+
+									<div class="clear"></div>
+									<div class="col-lg-12">
+										<span class="float-left">Số lượt up còn lại của deal</span>
+										<span class="float-right text-center" style="width: 50px"><b id="hold_con_lai"></b><br/>lượt</span>
+										<input type="hidden" id="sys_hidden_hold_con_lai" name="sys_hidden_hold_con_lai" value="0"/>
+									</div>
+								</div>
+							</div>
+
+							<div class="clear"></div>
+							<!--Block time-->
+							<div class="float-left marginTop20" style="width: 100%">
+
+								<div class="clear"></div>
+								<div class="col-lg-12">
+									<label for="TestForm_textField" class="control-label">Tùy chỉnh thời gian trong ngày để up tin (di chuyển các điểm xanh để chỉnh giờ)</label>
+								</div>
+								<div class="form-group col-lg-12">
+									<div class="form-group float-left">
+										<div class="time-line-region" style="position: relative;top: 20px;padding-bottom: 10px">
+											<div id="up_calendar" style="position: relative;top: -3px;">
+												<div id="tooltip" style="font-size: 11px;">
+													<div id="result"></div>
+													<div class="clear"></div>
+												</div>
+												<div class="clear"></div>
+											</div>
+											<div id="input_check_time"></div>
+											<div class="time-line" style="position: relative;left: 7px"></div>
+											<div style="position: relative; top: -9px;" class="time-line-text">
+												<span class="rvTimeStep" style="margin-left:-8px">00:00</span>
+												<span class="rvTimeStep" title="02:00" style="margin-left: 39px">02:00</span>
+												<span class="rvTimeStep" title="04:00" style="margin-left: 42px">04:00</span>
+												<span class="rvTimeStep" style="margin-left: 41px">06:00</span>
+												<span class="rvTimeStep" style="margin-left:38px">08:00</span>
+												<span class="rvTimeStep" style="margin-left: 40px">10:00</span>
+												<span class="rvTimeStep" style="margin-left: 40px">12:00</span>
+												<span class="rvTimeStep" style="margin-left:40px">14:00</span>
+												<span class="rvTimeStep" style="margin-left: 40px">16:00</span>
+												<span class="rvTimeStep" style="margin-left: 40px">18:00</span>
+												<span class="rvTimeStep" style="margin-left: 40px">20:00</span>
+												<span class="rvTimeStep" style="margin-left: 40px">22:00</span>
+												<span class="rvTimeStep" style="margin-left:30px">23:59</span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!--Block 4-->
+								<div class="clear"></div>
+								<div class="float-left marginLeft20 marginTop20">
+									<span id="button_submit"></span>
+									<span id="sys_input_hidden"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{ Form::close() }}
+			</div>
+		</div>
+	</div>
+</div>
+
+
 
