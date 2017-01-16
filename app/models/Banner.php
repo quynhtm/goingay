@@ -30,14 +30,14 @@ class Banner extends Eloquent
                 ->whereIn('banner_page',array(0,$banner_page))
                 ->whereIn('banner_category_id',array(0,$banner_category_id))
                 ->whereIn('banner_province_id',array(0,$banner_province_id))
-                ->orderBy('banner_position','asc')->orderBy('banner_order','asc')->get();
+                ->orderBy('banner_position','asc')->orderBy('banner_order','asc')->orderBy('banner_id','desc')->get();
             if($banner){
                 foreach($banner as $itm) {
                     $bannerAdvanced[$itm['banner_id']] = $itm;
                 }
             }
             if($bannerAdvanced && Memcache::CACHE_ON){
-                Cache::put($key_cache, $bannerAdvanced, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+                Cache::put($key_cache, $bannerAdvanced, Memcache::CACHE_TIME_TO_LIVE_ONE_DAY);
             }
         }
         return $bannerAdvanced;
@@ -128,9 +128,14 @@ class Banner extends Eloquent
             if ($data->save()) {
                 DB::connection()->getPdo()->commit();
                 if(isset($data->banner_id) && $data->banner_id > 0){
-                    //x�a cache banner show
+                    //xoa cache banner show
                     $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$data->banner_type.'_'.$data->banner_page.'_'.$data->banner_category_id.'_'.$data->banner_province_id;
                     Cache::forget($key_cache);
+
+                    //xoa cache toan quoc
+                    $key_cache2 = Memcache::CACHE_BANNER_ADVANCED.'_'.$data->banner_type.'_0_0_0';
+                    Cache::forget($key_cache2);
+
                     self::removeCache($data->banner_id);
                 }
                 return $data->banner_id;
@@ -160,8 +165,12 @@ class Banner extends Eloquent
                 if(isset($dataSave->banner_id) && $dataSave->banner_id > 0){
                     //x�a cache banner show
                     $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_'.$dataSave->banner_page.'_'.$dataSave->banner_category_id.'_'.$dataSave->banner_province_id;
-                    //Cache::pull($key_cache);
                     Cache::forget($key_cache);
+
+                    //xoa cache toan quoc
+                    $key_cache2 = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_0_0_0';
+                    Cache::forget($key_cache2);
+
                     self::removeCache($dataSave->banner_id);
                 }
             }
@@ -199,6 +208,11 @@ class Banner extends Eloquent
                 //x�a cache banner show
                 $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_'.$dataSave->banner_page.'_'.$dataSave->banner_category_id.'_'.$dataSave->banner_province_id;
                 Cache::forget($key_cache);
+
+                //xoa cache toan quoc
+                $key_cache2 = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_0_0_0';
+                Cache::forget($key_cache2);
+
                 self::removeCache($dataSave->banner_id);
             }
             DB::connection()->getPdo()->commit();
@@ -233,6 +247,11 @@ class Banner extends Eloquent
                     //xoa cache banner show
                     $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$itm->banner_type.'_'.$itm->banner_page.'_'.$itm->banner_category_id.'_'.$itm->banner_province_id;
                     Cache::forget($key_cache);
+
+                    //xoa cache toan quoc
+                    $key_cache2 = Memcache::CACHE_BANNER_ADVANCED.'_'.$itm->banner_type.'_0_0_0';
+                    Cache::forget($key_cache2);
+
                     self::removeCache($itm->banner_id);
                 }
             }
@@ -243,8 +262,5 @@ class Banner extends Eloquent
         if($id > 0){
             Cache::forget(Memcache::CACHE_BANNER_ID.$id);
         }
-        //xóa phần toàn quốc
-        $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_0_0_0_0';
-        Cache::forget($key_cache);
     }
 }
