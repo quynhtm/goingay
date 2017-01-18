@@ -21,15 +21,16 @@ class Banner extends Eloquent
         'banner_time_click', 'banner_update_time', 'banner_create_time');
 
     public static function getBannerAdvanced($banner_type = 0, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0){
+        //banner theo page, danh muc, tinh thanh
         $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_province_id;
         $bannerAdvanced = (Memcache::CACHE_ON)? Cache::get($key_cache) : array();
         if (sizeof($bannerAdvanced) == 0) {
             $banner = Banner::where('banner_id' ,'>', 0)
                 ->where('banner_status',CGlobal::status_show)
                 ->where('banner_type',$banner_type)
-                ->whereIn('banner_page',array(0,$banner_page))
-                ->whereIn('banner_category_id',array(0,$banner_category_id))
-                ->whereIn('banner_province_id',array(0,$banner_province_id))
+                ->where('banner_page',$banner_page)
+                ->where('banner_category_id',$banner_category_id)
+                ->where('banner_province_id',$banner_province_id)
                 ->orderBy('banner_position','asc')->orderBy('banner_order','asc')->orderBy('banner_id','desc')->get();
             if($banner){
                 foreach($banner as $itm) {
@@ -37,9 +38,36 @@ class Banner extends Eloquent
                 }
             }
             if($bannerAdvanced && Memcache::CACHE_ON){
-                Cache::put($key_cache, $bannerAdvanced, Memcache::CACHE_TIME_TO_LIVE_ONE_DAY);
+                Cache::put($key_cache, $bannerAdvanced, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
             }
         }
+
+        //lay toan banner toan site
+        $key_cache2 = Memcache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_0_0_0';
+        $bannerSite = (Memcache::CACHE_ON)? Cache::get($key_cache2) : array();
+        if (sizeof($bannerSite) == 0) {
+            $bannerSiteAll = Banner::where('banner_id' ,'>', 0)
+                ->where('banner_status',CGlobal::status_show)
+                ->where('banner_type',$banner_type)
+                ->where('banner_page',0)
+                ->where('banner_category_id',0)
+                ->where('banner_province_id',0)
+                ->orderBy('banner_position','asc')->orderBy('banner_order','asc')->orderBy('banner_id','desc')->get();
+            if($bannerSiteAll){
+                foreach($bannerSiteAll as $itm) {
+                    $bannerSite[$itm['banner_id']] = $itm;
+                }
+            }
+            if($bannerSite && Memcache::CACHE_ON){
+                Cache::put($key_cache2, $bannerSite, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+            }
+        }
+        if(!empty($bannerSite)){
+            foreach($bannerSite as $bannerId => $valuBanner){
+                $bannerAdvanced[$bannerId] = $valuBanner;
+            }
+        }
+
         return $bannerAdvanced;
     }
 
