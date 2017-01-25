@@ -34,6 +34,9 @@
 			@if(sizeof($arrBannerRight) > 0)
 				<div class="box-ads" >
 					@foreach($arrBannerRight as $key_position =>$bannerShow)
+						<script type="text/javascript">
+							var time_show = Math.floor(Math.random() * 3000) + 2000;//[2000->5000]
+						</script>
 						<ul class="rslides" id="sliderRight_{{$key_position}}" style="padding-bottom: 25px">
 							@foreach($bannerShow as $slider)
 								<div class="slide ">
@@ -48,7 +51,7 @@
 								jQuery("#sliderRight_{{$key_position}}").responsiveSlides({
 									maxwidth: 1000,
 									speed: 800,
-									timeout: 5000,
+									timeout: time_show,
 								});
 							});
 						</script>

@@ -60,7 +60,7 @@ class Items extends Eloquent
                 ->where('item_status',CGlobal::status_show)
                 ->where('item_category_id',$item_category_id)
                 ->orderBy('is_customer', 'desc')->orderBy('time_ontop', 'desc')->orderBy('item_id', 'desc')
-                ->take(7)->skip(0)->get();
+                ->take(8)->skip(0)->get();
             if($itemHome){
                 foreach($itemHome as $itm) {
                     $itemsHomeSite[$itm['item_id']] = array(

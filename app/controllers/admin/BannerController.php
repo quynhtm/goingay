@@ -28,6 +28,8 @@ class BannerController extends BaseAdminController
         5=> 'Vị trí Bottom 2',
         6=> 'Vị trí Bottom 3',
         7=> 'Vị trí Bottom 4',
+        8=> 'Vị trí Bottom 5',
+        9=> 'Vị trí Bottom 6',
         );
 
     private $arrTypeBanner = array(-1 => '--- Chọn loại Banner --',

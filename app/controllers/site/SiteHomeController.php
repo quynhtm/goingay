@@ -9,7 +9,7 @@ class SiteHomeController extends BaseSiteController
     }
 
 	private $str_field_items_get = 'item_id,item_name,item_content,item_type_price,item_price_sell,item_content,item_image,item_image_other,item_category_id,item_category_name,item_number_view,item_status,item_is_hot,item_province_id,item_province_name,item_district_id,customer_id,is_customer,customer_name,time_ontop';//cac truong can lay
-
+	private $limit_show_item = CGlobal::number_show_40;
     //trang chu
     public function index(){
 		$banner_page = $this->getControllerAction();
@@ -85,11 +85,11 @@ class SiteHomeController extends BaseSiteController
 			$search['item_province_id'] = $province_id;
 		}
 		$search['item_name'] = $keyword;
-		$search['field_get'] = $this->str_field_items_get;
+		//$search['field_get'] = $this->str_field_items_get;
 
 		//danh sach tin dang cua danh m?c
 		$pageNo = (int) Request::get('page_no',1);
-		$limit = CGlobal::number_show_20;
+		$limit = $this->limit_show_item;
 		$offset = ($pageNo == 1)? 0: ($pageNo - 1) * $limit;
 		$resultSearch = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
@@ -150,7 +150,7 @@ class SiteHomeController extends BaseSiteController
 		$arrCategory = Category::getCategoriessAll();//hien thi icons cua danh muc
 
 		//tin dang cua cung danh muc
-		$limit = CGlobal::number_show_15;
+		$limit = CGlobal::number_show_20;
 		$offset = 0;
 		$search = $data = array();
 		$totalSearch = 0;
@@ -211,7 +211,7 @@ class SiteHomeController extends BaseSiteController
 
 		//danh sach tin dang cua danh m?c
 		$pageNo = (int) Request::get('page_no',1);
-		$limit = CGlobal::number_limit_show;
+		$limit = $this->limit_show_item;
 		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;//b? 3 cï¿½i n?i b?t ? trï¿½n ?i
 		$search = $data = array();
 		$totalSearch = 0;
@@ -221,7 +221,7 @@ class SiteHomeController extends BaseSiteController
 			$province_name = $arrProvince[$province_id];
 		}
 		$search['item_category_id'] = $catid;
-		$search['field_get'] = $this->str_field_items_get;
+		//$search['field_get'] = $this->str_field_items_get;
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
 		$paging = $totalSearch > 0 ? Pagging::getNewPager(3, $pageNo, $totalSearch, $limit, $search) : '';
 
@@ -264,10 +264,11 @@ class SiteHomeController extends BaseSiteController
 
 		//danh sach tin dang cua danh m?c
 		$pageNo = (int) Request::get('page_no',1);
-		$limit = CGlobal::number_show_20;
+		$limit = $this->limit_show_item;
 		$offset = ($pageNo == 1)? $number_show_hot: ($pageNo - 1) * $limit;
 		$search = $data = array();
 		$totalSearch = 0;
+		$search['customer_name'] = $customer_name;
 		$search['customer_id'] = $customer_id;
 		$search['page_no'] = $pageNo;
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
