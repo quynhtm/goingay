@@ -12,8 +12,9 @@ class HosttingController extends BaseAdminController{
 	private $permission_delete = 'hostting_delete';
 	private $permission_create = 'hostting_create';
 	private $permission_edit = 'hostting_edit';
-	private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
-	private $arrIsHostting = array(-1 => 'Chọn hostting', CGlobal::status_hide => 'Hostting bên ngoài', CGlobal::status_show => 'Hostting của mình');
+	private $arrStatus = array(-1 => '--- Chọn trạng thái ---', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
+	private $arrIsHostting = array(-1 => '--- Chọn hostting ---', CGlobal::status_hide => 'Hostting bên ngoài', CGlobal::status_show => 'Hostting của mình');
+	private $arrIsReturn = array(-1 => '--- Chọn gia hạn ---', CGlobal::status_hide => 'Web mới', CGlobal::status_show => 'Web gia hạn');
 	private $error = '';
 	public function __construct(){
 		parent::__construct();
@@ -83,7 +84,7 @@ class HosttingController extends BaseAdminController{
 								->with('permission_create', in_array($this->permission_create, $this->permission) ? 1 : 0)
 								->with('permission_delete', in_array($this->permission_delete, $this->permission) ? 1 : 0)
 								->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0)
-								->with('arrStatus', $this->arrStatus)
+								->with('arrIsReturn', $this->arrIsReturn)
 								->with('optionStatus', $optionStatus)
 								->with('optionIsHostting', $optionIsHostting)
 								->with('search', $search);
@@ -104,11 +105,13 @@ class HosttingController extends BaseAdminController{
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['web_status'])? $data['web_status'] : CGlobal::status_show);
 		$optionIsHostting = FunctionLib::getOption($this->arrIsHostting, isset($data['web_is_hostting'])? $data['web_is_hostting'] : CGlobal::status_show);
+		$optionIsReturn = FunctionLib::getOption($this->arrIsReturn, isset($data['web_is_return'])? $data['web_is_return'] : CGlobal::status_hide);
 		$this->layout->content = View::make('admin.Hostting.add')
 			->with('id', $id)
 			->with('data', $data)
 			->with('optionStatus', $optionStatus)
 			->with('optionIsHostting', $optionIsHostting)
+			->with('optionIsReturn', $optionIsReturn)
 			->with('arrStatus', $this->arrStatus);
 	}
 	public function postItem($id=0) {
@@ -121,6 +124,7 @@ class HosttingController extends BaseAdminController{
 		$dataSave['web_price'] = (int)str_replace('.','',Request::get('web_price'));
 		$dataSave['web_status'] = (int)Request::get('web_status', CGlobal::status_show);
 		$dataSave['web_is_hostting'] = (int)Request::get('web_is_hostting', CGlobal::status_show);
+		$dataSave['web_is_return'] = (int)Request::get('web_is_return', CGlobal::status_hide);
 		$dataSave['web_time_start'] = Request::get('web_time_start','');
 		$dataSave['web_time_end'] = Request::get('web_time_end','');
 
@@ -170,6 +174,7 @@ class HosttingController extends BaseAdminController{
 
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($dataSave['web_status'])? $dataSave['web_status'] : CGlobal::status_show);
 		$optionIsHostting = FunctionLib::getOption($this->arrIsHostting, isset($dataSave['web_is_hostting'])? $dataSave['web_is_hostting'] : CGlobal::status_show);
+		$optionIsReturn = FunctionLib::getOption($this->arrIsReturn, isset($dataSave['web_is_return'])? $dataSave['web_is_return'] : CGlobal::status_hide);
 		$dataSave['web_time_start'] = strtotime($dataSave['web_time_start']);
 		$dataSave['web_time_end'] = strtotime($dataSave['web_time_end']);
 		$this->layout->content =  View::make('admin.Hostting.add')
@@ -177,6 +182,7 @@ class HosttingController extends BaseAdminController{
 			->with('data', $dataSave)
 			->with('optionStatus', $optionStatus)
 			->with('optionIsHostting', $optionIsHostting)
+			->with('optionIsReturn', $optionIsReturn)
 			->with('error', $this->error)
 			->with('arrStatus', $this->arrStatus);
 	}

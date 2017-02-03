@@ -91,6 +91,9 @@
 								<td class="text-center text-middle">{{ $stt + $key+1 }}</td>
 								<td>
 									[<b>{{ $item['web_id'] }}</b>] <a href="http://{{ $item['web_domain'] }}" target="_blank">{{ $item['web_name'] }}</a><br/>
+									@if(isset($arrIsReturn[$item->web_is_return]))
+										<i @if($item->web_is_return == CGlobal::status_show )class="red" @else class="green" @endif>{{ $arrIsReturn[$item->web_is_return] }}</i><br/>
+									@endif
 									@if($item->web_price > 0)
 										<b>Giá:</b> <b class="red">{{ FunctionLib::numberFormat($item->web_price) }}đ</b><br/>
 									@endif

@@ -156,6 +156,14 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Hostting</label>
+                                <select name="web_is_return" id="web_is_return" class="form-control input-sm">
+                                    {{$optionIsReturn}}
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {{ Form::close() }}

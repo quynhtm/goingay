@@ -11,7 +11,7 @@ class Hostting extends Eloquent
 
     //cac truong trong DB
     protected $fillable = array('web_id','web_name', 'web_time_start','web_status','web_time_end'
-    ,'web_note','web_domain','web_infor','web_price','web_is_hostting');
+    ,'web_note','web_domain','web_infor','web_price','web_is_hostting','web_is_return');
 
     public static function getByID($id) {
     	$result = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_HOSTTING_ID.$id) : array();
@@ -41,6 +41,9 @@ class Hostting extends Eloquent
             }
             if (isset($dataSearch['web_is_hostting']) && $dataSearch['web_is_hostting'] > -1) {
                 $query->where('web_is_hostting', $dataSearch['web_is_hostting']);
+            }
+            if (isset($dataSearch['web_is_return']) && $dataSearch['web_is_return'] > -1) {
+                $query->where('web_is_return', $dataSearch['web_is_return']);
             }
 
             //ngày b?t ??u
