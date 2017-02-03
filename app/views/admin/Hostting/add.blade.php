@@ -48,6 +48,24 @@
                     </div>
 
                     <div class="clearfix"></div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Hostting</label>
+                            <select name="web_is_hostting" id="web_is_hostting" class="form-control input-sm">
+                                {{$optionIsHostting}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Trạng thái</label>
+                            <select name="web_status" id="web_status" class="form-control input-sm">
+                                {{$optionStatus}}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
                     <div class="col-sm-10">
                         <div class="form-group">
                             <label for="name" class="control-label">Ngày bắt đầu</label>
@@ -60,16 +78,6 @@
                         <div class="form-group">
                             <label for="name" class="control-label">Ngày kết thúc</label>
                             <input type="text" class="form-control" id="web_time_end" name="web_time_end"  data-date-format="dd-mm-yyyy" value="@if(isset($data['web_time_end']) && $data['web_time_end'] > 0){{date('d-m-Y',$data['web_time_end'])}}@endif">
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-                    <div class="col-sm-10">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Trạng thái</label>
-                            <select name="web_status" id="web_status" class="form-control input-sm">
-                                {{$optionStatus}}
-                            </select>
                         </div>
                     </div>
 

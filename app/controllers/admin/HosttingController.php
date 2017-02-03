@@ -13,6 +13,7 @@ class HosttingController extends BaseAdminController{
 	private $permission_create = 'hostting_create';
 	private $permission_edit = 'hostting_edit';
 	private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
+	private $arrIsHostting = array(-1 => 'Chọn hostting', CGlobal::status_hide => 'Hostting bên ngoài', CGlobal::status_show => 'Hostting của mình');
 	private $error = '';
 	public function __construct(){
 		parent::__construct();
@@ -42,23 +43,36 @@ class HosttingController extends BaseAdminController{
 		$search['web_domain'] = addslashes(Request::get('web_domain', ''));
 		$search['web_id'] = (int)Request::get('web_id', '');
 		$search['web_status'] = (int)Request::get('web_status', -1);
+		$search['web_is_hostting'] = (int)Request::get('web_is_hostting', -1);
 		$dataFilter = $search;
 		//ngay bat dau
-		$star_time = Request::get('start_time','');
-		if($star_time != '') {
-			$dataFilter['start_time'] = $star_time;
-			$search['start_time'] = strtotime($star_time);
+		$from_start_time = Request::get('from_start_time','');
+		if($from_start_time != '') {
+			$dataFilter['from_start_time'] = $from_start_time;
+			$search['from_start_time'] = strtotime($from_start_time);
 		}
-		$end_time = Request::get('end_time','');
-		if($end_time != '') {
-			$dataFilter['end_time'] = $end_time;
-			$search['end_time'] = strtotime($end_time);
+		$to_start_time = Request::get('to_start_time','');
+		if($to_start_time != '') {
+			$dataFilter['to_start_time'] = $to_start_time;
+			$search['to_start_time'] = strtotime($to_start_time);
+		}
+		//ngay kết thúc
+		$from_end_time = Request::get('from_end_time','');
+		if($from_end_time != '') {
+			$dataFilter['from_end_time'] = $from_end_time;
+			$search['from_end_time'] = strtotime($from_end_time);
+		}
+		$to_end_time = Request::get('to_end_time','');
+		if($to_end_time != '') {
+			$dataFilter['to_end_time'] = $to_end_time;
+			$search['to_end_time'] = strtotime($to_end_time);
 		}
 
 		$data = Hostting::searchByCondition($search, $limit, $offset, $total);
 		$paging = $total > 0 ? Pagging::getNewPager($pageScroll, $pageNo, $total, $limit, $dataFilter) : '';
 		
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $search['web_status']);
+		$optionIsHostting = FunctionLib::getOption($this->arrIsHostting, $search['web_is_hostting']);
 		$this->layout->content = View::make('admin.Hostting.list')
 								->with('stt', $stt)
 								->with('data', $data)
@@ -71,6 +85,7 @@ class HosttingController extends BaseAdminController{
 								->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0)
 								->with('arrStatus', $this->arrStatus)
 								->with('optionStatus', $optionStatus)
+								->with('optionIsHostting', $optionIsHostting)
 								->with('search', $search);
 	}
 
@@ -88,10 +103,12 @@ class HosttingController extends BaseAdminController{
 			}
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['web_status'])? $data['web_status'] : CGlobal::status_show);
+		$optionIsHostting = FunctionLib::getOption($this->arrIsHostting, isset($data['web_is_hostting'])? $data['web_is_hostting'] : CGlobal::status_show);
 		$this->layout->content = View::make('admin.Hostting.add')
 			->with('id', $id)
 			->with('data', $data)
 			->with('optionStatus', $optionStatus)
+			->with('optionIsHostting', $optionIsHostting)
 			->with('arrStatus', $this->arrStatus);
 	}
 	public function postItem($id=0) {
@@ -102,7 +119,8 @@ class HosttingController extends BaseAdminController{
 		$dataSave['web_note'] = Request::get('web_note');
 		$dataSave['web_domain'] = Request::get('web_domain');
 		$dataSave['web_price'] = (int)str_replace('.','',Request::get('web_price'));
-		$dataSave['web_status'] = (int)Request::get('web_status', 1);
+		$dataSave['web_status'] = (int)Request::get('web_status', CGlobal::status_show);
+		$dataSave['web_is_hostting'] = (int)Request::get('web_is_hostting', CGlobal::status_show);
 		$dataSave['web_time_start'] = Request::get('web_time_start','');
 		$dataSave['web_time_end'] = Request::get('web_time_end','');
 
@@ -127,10 +145,15 @@ class HosttingController extends BaseAdminController{
 		$id_hiden = (int)Request::get('id_hiden', 0);
 		if($this->valid($dataSave) && empty($this->error)) {
 			$id = ($id == 0)?$id_hiden: $id;
-			if($dataSave['web_time_start'] != '' && $dataSave['web_time_end'] != ''){
-				$dataSave['web_time_start'] = strtotime($dataSave['web_time_start'] . ' 00:00:00');
-				$dataSave['web_time_end'] = strtotime($dataSave['web_time_end'] . ' 23:59:59');
+			if($dataSave['web_is_hostting'] == CGlobal::status_show){
+				if($dataSave['web_time_start'] != '' && $dataSave['web_time_end'] != ''){
+					$dataSave['web_time_start'] = strtotime($dataSave['web_time_start'] . ' 00:00:00');
+					$dataSave['web_time_end'] = strtotime($dataSave['web_time_end'] . ' 23:59:59');
+				}
+			}else{
+				$dataSave['web_time_start'] = $dataSave['web_time_end'] = 0;
 			}
+
 			//FunctionLib::debug($dataSave);
 			if($id > 0) {
 				//cap nhat
@@ -146,12 +169,14 @@ class HosttingController extends BaseAdminController{
 		}
 
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($dataSave['web_status'])? $dataSave['web_status'] : CGlobal::status_show);
+		$optionIsHostting = FunctionLib::getOption($this->arrIsHostting, isset($dataSave['web_is_hostting'])? $dataSave['web_is_hostting'] : CGlobal::status_show);
 		$dataSave['web_time_start'] = strtotime($dataSave['web_time_start']);
 		$dataSave['web_time_end'] = strtotime($dataSave['web_time_end']);
 		$this->layout->content =  View::make('admin.Hostting.add')
 			->with('id', $id)
 			->with('data', $dataSave)
 			->with('optionStatus', $optionStatus)
+			->with('optionIsHostting', $optionIsHostting)
 			->with('error', $this->error)
 			->with('arrStatus', $this->arrStatus);
 	}
@@ -159,6 +184,17 @@ class HosttingController extends BaseAdminController{
 		if(!empty($data)) {
 			if(isset($data['web_name']) && trim($data['web_name']) == '') {
 				$this->error[] = 'Tên web không được bỏ trống';
+			}
+			if(isset($data['web_domain']) && trim($data['web_domain']) == '') {
+				$this->error[] = 'Domain không được bỏ trống';
+			}
+			if(isset($data['web_is_hostting']) && trim($data['web_is_hostting']) == CGlobal::status_show) {
+				if(isset($data['web_time_start']) && trim($data['web_time_start']) == '') {
+					$this->error[] = 'Chưa nhập thời gian bắt đầu';
+				}
+				if(isset($data['web_time_end']) && trim($data['web_time_end']) == '') {
+					$this->error[] = 'Chưa nhập thời gian kết thúc';
+				}
 			}
 		}
 		return true;

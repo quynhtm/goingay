@@ -11,7 +11,7 @@ class Hostting extends Eloquent
 
     //cac truong trong DB
     protected $fillable = array('web_id','web_name', 'web_time_start','web_status','web_time_end'
-    ,'web_note','web_domain','web_infor','web_price');
+    ,'web_note','web_domain','web_infor','web_price','web_is_hostting');
 
     public static function getByID($id) {
     	$result = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_HOSTTING_ID.$id) : array();
@@ -39,11 +39,24 @@ class Hostting extends Eloquent
             if (isset($dataSearch['web_status']) && $dataSearch['web_status'] > -1) {
                 $query->where('web_status', $dataSearch['web_status']);
             }
-            if (isset($dataSearch['start_time']) && $dataSearch['start_time'] > 0) {
-                $query->where('web_time_start','>',$dataSearch['start_time']);
+            if (isset($dataSearch['web_is_hostting']) && $dataSearch['web_is_hostting'] > -1) {
+                $query->where('web_is_hostting', $dataSearch['web_is_hostting']);
             }
-            if (isset($dataSearch['end_time']) && $dataSearch['end_time'] > 0) {
-                $query->where('web_time_end','<',$dataSearch['end_time']);
+
+            //ngày b?t ??u
+            if (isset($dataSearch['from_start_time']) && $dataSearch['from_start_time'] > 0) {
+                $query->where('web_time_start','>=',$dataSearch['from_start_time']);
+            }
+            if (isset($dataSearch['to_start_time']) && $dataSearch['to_start_time'] > 0) {
+                $query->where('web_time_start','<',$dataSearch['to_start_time']);
+            }
+
+            //ngày k?t thúc
+            if (isset($dataSearch['from_end_time']) && $dataSearch['from_end_time'] > 0) {
+                $query->where('web_time_end','>=',$dataSearch['from_end_time']);
+            }
+            if (isset($dataSearch['to_end_time']) && $dataSearch['to_end_time'] > 0) {
+                $query->where('web_time_end','<',$dataSearch['to_end_time']);
             }
 
             $total = $query->count();
