@@ -84,25 +84,25 @@
 						</thead>
 						<tbody>
 						@foreach ($data as $key => $item)
+							@if($item['web_infor'] !='')
+								<?php $web_infor = unserialize($item['web_infor']);?>
+							@endif
 							<tr>
 								<td class="text-center text-middle">{{ $stt + $key+1 }}</td>
 								<td>
-									[<b>{{ $item['web_id'] }}</b>] {{ $item['web_name'] }}
+									[<b>{{ $item['web_id'] }}</b>] <a href="http://{{ $item['web_domain'] }}" target="_blank">{{ $item['web_name'] }}</a><br/>
 									@if($item->web_price > 0)
-										<br/><b>Giá:</b> <b class="red">{{ FunctionLib::numberFormat($item->web_price) }} đ</b>
+										<b>Giá:</b> <b class="red">{{ FunctionLib::numberFormat($item->web_price) }}đ</b><br/>
 									@endif
+									@if(isset($web_infor['infor_price_domain']) && $web_infor['infor_price_domain'] > 0)<b>Gia hạn Domain: </b><b class="red">{{FunctionLib::numberFormat($web_infor['infor_price_domain'])}}đ</b><br/>@endif
+									@if(isset($web_infor['infor_price_host']) && $web_infor['infor_price_host'] > 0)<b>Gia hạn Host: </b><b class="red">{{FunctionLib::numberFormat($web_infor['infor_price_host'])}}đ</b><br/>@endif
 								</td>
 								<td>
-									@if($item['web_infor'] !='')
-										<?php $web_infor = unserialize($item['web_infor']);?>
-										@if($web_infor['infor_name']!='')<b>N: </b>{{$web_infor['infor_name']}}<br/>@endif
-										@if($web_infor['infor_stand']!='')<b>S: </b>{{$web_infor['infor_stand']}}<br/>@endif
-										@if($web_infor['infor_bank_code']!='')<b>CB: </b>{{$web_infor['infor_bank_code']}}<br/>@endif
-										@if($web_infor['infor_bank_address']!='')<b>AB: </b>{{$web_infor['infor_bank_address']}}<br/>@endif
-										@if($web_infor['infor_email']!='')<b>E: </b>{{$web_infor['infor_email']}}<br/>@endif
-										@if($web_infor['infor_phone']!='')<b>F: </b>{{$web_infor['infor_phone']}}<br/>@endif
-										@if($web_infor['infor_address']!='')<b>A: </b>{{$web_infor['infor_address']}}<br/>@endif
-									@endif
+									@if($web_infor['infor_name']!='')<b>N: </b>{{$web_infor['infor_name']}}<br/>@endif
+									@if($web_infor['infor_stand']!='')<b>S: </b>{{$web_infor['infor_stand']}}<br/>@endif
+									@if($web_infor['infor_email']!='')<b>E: </b>{{$web_infor['infor_email']}}<br/>@endif
+									@if($web_infor['infor_phone']!='')<b>F: </b>{{$web_infor['infor_phone']}}<br/>@endif
+									@if($web_infor['infor_address']!='')<b>A: </b>{{$web_infor['infor_address']}}<br/>@endif
 								</td>
 								<td>{{ $item['web_note'] }}</td>
 								<td class="text-center text-middle">

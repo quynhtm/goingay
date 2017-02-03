@@ -60,7 +60,7 @@ class Hostting extends Eloquent
             }
 
             $total = $query->count();
-            $query->orderBy('web_time_end', 'asc');
+            $query->orderBy('web_is_hostting', 'desc')->orderBy('web_time_end', 'asc');
 
             //get field can lay du lieu
             $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();

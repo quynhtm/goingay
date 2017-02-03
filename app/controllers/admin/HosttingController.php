@@ -129,16 +129,16 @@ class HosttingController extends BaseAdminController{
 		$infor_stand = addslashes(Request::get('infor_stand'));
 		$infor_email = addslashes(Request::get('infor_email'));
 		$infor_address = addslashes(Request::get('infor_address'));
-		$infor_bank_code = addslashes(Request::get('infor_bank_code'));
-		$infor_bank_address = addslashes(Request::get('infor_bank_address'));
+		$infor_price_domain = (int)str_replace('.','',Request::get('infor_price_domain'));
+		$infor_price_host = (int)str_replace('.','',Request::get('infor_price_host'));
 		$infor_phone = addslashes(Request::get('infor_phone'));
 		$infor_web = array(
 			'infor_name' => $infor_name,
 			'infor_stand' => $infor_stand,
 			'infor_email' => $infor_email,
 			'infor_address' => $infor_address,
-			'infor_bank_code' => $infor_bank_code,
-			'infor_bank_address' => $infor_bank_address,
+			'infor_price_domain' => $infor_price_domain,
+			'infor_price_host' => $infor_price_host,
 			'infor_phone' => $infor_phone);
 		$dataSave['web_infor'] = !empty($infor_web)? serialize($infor_web): '';//thông tin web
 

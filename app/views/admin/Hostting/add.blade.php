@@ -119,22 +119,6 @@
 
                         <div class="col-sm-10">
                             <div class="form-group">
-                                <label for="name" class="control-label">Số tài khoản ngân hàng</label>
-                                <input type="text" id="infor_bank_code" name="infor_bank_code" class="form-control" @if(isset($data['web_infor']['infor_bank_code']))value="{{$data['web_infor']['infor_bank_code']}}"@endif>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Chi nhánh ngân hàng</label>
-                                <input type="text" id="infor_bank_address" name="infor_bank_address" class="form-control" @if(isset($data['web_infor']['infor_bank_address']))value="{{$data['web_infor']['infor_bank_address']}}"@endif>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
                                 <label for="name" class="control-label">Email</label>
                                 <input type="text" id="infor_email" name="infor_email" class="form-control" @if(isset($data['web_infor']['infor_email']))value="{{$data['web_infor']['infor_email']}}"@endif>
                             </div>
@@ -153,6 +137,22 @@
                             <div class="form-group">
                                 <label for="name" class="control-label">Địa chỉ</label>
                                 <input type="text" id="infor_address" name="infor_address" class="form-control" @if(isset($data['web_infor']['infor_address']))value="{{$data['web_infor']['infor_address']}}"@endif>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Giá Domain gia hạn</label>
+                                <input type="text" id="infor_price_domain" name="infor_price_domain" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['web_infor']['infor_price_domain'])){{$data['web_infor']['infor_price_domain']}}@endif">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Giá Hostting gia hạn</label>
+                                <input type="text" id="infor_price_host" name="infor_price_host" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['web_infor']['infor_price_host'])){{$data['web_infor']['infor_price_host']}}@endif">
                             </div>
                         </div>
                         <div class="clearfix"></div>
