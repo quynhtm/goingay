@@ -224,7 +224,7 @@ class BannerController extends BaseAdminController
         //FunctionLib::debug($data);
         if($this->valid($data) && empty($this->error)) {
             $id = ($id == 0)?$id_hiden: $id;
-            if($data['banner_start_time'] != '' && $data['banner_start_time'] != ''){
+            if($data['banner_start_time'] != '' && $data['banner_end_time'] != ''){
                 $data['banner_start_time'] = strtotime($data['banner_start_time'] . ' 00:00:00');
                 $data['banner_end_time'] = strtotime($data['banner_end_time'] . ' 23:59:59');
             }

@@ -152,6 +152,12 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::get('province/getInforDistrictOfProvince',array('as'=>'getInforDistrictOfProvince','uses'=>'ProvinceController@getInforDistrictOfProvince'));// thong tin quan huyen
     Route::post('province/submitInforDistrictOfProvince',array('as'=>'submitInforDistrictOfProvince','uses'=>'ProvinceController@submitInforDistrictOfProvince'));// thong tin quan huyen
 
+    //Hostting
+    Route::get('hostting/view', array('as' => 'admin.hostting','uses' => 'HosttingController@listView'));
+    Route::get('hostting/edit/{id?}', array('as' => 'admin.hosttingEdit','uses' => 'HosttingController@getItem'))->where('id', '[0-9]+');
+    Route::post('hostting/edit/{id?}', array('as' => 'admin.hosttingEdit','uses' => 'HosttingController@postItem'))->where('id', '[0-9]+');
+    Route::post('hostting/deleteHostting', array('as' => 'admin.deleteHostting','uses' => 'HosttingController@deleteHostting'));//ajax
+
     Route::get('toolsCommon/addPermit',array('as' => 'admin.addPermit','uses' => 'ToolsCommonController@addPermit'));
     //Tools quản lý các page khác nhau
     Route::get('toolsCommon/viewClickShare',array('as' => 'admin.viewClickShare','uses' => 'ToolsCommonController@viewClickShare'));
