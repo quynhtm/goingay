@@ -96,7 +96,41 @@
                 </div>
 
                 <div style="float: left; width: 50%;">
-                    <div class="col-lg-11" id="show_infor_contract_one" @if(isset($data['contract_infor']) && $data['contract_infor'] == 1) style="display: none" @endif>
+                    @if($is_root)
+                    <!--Thông tin hosting-->
+                    <div class="col-lg-11">
+                        <div class="form-group">
+                            <div class="col-lg-11" style="border-bottom: 2px solid #ccc"><h3 class="col-lg-12 text-center">Thông tin Hostting</h3></div>
+                        </div>
+
+                        <div class="col-sm-10 marginTop30">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Ip hosting</label>
+                                <input type="text" id="infor_host_ip" name="infor_host_ip" class="form-control" @if(isset($data['web_infor']['infor_host_ip']))value="{{$data['web_infor']['infor_host_ip']}}"@endif>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label for="name" class="control-label">User hosting</label>
+                                <input type="text" id="infor_host_user" name="infor_host_user" class="form-control" @if(isset($data['web_infor']['infor_host_user']))value="{{$data['web_infor']['infor_host_user']}}"@endif>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Pass hosting</label>
+                                <input type="text" id="infor_host_pass" name="infor_host_pass" class="form-control" @if(isset($data['web_infor']['infor_host_pass']))value="{{$data['web_infor']['infor_host_pass']}}"@endif>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    @endif
+
+                    <!---thông tin khách hàng-->
+                    <div class="col-lg-11">
                         <div class="form-group">
                             <div class="col-lg-11" style="border-bottom: 2px solid #ccc"><h3 class="col-lg-12 text-center">Thông tin khách hàng</h3></div>
                         </div>

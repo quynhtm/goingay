@@ -109,6 +109,7 @@ class HosttingController extends BaseAdminController{
 		$this->layout->content = View::make('admin.Hostting.add')
 			->with('id', $id)
 			->with('data', $data)
+			->with('is_root', $this->is_root)
 			->with('optionStatus', $optionStatus)
 			->with('optionIsHostting', $optionIsHostting)
 			->with('optionIsReturn', $optionIsReturn)
@@ -129,21 +130,19 @@ class HosttingController extends BaseAdminController{
 		$dataSave['web_time_end'] = Request::get('web_time_end','');
 
 		//thong tin web
-		$infor_name = addslashes(Request::get('infor_name'));
-		$infor_stand = addslashes(Request::get('infor_stand'));
-		$infor_email = addslashes(Request::get('infor_email'));
-		$infor_address = addslashes(Request::get('infor_address'));
-		$infor_price_domain = (int)str_replace('.','',Request::get('infor_price_domain'));
-		$infor_price_host = (int)str_replace('.','',Request::get('infor_price_host'));
-		$infor_phone = addslashes(Request::get('infor_phone'));
 		$infor_web = array(
-			'infor_name' => $infor_name,
-			'infor_stand' => $infor_stand,
-			'infor_email' => $infor_email,
-			'infor_address' => $infor_address,
-			'infor_price_domain' => $infor_price_domain,
-			'infor_price_host' => $infor_price_host,
-			'infor_phone' => $infor_phone);
+			'infor_name' => Request::get('infor_name'),
+			'infor_stand' => Request::get('infor_stand'),
+			'infor_email' => Request::get('infor_email'),
+			'infor_address' => Request::get('infor_address'),
+			'infor_price_domain' => (int)str_replace('.','',Request::get('infor_price_domain')),
+			'infor_price_host' => (int)str_replace('.','',Request::get('infor_price_host')),
+			'infor_phone' => Request::get('infor_phone'));
+		if($this->is_root){
+			$infor_web['infor_host_ip'] = Request::get('infor_host_ip');
+			$infor_web['infor_host_user'] = Request::get('infor_host_user');
+			$infor_web['infor_host_pass'] = Request::get('infor_host_pass');
+		}
 		$dataSave['web_infor'] = !empty($infor_web)? serialize($infor_web): '';//thông tin web
 
 		$id_hiden = (int)Request::get('id_hiden', 0);
@@ -180,6 +179,7 @@ class HosttingController extends BaseAdminController{
 		$this->layout->content =  View::make('admin.Hostting.add')
 			->with('id', $id)
 			->with('data', $dataSave)
+			->with('is_root', $this->is_root)
 			->with('optionStatus', $optionStatus)
 			->with('optionIsHostting', $optionIsHostting)
 			->with('optionIsReturn', $optionIsReturn)
