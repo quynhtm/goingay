@@ -17,10 +17,6 @@
 					{{ Form::open(array('method' => 'GET', 'role'=>'form')) }}
 					<div class="panel-body">
 						<div class="form-group col-lg-3">
-							<label for="web_id">Web ID</label>
-							<input type="text" class="form-control input-sm" id="web_id" name="web_id" placeholder="ID website" @if(isset($search['web_id']) && $search['web_id'] > 0)value="{{$search['web_id']}}"@endif>
-						</div>
-						<div class="form-group col-lg-3">
 							<label for="web_name">Name site</label>
 							<input type="text" class="form-control input-sm" id="web_name" name="web_name" placeholder="Tên website" @if(isset($search['web_name']) && $search['web_name'] != '')value="{{$search['web_name']}}"@endif>
 						</div>
@@ -35,12 +31,26 @@
 							</select>
 						</div>
 						<div class="form-group col-lg-3">
-							<label for="object_name">Ngày từ</label>
-							<input type="text" class="form-control" id="start_time" name="start_time"  data-date-format="dd-mm-yyyy" value="@if(isset($search['start_time']) && $search['start_time'] > 0){{date('d-m-Y',$search['start_time'])}}@endif">
+							<label for="web_status">Hostting</label>
+							<select name="web_is_hostting" id="web_is_hostting" class="form-control input-sm">
+								{{$optionIsHostting}}
+							</select>
+						</div>
+						<div class="form-group col-lg-3">
+							<label for="object_name">Ngày bắt đầy từ</label>
+							<input type="text" class="form-control" id="from_start_time" name="from_start_time"  data-date-format="dd-mm-yyyy" value="@if(isset($search['from_start_time']) && $search['from_start_time'] > 0){{date('d-m-Y',$search['from_start_time'])}}@endif">
 						</div>
 						<div class="form-group col-lg-3">
 							<label for="object_name">đến</label>
-							<input type="text" class="form-control" id="end_time" name="end_time"  data-date-format="dd-mm-yyyy" value="@if(isset($search['end_time']) && $search['end_time'] > 0){{date('d-m-Y',$search['end_time'])}}@endif">
+							<input type="text" class="form-control" id="to_start_time" name="to_start_time"  data-date-format="dd-mm-yyyy" value="@if(isset($search['to_start_time']) && $search['to_start_time'] > 0){{date('d-m-Y',$search['to_start_time'])}}@endif">
+						</div>
+						<div class="form-group col-lg-3">
+							<label for="object_name">Ngày kết thúc từ</label>
+							<input type="text" class="form-control" id="from_end_time" name="from_end_time"  data-date-format="dd-mm-yyyy" value="@if(isset($search['from_end_time']) && $search['from_end_time'] > 0){{date('d-m-Y',$search['from_end_time'])}}@endif">
+						</div>
+						<div class="form-group col-lg-3">
+							<label for="object_name">đến</label>
+							<input type="text" class="form-control" id="to_end_time" name="to_end_time"  data-date-format="dd-mm-yyyy" value="@if(isset($search['to_end_time']) && $search['to_end_time'] > 0){{date('d-m-Y',$search['to_end_time'])}}@endif">
 						</div>
 					</div>
 					<div class="panel-footer text-right">
@@ -74,30 +84,37 @@
 						</thead>
 						<tbody>
 						@foreach ($data as $key => $item)
+							@if($item['web_infor'] !='')
+								<?php $web_infor = unserialize($item['web_infor']);?>
+							@endif
 							<tr>
 								<td class="text-center text-middle">{{ $stt + $key+1 }}</td>
 								<td>
-									[<b>{{ $item['web_id'] }}</b>] {{ $item['web_name'] }}
-									@if($item->web_price > 0)
-										<br/><b>Giá:</b> <b class="red">{{ FunctionLib::numberFormat($item->web_price) }} đ</b>
+									[<b>{{ $item['web_id'] }}</b>] <a href="http://{{ $item['web_domain'] }}" target="_blank">{{ $item['web_name'] }}</a><br/>
+									@if(isset($arrIsReturn[$item->web_is_return]))
+										<i @if($item->web_is_return == CGlobal::status_show )class="red" @else class="green" @endif>{{ $arrIsReturn[$item->web_is_return] }}</i><br/>
 									@endif
+									@if($item->web_price > 0)
+										<b>Giá:</b> <b class="red">{{ FunctionLib::numberFormat($item->web_price) }}đ</b><br/>
+									@endif
+									@if(isset($web_infor['infor_price_domain']) && $web_infor['infor_price_domain'] > 0)<b>Gia hạn Domain: </b><b class="red">{{FunctionLib::numberFormat($web_infor['infor_price_domain'])}}đ</b><br/>@endif
+									@if(isset($web_infor['infor_price_host']) && $web_infor['infor_price_host'] > 0)<b>Gia hạn Host: </b><b class="red">{{FunctionLib::numberFormat($web_infor['infor_price_host'])}}đ</b><br/>@endif
 								</td>
 								<td>
-									@if($item['web_infor'] !='')
-										<?php $web_infor = unserialize($item['web_infor']);?>
-										<b>N: </b>{{$web_infor['infor_name']}}<br/>
-										<b>S: </b>{{$web_infor['infor_stand']}}<br/>
-										<b>C: </b>{{$web_infor['infor_bank_code']}}<br/>
-										<b>B: </b>{{$web_infor['infor_bank_address']}}<br/>
-										<b>E: </b>{{$web_infor['infor_email']}}<br/>
-										<b>F: </b>{{$web_infor['infor_phone']}}<br/>
-										<b>A: </b>{{$web_infor['infor_address']}}<br/>
-									@endif
+									@if($web_infor['infor_name']!='')<b>N: </b>{{$web_infor['infor_name']}}<br/>@endif
+									@if($web_infor['infor_stand']!='')<b>S: </b>{{$web_infor['infor_stand']}}<br/>@endif
+									@if($web_infor['infor_email']!='')<b>E: </b>{{$web_infor['infor_email']}}<br/>@endif
+									@if($web_infor['infor_phone']!='')<b>F: </b>{{$web_infor['infor_phone']}}<br/>@endif
+									@if($web_infor['infor_address']!='')<b>A: </b>{{$web_infor['infor_address']}}<br/>@endif
 								</td>
 								<td>{{ $item['web_note'] }}</td>
 								<td class="text-center text-middle">
-									<b style="color: green">{{date('d-m-Y',$item->web_time_start)}}</b>
-									<br/><b style="color: red">{{date('d-m-Y',$item->web_time_end)}}</b>
+									@if($item->web_is_hostting == CGlobal::status_show)
+										<b style="color: green">{{date('d-m-Y',$item->web_time_start)}}</b>
+										<br/><b style="color: red">{{date('d-m-Y',$item->web_time_end)}}</b>
+									@else
+										<b style="color: red">Hostting ngoài</b>
+									@endif
 								</td>
 								<td class="text-center text-middle">
 									@if($item['web_status'] == 1)
@@ -128,7 +145,9 @@
 </div>
 <script>
 	$(document).ready(function(){
-		var checkin = $('#start_time').datepicker({ });
-		var checkout = $('#end_time').datepicker({ });
+		var checkin = $('#from_start_time').datepicker({ });
+		var checkout = $('#to_start_time').datepicker({ });
+		var checkin2 = $('#from_end_time').datepicker({ });
+		var checkout2 = $('#to_end_time').datepicker({ });
 	});
 </script>

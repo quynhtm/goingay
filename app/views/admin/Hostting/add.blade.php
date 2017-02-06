@@ -48,6 +48,24 @@
                     </div>
 
                     <div class="clearfix"></div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Hostting</label>
+                            <select name="web_is_hostting" id="web_is_hostting" class="form-control input-sm">
+                                {{$optionIsHostting}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Trạng thái</label>
+                            <select name="web_status" id="web_status" class="form-control input-sm">
+                                {{$optionStatus}}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
                     <div class="col-sm-10">
                         <div class="form-group">
                             <label for="name" class="control-label">Ngày bắt đầu</label>
@@ -60,16 +78,6 @@
                         <div class="form-group">
                             <label for="name" class="control-label">Ngày kết thúc</label>
                             <input type="text" class="form-control" id="web_time_end" name="web_time_end"  data-date-format="dd-mm-yyyy" value="@if(isset($data['web_time_end']) && $data['web_time_end'] > 0){{date('d-m-Y',$data['web_time_end'])}}@endif">
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-                    <div class="col-sm-10">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Trạng thái</label>
-                            <select name="web_status" id="web_status" class="form-control input-sm">
-                                {{$optionStatus}}
-                            </select>
                         </div>
                     </div>
 
@@ -88,7 +96,41 @@
                 </div>
 
                 <div style="float: left; width: 50%;">
-                    <div class="col-lg-11" id="show_infor_contract_one" @if(isset($data['contract_infor']) && $data['contract_infor'] == 1) style="display: none" @endif>
+                    @if($is_root)
+                    <!--Thông tin hosting-->
+                    <div class="col-lg-11">
+                        <div class="form-group">
+                            <div class="col-lg-11" style="border-bottom: 2px solid #ccc"><h3 class="col-lg-12 text-center">Thông tin Hostting</h3></div>
+                        </div>
+
+                        <div class="col-sm-10 marginTop30">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Ip hosting</label>
+                                <input type="text" id="infor_host_ip" name="infor_host_ip" class="form-control" @if(isset($data['web_infor']['infor_host_ip']))value="{{$data['web_infor']['infor_host_ip']}}"@endif>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label for="name" class="control-label">User hosting</label>
+                                <input type="text" id="infor_host_user" name="infor_host_user" class="form-control" @if(isset($data['web_infor']['infor_host_user']))value="{{$data['web_infor']['infor_host_user']}}"@endif>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Pass hosting</label>
+                                <input type="text" id="infor_host_pass" name="infor_host_pass" class="form-control" @if(isset($data['web_infor']['infor_host_pass']))value="{{$data['web_infor']['infor_host_pass']}}"@endif>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    @endif
+
+                    <!---thông tin khách hàng-->
+                    <div class="col-lg-11">
                         <div class="form-group">
                             <div class="col-lg-11" style="border-bottom: 2px solid #ccc"><h3 class="col-lg-12 text-center">Thông tin khách hàng</h3></div>
                         </div>
@@ -105,22 +147,6 @@
                             <div class="form-group">
                                 <label for="name" class="control-label">Chức vụ</label>
                                 <input type="text" id="infor_stand" name="infor_stand" class="form-control" @if(isset($data['web_infor']['infor_stand']))value="{{$data['web_infor']['infor_stand']}}"@endif>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Số tài khoản ngân hàng</label>
-                                <input type="text" id="infor_bank_code" name="infor_bank_code" class="form-control" @if(isset($data['web_infor']['infor_bank_code']))value="{{$data['web_infor']['infor_bank_code']}}"@endif>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Chi nhánh ngân hàng</label>
-                                <input type="text" id="infor_bank_address" name="infor_bank_address" class="form-control" @if(isset($data['web_infor']['infor_bank_address']))value="{{$data['web_infor']['infor_bank_address']}}"@endif>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -148,6 +174,30 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
+
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Giá Domain gia hạn</label>
+                                <input type="text" id="infor_price_domain" name="infor_price_domain" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['web_infor']['infor_price_domain'])){{$data['web_infor']['infor_price_domain']}}@endif">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Giá Hostting gia hạn</label>
+                                <input type="text" id="infor_price_host" name="infor_price_host" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['web_infor']['infor_price_host'])){{$data['web_infor']['infor_price_host']}}@endif">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Hostting</label>
+                                <select name="web_is_return" id="web_is_return" class="form-control input-sm">
+                                    {{$optionIsReturn}}
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {{ Form::close() }}

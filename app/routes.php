@@ -35,6 +35,7 @@ Route::group(array('prefix' => '/', 'before' => ''), function () {
  * */
 Route::group(array('prefix' => 'cronjobs', 'before' => ''), function () {
     Route::get('runJobs', array('as' => 'cronjobs.runJobs','uses' => 'CronjobsController@runJobs'));//cap nhật lại link ảnh trong content
+    Route::get('apiPushProductShop', array('as' => 'cronjobs.apiPushProductShop','uses' => 'CronjobsController@apiPushProductShop'));//lây sản phẩm sang rao vặt
 });
 
 /*
