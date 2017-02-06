@@ -110,7 +110,7 @@
                                 </td>
                                 <td class="text-left text-middle">
                                     @if($item->item_status == CGlobal::status_show)
-                                        <a href="#" target="_blank" title="Chi tiết sản phẩm">
+                                        <a href="{{FunctionLib::buildLinkDetailItem($item->item_id,$item->item_name,$item->item_category_id)}}" title="Chi tiết tin đăng" target="_blank">
                                             [<b>{{ $item->item_id }}</b>] {{ $item->item_name }}
                                         </a>
                                     @else
