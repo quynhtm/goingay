@@ -122,7 +122,6 @@ class CronjobsController extends BaseSiteController
 				$dataSave['item_type_price'] = $item['product_type_price'];
 				$dataSave['item_price_sell'] = $item['product_price_sell'];
 				$dataSave['time_ontop'] = time();
-				$dataSave['item_image'] = '';
 				
 				//cập nhật nếu tồn tại rồi
 				if(!empty($arrProducInRaovat) && isset($arrProducInRaovat[$item['product_id']])){
