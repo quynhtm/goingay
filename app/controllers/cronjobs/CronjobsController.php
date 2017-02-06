@@ -89,4 +89,70 @@ class CronjobsController extends BaseSiteController
 		//FunctionLib::debug($provider);
 	}
 
+	public function apiPushProductShop(){
+		$url_shop = 'http://shopcuatui.com.vn/cronjobs/apiGetProductShop';
+		$this->user_customer = UserCustomer::getByID(7);
+		//lay mang id da tồn tại trên rao vat
+		$arrProducInRaovat = Items::getProductIdShop();
+		$update = $insert = 0;
+		$curl = Curl::getInstance();
+		$content = $curl->get($url_shop);
+		if($content){
+			/*
+			 * $result[$item->product_id] = array(
+					'product_id'=>$item->product_id,
+					'product_name'=>$item->product_name,
+					'product_type_price'=>$item->product_type_price,//1:hiển thị giá số, 2: hiển thị giá liên hệ
+					'product_price_sell'=>$item->product_price_sell,
+					'product_content'=>$item->product_content,
+					'product_image'=>$item->product_image,
+					'product_image_other'=>$item->product_image_other,
+					'product_status'=>$item->product_status,
+					);
+			 * */
+			$content = json_decode($content,true);
+			foreach($content as $item){
+				$dataSave['item_name'] = 'Bán '.$item['product_name'];
+				$dataSave['item_shop_product_id'] = $item['product_id'];//id cua SP shop
+				$dataSave['item_status'] = $item['product_status'];
+				$dataSave['item_content'] = FunctionLib::strReplace(addslashes($item['product_content']),CGlobal::$arrIconSpecals,'');
+				$dataSave['item_type_price'] = $item['product_type_price'];
+				$dataSave['item_price_sell'] = $item['product_price_sell'];
+				$dataSave['time_ontop'] = time();
+
+				//cập nhật nếu tồn tại rồi
+				if(!empty($arrProducInRaovat) && isset($arrProducInRaovat[$item['product_id']])){
+					$dataSave['time_update'] = time();
+					if(Items::updateData($arrProducInRaovat[$item['product_id']],$dataSave)){
+						$update ++;
+					}
+				}
+				//thêm mới
+				else{
+					$dataSave['item_image'] = '';
+					$dataSave['item_image_other'] = '';
+					$dataSave['item_category_id'] = 261;//thời trang làm đẹp
+					$dataSave['item_category_name'] = 'Thời trang - Làm đẹp';
+					$dataSave['item_type_action'] = CGlobal::ITEMS_TYPE_ACTION_1;
+
+					$dataSave['item_province_id'] = 22;
+					$dataSave['item_province_name'] = 'Hà Nội';
+					$dataSave['customer_id'] = $this->user_customer['customer_id'];
+					$dataSave['customer_name'] = $this->user_customer['customer_name'];
+					$dataSave['is_customer'] = $this->user_customer['is_customer'];
+					$dataSave['item_province_id'] = ($dataSave['item_province_id'] > 0) ?$dataSave['item_province_id'] : $this->user_customer['customer_province_id'];
+					$dataSave['item_infor_contract'] = $this->user_customer['customer_about'];
+					$dataSave['item_district_id'] = $this->user_customer['customer_district_id'];
+					$dataSave['item_block'] = CGlobal::ITEMS_NOT_BLOCK;
+					$dataSave['time_created'] = time();
+					if(Items::addData($dataSave)){
+						$insert ++;
+					}
+				}
+				//FunctionLib::debug($dataSave);
+			}
+		}
+		echo 'Thêm mới '.$insert.' và Cập nhật: '.$update; die;
+		//FunctionLib::debug($result);
+	}
 }

@@ -36,6 +36,7 @@ return array(
     'Contact' => $baseDir . '/app/models/Contact.php',
     'ContactController' => $baseDir . '/app/controllers/admin/ContactController.php',
     'CronjobsController' => $baseDir . '/app/controllers/cronjobs/CronjobsController.php',
+    'Curl' => $baseDir . '/app/library/AdminFunction/Curl.php',
     'DOMPDF' => $vendorDir . '/dompdf/dompdf/include/dompdf.cls.php',
     'DOMPDF_Exception' => $vendorDir . '/dompdf/dompdf/include/dompdf_exception.cls.php',
     'DOMPDF_Image_Exception' => $vendorDir . '/dompdf/dompdf/include/dompdf_image_exception.cls.php',
