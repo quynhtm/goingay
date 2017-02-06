@@ -75,7 +75,7 @@
 	<div class="content-boxcat">
 		<div class="col-653 pull-left">
 			<div class="detail-content-post">
-				{{FunctionLib::setNofollow(stripcslashes($itemShow->item_content))}}
+				{{FunctionLib::setNofollow(FunctionLib::strReplace(stripcslashes($itemShow->item_content), '\r\n', ''))}}
 			</div>
 
 			<div class="head-info">

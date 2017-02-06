@@ -90,7 +90,8 @@ class CronjobsController extends BaseSiteController
 	}
 
 	public function apiPushProductShop(){
-		$url_shop = 'http://shopcuatui.com.vn/cronjobs/apiGetProductShop';
+		$base_url_shop = 'http://shopcuatui.com.vn';
+		$url_shop = $base_url_shop.'/cronjobs/apiGetProductShop';
 		$this->user_customer = UserCustomer::getByID(7);
 		//lay mang id da tồn tại trên rao vat
 		$arrProducInRaovat = Items::getProductIdShop();
@@ -111,15 +112,18 @@ class CronjobsController extends BaseSiteController
 					);
 			 * */
 			$content = json_decode($content,true);
+			
 			foreach($content as $item){
 				$dataSave['item_name'] = 'Bán '.$item['product_name'];
 				$dataSave['item_shop_product_id'] = $item['product_id'];//id cua SP shop
 				$dataSave['item_status'] = $item['product_status'];
 				$dataSave['item_content'] = FunctionLib::strReplace(addslashes($item['product_content']),CGlobal::$arrIconSpecals,'');
+				$dataSave['item_content'] = FunctionLib::strReplace($dataSave['item_content'], '\r\n', '');
 				$dataSave['item_type_price'] = $item['product_type_price'];
 				$dataSave['item_price_sell'] = $item['product_price_sell'];
 				$dataSave['time_ontop'] = time();
-
+				$dataSave['item_image'] = '';
+				
 				//cập nhật nếu tồn tại rồi
 				if(!empty($arrProducInRaovat) && isset($arrProducInRaovat[$item['product_id']])){
 					$dataSave['time_update'] = time();
@@ -145,7 +149,20 @@ class CronjobsController extends BaseSiteController
 					$dataSave['item_district_id'] = $this->user_customer['customer_district_id'];
 					$dataSave['item_block'] = CGlobal::ITEMS_NOT_BLOCK;
 					$dataSave['time_created'] = time();
-					if(Items::addData($dataSave)){
+					
+					$_id =Items::addData($dataSave);
+					
+					if($_id){
+						if(isset($item['product_image']) && $item['product_image'] != ''){
+							$rao_vat_path_img = Config::get('config.DIR_ROOT').'/uploads/' .CGlobal::FOLDER_PRODUCT.'/'.$_id;
+							if(!file_exists($rao_vat_path_img)){
+								@mkdir($rao_vat_path_img, 0777, true);
+							};
+							$path_shop_img = $base_url_shop.'/uploads/product/'.$item['product_id'].'/'.$item['product_image'];
+							@copy($path_shop_img, $rao_vat_path_img.'/'.$item['product_image']);
+							$dataSaveUpdate['item_image'] = $item['product_image'];
+							Items::updateData($_id, $dataSaveUpdate);
+						}
 						$insert ++;
 					}
 				}
