@@ -220,6 +220,7 @@ class SiteHomeController extends BaseSiteController
 			$search['item_province_id'] = $province_id;
 			$province_name = $arrProvince[$province_id];
 		}
+		$search['item_category_name'] = $catname;
 		$search['item_category_id'] = $catid;
 		//$search['field_get'] = $this->str_field_items_get;
 		$resultItemCategory = Items::getItemsSite($search,$limit,$offset,$totalSearch);
