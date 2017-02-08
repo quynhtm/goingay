@@ -126,6 +126,17 @@ class CronjobsController extends BaseSiteController
 				//cập nhật nếu tồn tại rồi
 				if(!empty($arrProducInRaovat) && isset($arrProducInRaovat[$item['product_id']])){
 					$dataSave['time_update'] = time();
+					
+					if(isset($item['product_image']) && $item['product_image'] != ''){
+						$rao_vat_path_img = Config::get('config.DIR_ROOT').'/uploads/' .CGlobal::FOLDER_PRODUCT.'/'.$item['product_id'];
+						if(!file_exists($rao_vat_path_img)){
+							@mkdir($rao_vat_path_img, 0777, true);
+						};
+						$path_shop_img = $base_url_shop.'/uploads/product/'.$item['product_id'].'/'.$item['product_image'];
+						@copy($path_shop_img, $rao_vat_path_img.'/'.$item['product_image']);
+						$dataSave['item_image'] = $item['product_image'];
+					}
+					
 					if(Items::updateData($arrProducInRaovat[$item['product_id']],$dataSave)){
 						$update ++;
 					}
