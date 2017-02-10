@@ -678,7 +678,10 @@ class SiteUserCustomerController extends BaseSiteController{
 				if(!empty($items)){
 					if($item_id > 0){//cap nhat
 						$dataSave['time_update'] = time();
-						if(Items::updateData($item_id,$dataSave)){
+						$itemID = Items::updateData($item_id,$dataSave);
+						if($itemID){
+							$itemShow = Items::getItemsByID($itemID);
+							ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $itemShow->item_image, CGlobal::sizeImage_600);
 							return Redirect::route('customer.ItemsList');
 						}
 					}
@@ -692,7 +695,10 @@ class SiteUserCustomerController extends BaseSiteController{
 				$dataSave['time_created'] = time();
 				$dataSave['time_ontop'] = time();
 				$dataSave['time_update'] = time();
-				if(Items::addData($dataSave)){
+				$itemID = Items::addData($dataSave);
+				if($itemID){
+					$itemShow = Items::getItemsByID($itemID);
+					ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $itemShow->item_image, CGlobal::sizeImage_600);
 					//cập nhật số lượng up tin
 					$dataCustomer['customer_up_item'] = $this->user_customer['customer_up_item'] + 1;;
 					if(UserCustomer::updateData($this->user_customer['customer_id'],$dataCustomer)){

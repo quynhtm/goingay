@@ -139,7 +139,7 @@ class SiteHomeController extends BaseSiteController
 		$meta_description = addslashes(FunctionLib::substring($itemShow->item_content,200));
 		$meta_description = FunctionLib::strReplace($meta_description, array('rn', '\r\n', '\\r\\n'),'');
 		
-		$meta_img= ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $itemShow->item_image, CGlobal::sizeImage_200);
+		$meta_img= ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $itemShow->item_id, $itemShow->item_image, CGlobal::sizeImage_600);
 		$url_detail = FunctionLib::buildLinkDetailItem($itemShow->item_id, $itemShow->item_name, $itemShow->item_category_id);
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description,$url_detail);
 
