@@ -95,7 +95,7 @@
 					<td>
 						<?php 
 						$url_link_share = FunctionLib::buildLinkDetailItem($item->item_id,$item->item_name,$item->item_category_id);
-						$thumb_meta = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id, $item->item_image, CGlobal::sizeImage_600);
+						$thumb_meta = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id, $item->item_image, CGlobal::sizeImage_500);
 						if(!empty($arrCustomer)){
 							$string_base = $arrCustomer->customer_id.'_'.$arrCustomer->customer_email;
 							$param_customer_share = '?customer_share='.base64_encode($string_base);
