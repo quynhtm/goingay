@@ -52,7 +52,7 @@
 				<th width="45%">Thông tin</th>
 				<th width="16%" class="text-right">Giá bán</th>
 				<th width="12%" class="text-center">Ngày thao tác</th>
-				<th width="10%">Chia sẻ</th>
+				<th width="10%" class="text-center">Chia sẻ</th>
 				<th width="17%" class="text-center">Thao tác</th>
 			</tr>
 			</thead>
@@ -101,7 +101,7 @@
 							$url_link_share .= $param_customer_share;
 						}
 						?>
-						<div class="like-social pull-right">
+						<div class="like-social text-center">
 							<a class="share-google" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên google" data-url="{{$url_link_share}}">
 								<i  class="icon-share fa fa-google-plus"></i>
 							</a>

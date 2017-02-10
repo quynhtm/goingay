@@ -183,7 +183,7 @@ class Items extends Eloquent
                 $query->orderByRaw(DB::raw("FIELD(item_id, ".trim($dataSearch['str_item_id'])." )"));
 
             }else{
-                $query->orderBy('item_id', 'desc');
+                $query->orderBy('time_ontop', 'desc')->orderBy('item_id', 'desc');
             }
 
             $total = $query->count();
