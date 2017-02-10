@@ -95,10 +95,13 @@
 					<td>
 						<?php 
 						$url_link_share = FunctionLib::buildLinkDetailItem($item->item_id,$item->item_name,$item->item_category_id);
+						$thumb_meta = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item->item_id, $item->item_image, CGlobal::sizeImage_600);
 						if(!empty($arrCustomer)){
 							$string_base = $arrCustomer->customer_id.'_'.$arrCustomer->customer_email;
 							$param_customer_share = '?customer_share='.base64_encode($string_base);
-							$url_link_share .= $param_customer_share;
+							$url_link_share .= $param_customer_share.'&p[images][0]='.$thumb_meta;
+						}else{
+							$url_link_share .= '&p[images][0]='.$thumb_meta;
 						}
 						?>
 						<div class="like-social text-center">
