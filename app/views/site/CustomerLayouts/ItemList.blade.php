@@ -49,9 +49,10 @@
 			<thead class="thin-border-bottom">
 			<tr class="">
 				<th width="8%" class="text-center">Ảnh</th>
-				<th width="55%">Thông tin</th>
+				<th width="45%">Thông tin</th>
 				<th width="16%" class="text-right">Giá bán</th>
 				<th width="12%" class="text-center">Ngày thao tác</th>
+				<th width="10%">Chia sẻ</th>
 				<th width="17%" class="text-center">Thao tác</th>
 			</tr>
 			</thead>
@@ -90,6 +91,24 @@
 						<span style="font-size: 9px;color: green">Top: {{ date('d-m-Y h:i',$item->time_ontop) }}</span>
 						<div class="clear"></div>
 						<span style="font-size: 9px;">U: {{ date('d-m-Y h:i',$item->time_update) }}</span>
+					</td>
+					<td>
+						<?php 
+						$url_link_share = FunctionLib::buildLinkDetailItem($item->item_id,$item->item_name,$item->item_category_id);
+						if(!empty($arrCustomer)){
+							$string_base = $arrCustomer->customer_id.'_'.$arrCustomer->customer_email;
+							$param_customer_share = '?customer_share='.base64_encode($string_base);
+							$url_link_share .= $param_customer_share;
+						}
+						?>
+						<div class="like-social pull-right">
+							<a class="share-google" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên google" data-url="{{$url_link_share}}">
+								<i  class="icon-share fa fa-google-plus"></i>
+							</a>
+							<a class="share-facebook" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên facebook" data-url="{{$url_link_share}}">
+								<i class="icon-share fa fa-facebook"></i>
+							</a>
+						</div>
 					</td>
 					<td class="text-center text-middle">
 						@if($item->item_status == CGlobal::status_show)

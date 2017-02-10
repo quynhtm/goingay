@@ -221,11 +221,11 @@ SITE={
 		}
 	},
 	shareSocial:function(){
-		$("#share-facebook").click(function() {
+		$(".share-facebook").click(function() {
             var a = $(this).attr("data-url"),
                 b = "https://www.facebook.com/sharer/sharer.php?u=" + a;
             return window.open(b, "_blank", "height=450,width=700,resizable=no,status=no"), !1
-        }), $("#share-google").click(function() {
+        }), $(".share-google").click(function() {
             var a = $(this).attr("data-url"),
                 b = "https://plus.google.com/share?url=" + a;
             return window.open(b, "_blank", "height=450,width=700,resizable=no,status=no"), !1

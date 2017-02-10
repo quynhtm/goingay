@@ -6,10 +6,10 @@
 			</a>
 		</h2>
 		<div class="like-social pull-right">
-			<a id="share-google" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên google" data-url="{{$url_link_share}}">
+			<a class="share-google" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên google" data-url="{{$url_link_share}}">
 				<i  class="icon-share fa fa-google-plus"></i>
 			</a>
-			<a id="share-facebook" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên facebook" data-url="{{$url_link_share}}">
+			<a class="share-facebook" rel="nofollow" href="javascript:void(0);" title="Chia sẻ bài viết lên facebook" data-url="{{$url_link_share}}">
 				<i class="icon-share fa fa-facebook"></i>
 			</a>
 		</div>
