@@ -31,11 +31,14 @@ class BaseAdminController extends BaseController
             'name'=>'QL user Admin',
             'link'=>'javascript:void(0)',
             'icon'=>'fa fa-user',
-            'arr_link_sub'=>array('admin.user_view','admin.permission_view','admin.groupUser_view',),//dung de check menu left action
+            'arr_link_sub'=>array('admin.user_view','admin.permission_view','admin.groupUser_view','admin.hostting','admin.managerMoney'),//dung de check menu left action
             'sub'=>array(
                 array('name'=>'Tài khoản Admin', 'RouteName'=>'admin.user_view', 'icon'=>'fa fa-user icon-4x', 'showcontent'=>1, 'permission'=>'user_view'),
                 array('name'=>'Danh sách quyền', 'RouteName'=>'admin.permission_view', 'icon'=>'fa fa-user icon-4x', 'showcontent'=>0, 'permission'=>'permission_full'),
                 array('name'=>'Danh sách nhóm quyền', 'RouteName'=>'admin.groupUser_view', 'icon'=>'fa fa-user icon-4x', 'showcontent'=>0, 'permission'=>'group_user_view'),
+
+                array('name'=>'QL dự án website', 'RouteName'=>'admin.hostting', 'icon'=>'fa fa-wordpress icon-4x', 'showcontent'=>1, 'permission'=>''),
+                array('name'=>'QL quỹ nhóm', 'RouteName'=>'admin.managerMoney', 'icon'=>'fa fa-money icon-4x', 'showcontent'=>1, 'permission'=>''),
             ),
         );
 
@@ -45,9 +48,8 @@ class BaseAdminController extends BaseController
             'icon'=>'fa fa-cogs',
             'arr_link_sub'=>array('admin.info','admin.trash','admin.contract','admin.hostting'),
             'sub'=>array(
-                array('name'=>'QL dự án website', 'RouteName'=>'admin.hostting', 'icon'=>'fa fa-wordpress icon-4x', 'showcontent'=>1, 'permission'=>''),
                 array('name'=>'Liên hệ quản trị', 'RouteName'=>'admin.contract', 'icon'=>'fa fa-envelope-o icon-4x', 'showcontent'=>1, 'permission'=>'contract_view'),
-                array('name'=>'Thông tin chung', 'RouteName'=>'admin.info', 'icon'=>'fa fa-cogs icon-4x', 'showcontent'=>1, 'permission'=>'abc', 'clear'=>1),
+                array('name'=>'Thông tin chung', 'RouteName'=>'admin.info', 'icon'=>'fa fa-cogs icon-4x', 'showcontent'=>1, 'permission'=>'abc', 'clear'=>0),
                 array('name'=>'Thùng rác', 'RouteName'=>'admin.trash', 'icon'=>'fa fa-trash icon-4x', 'showcontent'=>1, 'permission'=>'abc'),
             ),
         );
@@ -69,7 +71,7 @@ class BaseAdminController extends BaseController
             'arr_link_sub'=>array('admin.customerView','admin.itemsView','admin.category_list',),
             'sub'=>array(
                 array('name'=>'Khách đăng tin', 'RouteName'=>'admin.customerView', 'icon'=>'fa fa-users icon-4x', 'showcontent'=>1, 'permission'=>'user_customer_full'),
-                array('name'=>'Danh mục tin', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1, 'permission'=>'category_full', 'clear'=>1),
+                array('name'=>'Danh mục tin', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1, 'permission'=>'category_full', 'clear'=>0),
                 array('name'=>'Danh sách tin đăng', 'RouteName'=>'admin.itemsView', 'icon'=>'fa fa-file-text-o icon-4x', 'showcontent'=>1, 'permission'=>'items_full'),
             ),
         );
