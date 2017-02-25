@@ -158,6 +158,10 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::get('hostting/edit/{id?}', array('as' => 'admin.hosttingEdit','uses' => 'HosttingController@getItem'))->where('id', '[0-9]+');
     Route::post('hostting/edit/{id?}', array('as' => 'admin.hosttingEdit','uses' => 'HosttingController@postItem'))->where('id', '[0-9]+');
     Route::post('hostting/deleteHostting', array('as' => 'admin.deleteHostting','uses' => 'HosttingController@deleteHostting'));//ajax
+    //quan ly tiền
+    Route::get('managerMoney/view', array('as' => 'admin.managerMoney','uses' => 'HosttingController@moneyView'));
+    Route::get('managerMoney/edit/{id?}', array('as' => 'admin.managerMoneyEdit','uses' => 'HosttingController@getMoney'))->where('id', '[0-9]+');
+    Route::post('managerMoney/edit/{id?}', array('as' => 'admin.managerMoneyEdit','uses' => 'HosttingController@postMoney'))->where('id', '[0-9]+');
 
     Route::get('toolsCommon/addPermit',array('as' => 'admin.addPermit','uses' => 'ToolsCommonController@addPermit'));
     //Tools quản lý các page khác nhau
