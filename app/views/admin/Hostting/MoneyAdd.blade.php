@@ -5,8 +5,8 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{URL::route('admin.dashboard')}}">Home</a>
             </li>
-            <li><a href="{{URL::route('admin.hostting')}}"> Quản lý Website Hostting</a></li>
-            <li class="active">@if($id > 0)Cập nhật tỉnh thành @else Tạo mới Website Hostting @endif</li>
+            <li><a href="{{URL::route('admin.hostting')}}"> Quản lý tiền quỹ</a></li>
+            <li class="active">@if($id > 0)Cập nhật tiền quỹ @else Tạo mới tiền quỹ @endif</li>
         </ul><!-- /.breadcrumb -->
     </div>
 
@@ -24,67 +24,35 @@
                 @endif
                 <div style="float: left; width: 50%; border-right: 1px solid #ccc">
                     <div class="form-group">
-                        <div class="col-lg-11" style="border-bottom: 2px solid #ccc"><h3 class="col-lg-12 text-center">Thông tin Website</h3></div>
+                        <div class="col-lg-11" style="border-bottom: 2px solid #ccc"><h3 class="col-lg-12 text-center">Thông tin quỹ</h3></div>
                     </div>
                     <div class="col-sm-10 marginTop30">
                         <div class="form-group">
-                            <label for="name" class="control-label">Tên Website<span class="red"> (*) </span></label>
-                            <input type="text" placeholder="Tên Website" id="web_name" name="web_name"  class="form-control input-sm" value="@if(isset($data['web_name'])){{$data['web_name']}}@endif">
+                            <label for="name" class="control-label">Lý do nhập-xuất<span class="red"> (*) </span></label>
+                            <input type="text" placeholder="Lý do nhập-xuất" id="money_name" name="money_name"  class="form-control input-sm" value="@if(isset($data['money_name'])){{$data['money_name']}}@endif">
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="col-sm-10">
                         <div class="form-group">
-                            <label for="name" class="control-label">Domain</label>
-                            <input type="text" placeholder="Domain" id="web_domain" name="web_domain"  class="form-control input-sm" value="@if(isset($data['web_domain'])){{$data['web_domain']}}@endif">
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col-sm-10">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Giá web</label>
-                            <input type="text" placeholder="Giá web" id="web_price" name="web_price" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['web_price'])){{$data['web_price']}}@endif">
+                            <label for="name" class="control-label">Số tiền</label>
+                            <input type="text" placeholder="Số tiền" id="money_price" name="money_price" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['money_price'])){{$data['money_price']}}@endif">
                         </div>
                     </div>
 
                     <div class="clearfix"></div>
                     <div class="col-sm-5">
                         <div class="form-group">
-                            <label for="name" class="control-label">Hostting</label>
-                            <select name="web_is_hostting" id="web_is_hostting" class="form-control input-sm">
-                                {{$optionIsHostting}}
+                            <label for="name" class="control-label">Kiểu nhập - xuất</label>
+                            <select name="money_type" id="money_type" class="form-control input-sm">
+                                {{$optionType}}
                             </select>
                         </div>
                     </div>
-                    <div class="col-sm-5">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Trạng thái</label>
-                            <select name="web_status" id="web_status" class="form-control input-sm">
-                                {{$optionStatus}}
-                            </select>
-                        </div>
-                    </div>
-
                     <div class="clearfix"></div>
                     <div class="col-sm-10">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Ngày bắt đầu</label>
-                            <input type="text" class="form-control" id="web_time_start" name="web_time_start"  data-date-format="dd-mm-yyyy" value="@if(isset($data['web_time_start']) && $data['web_time_start'] > 0){{date('d-m-Y',$data['web_time_start'])}}@endif">
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-                    <div class="col-sm-10">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Ngày kết thúc</label>
-                            <input type="text" class="form-control" id="web_time_end" name="web_time_end"  data-date-format="dd-mm-yyyy" value="@if(isset($data['web_time_end']) && $data['web_time_end'] > 0){{date('d-m-Y',$data['web_time_end'])}}@endif">
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-                    <div class="col-sm-10">
-                        <label for="name" class="control-label">Ghi chú thêm</label><div class="clearfix"></div>
-                        <textarea id="web_note" name="web_note" rows="5" cols="70">@if(isset($data['web_note'])){{$data['web_note']}}@endif</textarea>
+                        <label for="name" class="control-label">Ghi chú </label><div class="clearfix"></div>
+                        <textarea id="web_note" name="money_infor" rows="5" cols="70">@if(isset($data['money_infor'])){{$data['money_infor']}}@endif</textarea>
                     </div>
 
                     <div class="clearfix"></div>
@@ -93,112 +61,6 @@
                         <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
                     </div>
                     <input type="hidden" id="id_hiden" name="id_hiden" value="{{$id}}"/>
-                </div>
-
-                <div style="float: left; width: 50%;">
-                    @if($is_root)
-                    <!--Thông tin hosting-->
-                    <div class="col-lg-11">
-                        <div class="form-group">
-                            <div class="col-lg-11" style="border-bottom: 2px solid #ccc"><h3 class="col-lg-12 text-center">Thông tin Hostting</h3></div>
-                        </div>
-
-                        <div class="col-sm-10 marginTop30">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Ip hosting</label>
-                                <input type="text" id="infor_host_ip" name="infor_host_ip" class="form-control" @if(isset($data['web_infor']['infor_host_ip']))value="{{$data['web_infor']['infor_host_ip']}}"@endif>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <label for="name" class="control-label">User hosting</label>
-                                <input type="text" id="infor_host_user" name="infor_host_user" class="form-control" @if(isset($data['web_infor']['infor_host_user']))value="{{$data['web_infor']['infor_host_user']}}"@endif>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Pass hosting</label>
-                                <input type="text" id="infor_host_pass" name="infor_host_pass" class="form-control" @if(isset($data['web_infor']['infor_host_pass']))value="{{$data['web_infor']['infor_host_pass']}}"@endif>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    @endif
-
-                    <!---thông tin khách hàng-->
-                    <div class="col-lg-11">
-                        <div class="form-group">
-                            <div class="col-lg-11" style="border-bottom: 2px solid #ccc"><h3 class="col-lg-12 text-center">Thông tin khách hàng</h3></div>
-                        </div>
-
-                        <div class="col-sm-10 marginTop30">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Tên đại diện</label>
-                                <input type="text" id="infor_name" name="infor_name" class="form-control" @if(isset($data['web_infor']['infor_name']))value="{{$data['web_infor']['infor_name']}}"@endif>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Chức vụ</label>
-                                <input type="text" id="infor_stand" name="infor_stand" class="form-control" @if(isset($data['web_infor']['infor_stand']))value="{{$data['web_infor']['infor_stand']}}"@endif>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Email</label>
-                                <input type="text" id="infor_email" name="infor_email" class="form-control" @if(isset($data['web_infor']['infor_email']))value="{{$data['web_infor']['infor_email']}}"@endif>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Phone</label>
-                                <input type="text" id="infor_phone" name="infor_phone" class="form-control" @if(isset($data['web_infor']['infor_phone']))value="{{$data['web_infor']['infor_phone']}}"@endif>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Địa chỉ</label>
-                                <input type="text" id="infor_address" name="infor_address" class="form-control" @if(isset($data['web_infor']['infor_address']))value="{{$data['web_infor']['infor_address']}}"@endif>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Giá Domain gia hạn</label>
-                                <input type="text" id="infor_price_domain" name="infor_price_domain" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['web_infor']['infor_price_domain'])){{$data['web_infor']['infor_price_domain']}}@endif">
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Giá Hostting gia hạn</label>
-                                <input type="text" id="infor_price_host" name="infor_price_host" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['web_infor']['infor_price_host'])){{$data['web_infor']['infor_price_host']}}@endif">
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="col-sm-5">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Hostting</label>
-                                <select name="web_is_return" id="web_is_return" class="form-control input-sm">
-                                    {{$optionIsReturn}}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 {{ Form::close() }}
             </div>
