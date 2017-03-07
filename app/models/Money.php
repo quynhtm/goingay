@@ -19,7 +19,9 @@ class Money extends Eloquent
             if (isset($dataSearch['money_name']) && $dataSearch['money_name'] != '') {
                 $query->where('money_name','LIKE', '%' . $dataSearch['money_name'] . '%');
             }
-
+            if (isset($dataSearch['money_type']) && $dataSearch['money_type'] != -1) {
+                $query->where('money_type','=',$dataSearch['money_type']);
+            }
             //ngày k?t thúc
             if (isset($dataSearch['start_time']) && $dataSearch['start_time'] > 0) {
                 $query->where('money_time_creater','>=',$dataSearch['start_time']);
