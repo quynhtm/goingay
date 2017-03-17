@@ -1564,3 +1564,134 @@ h1, h2, h3, h4, h5, h6{
 .detail-content-post img {
     width: 80%;
 }
+/*Post Seo*/
+.list-item-post {
+    display: inline-block;
+    margin-top: 10px;
+    width: 100%;
+}
+.list-item-post .item-post-seo{
+    border-bottom: 1px dotted #ddd;
+    clear: both;
+    display: inline-block;
+    margin: 0 0 15px;
+    padding-bottom: 15px;
+    width: 100%;
+}
+.list-item-post .item-post-seo .post-img {
+    display: inline-block;
+    float: left;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-height: 185px;
+}
+.list-item-post .item-post-seo .post-img img {
+    border: 1px solid #fafafa;
+    width: 100%;
+}
+.post-format {
+    background: rgba(0, 0, 0, 0);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: background 0.5s ease 0s;
+    width: 100%;
+    z-index: 2;
+}
+.post-format .fa-file-text {
+    border: 2px solid #fff;
+    border-radius: 100%;
+    color: #fff;
+    display: block;
+    font-size: 18px;
+    height: 40px;
+    left: 50%;
+    line-height: 35px;
+    margin: -20px 0 0 -20px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: scale(0, 0);
+    transition: all 0.2s ease 0s;
+    width: 40px;
+}
+.item-post-seo:hover .post-format .fa-file-text {
+    transform: scale(1, 1);
+}
+.post-data .post-title {
+    font-style: normal;
+    font-weight: normal;
+    margin-top: 0;
+}
+.post-title{
+    color: #444;
+    display: block;
+    font-size: 18px;
+    line-height: 1.3em;
+    margin: 0;
+}
+.item-post-seo:hover .post-title,
+.post-title:hover {
+    color: #2858a0;
+}
+.item-post-seo .post-content{
+    color: #444;
+    text-align: justify;
+}
+.redmore{
+    margin-top: 10px;
+    color: #cc0000;
+    font-weight: 300;
+    transition: all 0.1s linear 0s;
+    font-style:italic;
+}
+.redmore:hover{
+    text-decoration: underline;
+}
+.date {
+    color: #555;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: normal;
+}
+.icon-date{
+    background: rgba(0, 0, 0, 0) url("../img/icon-date.png") no-repeat scroll 0 0;
+    display: inline-block;
+    margin-right: 5px;
+    width:10px;
+    height:10px;
+}
+.title-head{
+    border-left: #ff9c00 5px solid;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-left: 8px;
+}
+.item-post-seo:last-child,
+.item-post-seo.last{
+    border-bottom: none;
+}
+.list-item-post.ext .item-post-seo{
+    margin: 0 0 5px;
+    padding-bottom: 5px;
+}
+.bdt10{
+    padding-top: 20px;
+    border-top:1px dotted #ddd;
+}
+.list-item-post.ext .item-post-seo .post-img{
+    display: inline-block;
+    width: 100%;
+    clear: both;
+}
+.list-item-post.ext .item-post-seo .post-data{
+    display: inline-block;
+    width: 100%;
+    clear: both;
+    margin-top: 10px;
+}

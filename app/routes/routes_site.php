@@ -39,6 +39,10 @@ Route::get('chi-tiet/tin-tuc-{new_id}/{news_title}.html',array('as' => 'Site.pag
 Route::match(['GET','POST'], 'captcha', array('as' => 'Site.linkCaptcha','uses' =>'SiteHomeController@linkCaptcha'));
 Route::match(['GET','POST'], 'captchaCheckAjax', array('as' => 'Site.captchaCheckAjax','uses' =>'SiteHomeController@captchaCheckAjax'));
 
+//Tin đang phuc vu cho seo
+Route::get('forum-chia-se/{cat_name_alias}-{cat_id}.html',array('as' => 'Site.pagePostSeo','uses' =>'SiteHomeController@pagePostSeo'))->where('cat_name_alias', '[A-Z0-9a-z_\-]+')->where('cat_id', '[0-9]+');
+Route::get('forum-chia-se/{cat_name_alias}/{news_title}-{news_id}.html',array('as' => 'Site.pagePostSeoDetail','uses' =>'SiteHomeController@pagePostSeoDetail'))->where('cat_name_alias', '[A-Z0-9a-z_\-]+')->where('news_title', '[A-Z0-9a-z_\-]+')->where('news_id', '[0-9]+');
+
 /******************************************************************************************************************************
  * Thao tac co phan dang nhap cua khach hang
 //Quan ly tin dang

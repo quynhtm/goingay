@@ -444,4 +444,31 @@ class SiteHomeController extends BaseSiteController
 		Cache::flush();
 		echo $tag;
 	}
+
+	public function pagePostSeo($cat_name_alias='', $news_title='', $news_id=0){
+        $banner_page = CGlobal::BANNER_PAGE_SEARCH;
+        $this->header($banner_page);
+        $this->menuLeft($banner_page);
+
+        $search['news_status'] = CGlobal::status_show;
+        $search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort';
+        $arrListNew = News::searchByCondition($search, CGlobal::number_show_15, 0,$total);
+
+        $this->layout->content = View::make('site.SiteLayouts.pagePostSeo')
+            ->with('arrListNew', $arrListNew);
+        $this->footer();
+    }
+    public function pagePostSeoDetail($cat_name_alias='', $news_title='', $news_id=0){
+        $banner_page = CGlobal::BANNER_PAGE_SEARCH;
+        $this->header($banner_page);
+        $this->menuLeft($banner_page);
+
+        $search['news_status'] = CGlobal::status_show;
+        $search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort';
+        $arrListNew = News::searchByCondition($search, CGlobal::number_show_15, 0,$total);
+
+        $this->layout->content = View::make('site.SiteLayouts.pagePostSeoDetail')
+            ->with('arrListNew', $arrListNew);
+        $this->footer();
+    }
 }
