@@ -1289,13 +1289,16 @@ h1, h2, h3, h4, h5, h6{
 	list-style-type: disc;
 }
 .event-block-list li{
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 	list-style-type: disc;
 }
 .event-block-list li a {
     font-size: 14px;
     line-height: 1.2;
     color: #333;
+}
+.event-block-list li a:hover{
+    text-decoration: underline;
 }
 .post-title-view{
 	color: #333;
