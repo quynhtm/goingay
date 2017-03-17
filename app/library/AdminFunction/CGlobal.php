@@ -99,26 +99,31 @@ class CGlobal{
     const province_id_hanoi = 22;
 
     //Tin tuc
-    const NEW_CATEGORY_TIN_TUC_CHUNG = 1;
     const NEW_CATEGORY_GIOI_THIEU = 2;
-    const NEW_CATEGORY_QUANG_CAO = 3;
+    const NEW_CATEGORY_TIN_TUC = 3;
+    const NEW_CATEGORY_THE_THAO = 4;
+    const NEW_CATEGORY_SUC_KHOE = 5;
+    const NEW_CATEGORY_GIA_DINH = 6;
+    const NEW_CATEGORY_CONG_NGHE = 7;
+    const NEW_CATEGORY_THE_GIOI = 8;
 
     const NEW_TYPE_TIN_TUC = 1;
     const NEW_TYPE_GIOI_THIEU = 2;
     const NEW_TYPE_QUANG_CAO = 3;
 
     public static $arrCategoryNew = array(-1 => '--- Chọn danh mục ---',
-        self::NEW_CATEGORY_TIN_TUC_CHUNG => 'Tin tức chung',
         self::NEW_CATEGORY_GIOI_THIEU => 'Tin giới thiệu',
-        self::NEW_CATEGORY_QUANG_CAO => 'Tin quảng cáo',
-    );
+        self::NEW_CATEGORY_TIN_TUC => 'Tin tức',
+        self::NEW_CATEGORY_THE_THAO => 'Thể thao',
+        self::NEW_CATEGORY_SUC_KHOE => 'Sức khỏe',
+        self::NEW_CATEGORY_GIA_DINH => 'Gia đình',
+        self::NEW_CATEGORY_CONG_NGHE => 'Công nghệ',
+        self::NEW_CATEGORY_THE_GIOI => 'Thế giới',
+   );
     public static $arrTypeNew = array(-1 => '--- Chọn kiểu tin ---',
         self::NEW_TYPE_TIN_TUC => 'Tin tức chung',
         self::NEW_TYPE_GIOI_THIEU => 'Tin Hỗ trợ',
-        self::NEW_TYPE_QUANG_CAO => 'Tin quảng cáo',
     );
-
-
 
     const IMAGE_ERROR = 133;
     const FOLDER_NEWS = 'news';

@@ -56,16 +56,6 @@ class NewsController extends BaseAdminController
         $dataSearch = News::searchByCondition($search, $limit, $offset,$total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
 
-        if(!empty($dataSearch)){
-            foreach($dataSearch as $k=> $val){
-                $url_image = ($val->news_image != '')?ThumbImg::getImageThumb(CGlobal::FOLDER_NEWS, $val->news_id, $val->news_image, CGlobal::sizeImage_100,  '', true, CGlobal::type_thumb_image_banner, false):'';
-                $data[] = array('news_id'=>$val->news_id,
-                    'news_title'=>$val->news_title,
-                    'news_status'=>$val->news_status,
-                    'url_image'=>$url_image,
-                );
-            }
-        }
         //FunctionLib::debug($dataSearch);
         $optionStatus = FunctionLib::getOption($this->arrStatus, $search['news_status']);
         $this->layout->content = View::make('admin.News.view')
@@ -73,10 +63,11 @@ class NewsController extends BaseAdminController
             ->with('stt', ($pageNo-1)*$limit)
             ->with('total', $total)
             ->with('sizeShow', count($data))
-            ->with('data', $data)
+            ->with('data', $dataSearch)
             ->with('search', $search)
             ->with('optionStatus', $optionStatus)
             ->with('arrStatus', $this->arrStatus)
+            ->with('arrCategoryNew', $this->arrCategoryNew)
 
             ->with('is_root', $this->is_root)//dùng common
             ->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)//dùng common
@@ -111,7 +102,7 @@ class NewsController extends BaseAdminController
             }
         }
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['news_status'])? $data['news_status'] : CGlobal::status_show);
-        $optionCategory = FunctionLib::getOption($this->arrCategoryNew, isset($data['news_category'])? $data['news_category'] : CGlobal::NEW_CATEGORY_TIN_TUC_CHUNG);
+        $optionCategory = FunctionLib::getOption($this->arrCategoryNew, isset($data['news_category'])? $data['news_category'] : CGlobal::NEW_CATEGORY_TIN_TUC);
         $optionType = FunctionLib::getOption($this->arrTypeNew, isset($data['news_type'])? $data['news_type'] : CGlobal::NEW_TYPE_TIN_TUC);
 
         $this->layout->content = View::make('admin.News.add')
@@ -130,10 +121,13 @@ class NewsController extends BaseAdminController
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
         $dataSave['news_title'] = addslashes(Request::get('news_title'));
+        $dataSave['meta_title'] = addslashes(Request::get('meta_title'));
+        $dataSave['meta_description'] = addslashes(Request::get('meta_description'));
+        $dataSave['meta_keywords'] = addslashes(Request::get('meta_keywords'));
         $dataSave['news_desc_sort'] = addslashes(Request::get('news_desc_sort'));
         $dataSave['news_content'] = FunctionLib::strReplace(Request::get('news_content'), '\r\n', '');
-        $dataSave['news_type'] = addslashes(Request::get('news_type'));
-        $dataSave['news_category'] = addslashes(Request::get('news_category'));
+        $dataSave['news_type'] = addslashes(Request::get('news_type',CGlobal::NEW_TYPE_TIN_TUC));
+        $dataSave['news_category'] = (int)(Request::get('news_category',CGlobal::NEW_CATEGORY_TIN_TUC));
         $dataSave['news_status'] = (int)Request::get('news_status', 0);
         $id_hiden = (int)Request::get('id_hiden', 0);
 		
@@ -159,6 +153,7 @@ class NewsController extends BaseAdminController
             $id = ($id == 0)?$id_hiden: $id;
             if($id > 0) {
                 //cap nhat
+                $dataSave['news_create'] =  time();
                 if(News::updateData($id, $dataSave)) {
                     return Redirect::route('admin.newsView');
                 }
