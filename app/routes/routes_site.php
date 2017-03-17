@@ -11,7 +11,10 @@ Route::any('/', array('as' => 'site.home','uses' => 'SiteHomeController@index'))
 Route::get('deleteCache',array('as' => 'site.deleteCache','uses' => 'SiteHomeController@deleteCache'));//xoa cache theo tags
 Route::get('404.html',array('as' => 'site.page404','uses' =>'SiteHomeController@page404'));
 Route::get('tim-kiem.html',array('as' => 'site.searchItems','uses' =>'SiteHomeController@searchItems'));
+
 Route::match(['GET','POST'],'lien-he.html',array('as' => 'site.pageContact','uses' =>'SiteHomeController@pageContact'));
+Route::match(['GET','POST'], 'captcha', array('as' => 'Site.linkCaptcha','uses' =>'SiteHomeController@linkCaptcha'));
+Route::match(['GET','POST'], 'captchaCheckAjax', array('as' => 'Site.captchaCheckAjax','uses' =>'SiteHomeController@captchaCheckAjax'));
 //Register - Login
 Route::match(['GET','POST'],'dang-ky.html', array('as' => 'customer.pageRegister','uses' => 'SiteUserCustomerController@pageRegister'));
 Route::match(['GET','POST'],'kich-hoat-tai-khoan.html', array('as' => 'customer.pageActiveRegister','uses' => 'SiteUserCustomerController@pageActiveRegister'));
@@ -36,8 +39,11 @@ Route::get('{item_name}-cat{item_category_id}-tin{item_id}.html',array('as' => '
 //tin tuc
 Route::get('tin-tuc.html',array('as' => 'Site.pageNews','uses' =>'SiteHomeController@pageNews'));
 Route::get('chi-tiet/tin-tuc-{new_id}/{news_title}.html',array('as' => 'Site.pageDetailNew','uses' =>'SiteHomeController@pageDetailNew'))->where('new_id', '[0-9]+')->where('news_title', '[A-Z0-9a-z_\-]+');
-Route::match(['GET','POST'], 'captcha', array('as' => 'Site.linkCaptcha','uses' =>'SiteHomeController@linkCaptcha'));
-Route::match(['GET','POST'], 'captchaCheckAjax', array('as' => 'Site.captchaCheckAjax','uses' =>'SiteHomeController@captchaCheckAjax'));
+
+
+//Tin đang phuc vu cho seo
+Route::get('forum-chia-se/{cat_name_alias}-{cat_id}.html',array('as' => 'Site.pagePostSeo','uses' =>'SiteHomeController@pagePostSeo'))->where('cat_name_alias', '[A-Z0-9a-z_\-]+')->where('cat_id', '[0-9]+');
+Route::get('forum-chia-se/{cat_name_alias}/{news_title}-{news_id}.html',array('as' => 'Site.pagePostSeoDetail','uses' =>'SiteHomeController@pagePostSeoDetail'))->where('cat_name_alias', '[A-Z0-9a-z_\-]+')->where('news_title', '[A-Z0-9a-z_\-]+')->where('news_id', '[0-9]+');
 
 /******************************************************************************************************************************
  * Thao tac co phan dang nhap cua khach hang
