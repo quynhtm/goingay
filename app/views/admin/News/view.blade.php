@@ -50,18 +50,30 @@
                         <tr class="">
                             <th width="5%" class="text-center">STT</th>
                             <th width="5%" class="text-center">Ảnh</th>
-                            <th width="60%">Tên bài viết</th>
-                            <th width="15%" class="text-center">Trạng thái</th>
-                            <th width="15%" class="text-center">Thao tác</th>
+                            <th width="55%">Tên bài viết</th>
+                            <th width="15%" class="text-center">Danh mục tin</th>
+                            <th width="10%" class="text-center">Trạng thái</th>
+                            <th width="10%" class="text-center">Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($data as $key => $item)
                             <tr>
                                 <td class="text-center">{{ $stt + $key+1 }}</td>
-                                <td class="text-center"><img src="{{$item['url_image']}}"></td>
+                                <td class="text-center">
+                                    @if($item->news_image != '')
+                                        <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_NEWS, $item->news_id, $item->news_image, CGlobal::sizeImage_80,  '', true, CGlobal::type_thumb_image_banner, false)}}">
+                                    @endif
+                                </td>
                                 <td>
                                     [<b>{{ $item['news_id'] }}</b>]<a href="{{FunctionLib::buildLinkDetailNews($item['news_id'],$item['news_title'])}}" target="_blank">{{ $item['news_title'] }}</a>
+                                </td>
+                                <td class="text-center">
+                                    @if(isset($arrCategoryNew[$item->news_category]))
+                                        {{$arrCategoryNew[$item->news_category]}}
+                                    @else
+                                        ----
+                                    @endif
                                 </td>
                                 <td class="text-center">
                                     @if($item['news_status'] == 1)
