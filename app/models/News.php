@@ -12,6 +12,7 @@ class News extends Eloquent
     //cac truong trong DB
     protected $fillable = array('news_id','news_title', 'news_desc_sort',
         'news_content', 'news_image', 'news_image_other','news_create',
+        'meta_title', 'meta_keywords', 'meta_description',
         'news_type', 'news_category', 'news_status');
 
     public static function getNewByID($id) {
@@ -36,6 +37,9 @@ class News extends Eloquent
             }
             if (isset($dataSearch['news_category']) && $dataSearch['news_category'] > 0) {
                 $query->where('news_category', $dataSearch['news_category']);
+            }
+            if (isset($dataSearch['news_type']) && $dataSearch['news_type'] > 0) {
+                $query->where('news_type', $dataSearch['news_type']);
             }
             if (isset($dataSearch['not_news_id']) && $dataSearch['not_news_id'] > 0) {
                 $query->where('news_id','<>', $dataSearch['not_news_id']);
