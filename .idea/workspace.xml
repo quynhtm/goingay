@@ -4,6 +4,7 @@
     <list default="true" id="1c717333-8288-4d8a-8ab4-ffaa1fccb75d" name="Default" comment="">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/webtintuc.iml" afterPath="$PROJECT_DIR$/.idea/webtintuc.iml" />
 =======
@@ -17,6 +18,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/admin/News/view.blade.php" afterPath="$PROJECT_DIR$/app/views/admin/News/view.blade.php" />
 >>>>>>> 84dfa51f81df74bf26dd48ea078ac9214c0e24dd
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/admin/News/add.blade.php" afterPath="$PROJECT_DIR$/app/views/admin/News/add.blade.php" />
+>>>>>>> bdecd9912b2bef047e7aa28854ba2ae313a9d8f4
     </list>
     <ignored path="webtintuc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,10 +55,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewsController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NewsController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/admin/NewsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.1891892">
+            <state vertical-scroll-proportion="-5.923077">
               <caret line="105" column="125" selection-start-line="105" selection-start-column="125" selection-end-line="105" selection-end-column="125" />
               <folding />
             </state>
@@ -71,11 +75,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="add.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/admin/News/add.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.7454543">
-              <caret line="41" column="108" selection-start-line="41" selection-start-column="108" selection-end-line="41" selection-end-column="108" />
+            <state vertical-scroll-proportion="0.83057326">
+              <caret line="149" column="36" selection-start-line="149" selection-start-column="36" selection-end-line="149" selection-end-column="36" />
               <folding>
                 <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#4;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
@@ -172,10 +176,13 @@
 =======
         <option value="$PROJECT_DIR$/app/views/admin/News/view.blade.php" />
         <option value="$PROJECT_DIR$/app/models/News.php" />
-        <option value="$PROJECT_DIR$/app/views/admin/News/add.blade.php" />
         <option value="$PROJECT_DIR$/app/library/AdminFunction/CGlobal.php" />
         <option value="$PROJECT_DIR$/app/controllers/admin/NewsController.php" />
+<<<<<<< HEAD
 >>>>>>> 84dfa51f81df74bf26dd48ea078ac9214c0e24dd
+=======
+        <option value="$PROJECT_DIR$/app/views/admin/News/add.blade.php" />
+>>>>>>> bdecd9912b2bef047e7aa28854ba2ae313a9d8f4
       </list>
     </option>
   </component>
@@ -1177,18 +1184,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/News/add.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.7454543">
-          <caret line="41" column="108" selection-start-line="41" selection-start-column="108" selection-end-line="41" selection-end-column="108" />
-          <folding>
-            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#div#4;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/News.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.423077">
@@ -1207,9 +1202,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/admin/NewsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1891892">
+        <state vertical-scroll-proportion="-5.923077">
           <caret line="105" column="125" selection-start-line="105" selection-start-column="125" selection-end-line="105" selection-end-column="125" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/News/add.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.83057326">
+          <caret line="149" column="36" selection-start-line="149" selection-start-column="36" selection-end-line="149" selection-end-column="36" />
+          <folding>
+            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#4;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#div#4;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

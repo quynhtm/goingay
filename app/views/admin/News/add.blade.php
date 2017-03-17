@@ -72,13 +72,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Meta title</label>
-                            <textarea class="form-control input-sm" rows="3" name="meta_title">@if(isset($data['meta_title'])){{$data['meta_title']}}@endif</textarea>
-                        </div>
-                    </div>
                 </div>
 
                 <div style="float: left;width: 70%">
@@ -135,31 +128,36 @@
                     </div>
                 </div>
 
-
                 <div class="clearfix"></div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Mô tả ngắn</label>
+                        <textarea class="form-control input-sm" rows="8" name="news_desc_sort">@if(isset($data['news_desc_sort'])){{$data['news_desc_sort']}}@endif</textarea>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Meta title</label>
+                        <textarea class="form-control input-sm" rows="8" name="meta_title">@if(isset($data['meta_title'])){{$data['meta_title']}}@endif</textarea>
+                    </div>
+                </div>
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label for="name" class="control-label">Meta Keywords</label>
                         <textarea class="form-control input-sm" rows="8" name="meta_keywords">@if(isset($data['meta_keywords'])){{$data['meta_keywords']}}@endif</textarea>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label for="name" class="control-label">Meta Description</label>
                         <textarea class="form-control input-sm" rows="8" name="meta_description">@if(isset($data['meta_description'])){{$data['meta_description']}}@endif</textarea>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Mô tả ngắn</label>
-                        <textarea class="form-control input-sm" rows="8" name="news_desc_sort">@if(isset($data['news_desc_sort'])){{$data['news_desc_sort']}}@endif</textarea>
                     </div>
                 </div>
 
                 <div class="clearfix"></div>
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <label for="name" class="control-label">Nội dung chi tiết</label>
+                        <label for="name" class="control-label">Nội dung chi tiết<span class="red"> (*) </span></label>
                         <div class="form-group">
                             <div class="controls"><button type="button" onclick="Admin.insertImageContent(1)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
                             <textarea class="form-control input-sm"  name="news_content">@if(isset($data['news_content'])){{$data['news_content']}}@endif</textarea>
