@@ -38,12 +38,9 @@ Route::get('{item_name}-cat{item_category_id}-tin{item_id}.html',array('as' => '
 
 //tin tuc
 Route::get('tin-tuc.html',array('as' => 'Site.pageNews','uses' =>'SiteHomeController@pageNews'));
+Route::get('tin-tuc/{cat_name_alias}-{cat_id}.html',array('as' => 'Site.pageCatNews','uses' =>'SiteHomeController@pageCatNews'))->where('cat_name_alias', '[A-Z0-9a-z_\-]+')->where('cat_id', '[0-9]+');
 Route::get('chi-tiet/tin-tuc-{new_id}/{news_title}.html',array('as' => 'Site.pageDetailNew','uses' =>'SiteHomeController@pageDetailNew'))->where('new_id', '[0-9]+')->where('news_title', '[A-Z0-9a-z_\-]+');
 
-
-//Tin đang phuc vu cho seo
-Route::get('forum-chia-se/{cat_name_alias}-{cat_id}.html',array('as' => 'Site.pagePostSeo','uses' =>'SiteHomeController@pagePostSeo'))->where('cat_name_alias', '[A-Z0-9a-z_\-]+')->where('cat_id', '[0-9]+');
-Route::get('forum-chia-se/{cat_name_alias}/{news_title}-{news_id}.html',array('as' => 'Site.pagePostSeoDetail','uses' =>'SiteHomeController@pagePostSeoDetail'))->where('cat_name_alias', '[A-Z0-9a-z_\-]+')->where('news_title', '[A-Z0-9a-z_\-]+')->where('news_id', '[0-9]+');
 
 /******************************************************************************************************************************
  * Thao tac co phan dang nhap cua khach hang

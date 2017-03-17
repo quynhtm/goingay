@@ -1197,17 +1197,15 @@ h1, h2, h3, h4, h5, h6{
 #div_image_insert_content .float_left.image_insert_content {
     display: inline-block;
 }
-
 .item-post {
     clear: both;
     display: inline-block;
     margin: 0 0 5px;
-    padding-bottom: 5px;
     width: 100%;
-	background-color: #ebebeb;
-	padding: 10px;
-	box-sizing: border-box;
-	overflow: hidden;
+    background-color: #ebebeb;
+    padding: 5px 5px 1px;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 .item-post .post-title {
     color: #333;
@@ -1697,4 +1695,8 @@ h1, h2, h3, h4, h5, h6{
     width: 100%;
     clear: both;
     margin-top: 10px;
+}
+.list-item-post.ext .post-content{
+    height: 55px;
+    overflow: hidden;
 }

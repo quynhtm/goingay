@@ -111,7 +111,7 @@ class SiteHomeController extends BaseSiteController
 	}
 
 	//chi tiet tin rao
-	public function pageDetailItem( $item_name, $item_category_id,$item_id){
+	public function pageDetailItem( $item_name, $item_category_id, $item_id){
 		if((int)$item_id <= 0){
 			return Redirect::route('site.home');
 		}
@@ -307,36 +307,82 @@ class SiteHomeController extends BaseSiteController
 		return $data;
 	}
 
+	//News
 	public function pageNews(){
-		$banner_page = CGlobal::BANNER_PAGE_SEARCH; //page tìm kiếm
+	    //SEO
+        $meta_title = $meta_keywords = $meta_description = 'Tin tức - '.CGlobal::web_name;
+        $meta_img= '';
+        FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+
+	    $banner_page = CGlobal::BANNER_PAGE_SEARCH;
 		$this->header($banner_page);
 		$this->menuLeft($banner_page);
 		//list tin tuc lien quan
 		$search['news_status'] = CGlobal::status_show;
-		$search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort';//cac truong can lay
+		$search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort';
 		$arrListNew = News::searchByCondition($search, CGlobal::number_show_15, 0,$total);
 
 		$this->layout->content = View::make('site.SiteLayouts.pageNews')
 			->with('arrListNew', $arrListNew);
 		$this->footer();
 	}
-	//chi tiet tin tuc
+    public function pageCatNews($cat_name_alias='', $cat_id=0){
+
+        //SEO
+        $meta_title = $meta_keywords = $meta_description = 'Tin tức - '.CGlobal::web_name;
+        $meta_img= '';
+        FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+
+	    $banner_page = CGlobal::BANNER_PAGE_SEARCH;
+        $arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT,$banner_page);
+
+        $this->header($banner_page);
+        $this->menuLeft($banner_page);
+
+        $pageNo = (int) Request::get('page_no',1);
+        $limit = CGlobal::number_show_15;
+        $offset = ($pageNo - 1) * $limit;
+        $search = $data = array();
+        $total = 0;
+
+        $search['news_category'] = $cat_id;
+        $search['news_status'] = CGlobal::status_show;
+        $search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort';
+
+        $arrListNew = News::searchByCondition($search, $limit, $offset, $total);
+        $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
+
+        $this->layout->content = View::make('site.SiteLayouts.pageNewsCate')
+                                ->with('arrListNew', $arrListNew)
+                                ->with('paging', $paging)
+                                ->with('arrBannerRight', $arrBannerRight);
+        $this->footer();
+    }
 	public function pageDetailNew($new_id, $new_name){
-		$inforNew = News::getNewByID($new_id);
+		$arrCatName = '';
+	    $inforNew = News::getNewByID($new_id);
+
 		if(empty($inforNew)){
 			return Redirect::route('site.home');
 		}
 		if($inforNew->news_status != CGlobal::status_show){
 			return Redirect::route('site.home');
 		}
+        if($inforNew->news_category > 0){
+            if(isset(CGlobal::$arrCategoryNew[$inforNew->news_category])){
+                $arrCatName = CGlobal::$arrCategoryNew[$inforNew->news_category];
+            }else{
+                $arrCatName = 'Tin tức';
+            }
+        }
+
 		$banner_page = $this->getControllerAction();
     	$this->header($banner_page);
     	$this->menuLeft($banner_page);
 		//seo
-		$meta_title = $inforNew->news_title;
-		$meta_keywords = CGlobal::web_name;
-		$meta_description = $inforNew->news_desc_sort;
-		$meta_description = FunctionLib::strReplace($meta_description, array('rn', '\r\n', '\\r\\n'),'');
+		$meta_title = $inforNew->meta_title;
+		$meta_keywords = $inforNew->meta_keywords;
+		$meta_description = $inforNew->meta_description;
 		$meta_img= '';
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 
@@ -346,15 +392,15 @@ class SiteHomeController extends BaseSiteController
 		$search['not_news_id'] = $new_id;
 		$search['field_get'] = 'news_id,news_title,news_status';//cac truong can lay
 		$arrListNew = News::searchByCondition($search, CGlobal::number_show_15, 0,$total);
-		//FunctionLib::debug($arrListNew);
 
-		//quang cao ben phải
+		//quang cao ben phai
 		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT,$banner_page);
 
     	$this->layout->content = View::make('site.SiteLayouts.DetailNews')
-			->with('inforNew', $inforNew)
-			->with('arrBannerRight', $arrBannerRight)
-			->with('arrListNew', $arrListNew);
+                                ->with('inforNew', $inforNew)
+                                ->with('arrBannerRight', $arrBannerRight)
+                                ->with('arrListNew', $arrListNew)
+                                ->with('arrCatName', $arrCatName);
     	$this->footer();
     }
 
@@ -444,31 +490,4 @@ class SiteHomeController extends BaseSiteController
 		Cache::flush();
 		echo $tag;
 	}
-
-	public function pagePostSeo($cat_name_alias='', $news_title='', $news_id=0){
-        $banner_page = CGlobal::BANNER_PAGE_SEARCH;
-        $this->header($banner_page);
-        $this->menuLeft($banner_page);
-
-        $search['news_status'] = CGlobal::status_show;
-        $search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort';
-        $arrListNew = News::searchByCondition($search, CGlobal::number_show_15, 0,$total);
-
-        $this->layout->content = View::make('site.SiteLayouts.pagePostSeo')
-            ->with('arrListNew', $arrListNew);
-        $this->footer();
-    }
-    public function pagePostSeoDetail($cat_name_alias='', $news_title='', $news_id=0){
-        $banner_page = CGlobal::BANNER_PAGE_SEARCH;
-        $this->header($banner_page);
-        $this->menuLeft($banner_page);
-
-        $search['news_status'] = CGlobal::status_show;
-        $search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort';
-        $arrListNew = News::searchByCondition($search, CGlobal::number_show_15, 0,$total);
-
-        $this->layout->content = View::make('site.SiteLayouts.pagePostSeoDetail')
-            ->with('arrListNew', $arrListNew);
-        $this->footer();
-    }
 }

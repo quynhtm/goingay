@@ -1,6 +1,6 @@
 <div class="col-left-92">
 	<div class="head-info">
-		<h2><a href=""><i class="fa fa-newspaper-o"></i>Tin tức</a></h2>
+		<h2><a href="javascript:void(0)"><i class="fa fa-newspaper-o"></i>{{$arrCatName}}</a></h2>
 	</div>
 	<div class="content-boxcat">
 		<div class="col-653 pull-left">
@@ -58,7 +58,6 @@
 					@endforeach
 				</div>
 			@endif
-
 		</div>
 	</div>
 </div>

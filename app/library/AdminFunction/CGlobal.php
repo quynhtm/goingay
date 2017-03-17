@@ -99,6 +99,7 @@ class CGlobal{
     const province_id_hanoi = 22;
 
     //Tin tuc
+    const NEW_CATEGORY_HO_TRO = 1;
     const NEW_CATEGORY_GIOI_THIEU = 2;
     const NEW_CATEGORY_TIN_TUC = 3;
     const NEW_CATEGORY_THE_THAO = 4;
@@ -112,7 +113,8 @@ class CGlobal{
     const NEW_TYPE_QUANG_CAO = 3;
 
     public static $arrCategoryNew = array(-1 => '--- Chọn danh mục ---',
-        self::NEW_CATEGORY_GIOI_THIEU => 'Tin giới thiệu',
+        self::NEW_CATEGORY_GIOI_THIEU => 'Giới thiệu',
+        self::NEW_CATEGORY_HO_TRO => 'Hỗ trợ',
         self::NEW_CATEGORY_TIN_TUC => 'Tin tức',
         self::NEW_CATEGORY_THE_THAO => 'Thể thao',
         self::NEW_CATEGORY_SUC_KHOE => 'Sức khỏe',
