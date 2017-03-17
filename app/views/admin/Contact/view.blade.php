@@ -40,9 +40,10 @@
 						<tr class="">
 							<th width="5%" class="text-center">STT</th>
 							<th width="20%">Tiêu đề</th>
-							<th width="50%">Nội dung</th>
+							<th width="40%">Nội dung</th>
 							<th width="20%">Thông tin người liên hệ</th>
-							<th width="5%" class="text-center">Thao tác</th>
+							<th width="10%" class="text-center">Ngày</th>
+							<th width="5%" class="text-center"></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -52,15 +53,15 @@
 								<td>
 									[<b>{{ $item['contact_id'] }}</b>] {{ $item['contact_title'] }}
 								</td>
-								<td class="text-center">{{ $item['contact_content'] }}</td>
-								<td class="text-center">
+								<td>{{ $item['contact_content'] }}</td>
+								<td>
 									Họ Tên: {{ $item['contact_user_name_send'] }}
+									<br/>Phone: {{ $item['contact_phone_send'] }}
 									<br/>Email: {{ $item['contact_email_send'] }}
 								</td>
-
-								<td class="text-center">
+								<td class="text-center">{{ date('d-m-Y H:i:s',$item['contact_time_creater']) }}</td>
+								<td class="text-center" >
 									@if($is_root || $permission_full ==1 || $permission_delete == 1)
-										&nbsp;&nbsp;&nbsp;
 										<a href="javascript:void(0);" onclick="Admin.deleteItem({{$item['contact_id']}},12)" title="Xóa Item"><i class="fa fa-trash fa-2x"></i></a>
 									@endif
 									<span class="img_loading" id="img_loading_{{$item['contact_id']}}"></span>

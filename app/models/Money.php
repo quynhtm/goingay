@@ -10,7 +10,7 @@ class Money extends Eloquent
     public $timestamps = false;
 
     //cac truong trong DB
-    protected $fillable = array('money_id','money_name', 'money_price','money_total_price','money_type'
+    protected $fillable = array('money_id','money_name','money_id_first', 'money_price','money_total_price','money_type'
     ,'money_infor','money_time_creater','money_time_update','money_log');
 
     public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){
@@ -19,7 +19,9 @@ class Money extends Eloquent
             if (isset($dataSearch['money_name']) && $dataSearch['money_name'] != '') {
                 $query->where('money_name','LIKE', '%' . $dataSearch['money_name'] . '%');
             }
-
+            if (isset($dataSearch['money_type']) && $dataSearch['money_type'] != -1) {
+                $query->where('money_type','=',$dataSearch['money_type']);
+            }
             //ngày k?t thúc
             if (isset($dataSearch['start_time']) && $dataSearch['start_time'] > 0) {
                 $query->where('money_time_creater','>=',$dataSearch['start_time']);
@@ -43,6 +45,16 @@ class Money extends Eloquent
         }catch (PDOException $e){
             throw new PDOException();
         }
+    }
+
+    public static function getItemFirst($money_id){
+        if($money_id > 0){
+            $result = Money::where('money_id','>',0)->where('money_id','<>',$money_id)->orderBy('money_id', 'desc')->first();
+        }else{
+            $result = Money::where('money_id','>',0)->orderBy('money_id', 'desc')->first();
+        }
+
+        return $result;
     }
     /**
      * @desc: Tao Data.

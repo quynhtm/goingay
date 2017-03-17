@@ -90,8 +90,10 @@ class CronjobsController extends BaseSiteController
 	}
 
 	public function apiPushProductShop(){
+		$limit = (int)Request::get('limit',1000);
+		$order_by = (int)Request::get('order_by','desc');
 		$base_url_shop = 'http://shopcuatui.com.vn';
-		$url_shop = $base_url_shop.'/cronjobs/apiGetProductShop';
+		$url_shop = $base_url_shop.'/cronjobs/apiGetProductShop?limit='.$limit.'&order_by='.$order_by;
 		$this->user_customer = UserCustomer::getByID(7);
 		//lay mang id da tồn tại trên rao vat
 		$arrProducInRaovat = Items::getProductIdShop();

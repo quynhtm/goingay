@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-02-24 17:25:09
+Date: 2017-02-25 12:05:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,6 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `web_money`;
 CREATE TABLE `web_money` (
   `money_id` int(11) NOT NULL AUTO_INCREMENT,
+  `money_id_first` int(11) DEFAULT '0',
   `money_name` varchar(255) DEFAULT NULL,
   `money_price` int(12) DEFAULT NULL,
   `money_total_price` int(12) DEFAULT '0' COMMENT 'Tiền còn lại',
