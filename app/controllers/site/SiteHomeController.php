@@ -319,7 +319,7 @@ class SiteHomeController extends BaseSiteController
 		$this->menuLeft($banner_page);
 
 		$pageNo = (int) Request::get('page_no',1);
-		$limit = CGlobal::number_show_30;
+		$limit = CGlobal::number_show_20;
 		$offset = ($pageNo - 1) * $limit;
 		$search = $data = array();
 		$total = 0;
@@ -360,6 +360,7 @@ class SiteHomeController extends BaseSiteController
 
         $search['news_category'] = $cat_id;
         $search['news_status'] = CGlobal::status_show;
+		$search['news_type'] = CGlobal::NEW_TYPE_TIN_TUC;
         $search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort,news_create';
 
         $arrListNew = News::searchByCondition($search, $limit, $offset, $total);
