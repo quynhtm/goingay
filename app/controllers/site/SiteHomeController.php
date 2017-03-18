@@ -400,6 +400,9 @@ class SiteHomeController extends BaseSiteController
 		$meta_keywords = (trim($inforNew->meta_keywords) != '')?$inforNew->meta_keywords:$inforNew->news_title;
 		$meta_description = (trim($inforNew->meta_description) != '')?$inforNew->meta_description:$inforNew->news_title;
 		$meta_img= '';
+		if($inforNew->news_image != ''){
+			$meta_img = ThumbImg::getImageThumb(CGlobal::FOLDER_NEWS, $inforNew['news_id'],$inforNew['news_image'], CGlobal::sizeImage_500,  '', true, CGlobal::type_thumb_image_product, false);
+		}
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 
 		//list tin tuc lien quan
@@ -422,13 +425,16 @@ class SiteHomeController extends BaseSiteController
 
 		//quang cao ben phai
 		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT,$banner_page);
-
+		
+		$url_link_share = FunctionLib::buildLinkDetailNews($inforNew['news_id'],$inforNew['news_title']);
+		
     	$this->layout->content = View::make('site.SiteLayouts.DetailNews')
                                 ->with('inforNew', $inforNew)
                                 ->with('arrBannerRight', $arrBannerRight)
                                 ->with('arrListNew', $arrListNew)
                                 ->with('resultItem', $resultItem)
-                                ->with('categoryNewName', $categoryNewName);
+                                ->with('categoryNewName', $categoryNewName)
+								->with('url_link_share', $url_link_share);
     	$this->footer();
     }
 

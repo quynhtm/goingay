@@ -4,7 +4,7 @@
 			<a href="{{URL::route('Site.pageCatNews')}}"><i class="fa fa-newspaper-o"></i>
 				Tin tức
 			</a>
-			<a href="javascript:void (0);"> -> {{$categoryNewName}}</a>
+			<a href="javascript:void (0);"> &rsaquo; {{$categoryNewName}}</a>
 		</h2>
 	</div>
 	<div class="content-boxcat">
