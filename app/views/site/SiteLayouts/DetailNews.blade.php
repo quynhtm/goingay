@@ -7,7 +7,7 @@
 				<a href="{{URL::route('Site.pageCatNews')}}"><i class="fa fa-newspaper-o"></i>
 					Tin tức
 				</a>
-				->
+				<a href="javascript:void (0);"> -> </a>
 				<a href="{{FunctionLib::buildLinkCateNews($inforNew->news_category,$categoryNewName)}}">
 					{{$categoryNewName}}
 				</a>
