@@ -4,7 +4,7 @@
 			<h2><a href="javascript:void(0)"><i class="fa fa-newspaper-o"></i>{{$categoryNewName}}</a></h2>
 		@else
 			<h2>
-				<a href="{{URL::route('Site.pageCatNews')}}"><i class="fa fa-newspaper-o"></i>
+				<a href="{{URL::route('Site.pageNews')}}"><i class="fa fa-newspaper-o"></i>
 					Tin tức
 				</a>
 				<a href="javascript:void (0);"> -> </a>

@@ -340,10 +340,7 @@ class SiteHomeController extends BaseSiteController
 
 		$this->footer();
 	}
-    public function pageCatNews($cat_name_alias='', $cat_id=0){
-		if($cat_id <= 0 || $cat_id == CGlobal::NEW_CATEGORY_HO_TRO || !in_array($cat_id,CGlobal::$arrCategoryNew)){
-			return Redirect::route('Site.pageCatNews');
-		}
+    public function pageCatNews($cat_id=0,$cat_name_alias='' ){
         //SEO
         $meta_title = $meta_keywords = $meta_description = 'Tin tức - '.CGlobal::web_name;
         $meta_img= '';
