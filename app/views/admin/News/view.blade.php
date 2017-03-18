@@ -26,6 +26,12 @@
                                 {{$optionStatus}}
                             </select>
                         </div>
+                        <div class="form-group col-lg-3">
+                            <label for="category_status">Danh mục tin</label>
+                            <select name="news_category" id="news_category" class="form-control input-sm">
+                                {{$optionCategoryNew}}
+                            </select>
+                        </div>
                     </div>
                     <div class="panel-footer text-right">
                         @if($is_root || $permission_full ==1 || $permission_create == 1)
@@ -50,8 +56,9 @@
                         <tr class="">
                             <th width="5%" class="text-center">STT</th>
                             <th width="5%" class="text-center">Ảnh</th>
-                            <th width="55%">Tên bài viết</th>
+                            <th width="45%">Tên bài viết</th>
                             <th width="15%" class="text-center">Danh mục tin</th>
+                            <th width="10%" class="text-center">Ngày</th>
                             <th width="10%" class="text-center">Trạng thái</th>
                             <th width="10%" class="text-center">Thao tác</th>
                         </tr>
@@ -74,6 +81,9 @@
                                     @else
                                         ----
                                     @endif
+                                </td>
+                                <td class="text-center">
+                                    {{date ('d-m-Y H:i',$item->news_create)}}
                                 </td>
                                 <td class="text-center">
                                     @if($item['news_status'] == 1)

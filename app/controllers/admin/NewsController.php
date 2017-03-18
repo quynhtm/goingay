@@ -51,6 +51,7 @@ class NewsController extends BaseAdminController
 
         $search['news_title'] = addslashes(Request::get('news_title',''));
         $search['news_status'] = (int)Request::get('news_status',-1);
+        $search['news_category'] = (int)Request::get('news_category',-1);
         //$search['field_get'] = 'category_id,news_title,news_status';//cac truong can lay
 
         $dataSearch = News::searchByCondition($search, $limit, $offset,$total);
@@ -58,6 +59,7 @@ class NewsController extends BaseAdminController
 
         //FunctionLib::debug($dataSearch);
         $optionStatus = FunctionLib::getOption($this->arrStatus, $search['news_status']);
+        $optionCategoryNew = FunctionLib::getOption($this->arrCategoryNew, $search['news_category']);
         $this->layout->content = View::make('admin.News.view')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
@@ -66,6 +68,7 @@ class NewsController extends BaseAdminController
             ->with('data', $dataSearch)
             ->with('search', $search)
             ->with('optionStatus', $optionStatus)
+            ->with('optionCategoryNew', $optionCategoryNew)
             ->with('arrStatus', $this->arrStatus)
             ->with('arrCategoryNew', $this->arrCategoryNew)
 
