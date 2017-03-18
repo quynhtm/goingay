@@ -317,17 +317,33 @@ class SiteHomeController extends BaseSiteController
 	    $banner_page = CGlobal::BANNER_PAGE_SEARCH;
 		$this->header($banner_page);
 		$this->menuLeft($banner_page);
-		//list tin tuc lien quan
+
+		$pageNo = (int) Request::get('page_no',1);
+		$limit = CGlobal::number_show_20;
+		$offset = ($pageNo - 1) * $limit;
+		$search = $data = array();
+		$total = 0;
+
 		$search['news_status'] = CGlobal::status_show;
-		$search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort';
-		$arrListNew = News::searchByCondition($search, CGlobal::number_show_15, 0,$total);
+		$search['news_type'] = CGlobal::NEW_TYPE_TIN_TUC;
+		$search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort,news_create';
+		$arrListNew = News::searchByCondition($search, $limit, $offset,$total);
+		$paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
+
+		$banner_page = CGlobal::BANNER_PAGE_SEARCH;
+		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT,$banner_page);
 
 		$this->layout->content = View::make('site.SiteLayouts.pageNews')
+			->with('paging', $paging)
+			->with('arrBannerRight', $arrBannerRight)
 			->with('arrListNew', $arrListNew);
+
 		$this->footer();
 	}
     public function pageCatNews($cat_name_alias='', $cat_id=0){
-
+		if($cat_id <= 0 || $cat_id == CGlobal::NEW_CATEGORY_HO_TRO || !in_array($cat_id,CGlobal::$arrCategoryNew)){
+			return Redirect::route('Site.pageCatNews');
+		}
         //SEO
         $meta_title = $meta_keywords = $meta_description = 'Tin tức - '.CGlobal::web_name;
         $meta_img= '';
@@ -347,32 +363,35 @@ class SiteHomeController extends BaseSiteController
 
         $search['news_category'] = $cat_id;
         $search['news_status'] = CGlobal::status_show;
-        $search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort';
+        $search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort,news_create';
 
         $arrListNew = News::searchByCondition($search, $limit, $offset, $total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
 
+		$categoryNewName = isset(CGlobal::$arrCategoryNew[$cat_id])?CGlobal::$arrCategoryNew[$cat_id]:'Tin tức';
+
         $this->layout->content = View::make('site.SiteLayouts.pageNewsCate')
                                 ->with('arrListNew', $arrListNew)
+                                ->with('categoryNewName', $categoryNewName)
                                 ->with('paging', $paging)
                                 ->with('arrBannerRight', $arrBannerRight);
         $this->footer();
     }
 	public function pageDetailNew($new_id, $new_name){
-		$arrCatName = '';
+		$categoryNewName = '';
 	    $inforNew = News::getNewByID($new_id);
 
 		if(empty($inforNew)){
-			return Redirect::route('site.home');
+			return Redirect::route('Site.pageCatNews');
 		}
 		if($inforNew->news_status != CGlobal::status_show){
-			return Redirect::route('site.home');
+			return Redirect::route('Site.pageCatNews');
 		}
         if($inforNew->news_category > 0){
             if(isset(CGlobal::$arrCategoryNew[$inforNew->news_category])){
-                $arrCatName = CGlobal::$arrCategoryNew[$inforNew->news_category];
+				$categoryNewName = CGlobal::$arrCategoryNew[$inforNew->news_category];
             }else{
-                $arrCatName = 'Tin tức';
+				$categoryNewName = 'Tin tức';
             }
         }
 
@@ -380,9 +399,9 @@ class SiteHomeController extends BaseSiteController
     	$this->header($banner_page);
     	$this->menuLeft($banner_page);
 		//seo
-		$meta_title = $inforNew->meta_title;
-		$meta_keywords = $inforNew->meta_keywords;
-		$meta_description = $inforNew->meta_description;
+		$meta_title = (trim($inforNew->meta_title) != '')?$inforNew->meta_title:$inforNew->news_title;
+		$meta_keywords = (trim($inforNew->meta_keywords) != '')?$inforNew->meta_keywords:$inforNew->news_title;
+		$meta_description = (trim($inforNew->meta_description) != '')?$inforNew->meta_description:$inforNew->news_title;
 		$meta_img= '';
 		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 
@@ -390,8 +409,19 @@ class SiteHomeController extends BaseSiteController
 		$search['news_category'] = $inforNew->news_category;
 		$search['news_status'] = CGlobal::status_show;
 		$search['not_news_id'] = $new_id;
-		$search['field_get'] = 'news_id,news_title,news_status';//cac truong can lay
+		$search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort,news_create';//cac truong can lay
 		$arrListNew = News::searchByCondition($search, CGlobal::number_show_15, 0,$total);
+
+		$resultItem = array();
+		if($inforNew->news_type == CGlobal::NEW_TYPE_TIN_TUC){
+			//tin rao mới nhât
+			$limit = CGlobal::number_show_20;
+			$offset = 0;
+			$search = $data = array();
+			$totalSearch = 0;
+			$search['field_get'] = $this->str_field_items_get;
+			$resultItem = Items::getItemsSite($search,$limit,$offset,$totalSearch);
+		}
 
 		//quang cao ben phai
 		$arrBannerRight = $this->bannerRight(CGlobal::BANNER_TYPE_RIGHT,$banner_page);
@@ -400,7 +430,8 @@ class SiteHomeController extends BaseSiteController
                                 ->with('inforNew', $inforNew)
                                 ->with('arrBannerRight', $arrBannerRight)
                                 ->with('arrListNew', $arrListNew)
-                                ->with('arrCatName', $arrCatName);
+                                ->with('resultItem', $resultItem)
+                                ->with('categoryNewName', $categoryNewName);
     	$this->footer();
     }
 
