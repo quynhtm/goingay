@@ -115,7 +115,7 @@ class CGlobal{
     public static $arrCategoryNew = array(-1 => '--- Chọn danh mục ---',
         self::NEW_CATEGORY_GIOI_THIEU => 'Giới thiệu',
         self::NEW_CATEGORY_HO_TRO => 'Hỗ trợ',
-        self::NEW_CATEGORY_TIN_TUC => 'Tin tức',
+        self::NEW_CATEGORY_TIN_TUC => 'Tin chung',
         self::NEW_CATEGORY_THE_THAO => 'Thể thao',
         self::NEW_CATEGORY_SUC_KHOE => 'Sức khỏe',
         self::NEW_CATEGORY_GIA_DINH => 'Gia đình',
