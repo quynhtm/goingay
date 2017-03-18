@@ -319,7 +319,7 @@ class SiteHomeController extends BaseSiteController
 		$this->menuLeft($banner_page);
 
 		$pageNo = (int) Request::get('page_no',1);
-		$limit = CGlobal::number_show_20;
+		$limit = CGlobal::number_show_30;
 		$offset = ($pageNo - 1) * $limit;
 		$search = $data = array();
 		$total = 0;
@@ -353,7 +353,7 @@ class SiteHomeController extends BaseSiteController
         $this->menuLeft($banner_page);
 
         $pageNo = (int) Request::get('page_no',1);
-        $limit = CGlobal::number_show_15;
+        $limit = CGlobal::number_show_20;
         $offset = ($pageNo - 1) * $limit;
         $search = $data = array();
         $total = 0;
@@ -407,7 +407,7 @@ class SiteHomeController extends BaseSiteController
 		$search['news_status'] = CGlobal::status_show;
 		$search['not_news_id'] = $new_id;
 		$search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort,news_create';//cac truong can lay
-		$arrListNew = News::searchByCondition($search, CGlobal::number_show_15, 0,$total);
+		$arrListNew = News::searchByCondition($search, CGlobal::number_show_8, 0,$total);
 
 		$resultItem = array();
 		if($inforNew->news_type == CGlobal::NEW_TYPE_TIN_TUC){
