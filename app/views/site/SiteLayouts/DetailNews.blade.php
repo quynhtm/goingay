@@ -91,9 +91,14 @@
 					<div class="even-box-content">
 						@if(!empty($resultItem))
 						<div class="main-text">
-							<ul class="event-block-list">
+							<ul class="event-block-list item">
 								@foreach ($resultItem as $keyItem => $itemItem)
 									<li>
+										@if($itemItem['item_image'] != '')
+										<div class="ithumb">
+											<img src="{{ ThumbImg::getImageForSite(CGlobal::FOLDER_PRODUCT, $itemItem['item_id'],$itemItem['item_category_id'], $itemItem['item_image'], CGlobal::sizeImage_200)}}" title="{{$itemItem['item_name']}}" alt="{{$itemItem['item_name']}}" >
+										</div>
+										@endif
 										<a href="{{FunctionLib::buildLinkDetailItem($itemItem->item_id,$itemItem->item_name,$itemItem->item_category_id)}}" title="{{$itemItem->item_name}}">
 											{{$itemItem->item_name}}
 										</a>
