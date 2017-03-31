@@ -1714,3 +1714,10 @@ h1, h2, h3, h4, h5, h6{
 	display:inline-block;
 	width:100%;
 }
+.event-block-list.item li a {
+    float: left;
+    display: inline-block;
+    width: 70%;
+    height: 50px;
+    overflow: hidden;
+}
