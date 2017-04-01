@@ -136,48 +136,49 @@ class SiteUserCustomerController extends BaseSiteController{
     		
     		//Check Member Exists
     		$check = UserCustomer::getUserCustomerByEmail($mail);
-    		if(sizeof($check) != 0){
+    		if(sizeof($check) > 0){
     			$error .= 'Email đăng nhập này đã tồn tại!'.'<br/>';
-    		}
-    		if($mail != '' && $pass != '' && $repass != '' && $fullname != '' && $phone != '' && $address != ''){
-    			if($error == ''){
-	    			$data = array(
-	    				'customer_email'=>$mail,
-	    				'customer_password'=>$hash_pass,
-	    				'customer_name'=>$fullname,
-	    				'customer_phone'=>$phone,
-	    				'customer_address'=>$address,
-	    				'customer_time_created'=>time(),
-	    				'is_login'=>1,
-	    				'customer_time_login'=>time(),
-	    				'is_customer' => CGlobal::CUSTOMER_FREE,
-	    				'customer_status'=>CGlobal::status_show,
-	    			);
-	    			$id = UserCustomer::addData($data);
-	    			//Send mail active
-	    			if($id > 0){
-						//tam thời cho login luôn
-						$customer = UserCustomer::getByID($id);
-						Session::put('user_customer', $customer, 60*24);
-						Session::save();
-
-	    				$key_secret = base64_encode($mail .'/'.$phone.'/'.$id);
-	    				$emails = [$mail, CGlobal::emailAdmin];
-	    				$dataTheme = array(
-	    						'key_secret'=>$key_secret,
-	    						'customer_email'=>$mail,
-	    						'customer_password'=>$pass,
-	    						'customer_name'=>$fullname,
-	    				);
-	    				Mail::send('emails.userCustomerRegister', array('data'=>$dataTheme), function($message) use ($emails){
-	    					$message->to($emails, 'user_customer')
-	    							->subject('Kích hoạt tài khoản trên website '.CGlobal::web_name.' '.date('d/m/Y h:i',  time()));
-	    				});
-	    			}
-    			}
     		}else{
-    			$error .= 'Thông tin đăng ký chưa đầy đủ!';
-    		}
+				if($mail != '' && $pass != '' && $repass != '' && $fullname != '' && $phone != '' && $address != ''){
+					if($error == ''){
+						$data = array(
+							'customer_email'=>$mail,
+							'customer_password'=>$hash_pass,
+							'customer_name'=>$fullname,
+							'customer_phone'=>$phone,
+							'customer_address'=>$address,
+							'customer_time_created'=>time(),
+							'is_login'=>1,
+							'customer_time_login'=>time(),
+							'is_customer' => CGlobal::CUSTOMER_FREE,
+							'customer_status'=>CGlobal::status_show,
+						);
+						$id = UserCustomer::addData($data);
+						//Send mail active
+						if($id > 0){
+							//tam thời cho login luôn
+							$customer = UserCustomer::getByID($id);
+							Session::put('user_customer', $customer, 60*24);
+							Session::save();
+
+							$key_secret = base64_encode($mail .'/'.$phone.'/'.$id);
+							$emails = [$mail, CGlobal::emailAdmin];
+							$dataTheme = array(
+									'key_secret'=>$key_secret,
+									'customer_email'=>$mail,
+									'customer_password'=>$pass,
+									'customer_name'=>$fullname,
+							);
+							Mail::send('emails.userCustomerRegister', array('data'=>$dataTheme), function($message) use ($emails){
+								$message->to($emails, 'user_customer')
+										->subject('Kích hoạt tài khoản trên website '.CGlobal::web_name.' '.date('d/m/Y h:i',  time()));
+							});
+						}
+					}
+				}else{
+					$error .= 'Thông tin đăng ký chưa đầy đủ!';
+				}
+			}
     	}else{
     		$error .= 'Phiên làm việc hết hạn. Bạn refresh lại trang web!';
     	}

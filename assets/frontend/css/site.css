@@ -1700,3 +1700,24 @@ h1, h2, h3, h4, h5, h6{
     height: 55px;
     overflow: hidden;
 }
+.event-block-list.item li{
+	list-style-type: none;
+}
+.event-block-list.item .ithumb {
+    width: 25%;
+    float: left;
+    margin-right: 5px;
+}
+.event-block-list.item  li {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f6f6f6;
+	display:inline-block;
+	width:100%;
+}
+.event-block-list.item li a {
+    float: left;
+    display: inline-block;
+    width: 70%;
+    height: 50px;
+    overflow: hidden;
+}
