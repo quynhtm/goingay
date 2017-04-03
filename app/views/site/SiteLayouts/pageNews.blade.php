@@ -8,36 +8,56 @@
 				<div class="list-item-post ext">
 					<div class="row">
 						@foreach($arrListNew as $k=>$item)
-							@if($k < 2)
-								<div class="col-lg-6 col-md-6 col-sm-12">
-									<div class="item-post-seo">
-										<a title="{{stripslashes($item['news_title'])}}" href="{{FunctionLib::buildLinkDetailNews($item['news_id'],$item['news_title'])}}">
-											<div class="post-img">
-												@if($item['news_image'] != '')
-													<img alt="{{$item['news_title']}}" src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_NEWS, $item['news_id'],$item['news_image'], CGlobal::sizeImage_500,  '', true, CGlobal::type_thumb_image_product, false)}}">
-													<div class="post-format">
-														<i class="fa fa-file-text"></i>
-													</div>
-												@endif
-											</div>
-											<div class="post-data">
-												<h2 class="post-title">{{stripslashes($item['news_title'])}}</h2>
-												<div class="date">
-													<i class="icon-date"></i>
-													{{date('d/m/Y h:i', $item['news_create'])}}
+						@if($k < 1)
+							<div class="col-lg-8 col-md-8 col-sm-12">
+								<div class="item-post-last">
+									<a title="{{stripslashes($item['news_title'])}}" href="{{FunctionLib::buildLinkDetailNews($item['news_id'],$item['news_title'])}}">
+										<div class="post-img">
+											@if($item['news_image'] != '')
+												<img alt="{{$item['news_title']}}" src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_NEWS, $item['news_id'],$item['news_image'], CGlobal::sizeImage_500,  '', true, CGlobal::type_thumb_image_product, false)}}">
+												<div class="post-format">
+													<i class="fa fa-file-text"></i>
 												</div>
-												<div class="post-content">{{stripslashes($item['news_desc_sort'])}}</div>
+											@endif
+										</div>
+										<div class="post-data">
+											<h2 class="post-title">{{stripslashes($item['news_title'])}}</h2>
+											<div class="date">
+												<i class="icon-date"></i>
+												{{date('d/m/Y h:i', $item['news_create'])}}
 											</div>
-										</a>
-									</div>
+											<div class="post-content">{{stripslashes($item['news_desc_sort'])}}</div>
+										</div>
+									</a>
 								</div>
-							@endif
+							</div>
+						@endif
 						@endforeach
+						<div class="col-lg-4 col-md-4 col-sm-12">
+							<div class="row">
+								<ul class="event-block-list item item-news-post">
+									@foreach($arrListNew as $k=>$item)
+										@if($k >= 1 && $k <=6)
+											<li>
+												<div class="ithumb">
+													@if($item['news_image'] != '')
+														<img alt="{{$item['news_title']}}" src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_NEWS, $item['news_id'],$item['news_image'], CGlobal::sizeImage_500,  '', true, CGlobal::type_thumb_image_product, false)}}">
+													@endif
+												</div>
+												<a title="{{stripslashes($item['news_title'])}}" href="{{FunctionLib::buildLinkDetailNews($item['news_id'],$item['news_title'])}}">
+													{{stripslashes($item['news_title'])}}
+												</a>
+											</li>
+										@endif
+									@endforeach
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="list-item-post bdt10">
 					@foreach($arrListNew as $k=>$item)
-						@if($k > 2)
+						@if($k > 6)
 							<div class="item-post-seo">
 								<a title="{{stripslashes($item['news_title'])}}" href="{{FunctionLib::buildLinkDetailNews($item['news_id'],$item['news_title'])}}">
 									<div class="col-lg-3 col-md-3 col-sm-12">
@@ -73,7 +93,6 @@
 		</div>
 		<div class="col-327 pull-right">
 			<div class="event-box">
-				<div class="event-box-title">Quảng cáo</div>
 				@if(sizeof($arrBannerRight) > 0)
 					<div class="box-ads" >
 						@foreach($arrBannerRight as $key_position =>$bannerShow)

@@ -319,14 +319,14 @@ class SiteHomeController extends BaseSiteController
 		$this->menuLeft($banner_page);
 
 		$pageNo = (int) Request::get('page_no',1);
-		$limit = CGlobal::number_show_20;
+		$limit = CGlobal::number_show_30;
 		$offset = ($pageNo - 1) * $limit;
 		$search = $data = array();
 		$total = 0;
 
 		$search['news_status'] = CGlobal::status_show;
 		$search['news_type'] = CGlobal::NEW_TYPE_TIN_TUC;
-		$search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort,news_create';
+		$search['field_get'] = '';
 		$arrListNew = News::searchByCondition($search, $limit, $offset,$total);
 		$paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
 
@@ -361,7 +361,7 @@ class SiteHomeController extends BaseSiteController
         $search['news_category'] = $cat_id;
         $search['news_status'] = CGlobal::status_show;
 		$search['news_type'] = CGlobal::NEW_TYPE_TIN_TUC;
-        $search['field_get'] = 'news_id,news_title,news_status,news_image,news_desc_sort,news_create';
+        $search['field_get'] = '';
 
         $arrListNew = News::searchByCondition($search, $limit, $offset, $total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';

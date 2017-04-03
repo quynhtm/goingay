@@ -1721,3 +1721,18 @@ h1, h2, h3, h4, h5, h6{
     height: 50px;
     overflow: hidden;
 }
+.item-news-post.item li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.item-news-post.item li:last-child{
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.item-post-last .post-img{
+    margin-bottom: 5px;
+}
+.item-news-post{
+    margin-bottom: 2px;
+}
