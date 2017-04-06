@@ -52,7 +52,7 @@
 			<a title="Hỗ trợ" href="http://raovat30s.vn/chi-tiet/tin-tuc-6/gioi-thieu-ve-raovat30s-vn.html" @if(Route::currentRouteName() == 'Site.pageDetailNew')class="act"@endif><i class="fa fa-weixin"></i></a>
 		</li>
 		<li>
-			<a title="Tin tức" href="{{URL::route('Site.pageNews')}}" @if(Route::currentRouteName() == 'Site.pageNews')class="act"@endif><i class="fa fa-align-center"></i> Tin tức</a>
+			<a title="Tin tức" href="{{URL::route('Site.pageNews')}}" @if(Route::currentRouteName() == 'Site.pageNews')class="act"@endif><i class="fa fa-align-center"></i></a>
 		</li>
 		@if(!empty($menuCategoriessAll))
 		@foreach($menuCategoriessAll as $cat)
