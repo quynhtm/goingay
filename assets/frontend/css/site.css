@@ -1707,6 +1707,8 @@ h1, h2, h3, h4, h5, h6{
     width: 25%;
     float: left;
     margin-right: 5px;
+    height: 35px;
+    overflow: hidden;
 }
 .event-block-list.item  li {
     padding-bottom: 10px;
