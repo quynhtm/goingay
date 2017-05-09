@@ -64,7 +64,7 @@ class CronjobsController extends BaseSiteController
         				break;
 				case 4://replace /r/n
                     $dataSearch['field_get'] = 'item_id,item_content';
-                    $data = Items::searchByCondition($dataSearch,1000,0, $total);
+                    $data = Item::searchByCondition($dataSearch,1000,0, $total);
                     if($data){
                         foreach($data as $k=>$item){
                             $content = stripcslashes($item->item_content);
@@ -73,7 +73,7 @@ class CronjobsController extends BaseSiteController
                             $content = str_replace('\\', '',$content);
                         
                             $dataUpdate['item_content'] = $content;
-                            Items::updateData($item->item_id, $dataUpdate);
+                            Item::updateData($item->item_id, $dataUpdate);
                         }
                     }
                     break;
