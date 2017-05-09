@@ -12,7 +12,8 @@ class CronjobsController extends BaseSiteController
         $action = Request::get('action', 0);//kiểu chạy joib
         switch( $action ){
             case 1://cập nhật link ảnh trong sản phẩm
-			case 2://cập nhật link ảnh trong tin tức
+            case 2://cập nhật link ảnh trong sản phẩm
+            case 4://replace /r/n
                 $this->updateLinkInContent($action);
                 break;
 			case 3://cập nhật email NCC
@@ -61,6 +62,21 @@ class CronjobsController extends BaseSiteController
         					}
         				}
         				break;
+				case 4://replace /r/n
+                    $dataSearch['field_get'] = 'item_id,item_content';
+                    $data = Item::searchByCondition($dataSearch,1000,0, $total);
+                    if($data){
+                        foreach($data as $k=>$item){
+                            $content = stripcslashes($item->item_content);
+                            $content = str_replace('\r', '',$content);
+                            $content = str_replace('\n', '',$content);
+                            $content = str_replace('\\', '',$content);
+                        
+                            $dataUpdate['item_content'] = $content;
+                            Item::updateData($item->item_id, $dataUpdate);
+                        }
+                    }
+                    break;
         		default:
         			break;
         	}
