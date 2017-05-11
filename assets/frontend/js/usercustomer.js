@@ -95,6 +95,7 @@ USER_CUSTOMMER = {
 								jQuery("#popup_ok").click(function(){
 									jQuery('#frmRegister input').val('');
 									window.location.reload();
+									return false;
 								});
 							}else{
 								jQuery('#error-register').html(data);
