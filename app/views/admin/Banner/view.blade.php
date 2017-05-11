@@ -84,11 +84,12 @@
                             <tr>
                                 <td class="text-center text-middle">{{ $stt + $key+1 }}</td>
                                 <td class="text-center text-middle">
-                                    <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_BANNER, $item->banner_id, $item->banner_image, CGlobal::sizeImage_100)}}">
                                     @if($item->banner_parent_id > 0)<br/>
                                         <a href="{{URL::route('admin.bannerEdit',array('id' => $item->banner_id))}}" title="Xem banner gốc" target="_blank">
                                             <b>Banner cha: {{$item->banner_parent_id}} </b>
                                         </a>
+									@else
+										<img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_BANNER, $item->banner_id, $item->banner_image, CGlobal::sizeImage_100)}}">
                                     @endif
                                 </td>
                                 <td>
