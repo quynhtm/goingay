@@ -200,7 +200,7 @@ class CronjobsController extends BaseSiteController
 		//FunctionLib::debug($result);
 	}
 	public function apiPushProductHNStore(){
-        $base_url_get = 'hn-store.net';
+        $base_url_get = 'http://hn-store.net';
         $url_get = $base_url_get.'/postProductToRaoVat30s';
         $this->user_customer = UserCustomer::getByID(83);
         //lay mang id da tồn tại trên rao vat
