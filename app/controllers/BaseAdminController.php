@@ -73,6 +73,8 @@ class BaseAdminController extends BaseController
                 array('name'=>'Khách đăng tin', 'RouteName'=>'admin.customerView', 'icon'=>'fa fa-users icon-4x', 'showcontent'=>1, 'permission'=>'user_customer_full'),
                 array('name'=>'Danh mục tin', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1, 'permission'=>'category_full', 'clear'=>0),
                 array('name'=>'Danh sách tin đăng', 'RouteName'=>'admin.itemsView', 'icon'=>'fa fa-file-text-o icon-4x', 'showcontent'=>1, 'permission'=>'items_full'),
+                array('name'=>'Lấy tin shopcuatui', 'RouteName'=>'cronjobs.apiPushProductShop', 'icon'=>'fa fa-file-text-o icon-4x', 'showcontent'=>1, 'permission'=>'items_full'),
+                array('name'=>'Lấy tin hn-store.net', 'RouteName'=>'cronjobs.apiPushProductHNStore', 'icon'=>'fa fa-file-text-o icon-4x', 'showcontent'=>1, 'permission'=>'items_full'),
             ),
         );
 
