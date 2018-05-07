@@ -68,7 +68,8 @@ return array(
         'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'project_raovat30s',
+			//database'  => 'project_raovat30s',
+			'database'  => 'project_raovat30svn',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',
